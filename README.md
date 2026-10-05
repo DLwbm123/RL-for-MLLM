@@ -43,3 +43,5 @@ python3 scripts/status.py
 设置 `DATASET_NAME=rsna`、`DATA_ROOT` 为 RSNA 下载目录、独立 `OUTPUT_ROOT`、`RUN_CONFIG` 指向 RSNA 配置，执行 `scripts.prepare_rsna`，再用 `scripts/dispatch_rsna.py` 启动真实模型 smoke 与 `scripts.pipeline` 的独立后台链。固定流程 B0 → 32 例短拟合 → 一轮 B1 SFT → B1 证据审计。`diagnostic_only=true` 禁止自动执行 B2–B6；后续需另行授权。
 
 no/yes 表示是否有提示肺炎的肺部不透明影，不是病原确诊标签。无最终裁定标签的图像不当作阴性；无框阴性仅参与分类；多框阳性用于分类和包围全部标注的定位，机制分析限单框病例。几何对照未由临床专家确认为正常肺区，亦未完成肺野分割；结果必须带上此局限及资格覆盖率。
+
+RSNA 已通过独立 16 图 GPU smoke 并启动 B0，启动快照见 [reports/rsna_launch.md](reports/rsna_launch.md)；该快照不代表实验已完成。

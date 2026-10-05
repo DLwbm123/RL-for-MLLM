@@ -1,0 +1,30 @@
+{
+  "status": "passed",
+  "scope": "engineering_only_real_training_images",
+  "images": 16,
+  "gradient_checks": {
+    "evidence": {
+      "loss": 200.71893310546875,
+      "gradient_norm": 3.310134034873419
+    },
+    "stability": {
+      "loss": 0.23695108294487,
+      "gradient_norm": 1.8896907712632547
+    },
+    "zero_gate": {
+      "loss": 0.0,
+      "gradient_norm": 0.0
+    }
+  },
+  "checkpoint_score_exact": true,
+  "window_restore_mapping_verified": true,
+  "multi_gpu": "not_run_single_gpu_pilot",
+  "elapsed_s": 36.18018388748169,
+  "peak_memory_gib": 18.348912715911865,
+  "trainable_parameters": 5046272,
+  "generation_teacher_forcing_max_abs_logprob_delta": 0.0008447612635791302,
+  "generation_teacher_forcing_tolerance": 0.15,
+  "forward_count": 150,
+  "score_count": 148,
+  "generated_tokens": 2
+}
