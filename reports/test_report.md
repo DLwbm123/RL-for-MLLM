@@ -9,3 +9,7 @@ CPU 工程测试：11 项通过。覆盖官方校验失败、ZIP CRC 损坏与�
 尚未验证：真实模型多卡数值一致性、正式多 seed 复现、测试集泛化、临床证据充分性。单卡验证不代替这些检查。
 
 最后一次检查实际统计 148 次 teacher-forcing forward + 3 次生成 forward = 151；生成/teacher-forcing 最大 logprob 差 0.0003181167，检查通过。
+
+RSNA 适配：2026-10-05，CPU 测试共 12 项通过，包含 Calculated 标签过滤、无标注样本排除、多框保留和有纵向混合标签的患者隔离。GPU smoke 由独立 RSNA 启动链执行，未用 BUS-BRA 的既有通过记录代替。
+
+RSNA 实际冻结清单的 1,024 条训练 schedule 检查通过，阴性无定位任务，配置与协议锁匹配；12 张训练区域审核图已查看，非肺组织对照局限已记录在 rsna_protocol.md。

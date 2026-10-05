@@ -40,6 +40,9 @@ def main():
         from scripts.compare_audits import main as compare
         compare()
         summary=json.loads((root/'audits/B1/summary.json').read_text())
+        if cfg.get('diagnostic_only',False):
+            write_json(root/'pipeline_status.json',{'status':'completed_diagnostic','completed_stages':history,'elapsed_s':time.time()-started,'not_run':['B2','B3','B4','B5','B6'],'next':'review RSNA feasibility before authorizing posttraining'})
+            return
         review=json.loads((root/'gates/geometry_review.json').read_text())
         reasons=[]
         if review.get('status')!='passed':reasons.append('geometry_review_not_passed')

@@ -29,8 +29,9 @@ def seed_all(seed):
 def context():
     root=Path(os.environ['OUTPUT_ROOT']);data=Path(os.environ['DATA_ROOT']);model=Path(os.environ['MODEL_ROOT'])/'Qwen2.5-VL-7B-Instruct'
     config=json.loads(Path(os.environ.get('RUN_CONFIG','configs/pilot.json')).read_text())
+    if config.get('dataset','busbra') != os.environ.get('DATASET_NAME','busbra'):raise ValueError('Dataset/config mismatch')
     if config['mode']!='pilot':raise ValueError('Only the authorized pilot can execute through this entry')
-    frame=pd.read_csv(root/'protocol/manifest.csv',dtype={'case_id':str,'duplicate_group':str})
+    frame=pd.read_csv(root/'protocol/manifest.csv',keep_default_na=False,dtype={'case_id':str,'duplicate_group':str})
     regions=json.loads((root/'protocol/regions.json').read_text())
     lock=json.loads((root/'protocol/protocol_lock.json').read_text())
     for name,digest in lock['hashes'].items():
@@ -83,7 +84,7 @@ def original_validation(model,frame,data,localize=False):
         image=sample_image(data,row);inputs,_=model.prompt(image);features=model.encode(inputs)
         scores=as_values(model.classes(inputs,features));y=LABELS.index(row['pathology'])
         record={'image_id':row['image_id'],'case_id':row['case_id'],'y':y,'p':scores['probabilities'][1],**scores}
-        if localize:
+        if localize and json.loads(row['bbox_xyxy']) is not None:
             loc,_=model.prompt(image,'B');answer,_=model.generate(loc,features,max_tokens=64,sample=False)
             record.update(bbox_prediction=answer,bbox_iou=box_iou(answer,transform_box(json.loads(row['bbox_xyxy']),row['width'],row['height'])))
         records.append(record)
@@ -134,15 +135,17 @@ def audit(tag='B0'):
                 oi=sample_image(data,other);pi,_=model.prompt(oi);pf=model.encode(pi)
                 rec['wrong_image']=as_values(model.classes(pi,pf));rec['wrong_image_case_id']=other['case_id']
             # Independent localization call; masks/boxes never enter class prediction.
-            loc,_=model.prompt(image,'B');answer,_=model.generate(loc,features,max_tokens=config['max_bbox_tokens'],sample=False)
-            rec['bbox_prediction']=answer;rec['bbox_iou']=box_iou(answer,transform_box(json.loads(row['bbox_xyxy']),row['width'],row['height']))
+            if json.loads(row['bbox_xyxy']) is not None:
+                loc,_=model.prompt(image,'B');answer,_=model.generate(loc,features,max_tokens=config['max_bbox_tokens'],sample=False)
+                rec['bbox_prediction']=answer;rec['bbox_iou']=box_iou(answer,transform_box(json.loads(row['bbox_xyxy']),row['width'],row['height']))
             f.write(json.dumps(rec)+'\n');f.flush();records.append(rec)
             print(json.dumps({'stage':'audit','tag':tag,'done':i+1,'total':len(selected),'elapsed_s':time.time()-started}),flush=True)
+    localized=[r for r in records if 'bbox_iou' in r]
     summary={'tag':tag,'n_cases':len(records),'n_eligible':sum(r['eligible'] for r in records),
              'classification':binary_metrics([r['y'] for r in records],[r['p'] for r in records]),
-             'bbox_mean_iou':float(np.mean([r['bbox_iou'] for r in records])),
-             'bbox_iou_ge_05':float(np.mean([r['bbox_iou']>=.5 for r in records])),
-             'joint_correct_localization':float(np.mean([r['correct'] and r['bbox_iou']>=.5 for r in records])),
+             'n_localization':len(localized),'bbox_mean_iou':float(np.mean([r['bbox_iou'] for r in localized])) if localized else None,
+             'bbox_iou_ge_05':float(np.mean([r['bbox_iou']>=.5 for r in localized])) if localized else None,
+             'joint_correct_localization':float(np.mean([r['correct'] and r['bbox_iou']>=.5 for r in localized])) if localized else None,
              'elapsed_s':time.time()-started,'gpu_hours':(time.time()-started)/3600,
              'forward_count':model.forward_count,'vision_count':model.vision_count,
              'score_count':model.score_count,'generated_tokens':model.generated_tokens,'generation_calls':model.generation_calls,
@@ -180,10 +183,10 @@ def schedule(frame,steps,batch,seed,limit=None):
         if not order:order=list(rng.permutation(cases))
         case=order.pop();rows=groups[case];task=['A','A','A','B'][i%4]
         if task=='B':
-            rows=[r for r in rows if r['mask_components']==1]
+            rows=[r for r in rows if json.loads(r['bbox_xyxy']) is not None and (os.environ.get('DATASET_NAME')=='rsna' or r['mask_components']==1)]
             if not rows:
-                alternatives=[c for c in cases if any(r['mask_components']==1 for r in groups[c])]
-                case=alternatives[int(rng.integers(len(alternatives)))];rows=[r for r in groups[case] if r['mask_components']==1]
+                alternatives=[c for c in cases if any(json.loads(r['bbox_xyxy']) is not None and (os.environ.get('DATASET_NAME')=='rsna' or r['mask_components']==1) for r in groups[c])]
+                case=alternatives[int(rng.integers(len(alternatives)))];rows=[r for r in groups[case] if json.loads(r['bbox_xyxy']) is not None and (os.environ.get('DATASET_NAME')=='rsna' or r['mask_components']==1)]
         row=rows[int(rng.integers(len(rows)))].copy()
         row['task']=task;plan.append(row)
     return plan

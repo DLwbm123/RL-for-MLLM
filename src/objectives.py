@@ -1,4 +1,5 @@
 import torch
+from src.data import LABELS
 import torch.nn.functional as F
 
 
@@ -14,7 +15,7 @@ def token_logps(logits, ids, answer_mask):
 
 def correctness(answer, target):
     label=answer.strip()
-    if label not in ('benign','malignant'):return -.1
+    if label not in LABELS:return -.1
     return float(label==target)
 
 

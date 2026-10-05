@@ -50,18 +50,19 @@ def source_ring(selected, valid, forbidden, gh, gw):
     return np.flatnonzero(ring & valid & ~forbidden).tolist()
 
 
-def build_regions(image, mask, box, seed=42, min_tokens=576, max_tokens=1024):
+def build_regions(image, mask, box, seed=42, min_tokens=576, max_tokens=1024, chest=False):
     width, height = image.size
     rh, rw = smart_size(height, width, min_tokens, max_tokens)
     gh, gw = rh//28, rw//28
     ids = region_tokens(box, width, height, gh, gw)
     yy, xx = np.divmod(ids, gw)
     eh, ew = int(yy.max()-yy.min()+1), int(xx.max()-xx.min()+1)
-    valid = tissue_grid(image, gh, gw)
+    valid = tissue_grid(image, gh, gw) if not chest else np.asarray(image.convert('L').resize((gw,gh))) > 15
+    valid[[0,-1],:]=False;valid[:,[0,-1]]=False
     forbidden = np.zeros((gh,gw),bool)
-    # Exclude lesion + 10% box margin and the posterior column below it.
+    # Exclude lesion + 10% margin; the posterior-column exclusion applies only to ultrasound.
     x1,y1,x2,y2 = box
-    expanded = [max(0,x1-.1*(x2-x1)), max(0,y1-.1*(y2-y1)), min(width,x2+.1*(x2-x1)), height]
+    expanded = [max(0,x1-.1*(x2-x1)), max(0,y1-.1*(y2-y1)), min(width,x2+.1*(x2-x1)), min(height,y2+.1*(y2-y1)) if chest else height]
     forbidden.reshape(-1)[region_tokens(expanded,width,height,gh,gw)] = True
     rng = np.random.default_rng(seed)
     candidates = [(y,x) for y in range(1,gh-eh) for x in range(1,gw-ew)]

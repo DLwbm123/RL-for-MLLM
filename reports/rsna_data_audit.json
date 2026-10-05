@@ -1,0 +1,25 @@
+{
+  "mapped_images": 30000,
+  "unadjudicated_excluded": 316,
+  "images": 29684,
+  "patients": 12233,
+  "split_images": {
+    "unused_train": 19794,
+    "test": 4595,
+    "unused_validation": 4015,
+    "train": 1024,
+    "validation": 256
+  },
+  "active_labels": {
+    "('train', 'no')": 875,
+    "('train', 'yes')": 149,
+    "('validation', 'no')": 219,
+    "('validation', 'yes')": 37
+  },
+  "eligible": {
+    "train": 69,
+    "validation": 24
+  },
+  "test_pixels_read": false,
+  "patient_partition_disjoint": true
+}

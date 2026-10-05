@@ -17,6 +17,14 @@ QUESTIONS = {
     'A_equal_tokens': 'Based on this breast ultrasound image, is the lesion more likely benign or malignant? Choose A for benign or B for malignant. Answer with exactly one letter: A or B.',
 }
 LABELS = ['benign', 'malignant']
+if os.environ.get('DATASET_NAME') == 'rsna':
+    LABELS = ['no', 'yes']
+    QUESTIONS = {
+        'A': 'Does this chest radiograph contain lung opacity suspicious for pneumonia? Answer with exactly one label: no or yes.',
+        'B': 'Locate the annotated lung opacity. Return one bounding box enclosing all opacity regions as [x1, y1, x2, y2], with coordinates normalized to 0–1000.',
+        'A_equal_tokens': 'Does this chest radiograph contain lung opacity suspicious for pneumonia? Choose A for no or B for yes. Answer with exactly one letter: A or B.',
+    }
+
 
 
 def sha(data):
