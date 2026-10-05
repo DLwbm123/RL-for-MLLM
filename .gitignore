@@ -1,0 +1,15 @@
+private/
+data/
+outputs/
+cache/
+models/
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+*.safetensors
+*.pt
+*.png
+*.jpg
+*.parquet
+.env

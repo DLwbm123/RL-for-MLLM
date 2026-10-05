@@ -1,0 +1,10 @@
+{
+  "mode": "formal",
+  "authorized": false,
+  "seeds": [17,42,123],
+  "methods": ["B0","B1","B2","B3","B4","B5","B6"],
+  "post_case_epochs": [1,2,3],
+  "selection": "validation AUROC descending, then earliest step",
+  "test": "sealed until protocol and checkpoint selection are frozen",
+  "note": "Budget and GPU hours to be computed from the measured pilot; do not launch without explicit authorization."
+}

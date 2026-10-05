@@ -1,0 +1,17 @@
+{
+  "image_id": "ID",
+  "case_id": "Case",
+  "pathology": "Pathology",
+  "birads": "BIRADS",
+  "histology": "Histology",
+  "device": "Device",
+  "side_raw": "Side",
+  "bbox_xyxy": "computed from Masks, half-open xyxy; not CSV BBOX",
+  "case_key_basis": "Official CSV Case; 1064 distinct keys align with official 1064 patients. This is supporting consistency, not an independently documented patient dictionary.",
+  "patient_identity_confirmed": false,
+  "side_semantics": "Preserve left/right/single verbatim; do not interpret as breast laterality or scan direction.",
+  "label_mapping": {
+    "benign": "benign",
+    "malignant": "malignant"
+  }
+}

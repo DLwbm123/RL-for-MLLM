@@ -1,0 +1,32 @@
+{
+  "version": "0.1",
+  "split_seed": 42,
+  "training_seeds_formal": [
+    17,
+    42,
+    123
+  ],
+  "test_access": "integrity_only",
+  "case_aggregation": "disabled_until_same_target_identity_confirmed",
+  "hashes": {
+    "manifest.csv": "c218facfced6644b604950c6ae6fdf38e7b4f86249929880c62a2bb3b1e6c875",
+    "splits.csv": "87daa0855ac6e327f01b544466c0cc6d1739cdc8fed2c05ff75a3beed922a334",
+    "templates.json": "2a3bc5e987146c465df479982146d63eaca462b554ad010833f7c6ec0ed41082",
+    "schema_mapping.json": "78474021f985b4afe5c266aa0803887ce96a731317dc03c25b2c346d090fe264",
+    "regions.json": "dce59c761c12188db0d3f17b8bebc29730bf9fc55b527988bcc127ce3fff58ee"
+  },
+  "region_rules": {
+    "K": 3,
+    "depth_tolerance": 0.1,
+    "max_area_relative_error": 0.25,
+    "min_source_tokens": 4,
+    "posterior_column_excluded": true,
+    "pixel_blur_radius": 12,
+    "overlap": "positive_area",
+    "test_regions": "deferred"
+  },
+  "config_sha256": "12de73a2595432d19992755ed63b5297c0672b05b78357328a5873ae2a39c520",
+  "model_revision": "cc594898137f460bfe9f0759e9844b3ce807cfb5",
+  "pilot_gate_policy": "finalized_before_first_model_scoring",
+  "equal_token_diagnostic": "First 8 audit cases; A=benign B=malignant; frozen before B0, never select coding on test"
+}
