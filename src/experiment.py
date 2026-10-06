@@ -172,7 +172,9 @@ def audit(tag='B0'):
     return summary
 
 
-def schedule(frame,steps,batch,seed,limit=None):
+def schedule(frame,steps,batch,seed,limit=None,task_pattern=None):
+    task_pattern=['A','A','A','B'] if task_pattern is None else task_pattern
+    if not task_pattern or not set(task_pattern)<= {'A','B'}:raise ValueError('Invalid task pattern')
     train=frame.loc[frame.split=='train'].copy()
     if limit is not None:
         cases=fixed_cases(frame,'train',limit,seed).case_id
@@ -181,7 +183,7 @@ def schedule(frame,steps,batch,seed,limit=None):
     cases=sorted(groups);plan=[];order=[]
     for i in range(steps*batch):
         if not order:order=list(rng.permutation(cases))
-        case=order.pop();rows=groups[case];task=['A','A','A','B'][i%4]
+        case=order.pop();rows=groups[case];task=task_pattern[i%len(task_pattern)]
         if task=='B':
             rows=[r for r in rows if json.loads(r['bbox_xyxy']) is not None and (os.environ.get('DATASET_NAME')=='rsna' or r['mask_components']==1)]
             if not rows:
@@ -211,6 +213,8 @@ def fit_diagnostic(model,rows,data):
 
 
 def train(method='B1',resume=None):
+    if os.environ.get('V2_STAGE'):
+        raise RuntimeError('Legacy training entry is disabled for diagnostic v2')
     started=time.time()
     root,data,path,cfg,frame,regions=context();dest=root/method;dest.mkdir(parents=True,exist_ok=True)
     if (dest/'train.jsonl').exists() and not resume:
@@ -225,7 +229,7 @@ def train(method='B1',resume=None):
     model=get_model(path,cfg,adapter,trainable=True)
     batch=cfg['gradient_accumulation'];n_cases=frame.loc[frame.split=='train','case_id'].nunique()
     steps=cfg['post_steps'] if post else (cfg['shortfit_steps'] if method=='shortfit' else math.ceil(n_cases*cfg['sft_epochs']/batch))
-    plan=schedule(frame,steps,batch,cfg['seed'],cfg['shortfit_cases'] if method=='shortfit' else None)
+    plan=schedule(frame,steps,batch,cfg['seed'],cfg['shortfit_cases'] if method=='shortfit' else None,task_pattern=cfg['task_pattern'])
     write_json(dest/'sample_schedule.json',[{'image_id':r['image_id'],'case_id':r['case_id'],'task':r['task']} for r in plan])
     opt=torch.optim.AdamW([p for p in model.model.parameters() if p.requires_grad],lr=cfg['post_lr'] if post else cfg['sft_lr'])
     start=0
@@ -255,7 +259,7 @@ def train(method='B1',resume=None):
                     samples=[];old=[];rewards=[];cache={};reward_diagnostics=[]
                     with torch.no_grad():
                         for _ in range(cfg['group_size']):
-                            answer,ids=model.generate(inputs,features,cfg['max_answer_tokens'],sample=True)
+                            answer,ids=model.generate(inputs,features,cfg['max_answer_tokens'],sample=True,sampling_config={'temperature':cfg['sampling_temperature'],'top_p':cfg['sampling_top_p'],'top_k':cfg.get('sampling_top_k',0),'max_new_tokens':cfg['max_answer_tokens']})
                             samples.append((answer,ids));old.append(model.score(inputs,features,ids=ids)['tokens'].detach())
                             c=correctness(answer,row['pathology']);reward=c
                             if method=='B4':

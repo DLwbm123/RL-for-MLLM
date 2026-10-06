@@ -1,0 +1,664 @@
+{
+  "model": "historical B1 step_0256",
+  "scope": "post-run descriptive aggregation of existing frozen samples; no resampling or training",
+  "quantiles": "linear interpolation; these are descriptive group quantiles, not confidence intervals",
+  "dependence": "four groups per patient are dependent; groups are not independent clinical cases",
+  "strata": {
+    "all": {
+      "correctness_only": {
+        "groups": 256,
+        "patients": 64,
+        "legal_mixed_groups": 165,
+        "positive_order_nonzero_mixed_groups": 165,
+        "zero_advantage_groups": 91,
+        "zero_advantage_fraction": 0.35546875,
+        "reversed_groups": 0,
+        "patients_with_reversal": 0,
+        "reversed_fraction_of_mixed": 0.0,
+        "delta_A": {
+          "all_groups": {
+            "n": 256,
+            "min": 0.0,
+            "p25": 0.0,
+            "median": 0.0,
+            "p75": 0.0,
+            "p95": 0.0,
+            "max": 0.0,
+            "mean": 0.0
+          },
+          "legal_mixed_groups": {
+            "n": 165,
+            "min": 0.0,
+            "p25": 0.0,
+            "median": 0.0,
+            "p75": 0.0,
+            "p95": 0.0,
+            "max": 0.0,
+            "mean": 0.0
+          },
+          "positive_order_nonzero_mixed_groups": {
+            "n": 165,
+            "min": 0.0,
+            "p25": 0.0,
+            "median": 0.0,
+            "p75": 0.0,
+            "p95": 0.0,
+            "max": 0.0,
+            "mean": 0.0
+          },
+          "reversed_groups": {
+            "n": 0,
+            "min": null,
+            "p25": null,
+            "median": null,
+            "p75": null,
+            "p95": null,
+            "max": null,
+            "mean": null
+          }
+        },
+        "usable_delta_A_lt_1e4": 165
+      },
+      "legacy_B4": {
+        "groups": 256,
+        "patients": 64,
+        "legal_mixed_groups": 165,
+        "positive_order_nonzero_mixed_groups": 67,
+        "zero_advantage_groups": 158,
+        "zero_advantage_fraction": 0.6171875,
+        "reversed_groups": 31,
+        "patients_with_reversal": 9,
+        "reversed_fraction_of_mixed": 0.18787878787878787,
+        "delta_A": {
+          "all_groups": {
+            "n": 256,
+            "min": 0.0,
+            "p25": 0.0,
+            "median": 1.1920928955078125e-07,
+            "p75": 1.732050895690918,
+            "p95": 3.4641013145446777,
+            "max": 5.291502952575684,
+            "mean": 0.9179227885324508
+          },
+          "legal_mixed_groups": {
+            "n": 165,
+            "min": 0.0,
+            "p25": 1.1920928955078125e-07,
+            "median": 1.29099440574646,
+            "p75": 2.645751476287842,
+            "p95": 3.464101552963257,
+            "max": 5.291502952575684,
+            "mean": 1.4241711143291358
+          },
+          "positive_order_nonzero_mixed_groups": {
+            "n": 67,
+            "min": 0.0,
+            "p25": 5.960464477539063e-08,
+            "median": 1.1920928955078125e-07,
+            "p75": 2.384185791015625e-07,
+            "p95": 2.384185791015625e-07,
+            "max": 4.76837158203125e-07,
+            "mean": 1.2899512675271104e-07
+          },
+          "reversed_groups": {
+            "n": 31,
+            "min": 1.9999998807907104,
+            "p25": 2.58198881149292,
+            "median": 3.4641013145446777,
+            "p75": 3.464101552963257,
+            "p95": 5.2915027141571045,
+            "max": 5.291502952575684,
+            "mean": 3.422045423138526
+          }
+        },
+        "usable_delta_A_lt_1e4": 67
+      },
+      "revised_CED": {
+        "groups": 256,
+        "patients": 64,
+        "legal_mixed_groups": 165,
+        "positive_order_nonzero_mixed_groups": 134,
+        "zero_advantage_groups": 91,
+        "zero_advantage_fraction": 0.35546875,
+        "reversed_groups": 31,
+        "patients_with_reversal": 9,
+        "reversed_fraction_of_mixed": 0.18787878787878787,
+        "delta_A": {
+          "all_groups": {
+            "n": 256,
+            "min": 0.0,
+            "p25": 0.0,
+            "median": 0.0,
+            "p75": 1.1920928955078125e-07,
+            "p95": 3.4641013145446777,
+            "max": 5.291502952575684,
+            "mean": 0.41438834671862423
+          },
+          "legal_mixed_groups": {
+            "n": 165,
+            "min": 0.0,
+            "p25": 0.0,
+            "median": 5.960464477539063e-08,
+            "p75": 2.384185791015625e-07,
+            "p95": 3.464101552963257,
+            "max": 5.291502952575684,
+            "mean": 0.6429297985452594
+          },
+          "positive_order_nonzero_mixed_groups": {
+            "n": 134,
+            "min": 0.0,
+            "p25": 0.0,
+            "median": 0.0,
+            "p75": 1.1920928955078125e-07,
+            "p95": 2.384185791015625e-07,
+            "max": 4.76837158203125e-07,
+            "mean": 6.449756337635552e-08
+          },
+          "reversed_groups": {
+            "n": 31,
+            "min": 1.9999998807907104,
+            "p25": 2.58198881149292,
+            "median": 3.4641013145446777,
+            "p75": 3.464101552963257,
+            "p95": 5.2915027141571045,
+            "max": 5.291502952575684,
+            "mean": 3.422045423138526
+          }
+        },
+        "usable_delta_A_lt_1e4": 134
+      }
+    },
+    "geometry_only_positive": {
+      "correctness_only": {
+        "groups": 128,
+        "patients": 32,
+        "legal_mixed_groups": 98,
+        "positive_order_nonzero_mixed_groups": 98,
+        "zero_advantage_groups": 30,
+        "zero_advantage_fraction": 0.234375,
+        "reversed_groups": 0,
+        "patients_with_reversal": 0,
+        "reversed_fraction_of_mixed": 0.0,
+        "delta_A": {
+          "all_groups": {
+            "n": 128,
+            "min": 0.0,
+            "p25": 0.0,
+            "median": 0.0,
+            "p75": 0.0,
+            "p95": 0.0,
+            "max": 0.0,
+            "mean": 0.0
+          },
+          "legal_mixed_groups": {
+            "n": 98,
+            "min": 0.0,
+            "p25": 0.0,
+            "median": 0.0,
+            "p75": 0.0,
+            "p95": 0.0,
+            "max": 0.0,
+            "mean": 0.0
+          },
+          "positive_order_nonzero_mixed_groups": {
+            "n": 98,
+            "min": 0.0,
+            "p25": 0.0,
+            "median": 0.0,
+            "p75": 0.0,
+            "p95": 0.0,
+            "max": 0.0,
+            "mean": 0.0
+          },
+          "reversed_groups": {
+            "n": 0,
+            "min": null,
+            "p25": null,
+            "median": null,
+            "p75": null,
+            "p95": null,
+            "max": null,
+            "mean": null
+          }
+        },
+        "usable_delta_A_lt_1e4": 98
+      },
+      "legacy_B4": {
+        "groups": 128,
+        "patients": 32,
+        "legal_mixed_groups": 98,
+        "positive_order_nonzero_mixed_groups": 67,
+        "zero_advantage_groups": 30,
+        "zero_advantage_fraction": 0.234375,
+        "reversed_groups": 31,
+        "patients_with_reversal": 9,
+        "reversed_fraction_of_mixed": 0.3163265306122449,
+        "delta_A": {
+          "all_groups": {
+            "n": 128,
+            "min": 0.0,
+            "p25": 0.0,
+            "median": 1.1920928955078125e-07,
+            "p75": 2.980232238769531e-07,
+            "p95": 4.651911842823013,
+            "max": 5.291502952575684,
+            "mean": 0.8287766934372485
+          },
+          "legal_mixed_groups": {
+            "n": 98,
+            "min": 0.0,
+            "p25": 1.1920928955078125e-07,
+            "median": 2.384185791015625e-07,
+            "p75": 2.58198881149292,
+            "p95": 5.291502070426941,
+            "max": 5.291502952575684,
+            "mean": 1.0824838444894673
+          },
+          "positive_order_nonzero_mixed_groups": {
+            "n": 67,
+            "min": 0.0,
+            "p25": 5.960464477539063e-08,
+            "median": 1.1920928955078125e-07,
+            "p75": 2.384185791015625e-07,
+            "p95": 2.384185791015625e-07,
+            "max": 4.76837158203125e-07,
+            "mean": 1.2899512675271104e-07
+          },
+          "reversed_groups": {
+            "n": 31,
+            "min": 1.9999998807907104,
+            "p25": 2.58198881149292,
+            "median": 3.4641013145446777,
+            "p75": 3.464101552963257,
+            "p95": 5.2915027141571045,
+            "max": 5.291502952575684,
+            "mean": 3.422045423138526
+          }
+        },
+        "usable_delta_A_lt_1e4": 67
+      },
+      "revised_CED": {
+        "groups": 128,
+        "patients": 32,
+        "legal_mixed_groups": 98,
+        "positive_order_nonzero_mixed_groups": 67,
+        "zero_advantage_groups": 30,
+        "zero_advantage_fraction": 0.234375,
+        "reversed_groups": 31,
+        "patients_with_reversal": 9,
+        "reversed_fraction_of_mixed": 0.3163265306122449,
+        "delta_A": {
+          "all_groups": {
+            "n": 128,
+            "min": 0.0,
+            "p25": 0.0,
+            "median": 1.1920928955078125e-07,
+            "p75": 2.980232238769531e-07,
+            "p95": 4.651911842823013,
+            "max": 5.291502952575684,
+            "mean": 0.8287766934372485
+          },
+          "legal_mixed_groups": {
+            "n": 98,
+            "min": 0.0,
+            "p25": 1.1920928955078125e-07,
+            "median": 2.384185791015625e-07,
+            "p75": 2.58198881149292,
+            "p95": 5.291502070426941,
+            "max": 5.291502952575684,
+            "mean": 1.0824838444894673
+          },
+          "positive_order_nonzero_mixed_groups": {
+            "n": 67,
+            "min": 0.0,
+            "p25": 5.960464477539063e-08,
+            "median": 1.1920928955078125e-07,
+            "p75": 2.384185791015625e-07,
+            "p95": 2.384185791015625e-07,
+            "max": 4.76837158203125e-07,
+            "mean": 1.2899512675271104e-07
+          },
+          "reversed_groups": {
+            "n": 31,
+            "min": 1.9999998807907104,
+            "p25": 2.58198881149292,
+            "median": 3.4641013145446777,
+            "p75": 3.464101552963257,
+            "p95": 5.2915027141571045,
+            "max": 5.291502952575684,
+            "mean": 3.422045423138526
+          }
+        },
+        "usable_delta_A_lt_1e4": 67
+      }
+    },
+    "ineligible_positive": {
+      "correctness_only": {
+        "groups": 64,
+        "patients": 16,
+        "legal_mixed_groups": 45,
+        "positive_order_nonzero_mixed_groups": 45,
+        "zero_advantage_groups": 19,
+        "zero_advantage_fraction": 0.296875,
+        "reversed_groups": 0,
+        "patients_with_reversal": 0,
+        "reversed_fraction_of_mixed": 0.0,
+        "delta_A": {
+          "all_groups": {
+            "n": 64,
+            "min": 0.0,
+            "p25": 0.0,
+            "median": 0.0,
+            "p75": 0.0,
+            "p95": 0.0,
+            "max": 0.0,
+            "mean": 0.0
+          },
+          "legal_mixed_groups": {
+            "n": 45,
+            "min": 0.0,
+            "p25": 0.0,
+            "median": 0.0,
+            "p75": 0.0,
+            "p95": 0.0,
+            "max": 0.0,
+            "mean": 0.0
+          },
+          "positive_order_nonzero_mixed_groups": {
+            "n": 45,
+            "min": 0.0,
+            "p25": 0.0,
+            "median": 0.0,
+            "p75": 0.0,
+            "p95": 0.0,
+            "max": 0.0,
+            "mean": 0.0
+          },
+          "reversed_groups": {
+            "n": 0,
+            "min": null,
+            "p25": null,
+            "median": null,
+            "p75": null,
+            "p95": null,
+            "max": null,
+            "mean": null
+          }
+        },
+        "usable_delta_A_lt_1e4": 45
+      },
+      "legacy_B4": {
+        "groups": 64,
+        "patients": 16,
+        "legal_mixed_groups": 45,
+        "positive_order_nonzero_mixed_groups": 0,
+        "zero_advantage_groups": 64,
+        "zero_advantage_fraction": 1.0,
+        "reversed_groups": 0,
+        "patients_with_reversal": 0,
+        "reversed_fraction_of_mixed": 0.0,
+        "delta_A": {
+          "all_groups": {
+            "n": 64,
+            "min": 0.0,
+            "p25": 0.0,
+            "median": 1.29099440574646,
+            "p75": 1.732050895690918,
+            "p95": 2.645751476287842,
+            "max": 2.645751476287842,
+            "mean": 1.2676073797047138
+          },
+          "legal_mixed_groups": {
+            "n": 45,
+            "min": 1.0,
+            "p25": 1.29099440574646,
+            "median": 1.732050895690918,
+            "p75": 2.645751476287842,
+            "p95": 2.645751476287842,
+            "max": 2.645751476287842,
+            "mean": 1.8028193844689264
+          },
+          "positive_order_nonzero_mixed_groups": {
+            "n": 0,
+            "min": null,
+            "p25": null,
+            "median": null,
+            "p75": null,
+            "p95": null,
+            "max": null,
+            "mean": null
+          },
+          "reversed_groups": {
+            "n": 0,
+            "min": null,
+            "p25": null,
+            "median": null,
+            "p75": null,
+            "p95": null,
+            "max": null,
+            "mean": null
+          }
+        },
+        "usable_delta_A_lt_1e4": 0
+      },
+      "revised_CED": {
+        "groups": 64,
+        "patients": 16,
+        "legal_mixed_groups": 45,
+        "positive_order_nonzero_mixed_groups": 45,
+        "zero_advantage_groups": 19,
+        "zero_advantage_fraction": 0.296875,
+        "reversed_groups": 0,
+        "patients_with_reversal": 0,
+        "reversed_fraction_of_mixed": 0.0,
+        "delta_A": {
+          "all_groups": {
+            "n": 64,
+            "min": 0.0,
+            "p25": 0.0,
+            "median": 0.0,
+            "p75": 0.0,
+            "p95": 0.0,
+            "max": 0.0,
+            "mean": 0.0
+          },
+          "legal_mixed_groups": {
+            "n": 45,
+            "min": 0.0,
+            "p25": 0.0,
+            "median": 0.0,
+            "p75": 0.0,
+            "p95": 0.0,
+            "max": 0.0,
+            "mean": 0.0
+          },
+          "positive_order_nonzero_mixed_groups": {
+            "n": 45,
+            "min": 0.0,
+            "p25": 0.0,
+            "median": 0.0,
+            "p75": 0.0,
+            "p95": 0.0,
+            "max": 0.0,
+            "mean": 0.0
+          },
+          "reversed_groups": {
+            "n": 0,
+            "min": null,
+            "p25": null,
+            "median": null,
+            "p75": null,
+            "p95": null,
+            "max": null,
+            "mean": null
+          }
+        },
+        "usable_delta_A_lt_1e4": 45
+      }
+    },
+    "negative": {
+      "correctness_only": {
+        "groups": 64,
+        "patients": 16,
+        "legal_mixed_groups": 22,
+        "positive_order_nonzero_mixed_groups": 22,
+        "zero_advantage_groups": 42,
+        "zero_advantage_fraction": 0.65625,
+        "reversed_groups": 0,
+        "patients_with_reversal": 0,
+        "reversed_fraction_of_mixed": 0.0,
+        "delta_A": {
+          "all_groups": {
+            "n": 64,
+            "min": 0.0,
+            "p25": 0.0,
+            "median": 0.0,
+            "p75": 0.0,
+            "p95": 0.0,
+            "max": 0.0,
+            "mean": 0.0
+          },
+          "legal_mixed_groups": {
+            "n": 22,
+            "min": 0.0,
+            "p25": 0.0,
+            "median": 0.0,
+            "p75": 0.0,
+            "p95": 0.0,
+            "max": 0.0,
+            "mean": 0.0
+          },
+          "positive_order_nonzero_mixed_groups": {
+            "n": 22,
+            "min": 0.0,
+            "p25": 0.0,
+            "median": 0.0,
+            "p75": 0.0,
+            "p95": 0.0,
+            "max": 0.0,
+            "mean": 0.0
+          },
+          "reversed_groups": {
+            "n": 0,
+            "min": null,
+            "p25": null,
+            "median": null,
+            "p75": null,
+            "p95": null,
+            "max": null,
+            "mean": null
+          }
+        },
+        "usable_delta_A_lt_1e4": 22
+      },
+      "legacy_B4": {
+        "groups": 64,
+        "patients": 16,
+        "legal_mixed_groups": 22,
+        "positive_order_nonzero_mixed_groups": 0,
+        "zero_advantage_groups": 64,
+        "zero_advantage_fraction": 1.0,
+        "reversed_groups": 0,
+        "patients_with_reversal": 0,
+        "reversed_fraction_of_mixed": 0.0,
+        "delta_A": {
+          "all_groups": {
+            "n": 64,
+            "min": 0.0,
+            "p25": 0.0,
+            "median": 0.0,
+            "p75": 1.732050895690918,
+            "p95": 2.645751476287842,
+            "max": 2.645751476287842,
+            "mean": 0.7465303875505924
+          },
+          "legal_mixed_groups": {
+            "n": 22,
+            "min": 1.29099440574646,
+            "p25": 1.732050895690918,
+            "median": 2.645751476287842,
+            "p75": 2.645751476287842,
+            "p95": 2.645751476287842,
+            "max": 2.645751476287842,
+            "mean": 2.1717247637835415
+          },
+          "positive_order_nonzero_mixed_groups": {
+            "n": 0,
+            "min": null,
+            "p25": null,
+            "median": null,
+            "p75": null,
+            "p95": null,
+            "max": null,
+            "mean": null
+          },
+          "reversed_groups": {
+            "n": 0,
+            "min": null,
+            "p25": null,
+            "median": null,
+            "p75": null,
+            "p95": null,
+            "max": null,
+            "mean": null
+          }
+        },
+        "usable_delta_A_lt_1e4": 0
+      },
+      "revised_CED": {
+        "groups": 64,
+        "patients": 16,
+        "legal_mixed_groups": 22,
+        "positive_order_nonzero_mixed_groups": 22,
+        "zero_advantage_groups": 42,
+        "zero_advantage_fraction": 0.65625,
+        "reversed_groups": 0,
+        "patients_with_reversal": 0,
+        "reversed_fraction_of_mixed": 0.0,
+        "delta_A": {
+          "all_groups": {
+            "n": 64,
+            "min": 0.0,
+            "p25": 0.0,
+            "median": 0.0,
+            "p75": 0.0,
+            "p95": 0.0,
+            "max": 0.0,
+            "mean": 0.0
+          },
+          "legal_mixed_groups": {
+            "n": 22,
+            "min": 0.0,
+            "p25": 0.0,
+            "median": 0.0,
+            "p75": 0.0,
+            "p95": 0.0,
+            "max": 0.0,
+            "mean": 0.0
+          },
+          "positive_order_nonzero_mixed_groups": {
+            "n": 22,
+            "min": 0.0,
+            "p25": 0.0,
+            "median": 0.0,
+            "p75": 0.0,
+            "p95": 0.0,
+            "max": 0.0,
+            "mean": 0.0
+          },
+          "reversed_groups": {
+            "n": 0,
+            "min": null,
+            "p25": null,
+            "median": null,
+            "p75": null,
+            "p95": null,
+            "max": null,
+            "mean": null
+          }
+        },
+        "usable_delta_A_lt_1e4": 22
+      }
+    }
+  }
+}

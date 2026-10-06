@@ -45,3 +45,11 @@ python3 scripts/status.py
 no/yes 表示是否有提示肺炎的肺部不透明影，不是病原确诊标签。无最终裁定标签的图像不当作阴性；无框阴性仅参与分类；多框阳性用于分类和包围全部标注的定位，机制分析限单框病例。几何对照未由临床专家确认为正常肺区，亦未完成肺野分割；结果必须带上此局限及资格覆盖率。
 
 RSNA pilot v1 已完成 B0、短拟合、B1 SFT 与 B1 审计，状态 completed_diagnostic；固定 120 Case 的 AUROC 0.608795 → 0.679897，但 B1 sensitivity=0，证据依赖改善未获支持。RL 未运行、测试集封存。见 [完成报告](reports/rsna_report.md) 与 [聚合结果](reports/rsna_results.json)；[启动快照](reports/rsna_launch.md) 仅保留历史启动状态。
+
+## RSNA diagnostic v2
+
+v2已结束P0、P1、P3、P4。P1在step256首次达到32/32，但未满足连续两次门槛，因此SFT-N/SFT-B未启动；没有S*或RL。P3的93例仍待人工语义审核，P4出现正序组优势近似等价和奖励排序反转；不能把completed状态解释为科学审计通过。
+
+见[完整科学结果](reports/rsna_v2_completion.md)、[冻结协议](reports/rsna_v2_protocol.md)、[运行聚合](reports/rsna_v2_results.json)、[奖励分布](reports/rsna_v2_reward_distribution.json)、[执行溯源与检查](reports/rsna_v2_provenance.json)。v1结果保持原样。
+
+本轮完成后不重启。对既有私有记录复算P4分布可设置`P4_GROUPS_FILE`及`P4_SUMMARY_FILE`，以中性stdin入口运行`scripts/summarize_rsna_v2_groups.py`；它只读取冻结记录、输出聚合统计，不加载模型或进行采样。

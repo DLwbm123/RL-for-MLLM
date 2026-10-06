@@ -1,0 +1,140 @@
+{
+  "origin_HEAD": "9276431f96ecedeafdf5a2cd95732c0b1b4f6eb0",
+  "config_sha256": "e7bd66c9c0ba03bee8a92337a4cf9a256e4166c2013036130383c48251616eb5",
+  "executed_source_hashes": {
+    "src/evaluation.py": "5556535c82acd42b2de52fcf72d00f864bedce538e4aed9d520f72da3b24767f",
+    "src/v2.py": "a1346d9d0e0adb4118cb21f29aa525f9012dd16cd7bce446b08ce701e18a3c9f",
+    "src/experiment.py": "4e8ddf9f8143a13d4a2c46cffa8d7a77e3115d959ee64f959e84e4dda98f7f44",
+    "src/data.py": "c3f08369b5c0dc674c2c5171bdeda353589e1b289805c89d4cab1c7c086fee50",
+    "src/model.py": "3d08b38566f0a5fcce93caab929333730836bb03a6ede768818b428a1ca10e93",
+    "src/objectives.py": "3abfe2aa1947ffa35d3eaab1926ad5518bef02f1b0e06b9c00e7cc730a820a6a",
+    "src/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/regions.py": "ddbb2c9feb3012d86edc3ccf05987b223d85759e03197cabbb494a15ece33df5",
+    "src/v2_run.py": "0afb1a86b24957b377f5a99ed2a265957b64d309c9b88fa56ff788ada49f6f95",
+    "scripts/dispatch.py": "ee2097648e7504f21b071cd00bb81b6ad8108b593261246b09441d61564f01d1",
+    "scripts/prepare_rsna.py": "6569698888bd26ad81dc7313369b86f97834ff5ab97d8d487a0a1225e5f4d848",
+    "scripts/dispatch_rsna.py": "fe3d863ed7acc8a28aff26bee8ed938b6c02601c2119abbac8f1c7bf06174b68",
+    "scripts/summarize.py": "f93faf41c4ffcffb662889ff2410fa0a863522d0ae2eb4e96b4dbd4aeeb70dd2",
+    "scripts/prepare_regions.py": "3c3ac968fd3293e3ca677839c077059579c1264454104f5c72baedf9a62dd483",
+    "scripts/pipeline.py": "e1ce6ac8bbd860ec0b0622d1e6724bdb963a5ec5523d3316b10b28519af52ee7",
+    "scripts/prepare_manifest.py": "7d208a8c130f6a00a00dd6c83d7ee20d49736b3135133d23f411e328849587b9",
+    "scripts/dispatch_rsna_v2.py": "1cdb67b5f1a6013c95eaa4af0f75714acf0cac595beda2d70c48c2ac4bceab74",
+    "scripts/evaluate.py": "59bfdb62b105f537e5dd1b0cee75d7ca253b56b8dbe934f08de5eebeef7129df",
+    "scripts/prepare_rsna_v2.py": "bf094fee1da6a72ef819b6f46fc69f0ef0e0cebe531318a950b37eda5dc7b001",
+    "scripts/status.py": "fc8f83e7032b5f4cdfce448269d1ae0ac2700d8346304784a2665697ac9fc1d4",
+    "scripts/train_posttraining.py": "992035b0f423dce9646f01de61281ea884338652aacaf976a943d6e164d78826",
+    "scripts/sync.py": "df4d0d41c2206518ee058b7fcee78e29e022a52842cfa963de7ed45f91ac80c5",
+    "scripts/report_rsna_v2.py": "e138214227c0830aa1712e6752086595793e1f45413cd455ddae8021971b1bd4",
+    "scripts/train_sft.py": "395e4dc052f160af54edf35ac93280b64baa000458d546bd5d35c841169103db",
+    "scripts/build_qa.py": "bf962f550e828a63e2f19595f41fb5d8675a319d587c66db8bb1240b4ece26ae",
+    "scripts/make_splits.py": "f04b0ef35583b38000583a4ffbdfb50c34ed1decc96fccfb75874629d88b5e36",
+    "scripts/download_busbra.py": "ed29545f37ffcbc8e5df2bfd8027143f420e60bd4a4d431fef8f5a9c5450f161",
+    "scripts/compare_audits.py": "8a0777c019abbb8f10f3e3ca1b6428404965281adc1b0d6e6189b41f9407e78c",
+    "scripts/model_smoke.py": "e06a9490dd15c53051f4785465c20a0fdf7d3730fc7d49b0ec0bb2fd0a1083c9",
+    "scripts/runtime.py": "1096dd0fa62bf9fe70da2fa1f7d9bed8f18b04d983c3b46f40b0d1c9b0a071b7",
+    "scripts/rsna_v2_pipeline.py": "691414feb2e19dd6a6b8ccd6c7066174869112ba6405881855158e8d0fb2655b",
+    "scripts/expert_review.py": "7a405610fc121b7fcc7b76ce8236bdd5e481753719316283bcf1b9221ba50265",
+    "scripts/audit_evidence.py": "e05fc20e0fac507b94fe0477f0a8d6611b80ee06d5402a8503cd9538684de9a9",
+    "scripts/download_model.py": "a33becc2fdfbd21427ca8dcee60acc21b5091eddd0ff713a4f7a6c556c4414b5",
+    "tests/test_core.py": "1d6ddfa38b32b254ba2b71939a55010fa14eb165f912d220cd2375ee5b501ab9",
+    "tests/test_rsna.py": "cc271b82974d269fb5bd970f5ecad530d84102c0a1ec8b660038748b279e7365",
+    "tests/test_v2.py": "21a2957159d76eabd81cff95f5c096e251740cdb12283899411dcefc6bf6c587"
+  },
+  "frozen_manifest_hashes": {
+    "P1_schedule.json": "f3dd829f802c0cd4e52dd3300da0bcbc724e051a0129221d23542c0e8ba2832f",
+    "SFT-B_schedule.json": "aa6dee60f172cdbc43d442b47faf247fd0c60231e1260a70bcde5a4751388f22",
+    "folds.json": "c41951aa91670e798f8a75251b05d4cb5a675c58dc1d44e77c91f8bac052dc34",
+    "manifest.csv": "23e4224ebadc01c0f7db50e10687029d6bc24ffd645e6a45f78df03e1f39f848",
+    "regions.json": "26d12d53efc56358cddcc170759e982eea037d7e42689a96eb7265b97ff70245",
+    "identity.json": "a7b327f6391775cf0281f76ab70b09910b1d7b6b4051425a083b9dea195c73ad",
+    "subsets.json": "6bc0d4e8ec20c9109c067e1b7c1df246929bb9e37c737dde10b2e6fb3ffefea6",
+    "SFT-N_schedule.json": "0fcfb9b1e88acda3d1ced00df14f928ebe4ab00fa6c1d39ce16b38997ff58cfc",
+    "templates.json": "de7331d36d7bde64536552eab1428ea63953cb9033fc8ac978165961e7f16285",
+    "region_review.json": "03eb4d2666747bb45d684cbef3e7390266583f49208ced5cca9c059cff303fb2"
+  },
+  "runtime_versions": {
+    "torch": "2.7.1+cu128",
+    "transformers": "4.51.3",
+    "peft": "0.15.2",
+    "numpy": "1.26.4",
+    "pandas": "2.2.3",
+    "scikit-learn": "1.5.2",
+    "Pillow": "12.3.0"
+  },
+  "model_revision": "cc594898137f460bfe9f0759e9844b3ce807cfb5",
+  "historical_B1_checkpoint": "step_0256",
+  "preflight_differences": [
+    {
+      "item": "train",
+      "expected": 1024,
+      "observed": 1024,
+      "matches": true
+    },
+    {
+      "item": "validation",
+      "expected": 256,
+      "observed": 256,
+      "matches": true
+    },
+    {
+      "item": "train_positive",
+      "expected": 149,
+      "observed": 149,
+      "matches": true
+    },
+    {
+      "item": "validation_positive",
+      "expected": 37,
+      "observed": 37,
+      "matches": true
+    },
+    {
+      "item": "eligible_train",
+      "expected": 69,
+      "observed": 69,
+      "matches": true
+    },
+    {
+      "item": "eligible_validation",
+      "expected": 24,
+      "observed": 24,
+      "matches": true
+    }
+  ],
+  "geometry": {
+    "train": {
+      "candidates": 69,
+      "geometry_eligible": 69,
+      "semantic_approved": 0,
+      "clinical_review_pending": 69,
+      "exclusions": {}
+    },
+    "validation": {
+      "candidates": 24,
+      "geometry_eligible": 24,
+      "semantic_approved": 0,
+      "clinical_review_pending": 24,
+      "exclusions": {}
+    }
+  },
+  "unit_tests": {
+    "status": "passed",
+    "count": 24,
+    "seconds": 5.14,
+    "log": "tests_1791259860965304560.log"
+  },
+  "execution": {
+    "started_at": "2026-10-06T12:14:23+08:00",
+    "finished_at": "2026-10-06T12:42:53+08:00",
+    "gpu_seconds": 2280.7331352233887,
+    "gpu_seconds_limit": 21600.0,
+    "test_images_read": 0,
+    "RL_run": false
+  },
+  "amendment": {
+    "pre_GPU": true,
+    "reason": "Explicit user authorization for two independent GPU workers; cumulative budget and all scientific manifests unchanged; initial preparation retained privately."
+  },
+  "publication_scope": "Code, configuration, aggregate results and deidentified provenance only. Patient manifests, raw scores, sampled text, weights and raw logs stay private.",
+  "post_run_reporting": "summarize_rsna_v2_groups.py adds descriptive Delta_A quantiles from frozen records and checks original counts; it was not part of the executed model experiment."
+}

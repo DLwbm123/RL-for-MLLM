@@ -1,5 +1,6 @@
 """Single-image Qwen2.5-VL adapter with post-window-restore feature replacement."""
 from contextlib import contextmanager
+from copy import deepcopy
 import json
 from pathlib import Path
 import re
@@ -114,15 +115,21 @@ class Model:
         return torch.stack([x['mean'] for x in scores]),scores
 
     @torch.no_grad()
-    def generate(self,inputs,features,max_tokens=16,sample=True,diagnostic=False):
+    def generate(self,inputs,features,max_tokens=16,sample=True,diagnostic=False,sampling_config=None):
         before=self.model.training;self.set_training(False)
         self.generating=True
         try:
             with self.supplied_features(features):
                 kwargs={'do_sample':sample,'max_new_tokens':max_tokens,'use_cache':True}
-                if sample:kwargs.update(temperature=1.,top_p=.95,top_k=0)
+                if sample:
+                    cfg=sampling_config or {'temperature':1.,'top_p':.95,'top_k':0,'max_new_tokens':max_tokens}
+                    kwargs.update({k:cfg[k] for k in ['temperature','top_p','top_k','max_new_tokens']})
                 if diagnostic:kwargs.update(return_dict_in_generate=True,output_scores=True)
-                output=self.model.generate(**inputs,**kwargs)
+                effective=deepcopy(self.model.generation_config)
+                unused=effective.update(**kwargs)
+                if unused:raise ValueError('Unrecognized generation settings: '+str(unused))
+                self.last_generation_settings=effective.to_dict()
+                output=self.model.generate(**inputs,generation_config=effective)
         finally:
             self.generating=False
             self.set_training(before)

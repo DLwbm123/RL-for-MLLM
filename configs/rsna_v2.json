@@ -1,0 +1,111 @@
+{
+  "protocol_version": "rsna-diagnostic-v2",
+  "dataset": "rsna",
+  "diagnostic_only": true,
+  "posttraining_enabled": false,
+  "gpu_hours_limit": 6.0,
+  "seed": 17,
+  "fold_seed": 42,
+  "bootstrap_seed": 42,
+  "bootstrap_repeats": 2000,
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "revision": "cc594898137f460bfe9f0759e9844b3ce807cfb5",
+  "min_visual_tokens": 576,
+  "max_visual_tokens": 1024,
+  "task_pattern": [
+    "A"
+  ],
+  "gradient_accumulation": 4,
+  "gradient_clip": 1.0,
+  "optimizer": {
+    "lr": 2e-05,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eps": 1e-08,
+    "weight_decay": 0.01,
+    "amsgrad": false,
+    "maximize": false,
+    "foreach": null,
+    "capturable": false,
+    "differentiable": false,
+    "fused": null
+  },
+  "classification_score_eos": false,
+  "sft_include_eos": true,
+  "label_order": [
+    "no",
+    "yes"
+  ],
+  "threshold_tie": "positive",
+  "original_threshold": 0.5,
+  "threshold_target_specificity": 0.9,
+  "threshold_candidates": "distinct training-fold p values, nextafter(p,+inf), 0, nextafter(1,+inf); minimum feasible; p>=t",
+  "P1": {
+    "positive": 16,
+    "negative": 16,
+    "steps": 256,
+    "checkpoints": [
+      0,
+      32,
+      64,
+      128,
+      256
+    ],
+    "required_each_class": 15,
+    "consecutive_passes": 2
+  },
+  "P2": {
+    "steps": 512,
+    "checkpoints": [
+      128,
+      256,
+      512
+    ],
+    "primary_step": 512,
+    "selection_min_specificity": 0.85,
+    "selection_min_sensitivity": 0.5
+  },
+  "P0": {
+    "positive": 32,
+    "negative": 32,
+    "mismatched_permutations": 3,
+    "throughput_cases": 8
+  },
+  "P3": {
+    "clinical_review": "pending",
+    "lung_masks_available": false,
+    "lung_coverage_min": 0.9,
+    "pixel_blur_radius": 12,
+    "primary_specificity_metric": "D_E-D_wrong",
+    "review_scope": "geometry_only"
+  },
+  "P4": {
+    "eligible_positive": 32,
+    "ineligible_positive": 16,
+    "negative": 16,
+    "groups": 4,
+    "group_size": 8,
+    "generation": {
+      "temperature": 1.0,
+      "top_p": 0.95,
+      "top_k": 0,
+      "max_new_tokens": 16
+    },
+    "delta_advantage_tolerance": 0.0001,
+    "stop_fraction": 0.95,
+    "numerical_score_tolerance": 1e-05,
+    "advantage_epsilon": 1e-08,
+    "near_zero_std": 1e-08,
+    "ced_epsilon": 1e-06
+  },
+  "R0": {
+    "priority": "low",
+    "status": "blocked",
+    "reason": "Author counting/presence train/probe manifests, paired images and verified runnable reward recipe are not available as an authorized local bundle."
+  },
+  "max_concurrent_gpus": 2,
+  "single_gpu_per_experiment": true,
+  "parallelism": "independent model workers and SFT-N/SFT-B; never distributed training"
+}
