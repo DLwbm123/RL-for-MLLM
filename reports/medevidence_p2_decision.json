@@ -1,0 +1,82 @@
+{
+  "status": "completed_diagnostic",
+  "answers": [
+    "1. 历史重放：M1/M2阳性空列表分别32/37、31/37。",
+    "2. 历史重放：阳性分类yes但定位[]分别21、20人。",
+    "3. 新冻结M1测量：Fit32：16名阳性中首分歧空分支支持更高15名、实际选空token 15名，自由[] 15名；GT条件数字NLL均值2.0076；Ref32：16名阳性中首分歧空分支支持更高13名、实际选空token 13名，自由[] 13名；GT条件数字NLL均值2.0430。",
+    "4. 教师强制与自由生成：首个分歧在真实共享问题后的首token，旧M1在Fit/Ref分别15/16、13/16阳性更支持空分支并实际输出[]。GT条件数字NLL均值为2.0076/2.0430，不能据此称坐标支持已经良好。L1后Fit数字NLL降至0.7250且16/16准确自由定位；Ref数字NLL升至3.8534、严格成功仅2/16。支持训练内拟合与本轮参照泛化差距，尚未证明存在单独可修复的教师强制—自由生成机制。",
+    "5. Fit32最终：阳性非空16/16，严格单框成功16/16，平均IoU0.9086；阴性非空0/16。",
+    "6. Ref32最终：严格成功2/16，阴性非空5/16，分类阴性误报4→8/16。开发256例：阳性空列表32→12/37，区域匹配1→4/51，单框严格1→3/25，多框完整覆盖0→0/12，阴性非空4→75/219。原始0.5分类TP/FN/TN/FP从26/11/163/56变为30/7/79/140，AP从0.4811降至0.3840。区域召回差的患者配对95%区间[0,0.1321]，阴性非空率差[0.2658,0.3879]；单seed、旧开发集结果不构成独立泛化验证。",
+    "7. 覆盖缩减：训练149→71单框→69面积/边长合格→首32提议→3接受；开发37→25单框→25提议→3接受。训练仍有37个合格几何未提议/未做语义审核。语义原因和unknown保持旧记录，不重选旧3+3。",
+    "8. 本轮总研发优先项：优先改定位监督的患者覆盖，另行预指定仅扩大覆盖的对照，保留当前模型与坐标接口。依据是16名训练阳性全部严格定位成功、训练阴性无错误框，但本轮不更新参照严格成功仅2/16、开发仅3/25，且阴性误报显著增加。该方向是探索性优先级，不保证扩大覆盖能解决误报；新方案必须同时评价阳性定位、阴性非空率和原图分类代价，不能只追求阳性出框。 E0未来证据任务首选区域—发现对应，较少依赖框内信息完全消失；需要单独对应标注/审核，不能据此声称删除式因果证据。本轮不执行新训练或扩样。",
+    "9. D0/E0、三个固定checkpoint的D1各64例、唯一L1的256步和五个Fit/Ref检查点、固定step256的256例开发评价均完成。累计0.375923 GPU小时，五个GPU阶段退出码均0；实际1024次L暴露，每名Fit患者32次。测试访问0，无运行或预算阻塞。单独因果机制、未审核候选的语义资格、旧reject_or_unknown的进一步拆分仍未验证/unknown。公开聚合交付已获得本轮明确授权；私有患者记录、权重与原始日志不公开。"
+  ],
+  "stage_status": {
+    "D0": {
+      "status": "completed",
+      "models": 2,
+      "patients_per_model": 256
+    },
+    "E0": {
+      "status": "completed",
+      "new_reviews": 0
+    },
+    "D1": {
+      "status": "completed",
+      "patients_per_completed_checkpoint": 64
+    },
+    "L1_loc_probe": {
+      "status": "completed_diagnostic",
+      "patients": 64,
+      "steps": 256,
+      "output_relative": "L1_loc_probe",
+      "reason": null,
+      "optimizer_updates": 256
+    },
+    "CPU": {
+      "status": "completed_checks",
+      "patients": 64,
+      "overlay_review": "passed",
+      "test_pixels_read": 0
+    },
+    "D1_M1": {
+      "status": "completed",
+      "patients": 64,
+      "steps": null,
+      "output_relative": "D1_M1",
+      "reason": null
+    },
+    "D1_W": {
+      "status": "completed",
+      "patients": 64,
+      "steps": null,
+      "output_relative": "D1_W",
+      "reason": null
+    },
+    "D1_M2": {
+      "status": "completed",
+      "patients": 64,
+      "steps": null,
+      "output_relative": "D1_M2",
+      "reason": null
+    },
+    "eval_L1": {
+      "status": "completed",
+      "patients": 256,
+      "steps": null,
+      "output_relative": "eval_L1",
+      "reason": null,
+      "optimizer_updates": 0
+    }
+  },
+  "GPU_hours": 0.37592271268367766,
+  "recommendation": "优先改定位监督的患者覆盖，另行预指定仅扩大覆盖的对照，保留当前模型与坐标接口。依据是16名训练阳性全部严格定位成功、训练阴性无错误框，但本轮不更新参照严格成功仅2/16、开发仅3/25，且阴性误报显著增加。该方向是探索性优先级，不保证扩大覆盖能解决误报；新方案必须同时评价阳性定位、阴性非空率和原图分类代价，不能只追求阳性出框。",
+  "limits": [
+    "One localization-only probe, one seed; not a mechanism-isolated matched comparison",
+    "Ref32 is from historical training pool; no independent unseen test",
+    "Development set reused; no clinical validation",
+    "No automatic second training, evidence expansion, external patient upload, new data or RL"
+  ],
+  "delivery_status": "execution_and_reports_completed; public_release_authorized_for_this_commit",
+  "public_release_authorized": true
+}

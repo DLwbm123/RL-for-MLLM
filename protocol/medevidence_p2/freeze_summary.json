@@ -1,0 +1,172 @@
+{
+  "historical_reference_commit": "a94f1e2db2ca0243ec8e78c3c2783125a1f40e6a",
+  "historical_source_lock_verified": true,
+  "checkpoint_adapter_identities": {
+    "W": {
+      "adapter_digest": "770b72d010c535a5f630285310b72dc34a90cda0415f1fcd2f0b702abadc78a9",
+      "optimizer_digest": "b4b6ca0bb12ddaca5d297c2d92572f693211f47cc83e5bb135ff27e875f72539",
+      "RNG_digest": "a6835107f502fd6d5f148f8837c935e4bf3bad5da8b0d0c4769f493a1c08bcff",
+      "schedule_position": 256,
+      "lr": 2e-05
+    },
+    "M1": {
+      "adapter_digest": "c41b1747f2f743d8e1475b1b2b8c8ddf0e58f851c2d7409483742838447fcb93",
+      "optimizer_digest": "264239a682a9ca05ff23ef8f26ae7657d9deea048288406c94b96b0bb1eb5546",
+      "RNG_digest": "a6835107f502fd6d5f148f8837c935e4bf3bad5da8b0d0c4769f493a1c08bcff",
+      "schedule_position": 512,
+      "lr": 2e-05
+    },
+    "M2": {
+      "adapter_digest": "00d35d89f5c940fe575c7f022aff462f844e65fdec269f8263b65fc68a125879",
+      "optimizer_digest": "da417ad910c8942cbdb44756ba3d38703e2c1838ef1eb56950838a367067250b",
+      "RNG_digest": "a6835107f502fd6d5f148f8837c935e4bf3bad5da8b0d0c4769f493a1c08bcff",
+      "schedule_position": 512,
+      "lr": 2e-05
+    },
+    "M0": {
+      "adapter_digest": "9b1c54944cd270b54d020e2106c2b1165f318f451f25edec511e498a42fa609a",
+      "optimizer_digest": "d4ec6fbd9ed347839602089f5faf617e3e2be26b61511e492624a717f71d3f20",
+      "RNG_digest": "a6835107f502fd6d5f148f8837c935e4bf3bad5da8b0d0c4769f493a1c08bcff",
+      "schedule_position": 512,
+      "lr": 2e-05
+    }
+  },
+  "selected_summary": {
+    "Fit32": {
+      "n": 32,
+      "positive": 16,
+      "negative": 16,
+      "target_length_including_EOS": {
+        "yes": {
+          "n": 16,
+          "mean": 18.0,
+          "quantiles_0_25_50_75_100": [
+            18.0,
+            18.0,
+            18.0,
+            18.0,
+            18.0
+          ]
+        },
+        "no": {
+          "n": 16,
+          "mean": 2.0,
+          "quantiles_0_25_50_75_100": [
+            2.0,
+            2.0,
+            2.0,
+            2.0,
+            2.0
+          ]
+        }
+      }
+    },
+    "Ref32": {
+      "n": 32,
+      "positive": 16,
+      "negative": 16,
+      "target_length_including_EOS": {
+        "yes": {
+          "n": 16,
+          "mean": 18.0,
+          "quantiles_0_25_50_75_100": [
+            18.0,
+            18.0,
+            18.0,
+            18.0,
+            18.0
+          ]
+        },
+        "no": {
+          "n": 16,
+          "mean": 2.0,
+          "quantiles_0_25_50_75_100": [
+            2.0,
+            2.0,
+            2.0,
+            2.0,
+            2.0
+          ]
+        }
+      }
+    }
+  },
+  "selection_independent_of_scores_AI_and_reward": true,
+  "actual_L_only_schedule": {
+    "steps": 256,
+    "exposures": 1024,
+    "positive": 512,
+    "negative": 512,
+    "per_patient": 32
+  },
+  "CPU_checks": {
+    "status": "passed",
+    "historical_replay_parser_matcher_equal": true,
+    "adapter_identities_exact_CPU": true,
+    "Fit32_Ref32_disjoint": true,
+    "patients": 64,
+    "max_coordinate_roundtrip_error_pixels": 0.5120000000000005,
+    "GT_self_match_patients": 1280,
+    "processor_grid_checks": 64,
+    "test_access_blocked": true,
+    "test_pixels_read": 0,
+    "target_tokenization_verified": 64,
+    "overlay_engineering_review": "passed: current assistant inspected four fixed Fit positive originals/GT overlays; axes, spatial correspondence and original vs marked separation verified; no new disease or evidence-eligibility adjudication",
+    "authorization_blocks_before_CUDA_initialization": true,
+    "tests": "passed: CPU regression and actual authorization guard",
+    "GPU_training_optimizer_restore": "candidate implementation; actual GPU check deferred until own authorization"
+  },
+  "lock": {
+    "config_sha256": "43446ea57546214ad8883111718e44236493604c0ff58cc6cedf8bd9033a8575",
+    "protocol_hashes": {
+      "manifest.csv": "abc86f1ace32ca326eb632ce6410d613357c53c4ac74cab3be89e61b9488723b",
+      "sets.json": "ddbd39ce27cd1f7708814b328886dbf004b041694a7a5e79b5a349196ca700ab",
+      "schedule.json": "ef697b6360a1b880422b7a15eef0c57f3f0af19b4e3b1ef191fa9383f4d2e3b3",
+      "token_contracts.json": "b66fea615748dbf558aac0f6c86cd8db61e2c5310a22da93a329523a4153af41",
+      "selected_images.json": "b3014f3150943db6fd00aa5eede6651d1f87021583925505b26535d58bca4115",
+      "alignment_checks.json": "cf3dd33af18052e68aeb6d748fd9fe14e885a6072c71593348fa211c28064463",
+      "CPU_checks.json": "bec5c8e2cf799edae8fc04b88c4a5228db88c74bb5317a22038859bf91bc2dd6",
+      "reference_checkpoints.json": "08bf8d6f2a5a1484e956ea3581dc751e81bdbec8dc076db8bcf3b1dcaaa96cd4",
+      "reference_identity.json": "0b741216f55ccb61654a9f6633c00a386fcb45e437cdf7db4b9854d3b79230cc"
+    },
+    "source_hashes": {
+      "src/medevidence_p2.py": "3a8dc19581aec04836437464b1d043409e9ef5e8b09ac16593ce0f2ba2d5c10d",
+      "src/medevidence_p2_run.py": "5e4def6abea7de8e0b609a467411f87e41d3d17321d78857498020dbb4c9a70f",
+      "src/model.py": "3d08b38566f0a5fcce93caab929333730836bb03a6ede768818b428a1ca10e93",
+      "src/data.py": "c3f08369b5c0dc674c2c5171bdeda353589e1b289805c89d4cab1c7c086fee50",
+      "src/experiment.py": "4e8ddf9f8143a13d4a2c46cffa8d7a77e3115d959ee64f959e84e4dda98f7f44",
+      "src/v2.py": "a1346d9d0e0adb4118cb21f29aa525f9012dd16cd7bce446b08ce701e18a3c9f",
+      "src/medevidence.py": "4394300c0012a9dacc2ca93dc8f7a3ecb1634b860b03a781583c092c65d99cd3",
+      "src/medevidence_run.py": "20804158b81b8d3692220130e905e7f8dadcd6fb16bcf76e44f0b9f049132a04",
+      "src/objectives.py": "3abfe2aa1947ffa35d3eaab1926ad5518bef02f1b0e06b9c00e7cc730a820a6a",
+      "src/regions.py": "ddbb2c9feb3012d86edc3ccf05987b223d85759e03197cabbb494a15ece33df5",
+      "src/evaluation.py": "5556535c82acd42b2de52fcf72d00f864bedce538e4aed9d520f72da3b24767f",
+      "scripts/prepare_medevidence_p2.py": "682b7756a56c24f07504f5ca4f29f2e5683cc5ced64eaaf0f32d48af8d777816",
+      "scripts/medevidence_p2_pipeline.py": "de561c4edf7e5f3d652874f9e4f4e6e6566516b19927079b54bfb15aeb30120e",
+      "scripts/report_medevidence_p2.py": "7d00b951188d879239bf0ba6be5d05d0770f7c1affb2d63566fba1b5e5503389",
+      "scripts/launch_medevidence_p2.py": "20cabb3252ee451068e0c6e88f05d038f3ddb5fb785e8cf0aa41c336d5a0f536",
+      "scripts/freeze_medevidence_p2.py": "baf6ff2d6e90a37c49fd49bcbfa4efabdb0ee829d7b1e5aed6d6cf584ecf2ee7",
+      "tests/test_medevidence_p2.py": "ff68b11f565b7c0ff277a26c4de5b001309d91b57c037c3b396b66f7ace2940d"
+    },
+    "freeze_stage": "before_first_GPU_model_measurement",
+    "test_pixels_read": 0,
+    "GPU_authorization": "required separately, never inherited",
+    "public_release_authorization": "required separately",
+    "resource_revision": {
+      "user_instruction": "我授权你使用所有 gpu",
+      "previous_config_sha256": "758e8fff44a6ce403ddeaa72f683f87c423f173236507645ce5e356c316e846d",
+      "changed_source_files": [
+        "src/medevidence_p2_run.py",
+        "scripts/medevidence_p2_pipeline.py",
+        "scripts/launch_medevidence_p2.py",
+        "scripts/freeze_medevidence_p2.py",
+        "tests/test_medevidence_p2.py"
+      ],
+      "scientific_config_and_private_protocol_unchanged": true,
+      "previous_lock_preserved_private": "lock_cpu_initial.json",
+      "revision_stage": "before_first_GPU_model_measurement",
+      "max_concurrent_gpus": 3,
+      "gpu_hours_limit": 2
+    }
+  }
+}

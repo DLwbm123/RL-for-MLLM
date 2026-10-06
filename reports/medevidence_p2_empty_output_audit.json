@@ -1,0 +1,1169 @@
+{
+  "M1": {
+    "all_patients": 256,
+    "positive": {
+      "n": 37,
+      "invalid": 0,
+      "valid_empty": 32,
+      "valid_nonempty": 5,
+      "truncated": 0
+    },
+    "negative": {
+      "n": 219,
+      "invalid": 0,
+      "valid_empty": 215,
+      "valid_nonempty": 4,
+      "truncated": 0
+    },
+    "positive_empty_rate": 0.8648648648648649,
+    "positive_region_recall": 0.0196078431372549,
+    "GT_regions": 51,
+    "positive_predicted_boxes_known": 6,
+    "single_IoU_unconditional": {
+      "n": 25,
+      "mean": 0.0410795484280937,
+      "quantiles_0_25_50_75_100": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.6557501904036558
+      ]
+    },
+    "single_IoU_ge_05_count": 1,
+    "single_strict_success_count": 1,
+    "single_IoU_nonempty_supplement": {
+      "n": 2,
+      "mean": 0.5134943553511713,
+      "quantiles_0_25_50_75_100": [
+        0.3712385202986868,
+        0.44236643782492907,
+        0.5134943553511713,
+        0.5846222728774135,
+        0.6557501904036558
+      ]
+    },
+    "negative_nonempty_rate": 0.0182648401826484,
+    "negative_invalid_rate": 0.0,
+    "positive_failure_categories": {
+      "no_valid_prediction": {
+        "patients": 32,
+        "GT_regions": 43,
+        "missed_GT_regions": 43
+      },
+      "nonempty_all_IoU_below_05": {
+        "patients": 4,
+        "GT_regions": 7,
+        "missed_GT_regions": 7
+      },
+      "partial_GT_matches": {
+        "patients": 0,
+        "GT_regions": 0,
+        "missed_GT_regions": 0
+      },
+      "all_GT_with_extras": {
+        "patients": 0,
+        "GT_regions": 0,
+        "missed_GT_regions": 0
+      },
+      "all_GT_without_extras": {
+        "patients": 1,
+        "GT_regions": 1,
+        "missed_GT_regions": 0
+      }
+    },
+    "multi_patient_count": 12,
+    "multi_only_one_prediction": 2,
+    "multi_all_covered": 0,
+    "multi_strict_success": 0,
+    "class_loc_inconsistent_valid_count": 73,
+    "class_loc_inconsistent_valid_rate": 0.28515625,
+    "class_loc_inconsistent_all_patient_denominator": 0.28515625,
+    "overall_joint_supplement": 0.640625,
+    "always_no_empty_joint_reference": 0.85546875,
+    "classification_loc_cross_table": [
+      {
+        "true": false,
+        "class_yes": false,
+        "loc_state": "invalid",
+        "patients": 0
+      },
+      {
+        "true": false,
+        "class_yes": false,
+        "loc_state": "valid_empty",
+        "patients": 163
+      },
+      {
+        "true": false,
+        "class_yes": false,
+        "loc_state": "valid_nonempty",
+        "patients": 0
+      },
+      {
+        "true": false,
+        "class_yes": true,
+        "loc_state": "invalid",
+        "patients": 0
+      },
+      {
+        "true": false,
+        "class_yes": true,
+        "loc_state": "valid_empty",
+        "patients": 52
+      },
+      {
+        "true": false,
+        "class_yes": true,
+        "loc_state": "valid_nonempty",
+        "patients": 4
+      },
+      {
+        "true": true,
+        "class_yes": false,
+        "loc_state": "invalid",
+        "patients": 0
+      },
+      {
+        "true": true,
+        "class_yes": false,
+        "loc_state": "valid_empty",
+        "patients": 11
+      },
+      {
+        "true": true,
+        "class_yes": false,
+        "loc_state": "valid_nonempty",
+        "patients": 0
+      },
+      {
+        "true": true,
+        "class_yes": true,
+        "loc_state": "invalid",
+        "patients": 0
+      },
+      {
+        "true": true,
+        "class_yes": true,
+        "loc_state": "valid_empty",
+        "patients": 21
+      },
+      {
+        "true": true,
+        "class_yes": true,
+        "loc_state": "valid_nonempty",
+        "patients": 5
+      }
+    ],
+    "coordinate_diagnostics": {
+      "best_IoU": {
+        "n": 6,
+        "mean": 0.38676143831109977,
+        "quantiles_0_25_50_75_100": [
+          0.1451372596030346,
+          0.33467838871531375,
+          0.3667003412304245,
+          0.43838215494919286,
+          0.6557501904036558
+        ]
+      },
+      "center_distance_image_diagonal_units": {
+        "n": 6,
+        "mean": 0.07119238324719619,
+        "quantiles_0_25_50_75_100": [
+          0.042449970553582246,
+          0.05819653625758252,
+          0.06685525792110839,
+          0.08679926800446622,
+          0.10223624601871882
+        ]
+      },
+      "width_ratio": {
+        "n": 6,
+        "mean": 0.9864740865459111,
+        "quantiles_0_25_50_75_100": [
+          0.5677966101694916,
+          0.7177489177489178,
+          1.0054394180788233,
+          1.24712884600174,
+          1.390625
+        ]
+      },
+      "height_ratio": {
+        "n": 6,
+        "mean": 1.1014609634978894,
+        "quantiles_0_25_50_75_100": [
+          0.9655172413793104,
+          0.9892885691446842,
+          1.047222222222222,
+          1.1029888103651353,
+          1.4572490706319703
+        ]
+      },
+      "area_ratio": {
+        "n": 6,
+        "mean": 1.1009142926437885,
+        "quantiles_0_25_50_75_100": [
+          0.574105461393597,
+          0.7569466504718303,
+          1.070943793554498,
+          1.3873709829310212,
+          1.7443650585260018
+        ]
+      }
+    },
+    "template_diagnostic": {
+      "predicted_boxes": 6,
+      "distinct_exact_boxes": 6,
+      "largest_exact_template_count": 1,
+      "normalized_center_width_height_std": [
+        0.14528011735953408,
+        0.05699829432145803,
+        0.08811435120846597,
+        0.062195033742431745
+      ],
+      "interpretation": "Descriptive output spread; insufficient alone to prove a fixed template or explain empty outputs"
+    },
+    "historical_crossfit_supplement": {
+      "all_patients": 256,
+      "positive": {
+        "n": 37,
+        "invalid": 0,
+        "valid_empty": 32,
+        "valid_nonempty": 5,
+        "truncated": 0
+      },
+      "negative": {
+        "n": 219,
+        "invalid": 0,
+        "valid_empty": 215,
+        "valid_nonempty": 4,
+        "truncated": 0
+      },
+      "positive_empty_rate": 0.8648648648648649,
+      "positive_region_recall": 0.0196078431372549,
+      "GT_regions": 51,
+      "positive_predicted_boxes_known": 6,
+      "single_IoU_unconditional": {
+        "n": 25,
+        "mean": 0.0410795484280937,
+        "quantiles_0_25_50_75_100": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.6557501904036558
+        ]
+      },
+      "single_IoU_ge_05_count": 1,
+      "single_strict_success_count": 1,
+      "single_IoU_nonempty_supplement": {
+        "n": 2,
+        "mean": 0.5134943553511713,
+        "quantiles_0_25_50_75_100": [
+          0.3712385202986868,
+          0.44236643782492907,
+          0.5134943553511713,
+          0.5846222728774135,
+          0.6557501904036558
+        ]
+      },
+      "negative_nonempty_rate": 0.0182648401826484,
+      "negative_invalid_rate": 0.0,
+      "positive_failure_categories": {
+        "no_valid_prediction": {
+          "patients": 32,
+          "GT_regions": 43,
+          "missed_GT_regions": 43
+        },
+        "nonempty_all_IoU_below_05": {
+          "patients": 4,
+          "GT_regions": 7,
+          "missed_GT_regions": 7
+        },
+        "partial_GT_matches": {
+          "patients": 0,
+          "GT_regions": 0,
+          "missed_GT_regions": 0
+        },
+        "all_GT_with_extras": {
+          "patients": 0,
+          "GT_regions": 0,
+          "missed_GT_regions": 0
+        },
+        "all_GT_without_extras": {
+          "patients": 1,
+          "GT_regions": 1,
+          "missed_GT_regions": 0
+        }
+      },
+      "multi_patient_count": 12,
+      "multi_only_one_prediction": 2,
+      "multi_all_covered": 0,
+      "multi_strict_success": 0,
+      "class_loc_inconsistent_valid_count": 29,
+      "class_loc_inconsistent_valid_rate": 0.11328125,
+      "class_loc_inconsistent_all_patient_denominator": 0.11328125,
+      "overall_joint_supplement": 0.77734375,
+      "always_no_empty_joint_reference": 0.85546875,
+      "classification_loc_cross_table": [
+        {
+          "true": false,
+          "class_yes": false,
+          "loc_state": "invalid",
+          "patients": 0
+        },
+        {
+          "true": false,
+          "class_yes": false,
+          "loc_state": "valid_empty",
+          "patients": 198
+        },
+        {
+          "true": false,
+          "class_yes": false,
+          "loc_state": "valid_nonempty",
+          "patients": 0
+        },
+        {
+          "true": false,
+          "class_yes": true,
+          "loc_state": "invalid",
+          "patients": 0
+        },
+        {
+          "true": false,
+          "class_yes": true,
+          "loc_state": "valid_empty",
+          "patients": 17
+        },
+        {
+          "true": false,
+          "class_yes": true,
+          "loc_state": "valid_nonempty",
+          "patients": 4
+        },
+        {
+          "true": true,
+          "class_yes": false,
+          "loc_state": "invalid",
+          "patients": 0
+        },
+        {
+          "true": true,
+          "class_yes": false,
+          "loc_state": "valid_empty",
+          "patients": 20
+        },
+        {
+          "true": true,
+          "class_yes": false,
+          "loc_state": "valid_nonempty",
+          "patients": 0
+        },
+        {
+          "true": true,
+          "class_yes": true,
+          "loc_state": "invalid",
+          "patients": 0
+        },
+        {
+          "true": true,
+          "class_yes": true,
+          "loc_state": "valid_empty",
+          "patients": 12
+        },
+        {
+          "true": true,
+          "class_yes": true,
+          "loc_state": "valid_nonempty",
+          "patients": 5
+        }
+      ],
+      "coordinate_diagnostics": {
+        "best_IoU": {
+          "n": 6,
+          "mean": 0.38676143831109977,
+          "quantiles_0_25_50_75_100": [
+            0.1451372596030346,
+            0.33467838871531375,
+            0.3667003412304245,
+            0.43838215494919286,
+            0.6557501904036558
+          ]
+        },
+        "center_distance_image_diagonal_units": {
+          "n": 6,
+          "mean": 0.07119238324719619,
+          "quantiles_0_25_50_75_100": [
+            0.042449970553582246,
+            0.05819653625758252,
+            0.06685525792110839,
+            0.08679926800446622,
+            0.10223624601871882
+          ]
+        },
+        "width_ratio": {
+          "n": 6,
+          "mean": 0.9864740865459111,
+          "quantiles_0_25_50_75_100": [
+            0.5677966101694916,
+            0.7177489177489178,
+            1.0054394180788233,
+            1.24712884600174,
+            1.390625
+          ]
+        },
+        "height_ratio": {
+          "n": 6,
+          "mean": 1.1014609634978894,
+          "quantiles_0_25_50_75_100": [
+            0.9655172413793104,
+            0.9892885691446842,
+            1.047222222222222,
+            1.1029888103651353,
+            1.4572490706319703
+          ]
+        },
+        "area_ratio": {
+          "n": 6,
+          "mean": 1.1009142926437885,
+          "quantiles_0_25_50_75_100": [
+            0.574105461393597,
+            0.7569466504718303,
+            1.070943793554498,
+            1.3873709829310212,
+            1.7443650585260018
+          ]
+        }
+      },
+      "template_diagnostic": {
+        "predicted_boxes": 6,
+        "distinct_exact_boxes": 6,
+        "largest_exact_template_count": 1,
+        "normalized_center_width_height_std": [
+          0.14528011735953408,
+          0.05699829432145803,
+          0.08811435120846597,
+          0.062195033742431745
+        ],
+        "interpretation": "Descriptive output spread; insufficient alone to prove a fixed template or explain empty outputs"
+      },
+      "rule": "Stored pilot-1 thresholds/folds; no threshold re-fitting"
+    }
+  },
+  "M2": {
+    "all_patients": 256,
+    "positive": {
+      "n": 37,
+      "invalid": 0,
+      "valid_empty": 31,
+      "valid_nonempty": 6,
+      "truncated": 0
+    },
+    "negative": {
+      "n": 219,
+      "invalid": 0,
+      "valid_empty": 215,
+      "valid_nonempty": 4,
+      "truncated": 0
+    },
+    "positive_empty_rate": 0.8378378378378378,
+    "positive_region_recall": 0.0196078431372549,
+    "GT_regions": 51,
+    "positive_predicted_boxes_known": 7,
+    "single_IoU_unconditional": {
+      "n": 25,
+      "mean": 0.044057232524895615,
+      "quantiles_0_25_50_75_100": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.6607003891050583
+      ]
+    },
+    "single_IoU_ge_05_count": 1,
+    "single_strict_success_count": 1,
+    "single_IoU_nonempty_supplement": {
+      "n": 2,
+      "mean": 0.5507154065611952,
+      "quantiles_0_25_50_75_100": [
+        0.4407304240173321,
+        0.49572291528926365,
+        0.5507154065611952,
+        0.6057078978331267,
+        0.6607003891050583
+      ]
+    },
+    "negative_nonempty_rate": 0.0182648401826484,
+    "negative_invalid_rate": 0.0,
+    "positive_failure_categories": {
+      "no_valid_prediction": {
+        "patients": 31,
+        "GT_regions": 41,
+        "missed_GT_regions": 41
+      },
+      "nonempty_all_IoU_below_05": {
+        "patients": 5,
+        "GT_regions": 9,
+        "missed_GT_regions": 9
+      },
+      "partial_GT_matches": {
+        "patients": 0,
+        "GT_regions": 0,
+        "missed_GT_regions": 0
+      },
+      "all_GT_with_extras": {
+        "patients": 0,
+        "GT_regions": 0,
+        "missed_GT_regions": 0
+      },
+      "all_GT_without_extras": {
+        "patients": 1,
+        "GT_regions": 1,
+        "missed_GT_regions": 0
+      }
+    },
+    "multi_patient_count": 12,
+    "multi_only_one_prediction": 3,
+    "multi_all_covered": 0,
+    "multi_strict_success": 0,
+    "class_loc_inconsistent_valid_count": 71,
+    "class_loc_inconsistent_valid_rate": 0.27734375,
+    "class_loc_inconsistent_all_patient_denominator": 0.27734375,
+    "overall_joint_supplement": 0.64453125,
+    "always_no_empty_joint_reference": 0.85546875,
+    "classification_loc_cross_table": [
+      {
+        "true": false,
+        "class_yes": false,
+        "loc_state": "invalid",
+        "patients": 0
+      },
+      {
+        "true": false,
+        "class_yes": false,
+        "loc_state": "valid_empty",
+        "patients": 164
+      },
+      {
+        "true": false,
+        "class_yes": false,
+        "loc_state": "valid_nonempty",
+        "patients": 0
+      },
+      {
+        "true": false,
+        "class_yes": true,
+        "loc_state": "invalid",
+        "patients": 0
+      },
+      {
+        "true": false,
+        "class_yes": true,
+        "loc_state": "valid_empty",
+        "patients": 51
+      },
+      {
+        "true": false,
+        "class_yes": true,
+        "loc_state": "valid_nonempty",
+        "patients": 4
+      },
+      {
+        "true": true,
+        "class_yes": false,
+        "loc_state": "invalid",
+        "patients": 0
+      },
+      {
+        "true": true,
+        "class_yes": false,
+        "loc_state": "valid_empty",
+        "patients": 11
+      },
+      {
+        "true": true,
+        "class_yes": false,
+        "loc_state": "valid_nonempty",
+        "patients": 0
+      },
+      {
+        "true": true,
+        "class_yes": true,
+        "loc_state": "invalid",
+        "patients": 0
+      },
+      {
+        "true": true,
+        "class_yes": true,
+        "loc_state": "valid_empty",
+        "patients": 20
+      },
+      {
+        "true": true,
+        "class_yes": true,
+        "loc_state": "valid_nonempty",
+        "patients": 6
+      }
+    ],
+    "coordinate_diagnostics": {
+      "best_IoU": {
+        "n": 7,
+        "mean": 0.34762024136318637,
+        "quantiles_0_25_50_75_100": [
+          0.059911242603550297,
+          0.2255619825589823,
+          0.3621621621621622,
+          0.44972196527678465,
+          0.6607003891050583
+        ]
+      },
+      "center_distance_image_diagonal_units": {
+        "n": 7,
+        "mean": 0.07814512788279342,
+        "quantiles_0_25_50_75_100": [
+          0.04242787998474587,
+          0.058297711456111255,
+          0.0657419196555744,
+          0.09896224436981282,
+          0.12432618388738553
+        ]
+      },
+      "width_ratio": {
+        "n": 7,
+        "mean": 0.948575263265908,
+        "quantiles_0_25_50_75_100": [
+          0.5193798449612403,
+          0.6479418886198547,
+          0.8095238095238095,
+          1.3123072055682987,
+          1.390625
+        ]
+      },
+      "height_ratio": {
+        "n": 7,
+        "mean": 1.02110996757837,
+        "quantiles_0_25_50_75_100": [
+          0.5390946502057613,
+          0.9712643678160919,
+          0.9820143884892086,
+          1.0911366313309776,
+          1.5018587360594795
+        ]
+      },
+      "area_ratio": {
+        "n": 7,
+        "mean": 1.021325244398867,
+        "quantiles_0_25_50_75_100": [
+          0.2799948958433024,
+          0.6663438256658596,
+          0.7949640287769785,
+          1.4384343651080163,
+          1.8647614046240377
+        ]
+      }
+    },
+    "template_diagnostic": {
+      "predicted_boxes": 7,
+      "distinct_exact_boxes": 7,
+      "largest_exact_template_count": 1,
+      "normalized_center_width_height_std": [
+        0.13941045696146356,
+        0.06392557854127513,
+        0.09376718890041288,
+        0.08291205077228103
+      ],
+      "interpretation": "Descriptive output spread; insufficient alone to prove a fixed template or explain empty outputs"
+    },
+    "historical_crossfit_supplement": {
+      "all_patients": 256,
+      "positive": {
+        "n": 37,
+        "invalid": 0,
+        "valid_empty": 31,
+        "valid_nonempty": 6,
+        "truncated": 0
+      },
+      "negative": {
+        "n": 219,
+        "invalid": 0,
+        "valid_empty": 215,
+        "valid_nonempty": 4,
+        "truncated": 0
+      },
+      "positive_empty_rate": 0.8378378378378378,
+      "positive_region_recall": 0.0196078431372549,
+      "GT_regions": 51,
+      "positive_predicted_boxes_known": 7,
+      "single_IoU_unconditional": {
+        "n": 25,
+        "mean": 0.044057232524895615,
+        "quantiles_0_25_50_75_100": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.6607003891050583
+        ]
+      },
+      "single_IoU_ge_05_count": 1,
+      "single_strict_success_count": 1,
+      "single_IoU_nonempty_supplement": {
+        "n": 2,
+        "mean": 0.5507154065611952,
+        "quantiles_0_25_50_75_100": [
+          0.4407304240173321,
+          0.49572291528926365,
+          0.5507154065611952,
+          0.6057078978331267,
+          0.6607003891050583
+        ]
+      },
+      "negative_nonempty_rate": 0.0182648401826484,
+      "negative_invalid_rate": 0.0,
+      "positive_failure_categories": {
+        "no_valid_prediction": {
+          "patients": 31,
+          "GT_regions": 41,
+          "missed_GT_regions": 41
+        },
+        "nonempty_all_IoU_below_05": {
+          "patients": 5,
+          "GT_regions": 9,
+          "missed_GT_regions": 9
+        },
+        "partial_GT_matches": {
+          "patients": 0,
+          "GT_regions": 0,
+          "missed_GT_regions": 0
+        },
+        "all_GT_with_extras": {
+          "patients": 0,
+          "GT_regions": 0,
+          "missed_GT_regions": 0
+        },
+        "all_GT_without_extras": {
+          "patients": 1,
+          "GT_regions": 1,
+          "missed_GT_regions": 0
+        }
+      },
+      "multi_patient_count": 12,
+      "multi_only_one_prediction": 3,
+      "multi_all_covered": 0,
+      "multi_strict_success": 0,
+      "class_loc_inconsistent_valid_count": 29,
+      "class_loc_inconsistent_valid_rate": 0.11328125,
+      "class_loc_inconsistent_all_patient_denominator": 0.11328125,
+      "overall_joint_supplement": 0.7734375,
+      "always_no_empty_joint_reference": 0.85546875,
+      "classification_loc_cross_table": [
+        {
+          "true": false,
+          "class_yes": false,
+          "loc_state": "invalid",
+          "patients": 0
+        },
+        {
+          "true": false,
+          "class_yes": false,
+          "loc_state": "valid_empty",
+          "patients": 197
+        },
+        {
+          "true": false,
+          "class_yes": false,
+          "loc_state": "valid_nonempty",
+          "patients": 0
+        },
+        {
+          "true": false,
+          "class_yes": true,
+          "loc_state": "invalid",
+          "patients": 0
+        },
+        {
+          "true": false,
+          "class_yes": true,
+          "loc_state": "valid_empty",
+          "patients": 18
+        },
+        {
+          "true": false,
+          "class_yes": true,
+          "loc_state": "valid_nonempty",
+          "patients": 4
+        },
+        {
+          "true": true,
+          "class_yes": false,
+          "loc_state": "invalid",
+          "patients": 0
+        },
+        {
+          "true": true,
+          "class_yes": false,
+          "loc_state": "valid_empty",
+          "patients": 20
+        },
+        {
+          "true": true,
+          "class_yes": false,
+          "loc_state": "valid_nonempty",
+          "patients": 0
+        },
+        {
+          "true": true,
+          "class_yes": true,
+          "loc_state": "invalid",
+          "patients": 0
+        },
+        {
+          "true": true,
+          "class_yes": true,
+          "loc_state": "valid_empty",
+          "patients": 11
+        },
+        {
+          "true": true,
+          "class_yes": true,
+          "loc_state": "valid_nonempty",
+          "patients": 6
+        }
+      ],
+      "coordinate_diagnostics": {
+        "best_IoU": {
+          "n": 7,
+          "mean": 0.34762024136318637,
+          "quantiles_0_25_50_75_100": [
+            0.059911242603550297,
+            0.2255619825589823,
+            0.3621621621621622,
+            0.44972196527678465,
+            0.6607003891050583
+          ]
+        },
+        "center_distance_image_diagonal_units": {
+          "n": 7,
+          "mean": 0.07814512788279342,
+          "quantiles_0_25_50_75_100": [
+            0.04242787998474587,
+            0.058297711456111255,
+            0.0657419196555744,
+            0.09896224436981282,
+            0.12432618388738553
+          ]
+        },
+        "width_ratio": {
+          "n": 7,
+          "mean": 0.948575263265908,
+          "quantiles_0_25_50_75_100": [
+            0.5193798449612403,
+            0.6479418886198547,
+            0.8095238095238095,
+            1.3123072055682987,
+            1.390625
+          ]
+        },
+        "height_ratio": {
+          "n": 7,
+          "mean": 1.02110996757837,
+          "quantiles_0_25_50_75_100": [
+            0.5390946502057613,
+            0.9712643678160919,
+            0.9820143884892086,
+            1.0911366313309776,
+            1.5018587360594795
+          ]
+        },
+        "area_ratio": {
+          "n": 7,
+          "mean": 1.021325244398867,
+          "quantiles_0_25_50_75_100": [
+            0.2799948958433024,
+            0.6663438256658596,
+            0.7949640287769785,
+            1.4384343651080163,
+            1.8647614046240377
+          ]
+        }
+      },
+      "template_diagnostic": {
+        "predicted_boxes": 7,
+        "distinct_exact_boxes": 7,
+        "largest_exact_template_count": 1,
+        "normalized_center_width_height_std": [
+          0.13941045696146356,
+          0.06392557854127513,
+          0.09376718890041288,
+          0.08291205077228103
+        ],
+        "interpretation": "Descriptive output spread; insufficient alone to prove a fixed template or explain empty outputs"
+      },
+      "rule": "Stored pilot-1 thresholds/folds; no threshold re-fitting"
+    }
+  },
+  "training_exposure": {
+    "W": {
+      "yes": {
+        "eligible_patients": 149,
+        "exposures": 128,
+        "different_patients": 128,
+        "patient_repetition_histogram": {
+          "1": 128,
+          "0": 21
+        },
+        "repetitions_0_1_2_more": {
+          "0": 21,
+          "1": 128,
+          "2": 0,
+          "more_than_2": 0
+        },
+        "original_frame_repetition_histogram": {
+          "1": 202,
+          "0": 33
+        },
+        "GT_target_length_including_EOS": {
+          "n": 149,
+          "mean": 27.19463087248322,
+          "quantiles_0_25_50_75_100": [
+            17.0,
+            18.0,
+            34.0,
+            34.0,
+            50.0
+          ]
+        },
+        "exposure_weighted_target_length": {
+          "n": 128,
+          "mean": 27.2109375,
+          "quantiles_0_25_50_75_100": [
+            17.0,
+            18.0,
+            34.0,
+            34.0,
+            50.0
+          ]
+        }
+      },
+      "no": {
+        "eligible_patients": 875,
+        "exposures": 128,
+        "different_patients": 128,
+        "patient_repetition_histogram": {
+          "0": 747,
+          "1": 128
+        },
+        "repetitions_0_1_2_more": {
+          "0": 747,
+          "1": 128,
+          "2": 0,
+          "more_than_2": 0
+        },
+        "original_frame_repetition_histogram": {},
+        "GT_target_length_including_EOS": {
+          "n": 875,
+          "mean": 2.0,
+          "quantiles_0_25_50_75_100": [
+            2.0,
+            2.0,
+            2.0,
+            2.0,
+            2.0
+          ]
+        },
+        "exposure_weighted_target_length": {
+          "n": 128,
+          "mean": 2.0,
+          "quantiles_0_25_50_75_100": [
+            2.0,
+            2.0,
+            2.0,
+            2.0,
+            2.0
+          ]
+        }
+      },
+      "single_box_exposures": 62,
+      "multi_box_exposures": 66,
+      "loss_weight": 0.5,
+      "normalization": "each auxiliary patient mean-token NLL incl EOS, multiplied .5; not divided by four classification slots"
+    },
+    "M1": {
+      "yes": {
+        "eligible_patients": 149,
+        "exposures": 128,
+        "different_patients": 113,
+        "patient_repetition_histogram": {
+          "0": 36,
+          "1": 98,
+          "2": 15
+        },
+        "repetitions_0_1_2_more": {
+          "0": 36,
+          "1": 98,
+          "2": 15,
+          "more_than_2": 0
+        },
+        "original_frame_repetition_histogram": {
+          "0": 52,
+          "1": 158,
+          "2": 25
+        },
+        "GT_target_length_including_EOS": {
+          "n": 149,
+          "mean": 27.19463087248322,
+          "quantiles_0_25_50_75_100": [
+            17.0,
+            18.0,
+            34.0,
+            34.0,
+            50.0
+          ]
+        },
+        "exposure_weighted_target_length": {
+          "n": 128,
+          "mean": 27.9453125,
+          "quantiles_0_25_50_75_100": [
+            17.0,
+            18.0,
+            34.0,
+            34.0,
+            50.0
+          ]
+        }
+      },
+      "no": {
+        "eligible_patients": 875,
+        "exposures": 128,
+        "different_patients": 128,
+        "patient_repetition_histogram": {
+          "0": 747,
+          "1": 128
+        },
+        "repetitions_0_1_2_more": {
+          "0": 747,
+          "1": 128,
+          "2": 0,
+          "more_than_2": 0
+        },
+        "original_frame_repetition_histogram": {},
+        "GT_target_length_including_EOS": {
+          "n": 875,
+          "mean": 2.0,
+          "quantiles_0_25_50_75_100": [
+            2.0,
+            2.0,
+            2.0,
+            2.0,
+            2.0
+          ]
+        },
+        "exposure_weighted_target_length": {
+          "n": 128,
+          "mean": 2.0,
+          "quantiles_0_25_50_75_100": [
+            2.0,
+            2.0,
+            2.0,
+            2.0,
+            2.0
+          ]
+        }
+      },
+      "single_box_exposures": 55,
+      "multi_box_exposures": 73,
+      "loss_weight": 0.5,
+      "normalization": "each auxiliary patient mean-token NLL incl EOS, multiplied .5; not divided by four classification slots"
+    },
+    "M2": {
+      "yes": {
+        "eligible_patients": 149,
+        "exposures": 128,
+        "different_patients": 113,
+        "patient_repetition_histogram": {
+          "0": 36,
+          "1": 98,
+          "2": 15
+        },
+        "repetitions_0_1_2_more": {
+          "0": 36,
+          "1": 98,
+          "2": 15,
+          "more_than_2": 0
+        },
+        "original_frame_repetition_histogram": {
+          "0": 52,
+          "1": 158,
+          "2": 25
+        },
+        "GT_target_length_including_EOS": {
+          "n": 149,
+          "mean": 27.19463087248322,
+          "quantiles_0_25_50_75_100": [
+            17.0,
+            18.0,
+            34.0,
+            34.0,
+            50.0
+          ]
+        },
+        "exposure_weighted_target_length": {
+          "n": 128,
+          "mean": 27.9453125,
+          "quantiles_0_25_50_75_100": [
+            17.0,
+            18.0,
+            34.0,
+            34.0,
+            50.0
+          ]
+        }
+      },
+      "no": {
+        "eligible_patients": 875,
+        "exposures": 128,
+        "different_patients": 128,
+        "patient_repetition_histogram": {
+          "0": 747,
+          "1": 128
+        },
+        "repetitions_0_1_2_more": {
+          "0": 747,
+          "1": 128,
+          "2": 0,
+          "more_than_2": 0
+        },
+        "original_frame_repetition_histogram": {},
+        "GT_target_length_including_EOS": {
+          "n": 875,
+          "mean": 2.0,
+          "quantiles_0_25_50_75_100": [
+            2.0,
+            2.0,
+            2.0,
+            2.0,
+            2.0
+          ]
+        },
+        "exposure_weighted_target_length": {
+          "n": 128,
+          "mean": 2.0,
+          "quantiles_0_25_50_75_100": [
+            2.0,
+            2.0,
+            2.0,
+            2.0,
+            2.0
+          ]
+        }
+      },
+      "single_box_exposures": 55,
+      "multi_box_exposures": 73,
+      "loss_weight": 0.5,
+      "normalization": "each auxiliary patient mean-token NLL incl EOS, multiplied .5; not divided by four classification slots"
+    }
+  }
+}

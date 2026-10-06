@@ -1,0 +1,74 @@
+{
+  "train": {
+    "original_positive_patients": 149,
+    "original_single_box": 71,
+    "original_multi_box": 78,
+    "area_side_eligible": 69,
+    "area_side_excluded": 2,
+    "geometry_attempted_source_loop": 69,
+    "geometry_failed_recorded_all_splits": 0,
+    "geometry_success_inferred_from_source_and_aggregate": 69,
+    "unattempted_geometry": 0,
+    "actual_proposals": 32,
+    "eligible_not_proposed_or_reviewed": 37,
+    "review_completed": 32,
+    "proposed_unreviewed": 0,
+    "accepted": 3,
+    "reject_or_unknown_combined": 29,
+    "pure_rejected_vs_uncertain": "NA: prior records combine reject_or_unknown; cannot separate retrospectively",
+    "original_primary_reasons": {
+      "control_or_target_context_unassessable": 8,
+      "other_or_nonlocal_visible_information": 20,
+      "uncertain_target_or_control": 1
+    },
+    "supported_coarse_reason_mapping": {
+      "unknown_target_vs_control_vs_anatomical_context": 8,
+      "multifocal_diffuse_or_target_information_outside_box": 20,
+      "unknown_target_vs_control_uncertainty": 1
+    },
+    "semantic_review_missing_among_geometry_eligible": 37,
+    "crop_excluded_reviewed": 3,
+    "crop_eligible_positive_patients": 146,
+    "use_levels": {
+      "original_region_supervision": 149,
+      "region_finding_correspondence": "All annotated positives are candidates; semantic crop applicability not exhaustively validated",
+      "paired_restricted_evidence_accepted": 3
+    },
+    "overlapping_multilabel_reasons": "Not recorded; only one primary reason per old reviewed patient; unrecorded causes remain unknown"
+  },
+  "validation": {
+    "original_positive_patients": 37,
+    "original_single_box": 25,
+    "original_multi_box": 12,
+    "area_side_eligible": 25,
+    "area_side_excluded": 0,
+    "geometry_attempted_source_loop": 25,
+    "geometry_failed_recorded_all_splits": 0,
+    "geometry_success_inferred_from_source_and_aggregate": 25,
+    "unattempted_geometry": 0,
+    "actual_proposals": 25,
+    "eligible_not_proposed_or_reviewed": 0,
+    "review_completed": 25,
+    "proposed_unreviewed": 0,
+    "accepted": 3,
+    "reject_or_unknown_combined": 22,
+    "pure_rejected_vs_uncertain": "NA: prior records combine reject_or_unknown; cannot separate retrospectively",
+    "original_primary_reasons": {
+      "other_or_nonlocal_visible_information": 17,
+      "control_or_target_context_unassessable": 5
+    },
+    "supported_coarse_reason_mapping": {
+      "multifocal_diffuse_or_target_information_outside_box": 17,
+      "unknown_target_vs_control_vs_anatomical_context": 5
+    },
+    "semantic_review_missing_among_geometry_eligible": 0,
+    "crop_excluded_reviewed": 3,
+    "crop_eligible_positive_patients": 34,
+    "use_levels": {
+      "original_region_supervision": 37,
+      "region_finding_correspondence": "All annotated positives are candidates; semantic crop applicability not exhaustively validated",
+      "paired_restricted_evidence_accepted": 3
+    },
+    "overlapping_multilabel_reasons": "Not recorded; only one primary reason per old reviewed patient; unrecorded causes remain unknown"
+  }
+}

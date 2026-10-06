@@ -1,0 +1,58 @@
+{
+  "D0": {
+    "status": "completed",
+    "models": 2,
+    "patients_per_model": 256
+  },
+  "E0": {
+    "status": "completed",
+    "new_reviews": 0
+  },
+  "D1": {
+    "status": "completed",
+    "patients_per_completed_checkpoint": 64
+  },
+  "L1_loc_probe": {
+    "status": "completed_diagnostic",
+    "patients": 64,
+    "steps": 256,
+    "output_relative": "L1_loc_probe",
+    "reason": null,
+    "optimizer_updates": 256
+  },
+  "CPU": {
+    "status": "completed_checks",
+    "patients": 64,
+    "overlay_review": "passed",
+    "test_pixels_read": 0
+  },
+  "D1_M1": {
+    "status": "completed",
+    "patients": 64,
+    "steps": null,
+    "output_relative": "D1_M1",
+    "reason": null
+  },
+  "D1_W": {
+    "status": "completed",
+    "patients": 64,
+    "steps": null,
+    "output_relative": "D1_W",
+    "reason": null
+  },
+  "D1_M2": {
+    "status": "completed",
+    "patients": 64,
+    "steps": null,
+    "output_relative": "D1_M2",
+    "reason": null
+  },
+  "eval_L1": {
+    "status": "completed",
+    "patients": 256,
+    "steps": null,
+    "output_relative": "eval_L1",
+    "reason": null,
+    "optimizer_updates": 0
+  }
+}

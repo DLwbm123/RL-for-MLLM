@@ -1,0 +1,40 @@
+{
+  "status": "completed_diagnostic",
+  "charged_gpu_hours": 0.37592271268367766,
+  "stages": [
+    {
+      "stage": "D1_M1",
+      "status": "completed",
+      "charged_seconds": 80.3871636390686,
+      "exit_code": 0
+    },
+    {
+      "stage": "D1_W",
+      "status": "completed",
+      "charged_seconds": 80.19540905952454,
+      "exit_code": 0
+    },
+    {
+      "stage": "D1_M2",
+      "status": "completed",
+      "charged_seconds": 82.05040264129639,
+      "exit_code": 0
+    },
+    {
+      "stage": "L1_loc_probe",
+      "status": "completed_diagnostic",
+      "charged_seconds": 882.5557863712311,
+      "exit_code": 0
+    },
+    {
+      "stage": "eval_L1",
+      "status": "completed",
+      "charged_seconds": 228.13300395011902,
+      "exit_code": 0
+    }
+  ],
+  "limit_gpu_hours": 2,
+  "max_concurrent_gpus": 3,
+  "single_gpu_per_job": true,
+  "active_jobs": 0
+}
