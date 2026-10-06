@@ -1,0 +1,325 @@
+{
+  "v2_reference_commit": "76816e51c98f6ec2e41260d3784bc6e11b596f5a",
+  "relative_to_v2": "only new v3 files; no tracked v1/v2 modifications",
+  "R1_protocol_lock": {
+    "version": "rsna-v3-reward-attribution-interface-audit",
+    "reference_commit": "76816e51c98f6ec2e41260d3784bc6e11b596f5a",
+    "origin_HEAD": "76816e51c98f6ec2e41260d3784bc6e11b596f5a",
+    "config_sha256": "83646f091a6ff2b12f7a5588591287054ad72b893c5b127a4e7a833f83f05d46",
+    "v2_config_sha256": "e7bd66c9c0ba03bee8a92337a4cf9a256e4166c2013036130383c48251616eb5",
+    "v2_protocol_lock_sha256": "cde76190f2d7362295145d110852f5abcc1e15881f6e8b3e74135aa8259bab54",
+    "artifact_hashes": {
+      "P4/B1/ced_diagnostics.json": "c000228fca0d1bc316c9baf893ea3311d715ca2af9bb5e65f78fdf2a72ecd392",
+      "P4/B1/groups.json": "619255b59cc829d5b61b472d3e4d93a25d88aea10d652f986e7e52eb68465540",
+      "P4/B1/samples.jsonl": "6742bc03fd23e5d6b2e6c8fd52fd5a3ed20df8f6fab297c0e8cf0d00508cf0ec",
+      "P4/B1/frozen_identity.json": "b74b8f1d5f274198690da426c6a946284045d2722d210a719cbcee7c66fdd68e",
+      "P4/B1/effective_generation.json": "999c0ecc717c4042d598c026d9c12378e1aec7466e51b63f41cf13036736bdb8",
+      "P4/summary.json": "690ed25cf4deb74fd3c1b71c2e729aa7ef48afacb670d89aa340a7b064e2c900",
+      "P1/summary.json": "0d11f39efa6932440f0cb658e04351fbec80b98fb3fdd95b87519caa679f0fd8",
+      "P3/summary.json": "74e056741a5380fdc7f025bb49ed701c334d810796f124f2e36f25c8ba16607b",
+      "stage_status.json": "9b5ccf7c4939dc96fe040b0b0bd71c6d22af2a2cb23e1d60017af1c718dbfeaf",
+      "protocol/regions.json": "26d12d53efc56358cddcc170759e982eea037d7e42689a96eb7265b97ff70245",
+      "protocol/subsets.json": "6bc0d4e8ec20c9109c067e1b7c1df246929bb9e37c737dde10b2e6fb3ffefea6",
+      "protocol/manifest.csv": "23e4224ebadc01c0f7db50e10687029d6bc24ffd645e6a45f78df03e1f39f848",
+      "protocol/identity.json": "a7b327f6391775cf0281f76ab70b09910b1d7b6b4051425a083b9dea195c73ad",
+      "protocol/protocol_lock.json": "cde76190f2d7362295145d110852f5abcc1e15881f6e8b3e74135aa8259bab54"
+    },
+    "source_hashes": {
+      "src/v3.py": "205a03b5afe9c821626e8b478f1764002d780d9d115aaa4d8dc5f3021c89e3d1",
+      "scripts/replay_rsna_v3.py": "e4cc25302e39fc7b21083895e82aad52bd75e4a54d0791abd0fbafadf944a2b0",
+      "tests/test_v3.py": "aef16964799606ee82353624d37722b73681e0e98a9b7231a78faf3ae48cb1ff"
+    },
+    "created_at": 1791265742.7950392,
+    "tolerances_fixed_before_replay": true,
+    "small_std_is_descriptive_only": 0.0001,
+    "base_revision": "cc594898137f460bfe9f0759e9844b3ce807cfb5",
+    "B1_checkpoint": "step_0256",
+    "new_GPU_seconds": 0
+  },
+  "R2_source_checks": {
+    "synthetic_tests_passed": 1,
+    "synthetic_test_seconds": 0.68,
+    "png_count": 1116,
+    "csv_rows": 930,
+    "all_status_pending": true,
+    "representative_source_png_readable": true,
+    "representative_png_size": [
+      1024,
+      1058
+    ],
+    "index_and_representative_page_blind_identity_check": "passed",
+    "numeric_outcome_field_check": "passed"
+  },
+  "R3_source_checks": {
+    "origin": "https://github.com/evidencerl/code.git",
+    "HEAD": "808a092fe87dd8be4b7e88c2d44aff76cec81b47",
+    "tracked_source_status": "",
+    "files": {
+      "src/reward/action_logprob_ate.py": {
+        "git_blob": "935ddaa531b37a6d94e36990258296a3433f9ab7",
+        "working_file_matches_blob": true,
+        "sha256": "9a3f066945c4595d5a2e7673607727fdea739486bec14e42a7dae346cf208ede"
+      },
+      "src/answer_format_utils.py": {
+        "git_blob": "7a71723847463ff340f4cae78d35cb735623ef57",
+        "working_file_matches_blob": true,
+        "sha256": "550bfa5305f9046d0d640cb7b4cd128a2349e386fa873e7337f6e9dcd5ba9171"
+      },
+      "src/yesno_utils.py": {
+        "git_blob": "976a365576fe6a162b8a6940661290dede2aad00",
+        "working_file_matches_blob": true,
+        "sha256": "e43c261a223daedd9d8ccddc16fc658f9b82c96830db8eac39bfc2669803c74e"
+      },
+      "src/mini_grpo_smoke.py": {
+        "git_blob": "0d3d3698202d158ac77211d8b8eda019937f2c97",
+        "working_file_matches_blob": true,
+        "sha256": "da21abd29cb9bdee1a8daa99f52b63225dae7d9f466d7dd532f858ac8b4ab0d9"
+      },
+      "src/proposal_utils.py": {
+        "git_blob": "c402e6babee8eb5509c3523817b2d5008c63e284",
+        "working_file_matches_blob": true,
+        "sha256": "36af951b2786fa2fc6e4a27af90dd735bbfefc0fc9348cd3e169fce5f8c3c61f"
+      },
+      "src/ced_core.py": {
+        "git_blob": "bb34b6498ca4b8b3d6a8e02dcec9a0bd6a65cb75",
+        "working_file_matches_blob": true,
+        "sha256": "85de11d602a5c1d401a9245cb3e445020b2923e5a8ffc4d7de4d3d0b8491f1b8"
+      },
+      "src/visual_token_map.py": {
+        "git_blob": "de529aa4058c74021209d14a580630dbd7710c4e",
+        "working_file_matches_blob": true,
+        "sha256": "e2f078acb77ed3692610836f48bde26ad39981ab20720a7dc503d4b95302552a"
+      },
+      "src/candidate_gen.py": {
+        "git_blob": "20a2b151bf49622da97f13391350d17a191cfc02",
+        "working_file_matches_blob": true,
+        "sha256": "3921ae26593a7b82bb20acd62b1e37d5700b1b732bcbe46b71df9e7bb4e686b8"
+      },
+      "src/train_main_experiment.py": {
+        "git_blob": "78c7047f9c06c453165e8422a4813f8c74b7aaad",
+        "working_file_matches_blob": true,
+        "sha256": "9c31d0fac97b2d078827d7d92c3e4148e267b8195092139b9825280dc757efcb"
+      },
+      "scripts/train_qwen35_9b_single.sh": {
+        "git_blob": "fcb0f8b0cef7c0ae6b6354a4b9fe9d71f64ea68e",
+        "working_file_matches_blob": true,
+        "sha256": "be6376c05271902d293398c88281a0b8c2e4825d3edb12fc962bc54cdbe3e873"
+      },
+      "README.md": {
+        "git_blob": "123554787c8a7b4e4e04639ee6a65909627f0ca2",
+        "working_file_matches_blob": true,
+        "sha256": "e1c3a1e40cd1c5cf5a3dded5cd0b4c6c990908dc04d769c1bf2192909ae700d2"
+      }
+    }
+  },
+  "tests": {
+    "R1": {
+      "status": "passed",
+      "scope": "tests/test_v3.py synthetic only",
+      "log": "CPU_tests_1791265725430294601.log",
+      "exit_code": 0,
+      "output": ".............                                                            [100%]\n13 passed in 1.88s\n",
+      "prior_synthetic_discovery": "constant float32 reward 0.2 may produce a rounding advantage; preserve and report historical behavior, do not force ideal identity"
+    },
+    "R2": {
+      "passed": 1,
+      "seconds": 0.68
+    },
+    "R3": {
+      "command": "python3 -m unittest discover -s tests -p test_v3_interfaces.py -v",
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "synthetic_only": true,
+      "private_author_pure_methods_tested": true,
+      "real_tokenizer_alignment_tested": false,
+      "model_backend_executed": false,
+      "author_python_files_syntax_checked": true
+    },
+    "total_final_passed": 26,
+    "historical_failed_synthetic_check_preserved": true,
+    "AI_review_aggregation": {
+      "passed": 2,
+      "failed": 0,
+      "synthetic_only": true,
+      "checks": [
+        "complete row coverage and eight-component qualification",
+        "reject duplicate, pending, missing or fabricated human qualification"
+      ]
+    },
+    "execution_amendment": {
+      "tests_run": 7,
+      "passed": 7,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.04147005081176758,
+      "GPU_used": false,
+      "log": "amendment_cpu_tests.log"
+    },
+    "G1_launcher": {
+      "tests_run": 1,
+      "passed": 1,
+      "seconds": 0.35024189949035645,
+      "GPU_used": false,
+      "log": "launcher_cpu_tests.log"
+    }
+  },
+  "stages": {
+    "V3-R1": {
+      "status": "completed",
+      "scope": "existing-record CPU replay",
+      "patients": 64,
+      "groups": 256,
+      "candidates": 2048
+    },
+    "V3-R2": {
+      "status": "completed_AI_screening_and_single_revision",
+      "packet_ready": true,
+      "patients": 93,
+      "human_review_status": "human_review_pending",
+      "ai_review_authorized": true,
+      "reviewer_model": "gpt-6-astra",
+      "ai_reviewed_patients": 93,
+      "ai_reviewed_rows": 930,
+      "ai_unchanged_interface_eligible": 0,
+      "ai_unchanged_interface_excluded": 93,
+      "ai_original_evidence_acceptable_P4": 22,
+      "final_G1_eligible": 0,
+      "final_G1_excluded": 32
+    },
+    "V3-R3": {
+      "status": "completed_source_audit",
+      "source_recipe_status": "blocked_source_recipe",
+      "model_measurements": null
+    },
+    "V3-G1": {
+      "status": "blocked_no_eligible_regions",
+      "gpu_authorized": true,
+      "protocol_variant": "AI-screened intervention interface, not human-validated",
+      "blockers": [
+        "zero eligible regions after the frozen single semantic proposal pass"
+      ],
+      "original_patients": 32,
+      "selected": 0,
+      "excluded": 32,
+      "measurements": 0,
+      "gpu_seconds": 0,
+      "manifest_sha256": "b649fd66fff65e4da36d4354459c50021d846a5f46d3d62d4231de808646f74e"
+    },
+    "V3-G2": {
+      "status": "blocked_source_recipe",
+      "gpu_authorized": true,
+      "source_recipe_status": "blocked_source_recipe",
+      "blockers": [
+        "author presence task pool missing",
+        "verified composite-base recipe and diagnostic checkpoint receipt missing"
+      ],
+      "measurements": 0
+    }
+  },
+  "GPU_seconds": 0,
+  "new_frozen_model_measurements": 0,
+  "training_run": false,
+  "test_images_read": 0,
+  "push_authorized": true,
+  "new_source_hashes": {
+    "configs/rsna_v3.json": "83646f091a6ff2b12f7a5588591287054ad72b893c5b127a4e7a833f83f05d46",
+    "configs/rsna_v3_ai_region_revision.json": "9f9226aba8ec7102e4272abbe02caa6b239402ec25107e3843ebf4aa7bb0e8ba",
+    "configs/rsna_v3_execution_amendment.json": "fce90a2c2da6d75a6a67f9970d7555d11aa042ee7ba7b8f797a2b6c1f3915083",
+    "scripts/dispatch_rsna_v3.py": "6a15f542cc5dd2a6c42c24694916bf05f565b9fbd5b12c1af9e51bf817cca349",
+    "scripts/launch_rsna_v3_g1.py": "a9f603ff15b766a6ac58d2e88771b087f2e7da930a9891a0c69159ba3f2c2b9d",
+    "scripts/prepare_rsna_v3_ai_regions.py": "a0c1899a28255d0d74b6abaa91f69e93a008743bd58cacf3b99c70e16f02eb65",
+    "scripts/prepare_rsna_v3_review.py": "f1d5b78072243ed0a935bdffd845592ed62fc38096df29d24abf10feb068efca",
+    "scripts/replay_rsna_v3.py": "e4cc25302e39fc7b21083895e82aad52bd75e4a54d0791abd0fbafadf944a2b0",
+    "scripts/run_rsna_v3_g1.py": "09c3d817ba9ab37e36fec6df1e8532e0c496f8db033bc4b83aea86fe637408fc",
+    "scripts/summarize_rsna_v3_ai_review.py": "4bf6fe01ba8b157266cf64736eb95aedd068f389a902dc3fee50442889931eeb",
+    "scripts/summarize_rsna_v3_replay.py": "7fd5c7f1daa6992b6c75080f41c77f5001907db4938fa537cd7bb4be401b6fee",
+    "src/v3.py": "205a03b5afe9c821626e8b478f1764002d780d9d115aaa4d8dc5f3021c89e3d1",
+    "src/v3_interfaces.py": "6ab5f6e38a7e77d04a714e8542fc97950076b40b1db05a3b99a334b7cd3038e0",
+    "tests/test_v3.py": "aef16964799606ee82353624d37722b73681e0e98a9b7231a78faf3ae48cb1ff",
+    "tests/test_v3_ai_regions.py": "e1d2ca07750424fa3dae1ca278a91820570305b1bd3b6ca9dd43f3e35ed9c6ff",
+    "tests/test_v3_ai_review.py": "2a94778ba21da52805fef251c7f9030bad74238a667056a5ae804ed8becbbc52",
+    "tests/test_v3_g1.py": "5b8df9cb8bc9ab22cf3972d5ca8ff79fbe95581004e3ebe99783072f9281cb13",
+    "tests/test_v3_g1_launcher.py": "64b80ff67b52920af6c3c43dfe029024f070d57b0f72d4f9274f61bd1c44ed4e",
+    "tests/test_v3_interfaces.py": "cc5da661cb5140a9bc14bc2d47778e63be92144398a5a2135b497aec3421233a",
+    "tests/test_v3_review.py": "65082e37e7f35b2e4afa53a49bbefc2dfe613f28fd9ea7706b58f4d6427d35bc"
+  },
+  "execution_amendment": "configs/rsna_v3_execution_amendment.json",
+  "AI_old_review": {
+    "patients": 93,
+    "rows": 930,
+    "row_status_counts": {
+      "acceptable": 129,
+      "uncertain": 103,
+      "rejected": 698
+    },
+    "by_batch": {
+      "1": {
+        "patients": 32,
+        "unchanged_interface_eligible": 0,
+        "excluded": 32
+      },
+      "2": {
+        "patients": 61,
+        "unchanged_interface_eligible": 0,
+        "excluded": 61
+      }
+    },
+    "completed_at": "2026-10-06T07:02:10.152183+00:00",
+    "human_expert_reviews": 0
+  },
+  "AI_revision": {
+    "status": "blocked_no_eligible_regions",
+    "gpu_authorized": true,
+    "protocol_variant": "AI-screened intervention interface, not human-validated",
+    "original_P4_geometry_patients": 32,
+    "original_evidence_AI_acceptable": 22,
+    "original_evidence_AI_excluded": 10,
+    "support_nonempty": 19,
+    "support_absent_despite_acceptable_evidence": 3,
+    "single_pass_geometry_attempts": 22,
+    "patients_with_one_matching_control": 0,
+    "patients_with_three_matching_controls": 0,
+    "insufficient_evidence_source_among_attempted": 19,
+    "adequate_evidence_source_among_attempted": 3,
+    "final_selected": 0,
+    "final_excluded": 32,
+    "common_paired_analysis_patients": 0,
+    "revised_semantic_reviews": 0,
+    "new_frozen_model_measurements": 0,
+    "frozen_B1_loaded": false,
+    "new_GPU_seconds": 0,
+    "training_run": false,
+    "test_images_read": 0,
+    "old_new_score_distributions": null,
+    "old_new_reward_reversal_change": null,
+    "manifest_sha256": "b649fd66fff65e4da36d4354459c50021d846a5f46d3d62d4231de808646f74e",
+    "frozen_at": "2026-10-06T07:19:36.418203+00:00",
+    "reason": "All 22 original-evidence-acceptable cases lack even one complete evidence-shaped token block inside the proposed AI support; three matched controls cannot be formed. No second proposal or relaxed matching rule.",
+    "counts_overlap_note": "The 19 source failures are contained within the 22 control failures, not additional patients."
+  },
+  "G1_manifest_sha256": "b649fd66fff65e4da36d4354459c50021d846a5f46d3d62d4231de808646f74e",
+  "publication": {
+    "status": "prepared_for_authorized_publication",
+    "verification": "reported separately after GitHub push and anonymous access check",
+    "public_files": 37,
+    "private_exclusions": [
+      "patient images and identities",
+      "case scores and candidate text",
+      "review tables, polygons and manifests",
+      "weights and raw logs"
+    ]
+  },
+  "HEAD_at_v3_start": "76816e51c98f6ec2e41260d3784bc6e11b596f5a",
+  "final_remote_validation": {
+    "final_private_record_sync": "completed",
+    "files": 72,
+    "frozen_source_check": "passed",
+    "original_32_partition_check": "passed",
+    "selected": 0,
+    "excluded": 32,
+    "GPU_seconds": 0,
+    "GPU_launch_receipt_present": false
+  }
+}

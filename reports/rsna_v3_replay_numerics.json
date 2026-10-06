@@ -1,0 +1,322 @@
+{
+  "analysis_type": "aggregation of already completed v3 CPU replay; no additional measurements",
+  "reversed_groups_by_correct_count": {
+    "1": {
+      "groups": 7,
+      "patients": 5,
+      "float32_Delta_A": {
+        "n": 7,
+        "min": 5.291501998901367,
+        "q25": 5.291502237319946,
+        "median": 5.291502475738525,
+        "q75": 5.2915027141571045,
+        "q95": 5.291502952575684,
+        "max": 5.291502952575684,
+        "mean": 5.291502475738525
+      },
+      "float32_formula_error": {
+        "n": 7,
+        "min": 1.463906560417172e-07,
+        "q25": 1.463906560417172e-07,
+        "median": 3.304465021614078e-07,
+        "q75": 4.76837158203125e-07,
+        "q95": 6.232278142448422e-07,
+        "max": 6.232278142448422e-07,
+        "mean": 3.352172287053788e-07
+      },
+      "float64_no_epsilon_formula_error": {
+        "n": 7,
+        "min": 0.0,
+        "q25": 0.0,
+        "median": 0.0,
+        "q75": 0.0,
+        "q95": 0.0,
+        "max": 0.0,
+        "mean": 0.0
+      }
+    },
+    "2": {
+      "groups": 10,
+      "patients": 7,
+      "float32_Delta_A": {
+        "n": 10,
+        "min": 3.4641013145446777,
+        "q25": 3.4641013145446777,
+        "median": 3.4641013145446777,
+        "q75": 3.464101552963257,
+        "q95": 3.464101552963257,
+        "max": 3.464101552963257,
+        "mean": 3.4641014099121095
+      },
+      "float32_formula_error": {
+        "n": 10,
+        "min": 6.217449755041571e-08,
+        "q25": 6.217449755041571e-08,
+        "median": 3.005930766519782e-07,
+        "q75": 3.005930766519782e-07,
+        "q95": 3.005930766519782e-07,
+        "max": 3.005930766519782e-07,
+        "mean": 2.052256450113532e-07
+      },
+      "float64_no_epsilon_formula_error": {
+        "n": 10,
+        "min": 0.0,
+        "q25": 1.1102230246251565e-16,
+        "median": 4.440892098500626e-16,
+        "q75": 4.440892098500626e-16,
+        "q95": 8.881784197001252e-16,
+        "max": 8.881784197001252e-16,
+        "mean": 3.9968028886505636e-16
+      }
+    },
+    "3": {
+      "groups": 11,
+      "patients": 6,
+      "float32_Delta_A": {
+        "n": 11,
+        "min": 2.58198881149292,
+        "q25": 2.58198881149292,
+        "median": 2.58198881149292,
+        "q75": 2.58198881149292,
+        "q95": 2.58198881149292,
+        "max": 2.58198881149292,
+        "mean": 2.58198881149292
+      },
+      "float32_formula_error": {
+        "n": 11,
+        "min": 8.597869127768831e-08,
+        "q25": 8.597869127768831e-08,
+        "median": 8.597869127768831e-08,
+        "q75": 8.597869127768831e-08,
+        "q95": 8.597869127768831e-08,
+        "max": 8.597869127768831e-08,
+        "mean": 8.597869127768831e-08
+      },
+      "float64_no_epsilon_formula_error": {
+        "n": 11,
+        "min": 0.0,
+        "q25": 0.0,
+        "median": 0.0,
+        "q75": 0.0,
+        "q95": 4.440892098500626e-16,
+        "max": 4.440892098500626e-16,
+        "mean": 8.074349270001139e-17
+      }
+    },
+    "4": {
+      "groups": 3,
+      "patients": 2,
+      "float32_Delta_A": {
+        "n": 3,
+        "min": 1.9999998807907104,
+        "q25": 1.9999998807907104,
+        "median": 1.9999998807907104,
+        "q75": 1.9999999403953552,
+        "q95": 1.999999988079071,
+        "max": 2.0,
+        "mean": 1.9999999205271404
+      },
+      "float32_formula_error": {
+        "n": 3,
+        "min": 0.0,
+        "q25": 5.960464477539063e-08,
+        "median": 1.1920928955078125e-07,
+        "q75": 1.1920928955078125e-07,
+        "q95": 1.1920928955078125e-07,
+        "max": 1.1920928955078125e-07,
+        "mean": 7.947285970052083e-08
+      },
+      "float64_no_epsilon_formula_error": {
+        "n": 3,
+        "min": 0.0,
+        "q25": 0.0,
+        "median": 0.0,
+        "q75": 0.0,
+        "q95": 0.0,
+        "max": 0.0,
+        "mean": 0.0
+      }
+    },
+    "5": {
+      "groups": 0,
+      "patients": 0,
+      "float32_Delta_A": {
+        "n": 0,
+        "min": null,
+        "q25": null,
+        "median": null,
+        "q75": null,
+        "q95": null,
+        "max": null,
+        "mean": null
+      },
+      "float32_formula_error": {
+        "n": 0,
+        "min": null,
+        "q25": null,
+        "median": null,
+        "q75": null,
+        "q95": null,
+        "max": null,
+        "mean": null
+      },
+      "float64_no_epsilon_formula_error": {
+        "n": 0,
+        "min": null,
+        "q25": null,
+        "median": null,
+        "q75": null,
+        "q95": null,
+        "max": null,
+        "mean": null
+      }
+    },
+    "6": {
+      "groups": 0,
+      "patients": 0,
+      "float32_Delta_A": {
+        "n": 0,
+        "min": null,
+        "q25": null,
+        "median": null,
+        "q75": null,
+        "q95": null,
+        "max": null,
+        "mean": null
+      },
+      "float32_formula_error": {
+        "n": 0,
+        "min": null,
+        "q25": null,
+        "median": null,
+        "q75": null,
+        "q95": null,
+        "max": null,
+        "mean": null
+      },
+      "float64_no_epsilon_formula_error": {
+        "n": 0,
+        "min": null,
+        "q25": null,
+        "median": null,
+        "q75": null,
+        "q95": null,
+        "max": null,
+        "mean": null
+      }
+    },
+    "7": {
+      "groups": 0,
+      "patients": 0,
+      "float32_Delta_A": {
+        "n": 0,
+        "min": null,
+        "q25": null,
+        "median": null,
+        "q75": null,
+        "q95": null,
+        "max": null,
+        "mean": null
+      },
+      "float32_formula_error": {
+        "n": 0,
+        "min": null,
+        "q25": null,
+        "median": null,
+        "q75": null,
+        "q95": null,
+        "max": null,
+        "mean": null
+      },
+      "float64_no_epsilon_formula_error": {
+        "n": 0,
+        "min": null,
+        "q25": null,
+        "median": null,
+        "q75": null,
+        "q95": null,
+        "max": null,
+        "mean": null
+      }
+    }
+  },
+  "recomputed_reward_error": {
+    "max_absolute": 4.470348358154297e-07,
+    "max_relative_with_floor": 3.2208410670119408e-06,
+    "relative_floor": 1e-12
+  },
+  "cached_numeric_serialization": {
+    "numbers_checked": 576,
+    "non_float32_representable_numbers": 0,
+    "interpretation": "checks stored cache representation only; precision before caching remains NA"
+  },
+  "constant_input_numerical_artifacts": [
+    {
+      "variant": "R-G",
+      "correct_candidates": 8,
+      "stored_input_constant": true,
+      "float32_std": 5.960464477539063e-08,
+      "advantage": {
+        "n": 8,
+        "min": -0.8563314080238342,
+        "q25": -0.8563314080238342,
+        "median": -0.8563314080238342,
+        "q75": -0.8563314080238342,
+        "q95": -0.8563314080238342,
+        "max": -0.8563314080238342,
+        "mean": -0.8563314080238342
+      },
+      "float64_with_epsilon_zero": true,
+      "float64_without_epsilon_zero": true
+    }
+  ],
+  "ordering_protection_gap": {
+    "R-C": {
+      "n": 32,
+      "min": 1.0,
+      "q25": 1.0,
+      "median": 1.0,
+      "q75": 1.0,
+      "q95": 1.0,
+      "max": 1.0,
+      "mean": 1.0
+    },
+    "R-H": {
+      "n": 32,
+      "min": -0.19976039975881577,
+      "q25": -0.1262216242030263,
+      "median": 1.1998929008841515,
+      "q75": 1.1999546065926552,
+      "q95": 1.1999546065926552,
+      "max": 1.1999546065926552,
+      "mean": 0.7465207674831618
+    },
+    "R-G": {
+      "n": 32,
+      "min": 4.610419273376465e-05,
+      "q25": 0.0018920749425888062,
+      "median": 0.9999545812606812,
+      "q75": 0.9999545812606812,
+      "q95": 0.9999545812606812,
+      "max": 0.9999545812606812,
+      "mean": 0.6714701168239117
+    },
+    "R-A": {
+      "n": 32,
+      "min": 0.8001934662461281,
+      "q25": 0.8719021659344435,
+      "median": 1.1999383196234703,
+      "q75": 1.200000025331974,
+      "q95": 1.200000025331974,
+      "max": 1.200000025331974,
+      "mean": 1.0750506497279275
+    }
+  },
+  "same_patient_mixed_order_changes": 0,
+  "float32_vs_float64_advantage_max_error": {
+    "R-C": 2.452232488181494e-07,
+    "R-H": 3.565309687481033e-07,
+    "R-G": 0.8563314080238342,
+    "R-A": 2.651966237721126e-07
+  }
+}

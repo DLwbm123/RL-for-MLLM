@@ -1,0 +1,264 @@
+{
+  "schema_version": "rsna-v3-author-interface-audit-1",
+  "date": "2026-10-06",
+  "evidence_class": "source_audit_and_synthetic_CPU_checks_only",
+  "source_audit_status": "completed_with_explicit_unresolved_items",
+  "new_model_measurements": false,
+  "training_run": false,
+  "GPU_used": false,
+  "G2": {
+    "authorization": "authorized",
+    "source_recipe_status": "blocked_source_recipe",
+    "author_exact_measurements": null,
+    "composite_B_measurements": null
+  },
+  "paper": {
+    "historical_record": "arXiv:2608.08021v2",
+    "readable_source": "private/paper.txt",
+    "source_sha256": "f15db15db3b0ac96d914e6a946ee72a119991dbd9d57aca7cb815328f2f251d0",
+    "sections_read": [
+      "3",
+      "4.1",
+      "A.1",
+      "A.2",
+      "A.8",
+      "A.9",
+      "A.11"
+    ],
+    "original_PDF_page_image_verified_this_round": false
+  },
+  "author_repository": {
+    "origin": "https://github.com/evidencerl/code.git",
+    "HEAD": "808a092fe87dd8be4b7e88c2d44aff76cec81b47",
+    "tracked_source_status": "",
+    "files": {
+      "src/reward/action_logprob_ate.py": {
+        "git_blob": "935ddaa531b37a6d94e36990258296a3433f9ab7",
+        "working_file_matches_blob": true,
+        "sha256": "9a3f066945c4595d5a2e7673607727fdea739486bec14e42a7dae346cf208ede"
+      },
+      "src/answer_format_utils.py": {
+        "git_blob": "7a71723847463ff340f4cae78d35cb735623ef57",
+        "working_file_matches_blob": true,
+        "sha256": "550bfa5305f9046d0d640cb7b4cd128a2349e386fa873e7337f6e9dcd5ba9171"
+      },
+      "src/yesno_utils.py": {
+        "git_blob": "976a365576fe6a162b8a6940661290dede2aad00",
+        "working_file_matches_blob": true,
+        "sha256": "e43c261a223daedd9d8ccddc16fc658f9b82c96830db8eac39bfc2669803c74e"
+      },
+      "src/mini_grpo_smoke.py": {
+        "git_blob": "0d3d3698202d158ac77211d8b8eda019937f2c97",
+        "working_file_matches_blob": true,
+        "sha256": "da21abd29cb9bdee1a8daa99f52b63225dae7d9f466d7dd532f858ac8b4ab0d9"
+      },
+      "src/proposal_utils.py": {
+        "git_blob": "c402e6babee8eb5509c3523817b2d5008c63e284",
+        "working_file_matches_blob": true,
+        "sha256": "36af951b2786fa2fc6e4a27af90dd735bbfefc0fc9348cd3e169fce5f8c3c61f"
+      },
+      "src/ced_core.py": {
+        "git_blob": "bb34b6498ca4b8b3d6a8e02dcec9a0bd6a65cb75",
+        "working_file_matches_blob": true,
+        "sha256": "85de11d602a5c1d401a9245cb3e445020b2923e5a8ffc4d7de4d3d0b8491f1b8"
+      },
+      "src/visual_token_map.py": {
+        "git_blob": "de529aa4058c74021209d14a580630dbd7710c4e",
+        "working_file_matches_blob": true,
+        "sha256": "e2f078acb77ed3692610836f48bde26ad39981ab20720a7dc503d4b95302552a"
+      },
+      "src/candidate_gen.py": {
+        "git_blob": "20a2b151bf49622da97f13391350d17a191cfc02",
+        "working_file_matches_blob": true,
+        "sha256": "3921ae26593a7b82bb20acd62b1e37d5700b1b732bcbe46b71df9e7bb4e686b8"
+      },
+      "src/train_main_experiment.py": {
+        "git_blob": "78c7047f9c06c453165e8422a4813f8c74b7aaad",
+        "working_file_matches_blob": true,
+        "sha256": "9c31d0fac97b2d078827d7d92c3e4148e267b8195092139b9825280dc757efcb"
+      },
+      "scripts/train_qwen35_9b_single.sh": {
+        "git_blob": "fcb0f8b0cef7c0ae6b6354a4b9fe9d71f64ea68e",
+        "working_file_matches_blob": true,
+        "sha256": "be6376c05271902d293398c88281a0b8c2e4825d3edb12fc962bc54cdbe3e873"
+      },
+      "README.md": {
+        "git_blob": "123554787c8a7b4e4e04639ee6a65909627f0ca2",
+        "working_file_matches_blob": true,
+        "sha256": "e1c3a1e40cd1c5cf5a3dded5cd0b4c6c990908dc04d769c1bf2192909ae700d2"
+      }
+    }
+  },
+  "interfaces": [
+    {
+      "item": "冻结模型/checkpoint",
+      "paper": "§4 主匹配基座 Qwen2.5-VL-7B；A.11 的 Answer/CoT 比较为 Qwen3.5-9B；§4.1 对应精确权重 revision 未给出可复算标识（全文 318–325、374–379、1162–1169）",
+      "author_implementation": "README 发布 `hhj-ai/Evidence-RL-9B` 成品模型；不是自动等同于 pre-RL 信号探针 checkpoint",
+      "published_call_recipe_not_run_receipt": "`scripts/train_qwen35_9b_single.sh` 默认 `Qwen/Qwen3.5-9B`，无固定模型 revision；§4.1/A.8/A.9 的冻结 checkpoint、receipt **unresolved**",
+      "rsna_v2": "`configs/rsna_v2.json` 基座 Qwen2.5-VL-7B-Instruct revision `cc594898137f460bfe9f0759e9844b3ce807cfb5`；P4 仅历史 B1 step_0256，非作者权重"
+    },
+    {
+      "item": "数据与任务来源",
+      "paper": "A.1：COCO val2017 派生 train 17,502 / validation 2,352 / probe 1,904；在线筛选后 15,314（834–849）",
+      "author_implementation": "README 和 data 目录提供 Visual Genome brutal 标注/下载脚本",
+      "published_call_recipe_not_run_receipt": "发布脚本 `dataset_name=vg_brutal`；本地仅标注、无配套 image bundle、无原 COCO probe split/recipe；实际论文诊断 manifest **unresolved**",
+      "rsna_v2": "原 RSNA 开发范围；不具有作者任务复现身份，不扩展患者或使用测试"
+    },
+    {
+      "item": "question/response 模板",
+      "paper": "A.1 Table A.1 `short_evidence_v1`；A.11 最终答案与 CoT 范围有别",
+      "author_implementation": "`answer_format_utils.build_generation_prompt`：任务规则 + Evidence 1–8 words + Final answer 两行；`render_question_text` 可把 bbox 文本嵌入问题；`ced_core.prepare_inputs` 使用 processor chat template",
+      "published_call_recipe_not_run_receipt": "发布脚本显式short_evidence_v1；MiniGRPO.train_step生成用扩展prompt，但_compute_reward_detail传sample[question]给scorer；两种文本须分别记录，论文信号实验实际模板 **unresolved**",
+      "rsna_v2": "`src/data.py` DATASET_NAME=rsna 的 A 问句；`src/model.Model.prompt` chat template；只要求 no/yes，无候选特有 Evidence/CoT 前缀"
+    },
+    {
+      "item": "final-answer 提取",
+      "paper": "A.11 仅 final answer 计敏感性；无完整 tokenizer/span 算法（1162–1195）",
+      "author_implementation": "`extract_final_answer` 按 final tag、answer tag、两行、tag-next-line、末短行/单短行等规则提取；`extract_final_answer_with_prefix` 返回 char span 和此前 prefix；`MiniGRPO._select_policy_scope_and_span` 增量 decode 映射与字符区间重叠的 tokens",
+      "published_call_recipe_not_run_receipt": "`answer_text_source=final_answer`、policy/reward scope=final_answer、strict scope=True 为主入口 defaults；没有真实候选 span/截断收据，不能证明所有历史候选对齐",
+      "rsna_v2": "`src/model.Model.score` 直接 tokenize 固定标签；P4 raw 回答经 `src/objectives.correctness` 严格匹配；不是作者 span 提取路径"
+    },
+    {
+      "item": "保留响应前缀",
+      "paper": "Answer-CED“仅答案计分”不等于“删除此前 prefix”",
+      "author_implementation": "`ActionLogProbATEReward.compute` 的 `reward_condition_on_prefix=True` 把完整 response teacher-force，仅汇总 final span；False 则只 tokenize answer",
+      "published_call_recipe_not_run_receipt": "主入口 default=True 且传至 MiniGRPO；作者实际 §4.1 日志 **unresolved**；支持 isolated 切换不是论文实际使用的证据",
+      "rsna_v2": "只计 isolated yes/no：score(a given I,q)，没有 h_i"
+    },
+    {
+      "item": "干预间文本固定",
+      "paper": "§3 固定候选 y，比较局部干预支持度（237–269）",
+      "author_implementation": "`compute` 仅一次构造 `response_ids`/`extended`，原图、evidence、三个 controls 均复用；没有干预后重新生成前缀",
+      "published_call_recipe_not_run_receipt": "已在该函数源码中确认；实际调用是否使用此路径缺 receipt",
+      "rsna_v2": "`src/v2_run.py` P4 缓存每病例两标签；`Model.score` 固定答案 tokens，所有干预共享该答案"
+    },
+    {
+      "item": "平均/序列 logprob",
+      "paper": "Eq.2 用序列 log likelihood 简写；A.11 讨论 span 范围/长度",
+      "author_implementation": "`_mean_logprob_from_logits` 对所选 token 的 logprob **平均**；返回 vector 与 count；不是序列总和",
+      "published_call_recipe_not_run_receipt": "该 compute 原图/所有干预调用同一 mean helper；无法用 Eq.2 简写替代实际 reduction",
+      "rsna_v2": "`Model.score` 保存 mean/sum/length，`classes`/CED 用 mean；v2 冻结定义不变"
+    },
+    {
+      "item": "EOS/结束标记",
+      "paper": "A.1 未独立给出 EOS 计分规则；A.11 长度诊断不能推出 EOS 合同",
+      "author_implementation": "`compute` encode(... add_special_tokens=False) 不额外追加 EOS；候选生成有效长度截在 EOS/PAD 前；解码 skip_special_tokens；final span排除后缀标记",
+      "published_call_recipe_not_run_receipt": "主作用路径可追踪；若 raw 内显式含特殊标记需实际 token 记录确认，不能泛称一切 EOS 都已排除",
+      "rsna_v2": "classification_score_eos=false；SFT historical include_eos=true 是监督协议，不是本轮训练；P4 reward排除EOS"
+    },
+    {
+      "item": "长度、格式、截断",
+      "paper": "A.1 evidence max_new_tokens=32，full max_response_tokens=64；format penalty −.75；A.11 测长另有诊断（797–831、1236–1259）",
+      "author_implementation": "compute response IDs截至max_response_tokens；MiniGRPO span映射截至max_new_tokens；strict无span返回invalid。边界token相交计入span，故需真实tokenizer复核",
+      "published_call_recipe_not_run_receipt": "发布脚本32/64；候选生成decode/重新encode可能影响长度，需逐候选记录；A.11 held-out自然长回答不能当作同一32-token采样收据",
+      "rsna_v2": "P4最大16新tokens，temperature1/top_p.95/top_k0；合法回答2048/2048是v2已有结果，非本轮新增"
+    },
+    {
+      "item": "R_ans 复合分数",
+      "paper": "A.1 `alpha_ans=.30, alpha_resp=.70, tau_ans=1, tau_resp=.20`；复合基础值，不是严格c",
+      "author_implementation": "compute 的 `score_resp=tanh(m/.20)`；`score_ans=tanh(delta_ans_margin/1)`；score_base为加权和，yes/no margin 默认启用，非yes/no parse令delta_ans=0",
+      "published_call_recipe_not_run_receipt": "主入口构造reward_fn采用soft_shaping，但主trainer另消费reward_main字段；论文复合B与实际运行字段映射 **unresolved**",
+      "rsna_v2": "R_H直接c*g(m)+.1m；不得称为作者复合R_ans"
+    },
+    {
+      "item": "correctness-only",
+      "paper": "§4.1/A.8/A.9名称及分组统计不能单独定义0/1编码",
+      "author_implementation": "`_correctness_reward` task-aware score>=1给+1，否则−.25；缺GT为0。`reward_main_correctness_only`即该值",
+      "published_call_recipe_not_run_receipt": "MiniGRPO main路径明确消费对应字段；此外样式和KL可再改变最终reward；actual receipt缺失",
+      "rsna_v2": "c正确1、错误0、非法−.1（`src/objectives.correctness`），不等于作者+1/−.25"
+    },
+    {
+      "item": "非法格式与异常",
+      "paper": "A.1 format penalty −.75",
+      "author_implementation": "`_make_result`失败结果、strict scope、`invalid_final_answer_penalty`、style parse-fail和hard-template veto属于不同分支",
+      "published_call_recipe_not_run_receipt": "`MiniGRPO.step`先改r['reward']，之后main mix从reward_main字段取training_reward_total，因此不能断言−.75直接传递到最终main reward；还需完整receipt与style状态",
+      "rsna_v2": "P4全部合法；非法−.1规则存在但实测无非法分母；不能由此验证作者异常路径"
+    },
+    {
+      "item": "gate/tie/clipping",
+      "paper": "Eq.4 g=.5(1+tanh(m/.20)), tie=.10m；A.1 clip[-1.25,1]",
+      "author_implementation": "`_compose_main_rewards`门控离散correctness，无最终clip；`_soft_shaping_reward`另有bias/scale与clip；legacy/raw还有不同规则",
+      "published_call_recipe_not_run_receipt": "main入口的min/max只送soft-shaping构造；CPU pure-method检查main在正确m=1时>1、soft分支clip=1。style/veto/KL后才形成最终标准化奖励；论文实际clip路径 **unresolved**",
+      "rsna_v2": "`src/objectives.ced_reward` detach，c*g+.1m无额外clip；eps_CED=1e-6、controls ddof=0"
+    },
+    {
+      "item": "evidence/control proposals",
+      "paper": "§3 COCO弱对象框；A.2 priority proposal/target/argument/metadata/center，K=3 area match、IoU≤.05，允许token-subset回退",
+      "author_implementation": "`proposal_utils.resolve_primary_proposal_bbox/build_intervention_proposals`实现优先级、random bbox及token-subset fallback",
+      "published_call_recipe_not_run_receipt": "发布脚本K3、mean；各论文run具体proposal/fallback计数 **unresolved**",
+      "rsna_v2": "`src/regions.py` 固定标注框联合区域，三个几何匹配controls；禁止任意token fallback；93例仅几何合格，human review pending"
+    },
+    {
+      "item": "replacement来源/层位",
+      "paper": "A.2 post spatial-merge，邻近非目标token均值（879–901）",
+      "author_implementation": "`ced_core.TokenReplacer`在首LLM层输入hook替换；source由`visual_token_map.surrounding_indices`默认ring2；空ring可回退全局非目标，最后可回退all visual；TokenReplacer空sur甚至用整序列hidden均值",
+      "published_call_recipe_not_run_receipt": "作者源码支持的fallback，不能说每个论文样本实际用过；需要来源索引和hook运行证据",
+      "rsna_v2": "`Model.supplied_features`在visual恢复空间顺序后替换；`source_ring`ring3/valid/forbidden约束，源与目标不交且至少4源tokens；语义合格未获人工确认"
+    },
+    {
+      "item": "跨候选区域固定性",
+      "paper": "论文按sample构建references，未给seed字段规则",
+      "author_implementation": "每次compute可重建proposal，但_seed_from_metadata按sample_uid/pair_id/sample_id/image_id优先，MD5前8位seed局部random.Random；同metadata/grid/框条件确定",
+      "published_call_recipe_not_run_receipt": "MiniGRPO传metadata=sample，同case多个候选通常共享同sample；不得把“每次调用重建”误报为“每候选独立随机”。若metadata身份变动则不能保证，需freeze并对照indices",
+      "rsna_v2": "v2私有regions manifest按病例固定；同标签缓存奖励，不按候选重抽"
+    },
+    {
+      "item": "presence/binary routing",
+      "paper": "§3.2、A.9 presence进入audit；二元任务组方差限制（1127–1138）",
+      "author_implementation": "answer_format_utils evidence families=counting/attribute/spatial；existence probe-only；_compose_main_rewards不允许的任务退correctness-only",
+      "published_call_recipe_not_run_receipt": "单卡脚本task_family_filter=counting,attribute,spatial，probe_filter=existence；G2 presence只能作为CED诊断，不能强推训练",
+      "rsna_v2": "P4对RSNA binary进行离线诊断；RL从未运行，当前isolated yes/no CED-GRPO维持停止"
+    },
+    {
+      "item": "advantage/近零分支",
+      "paper": "§3.2组内(R−均值)/std，正文省略数值分支",
+      "author_implementation": "MiniGRPO先减KL，再np.std(ddof=0)；std<1e-4时仅中心化，否则除std；all-identical telemetry阈值1e-8；style惩罚先于此",
+      "published_call_recipe_not_run_receipt": "主脚本kl_coeff=.01；style_debias默认True、长度/abstention/template/parse等系数，hard veto默认True；论文该诊断是否启用每项 **unresolved**",
+      "rsna_v2": "v2.reward_group为float32、std<1e-8置零，否则除std+1e-8；不可把作者near-zero路径与本项目公式混同"
+    },
+    {
+      "item": "候选数量/采样参数",
+      "paper": "A.1 group32、rerank6、T1/top_p.95；A.8不同分析分母而非一套通用数量",
+      "author_implementation": "train入口及候选生成分别有group/rerank/max sampling rounds；可选去重/补采路径",
+      "published_call_recipe_not_run_receipt": "发布单卡脚本group32/T1/top_p.95/max_new32/max_response64；§4.1原始group收据 **unresolved**；v3不可直接沿用作者补采逻辑",
+      "rsna_v2": "P4每病例4组、每组8、64病例；G2仅预注册16 counting+16 presence，每题一次16候选，最多512、不补采"
+    }
+  ],
+  "tests": {
+    "command": "python3 -m unittest discover -s tests -p test_v3_interfaces.py -v",
+    "passed": 4,
+    "failed": 0,
+    "skipped": 0,
+    "synthetic_only": true,
+    "private_author_pure_methods_tested": true,
+    "real_tokenizer_alignment_tested": false,
+    "model_backend_executed": false,
+    "author_python_files_syntax_checked": true
+  },
+  "required_G2_materials_missing": [
+    "paper_signal_probe_checkpoint_and_revision_receipt",
+    "paper_train_probe_task_image_split_manifest_with_legal_availability",
+    "composite_R_ans_to_actual_runtime_field_recipe",
+    "effective_prompt_generation_scoring_style_veto_KL_config",
+    "real_tokenizer_span_and_truncation_check"
+  ],
+  "diagnostic_combinations": [
+    "C",
+    "B",
+    "C*g(m_I)+0.10*m_I",
+    "C*g(m_P)+0.10*m_P",
+    "B*g(m_I)+0.10*m_I",
+    "B*g(m_P)+0.10*m_P",
+    "B_fixed_m0=0.5*B"
+  ],
+  "author_exact": "separate_required_path_unresolved_not_substituted",
+  "limitations": [
+    "source code support does not identify paper experimental runtime",
+    "author score_base already contains intervention information",
+    "main correctness is +1/-0.25, not strict binary C",
+    "prefix variance does not validate reliable grounding",
+    "no independent replication or new frozen-model measurements",
+    "published MiniGRPO generates from extended prompt but passes raw sample question into CED scorer"
+  ],
+  "latest_material_check": "rsna_v3_G2_readiness.json"
+}

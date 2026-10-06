@@ -1,0 +1,46 @@
+{
+  "checked_at": "2026-10-06T06:14:04.736728+00:00",
+  "gpu_authorized": true,
+  "status": "blocked_source_recipe",
+  "author_pinned_commit": "808a092fe87dd8be4b7e88c2d44aff76cec81b47",
+  "official_main_verified_same_commit": true,
+  "verification_route": "GitHub API via configured HTTP proxy; local fixed checkout retained",
+  "datasets": {
+    "vg_brutal_pairs.jsonl": {
+      "rows": 21758,
+      "author_task_family_counts": {
+        "attribute": 8158,
+        "spatial": 8160,
+        "counting": 2720,
+        "other": 2720
+      }
+    },
+    "vg_brutal_pairs.rewritten.jsonl": {
+      "rows": 21758,
+      "author_task_family_counts": {
+        "attribute": 8158,
+        "spatial": 8160,
+        "counting": 2720,
+        "other": 2720
+      }
+    }
+  },
+  "available_presence_tasks_by_author_router": 0,
+  "required_presence_tasks": 16,
+  "data_download_performed": false,
+  "new_questions_fabricated": false,
+  "test_data_accessed": false,
+  "model_measurements": 0,
+  "reason": "The published annotation sets contain no existence family under the author router. Do not re-label other families or manufacture binary questions. Model and recipe provenance gaps also remain.",
+  "official_model_card": {
+    "url": "https://huggingface.co/hhj-ai/Evidence-RL-9B/blob/main/README.md",
+    "read": true,
+    "describes": "post-trained Qwen3.5-9B product checkpoint",
+    "provides_missing_presence_probe_manifest": false,
+    "provides_signal_diagnostic_checkpoint_receipt": false,
+    "additional_data_links": []
+  },
+  "adapted_backbone_available": true,
+  "adapted_backbone": "existing frozen Qwen2.5-VL-7B-Instruct",
+  "adaptation_limit": "Backbone substitution is allowed as adapted-control but does not supply the missing author presence tasks or resolve the paper composite-base mapping."
+}

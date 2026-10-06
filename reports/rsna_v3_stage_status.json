@@ -1,0 +1,53 @@
+{
+  "V3-R1": {
+    "status": "completed",
+    "scope": "existing-record CPU replay",
+    "patients": 64,
+    "groups": 256,
+    "candidates": 2048
+  },
+  "V3-R2": {
+    "status": "completed_AI_screening_and_single_revision",
+    "packet_ready": true,
+    "patients": 93,
+    "human_review_status": "human_review_pending",
+    "ai_review_authorized": true,
+    "reviewer_model": "gpt-6-astra",
+    "ai_reviewed_patients": 93,
+    "ai_reviewed_rows": 930,
+    "ai_unchanged_interface_eligible": 0,
+    "ai_unchanged_interface_excluded": 93,
+    "ai_original_evidence_acceptable_P4": 22,
+    "final_G1_eligible": 0,
+    "final_G1_excluded": 32
+  },
+  "V3-R3": {
+    "status": "completed_source_audit",
+    "source_recipe_status": "blocked_source_recipe",
+    "model_measurements": null
+  },
+  "V3-G1": {
+    "status": "blocked_no_eligible_regions",
+    "gpu_authorized": true,
+    "protocol_variant": "AI-screened intervention interface, not human-validated",
+    "blockers": [
+      "zero eligible regions after the frozen single semantic proposal pass"
+    ],
+    "original_patients": 32,
+    "selected": 0,
+    "excluded": 32,
+    "measurements": 0,
+    "gpu_seconds": 0,
+    "manifest_sha256": "b649fd66fff65e4da36d4354459c50021d846a5f46d3d62d4231de808646f74e"
+  },
+  "V3-G2": {
+    "status": "blocked_source_recipe",
+    "gpu_authorized": true,
+    "source_recipe_status": "blocked_source_recipe",
+    "blockers": [
+      "author presence task pool missing",
+      "verified composite-base recipe and diagnostic checkpoint receipt missing"
+    ],
+    "measurements": 0
+  }
+}

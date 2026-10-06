@@ -1,0 +1,1818 @@
+{
+  "analysis_type": "CPU replay and attribution of the same v2 records; not an independent experiment",
+  "identity_counts": {
+    "patients": 64,
+    "groups": 256,
+    "candidates": 2048,
+    "geometry_patients": 32,
+    "geometry_groups": 128,
+    "illegal_candidates": 0,
+    "truncated_candidates": 0,
+    "duplicate_or_missing_records": 0,
+    "raw_text_token_decode_mismatch": 0
+  },
+  "historical_aggregate_differences": [],
+  "tokenizer_identity_verified": true,
+  "frozen_identity_receipt_verified": true,
+  "precision_limit": "Stored JSON numbers preserve binary float32 values; pre-cache forward intermediates and logits are not present, so their serialization precision is NA.",
+  "reward_cache_order": {
+    "observed_reversal_patients": 9,
+    "potential_reversed_cache_patients": 10,
+    "reversed_without_sampled_mixed_group_patients": 1,
+    "positive_cache_patients": 22,
+    "tied_cache_patients": 0,
+    "inequality_mismatches": 0
+  },
+  "numerical_conditions": {
+    "case_label_pairs": 64,
+    "control_std_exact_zero": 0,
+    "small_nonzero_control_std": 10,
+    "small_threshold": 0.0001,
+    "gate_saturated": 56,
+    "gate_saturation_bounds": [
+      0.001,
+      0.999
+    ]
+  },
+  "replay_errors": {
+    "reward_max_absolute": 4.470348358154297e-07,
+    "component_max_absolute": 4.470348358154297e-07,
+    "component_max_relative_with_floor": 2.5583887740480484e-05,
+    "advantage_max_absolute": 0.0,
+    "advantage_max_relative_with_floor": 0.0,
+    "relative_floor": 1e-12,
+    "float64_vs_float32_recomputed_reward": {
+      "n": 64,
+      "min": 4.501836126102887e-10,
+      "q25": 1.5367019670642357e-09,
+      "median": 2.9712414750804328e-09,
+      "q75": 5.483471260392392e-09,
+      "q95": 7.168261294543396e-08,
+      "max": 1.4802598241603349e-07,
+      "mean": 1.1546705874022943e-08
+    }
+  },
+  "component_distributions": {
+    "reversed": {
+      "patients": 10,
+      "reward_gap": {
+        "n": 10,
+        "min": -0.19976039975881577,
+        "q25": -0.1988001111894846,
+        "median": -0.18645133450627327,
+        "q75": -0.14839370548725128,
+        "q95": -0.11937381960451603,
+        "max": -0.1193426288664341,
+        "mean": -0.17089769914746283
+      },
+      "components": {
+        "correct/D_E": {
+          "n": 10,
+          "min": -0.23810482025146484,
+          "q25": -0.09423741698265076,
+          "median": -0.032255858182907104,
+          "q75": 3.4749507904052734e-05,
+          "q95": 0.09304190874099731,
+          "max": 0.09572315216064453,
+          "mean": -0.048526924848556516
+        },
+        "correct/mean_D_N": {
+          "n": 10,
+          "min": -0.061938364058732986,
+          "q25": 0.0306585724465549,
+          "median": 0.11009125038981438,
+          "q75": 0.3126807063817978,
+          "q95": 0.5075928032398221,
+          "max": 0.613926887512207,
+          "mean": 0.17915809992700815
+        },
+        "correct/std_D_N": {
+          "n": 10,
+          "min": 0.042317263782024384,
+          "q25": 0.04870040249079466,
+          "median": 0.08493676036596298,
+          "q75": 0.1964883767068386,
+          "q95": 0.5517267212271685,
+          "max": 0.7717958688735962,
+          "mean": 0.1751470234245062
+        },
+        "correct/M": {
+          "n": 10,
+          "min": -0.678377091884613,
+          "q25": -0.26707036048173904,
+          "median": -0.17811636626720428,
+          "q75": -0.13480664044618607,
+          "q95": -0.07083806386217484,
+          "max": -0.03000454045832157,
+          "mean": -0.22768502477556468
+        },
+        "correct/z": {
+          "n": 10,
+          "min": -3.581009864807129,
+          "q25": -2.801249325275421,
+          "median": -2.044519543647766,
+          "q75": -0.8881875723600388,
+          "q95": -0.7080025374889374,
+          "max": -0.7071691751480103,
+          "mean": -1.999791020154953
+        },
+        "correct/m": {
+          "n": 10,
+          "min": -0.9984502196311951,
+          "q25": -0.9926448613405228,
+          "median": -0.9306772947311401,
+          "q75": -0.7104078978300095,
+          "q95": -0.6094224214553833,
+          "max": -0.6088986396789551,
+          "mean": -0.8491878688335419
+        },
+        "correct/g": {
+          "n": 10,
+          "min": 4.610419273376465e-05,
+          "q25": 4.8860907554626465e-05,
+          "median": 0.0001084059476852417,
+          "q75": 0.0008235052227973938,
+          "q95": 0.002250814437866211,
+          "max": 0.0022625625133514404,
+          "mean": 0.0006482124328613282
+        },
+        "correct/correctness_gate_term": {
+          "n": 10,
+          "min": 4.610419273376465e-05,
+          "q25": 4.8860907554626465e-05,
+          "median": 0.0001084059476852417,
+          "q75": 0.0008235052227973938,
+          "q95": 0.002250814437866211,
+          "max": 0.0022625625133514404,
+          "mean": 0.0006482124328613282
+        },
+        "correct/tie_term": {
+          "n": 10,
+          "min": -0.0998450219631195,
+          "q25": -0.09926448948681355,
+          "median": -0.09306773170828819,
+          "q75": -0.071040790528059,
+          "q95": -0.060942243039608004,
+          "max": -0.06088986620306969,
+          "mean": -0.08491878807544709
+        },
+        "correct/final_reward": {
+          "n": 10,
+          "min": -0.09979891777038574,
+          "q25": -0.09921562857925892,
+          "median": -0.09295932576060295,
+          "q75": -0.07021728530526161,
+          "q95": -0.05869142860174179,
+          "max": -0.058627303689718246,
+          "mean": -0.08427057564258575
+        },
+        "wrong/D_E": {
+          "n": 10,
+          "min": -0.03523516654968262,
+          "q25": -4.404410719871521e-05,
+          "median": 0.005969472229480743,
+          "q75": 0.03372897952795029,
+          "q95": 0.06427112370729446,
+          "max": 0.06731584668159485,
+          "mean": 0.013973090052604675
+        },
+        "wrong/mean_D_N": {
+          "n": 10,
+          "min": -0.21940650045871735,
+          "q25": -0.0704982178285718,
+          "median": -0.015597835183143616,
+          "q75": -0.009232395561411977,
+          "q95": 0.013349886203650366,
+          "max": 0.021394958719611168,
+          "mean": -0.050008552498184144
+        },
+        "wrong/std_D_N": {
+          "n": 10,
+          "min": 0.0033487325999885798,
+          "q25": 0.012791609624400735,
+          "median": 0.015882122330367565,
+          "q75": 0.035500172059983015,
+          "q95": 0.14743543919175844,
+          "max": 0.22993877530097961,
+          "mean": 0.04107587628532201
+        },
+        "wrong/M": {
+          "n": 10,
+          "min": 0.00837813038378954,
+          "q25": 0.018281809985637665,
+          "median": 0.04561587795615196,
+          "q75": 0.0573496213182807,
+          "q95": 0.19318709783256033,
+          "max": 0.27995628118515015,
+          "mean": 0.06398164089769125
+        },
+        "wrong/z": {
+          "n": 10,
+          "min": 0.7021459341049194,
+          "q25": 1.0336474180221558,
+          "median": 2.190796673297882,
+          "q75": 3.0878008604049683,
+          "q95": 4.250964617729187,
+          "max": 4.277402400970459,
+          "mean": 2.262342405319214
+        },
+        "wrong/m": {
+          "n": 10,
+          "min": 0.6057281494140625,
+          "q25": 0.7720337957143784,
+          "median": 0.9349201023578644,
+          "q75": 0.9958447962999344,
+          "q95": 0.9995932430028915,
+          "max": 0.9996148347854614,
+          "mean": 0.8662712275981903
+        },
+        "wrong/g": {
+          "n": 10,
+          "min": 0.9976646900177002,
+          "q25": 0.9995275437831879,
+          "median": 0.9998965859413147,
+          "q75": 0.9999526888132095,
+          "q95": 0.9999544352293015,
+          "max": 0.9999544620513916,
+          "mean": 0.999420416355133
+        },
+        "wrong/correctness_gate_term": {
+          "n": 10,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 0.0,
+          "q95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "wrong/tie_term": {
+          "n": 10,
+          "min": 0.06057281419634819,
+          "q25": 0.07720338180661201,
+          "median": 0.09349201247096062,
+          "q75": 0.09958448261022568,
+          "q95": 0.09995932281017303,
+          "max": 0.09996148198843002,
+          "mean": 0.08662712387740612
+        },
+        "wrong/final_reward": {
+          "n": 10,
+          "min": 0.06057281419634819,
+          "q25": 0.07720338180661201,
+          "median": 0.09349201247096062,
+          "q75": 0.09958448261022568,
+          "q95": 0.09995932281017303,
+          "max": 0.09996148198843002,
+          "mean": 0.08662712387740612
+        }
+      }
+    },
+    "positive": {
+      "patients": 22,
+      "reward_gap": {
+        "n": 22,
+        "min": 0.4878822914324701,
+        "q25": 1.1998860985040665,
+        "median": 1.1999546065926552,
+        "q75": 1.1999546065926552,
+        "q95": 1.1999546065926552,
+        "max": 1.1999546065926552,
+        "mean": 1.1635291822550988
+      },
+      "components": {
+        "correct/D_E": {
+          "n": 22,
+          "min": -0.22324180603027344,
+          "q25": 0.11374431848526001,
+          "median": 0.3056463599205017,
+          "q75": 0.8339581489562988,
+          "q95": 1.7824336171150201,
+          "max": 2.4639809131622314,
+          "mean": 0.5217954218387604
+        },
+        "correct/mean_D_N": {
+          "n": 22,
+          "min": -0.24042241275310516,
+          "q25": -0.09216211549937725,
+          "median": -0.03902876377105713,
+          "q75": 0.029262006282806396,
+          "q95": 0.1049787227064371,
+          "max": 0.17359893023967743,
+          "mean": -0.03405241441743618
+        },
+        "correct/std_D_N": {
+          "n": 22,
+          "min": 6.035295427864185e-06,
+          "q25": 0.0029546703772211913,
+          "median": 0.04473751597106457,
+          "q75": 0.05514786019921303,
+          "q95": 0.09735441170632839,
+          "max": 0.11153494566679001,
+          "mean": 0.042752194390252705
+        },
+        "correct/M": {
+          "n": 22,
+          "min": -0.0005838125944137573,
+          "q25": 0.11989336088299751,
+          "median": 0.28151845932006836,
+          "q75": 0.8190412372350693,
+          "q95": 1.830730646848678,
+          "max": 2.4712095260620117,
+          "mean": 0.5558478325944055
+        },
+        "correct/z": {
+          "n": 22,
+          "min": -0.006498139351606369,
+          "q25": 5.010735511779785,
+          "median": 17.370760917663574,
+          "q75": 445.7630195617676,
+          "q95": 9989.916308593749,
+          "max": 12037.171875,
+          "mean": 2210.9761090070347
+        },
+        "correct/m": {
+          "n": 22,
+          "min": -0.006498048081994057,
+          "q25": 0.9999110847711563,
+          "median": 1.0,
+          "q75": 1.0,
+          "q95": 1.0,
+          "max": 1.0,
+          "mean": 0.9348626349290664
+        },
+        "correct/g": {
+          "n": 22,
+          "min": 0.4837605953216553,
+          "q25": 0.9999545812606812,
+          "median": 0.9999545812606812,
+          "q75": 0.9999545812606812,
+          "q95": 0.9999545812606812,
+          "max": 0.9999545812606812,
+          "mean": 0.976389164274389
+        },
+        "correct/correctness_gate_term": {
+          "n": 22,
+          "min": 0.4837605953216553,
+          "q25": 0.9999545812606812,
+          "median": 0.9999545812606812,
+          "q75": 0.9999545812606812,
+          "q95": 0.9999545812606812,
+          "max": 0.9999545812606812,
+          "mean": 0.976389164274389
+        },
+        "correct/tie_term": {
+          "n": 22,
+          "min": -0.00064980483148247,
+          "q25": 0.09999110735952854,
+          "median": 0.10000000149011612,
+          "q75": 0.10000000149011612,
+          "q95": 0.10000000149011612,
+          "max": 0.10000000149011612,
+          "mean": 0.0934862647449005
+        },
+        "correct/final_reward": {
+          "n": 22,
+          "min": 0.48311078548431396,
+          "q25": 1.0999456942081451,
+          "median": 1.099954605102539,
+          "q75": 1.099954605102539,
+          "q95": 1.099954605102539,
+          "max": 1.099954605102539,
+          "mean": 1.0698754516514866
+        },
+        "wrong/D_E": {
+          "n": 22,
+          "min": -2.1610190868377686,
+          "q25": -0.1227577980607748,
+          "median": -0.03844175115227699,
+          "q75": -0.012082202360033989,
+          "q95": 5.769431591033933e-05,
+          "max": 0.0267581045627594,
+          "mean": -0.1997954948720607
+        },
+        "wrong/mean_D_N": {
+          "n": 22,
+          "min": -0.03473440185189247,
+          "q25": -0.001987912944400705,
+          "median": 0.013050112873315811,
+          "q75": 0.02775863278657198,
+          "q95": 0.07610318586230277,
+          "max": 0.07621437311172485,
+          "mean": 0.017083937235197896
+        },
+        "wrong/std_D_N": {
+          "n": 22,
+          "min": 6.035295427864185e-06,
+          "q25": 0.0010603156151773874,
+          "median": 0.007773294346407056,
+          "q75": 0.017001818865537643,
+          "q95": 0.028202956262975927,
+          "max": 0.10649772733449936,
+          "mean": 0.013331059110255823
+        },
+        "wrong/M": {
+          "n": 22,
+          "min": -2.237123489379883,
+          "q25": -0.14341551437973976,
+          "median": -0.052511099725961685,
+          "q75": -0.017679687589406967,
+          "q95": -0.007387157157063486,
+          "max": -0.0005838442593812943,
+          "mean": -0.21687942929565907
+        },
+        "wrong/z": {
+          "n": 22,
+          "min": -8057.345703125,
+          "q25": -613.4432988166809,
+          "median": -10.769052028656006,
+          "q75": -4.068900227546692,
+          "q95": -0.7860295951366435,
+          "max": -0.0477466844022274,
+          "mean": -879.1309623025696
+        },
+        "wrong/m": {
+          "n": 22,
+          "min": -1.0,
+          "q25": -1.0,
+          "median": -1.0,
+          "q75": -0.9994010478258133,
+          "q95": -0.6292504221200945,
+          "max": -0.04771043360233307,
+          "mean": -0.9365370849316771
+        },
+        "wrong/g": {
+          "n": 22,
+          "min": 4.538893699645996e-05,
+          "q25": 4.538893699645996e-05,
+          "median": 4.538893699645996e-05,
+          "q75": 4.567950963973999e-05,
+          "q95": 0.002108554542064665,
+          "max": 0.38293612003326416,
+          "mean": 0.017549449747258968
+        },
+        "wrong/correctness_gate_term": {
+          "n": 22,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 0.0,
+          "q95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "wrong/tie_term": {
+          "n": 22,
+          "min": -0.10000000149011612,
+          "q25": -0.10000000149011612,
+          "median": -0.10000000149011612,
+          "q75": -0.09994010627269745,
+          "q95": -0.06292504370212558,
+          "max": -0.004771043546497822,
+          "mean": -0.09365370992401784
+        },
+        "wrong/final_reward": {
+          "n": 22,
+          "min": -0.10000000149011612,
+          "q25": -0.10000000149011612,
+          "median": -0.10000000149011612,
+          "q75": -0.09994010627269745,
+          "q95": -0.06292504370212558,
+          "max": -0.004771043546497822,
+          "mean": -0.09365370992401784
+        }
+      }
+    },
+    "tie": {
+      "patients": 0,
+      "reward_gap": {
+        "n": 0,
+        "min": null,
+        "q25": null,
+        "median": null,
+        "q75": null,
+        "q95": null,
+        "max": null,
+        "mean": null
+      },
+      "components": {
+        "correct/D_E": {
+          "n": 0,
+          "min": null,
+          "q25": null,
+          "median": null,
+          "q75": null,
+          "q95": null,
+          "max": null,
+          "mean": null
+        },
+        "correct/mean_D_N": {
+          "n": 0,
+          "min": null,
+          "q25": null,
+          "median": null,
+          "q75": null,
+          "q95": null,
+          "max": null,
+          "mean": null
+        },
+        "correct/std_D_N": {
+          "n": 0,
+          "min": null,
+          "q25": null,
+          "median": null,
+          "q75": null,
+          "q95": null,
+          "max": null,
+          "mean": null
+        },
+        "correct/M": {
+          "n": 0,
+          "min": null,
+          "q25": null,
+          "median": null,
+          "q75": null,
+          "q95": null,
+          "max": null,
+          "mean": null
+        },
+        "correct/z": {
+          "n": 0,
+          "min": null,
+          "q25": null,
+          "median": null,
+          "q75": null,
+          "q95": null,
+          "max": null,
+          "mean": null
+        },
+        "correct/m": {
+          "n": 0,
+          "min": null,
+          "q25": null,
+          "median": null,
+          "q75": null,
+          "q95": null,
+          "max": null,
+          "mean": null
+        },
+        "correct/g": {
+          "n": 0,
+          "min": null,
+          "q25": null,
+          "median": null,
+          "q75": null,
+          "q95": null,
+          "max": null,
+          "mean": null
+        },
+        "correct/correctness_gate_term": {
+          "n": 0,
+          "min": null,
+          "q25": null,
+          "median": null,
+          "q75": null,
+          "q95": null,
+          "max": null,
+          "mean": null
+        },
+        "correct/tie_term": {
+          "n": 0,
+          "min": null,
+          "q25": null,
+          "median": null,
+          "q75": null,
+          "q95": null,
+          "max": null,
+          "mean": null
+        },
+        "correct/final_reward": {
+          "n": 0,
+          "min": null,
+          "q25": null,
+          "median": null,
+          "q75": null,
+          "q95": null,
+          "max": null,
+          "mean": null
+        },
+        "wrong/D_E": {
+          "n": 0,
+          "min": null,
+          "q25": null,
+          "median": null,
+          "q75": null,
+          "q95": null,
+          "max": null,
+          "mean": null
+        },
+        "wrong/mean_D_N": {
+          "n": 0,
+          "min": null,
+          "q25": null,
+          "median": null,
+          "q75": null,
+          "q95": null,
+          "max": null,
+          "mean": null
+        },
+        "wrong/std_D_N": {
+          "n": 0,
+          "min": null,
+          "q25": null,
+          "median": null,
+          "q75": null,
+          "q95": null,
+          "max": null,
+          "mean": null
+        },
+        "wrong/M": {
+          "n": 0,
+          "min": null,
+          "q25": null,
+          "median": null,
+          "q75": null,
+          "q95": null,
+          "max": null,
+          "mean": null
+        },
+        "wrong/z": {
+          "n": 0,
+          "min": null,
+          "q25": null,
+          "median": null,
+          "q75": null,
+          "q95": null,
+          "max": null,
+          "mean": null
+        },
+        "wrong/m": {
+          "n": 0,
+          "min": null,
+          "q25": null,
+          "median": null,
+          "q75": null,
+          "q95": null,
+          "max": null,
+          "mean": null
+        },
+        "wrong/g": {
+          "n": 0,
+          "min": null,
+          "q25": null,
+          "median": null,
+          "q75": null,
+          "q95": null,
+          "max": null,
+          "mean": null
+        },
+        "wrong/correctness_gate_term": {
+          "n": 0,
+          "min": null,
+          "q25": null,
+          "median": null,
+          "q75": null,
+          "q95": null,
+          "max": null,
+          "mean": null
+        },
+        "wrong/tie_term": {
+          "n": 0,
+          "min": null,
+          "q25": null,
+          "median": null,
+          "q75": null,
+          "q95": null,
+          "max": null,
+          "mean": null
+        },
+        "wrong/final_reward": {
+          "n": 0,
+          "min": null,
+          "q25": null,
+          "median": null,
+          "q75": null,
+          "q95": null,
+          "max": null,
+          "mean": null
+        }
+      }
+    }
+  },
+  "strata": {
+    "all": {
+      "R-C": {
+        "groups": 256,
+        "patients": 64,
+        "mixed_groups": 165,
+        "algebra_eligible_mixed_groups": 165,
+        "positive_mixed_groups": 165,
+        "reversed_mixed_groups": 0,
+        "mixed_tie_or_near_zero_groups": 0,
+        "zero_advantage_groups": 91,
+        "constant_input_roundoff_groups": 0,
+        "all_identical_answer_groups": 91,
+        "positive_Delta_A": {
+          "n": 165,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 0.0,
+          "q95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "reversed_Delta_A": {
+          "n": 0,
+          "min": null,
+          "q25": null,
+          "median": null,
+          "q75": null,
+          "q95": null,
+          "max": null,
+          "mean": null
+        },
+        "float32_sign_residual": {
+          "n": 165,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 0.0,
+          "q95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "float64_no_epsilon_sign_residual": {
+          "n": 165,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 0.0,
+          "q95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "epsilon_explainable_error": {
+          "n": 165,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 0.0,
+          "q95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "unexplained_groups": 0,
+        "reversal_k_counts": {}
+      },
+      "R-H": {
+        "groups": 256,
+        "patients": 64,
+        "mixed_groups": 165,
+        "algebra_eligible_mixed_groups": 165,
+        "positive_mixed_groups": 134,
+        "reversed_mixed_groups": 31,
+        "mixed_tie_or_near_zero_groups": 0,
+        "zero_advantage_groups": 91,
+        "constant_input_roundoff_groups": 0,
+        "all_identical_answer_groups": 91,
+        "positive_Delta_A": {
+          "n": 134,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 1.1920928955078125e-07,
+          "q95": 2.384185791015625e-07,
+          "max": 4.76837158203125e-07,
+          "mean": 6.449756337635552e-08
+        },
+        "reversed_Delta_A": {
+          "n": 31,
+          "min": 1.9999998807907104,
+          "q25": 2.58198881149292,
+          "median": 3.4641013145446777,
+          "q75": 3.464101552963257,
+          "q95": 5.2915027141571045,
+          "max": 5.291502952575684,
+          "mean": 3.422045423138526
+        },
+        "float32_sign_residual": {
+          "n": 165,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 5.960464477539063e-08,
+          "q75": 1.1920928955078125e-07,
+          "q95": 3.5762786865234375e-07,
+          "max": 1.1920928955078125e-06,
+          "mean": 1.0548215923887311e-07
+        },
+        "float64_no_epsilon_sign_residual": {
+          "n": 165,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 2.220446049250313e-16,
+          "q95": 7.993605777301051e-16,
+          "max": 8.881784197001252e-16,
+          "mean": 1.4836616783627093e-16
+        },
+        "epsilon_explainable_error": {
+          "n": 165,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 4.443603397754e-09,
+          "q75": 1.3330811019944405e-08,
+          "q95": 2.3275701751145173e-07,
+          "max": 5.903386776570498e-07,
+          "mean": 4.189565553416113e-08
+        },
+        "unexplained_groups": 0,
+        "reversal_k_counts": {
+          "1": 7,
+          "2": 10,
+          "3": 11,
+          "4": 3
+        }
+      },
+      "R-G": {
+        "groups": 256,
+        "patients": 64,
+        "mixed_groups": 165,
+        "algebra_eligible_mixed_groups": 165,
+        "positive_mixed_groups": 165,
+        "reversed_mixed_groups": 0,
+        "mixed_tie_or_near_zero_groups": 0,
+        "zero_advantage_groups": 90,
+        "constant_input_roundoff_groups": 1,
+        "all_identical_answer_groups": 91,
+        "positive_Delta_A": {
+          "n": 165,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 2.384185791015625e-07,
+          "q95": 0.000814366340637207,
+          "max": 0.0017342567443847656,
+          "mean": 0.00010397289738510595
+        },
+        "reversed_Delta_A": {
+          "n": 0,
+          "min": null,
+          "q25": null,
+          "median": null,
+          "q75": null,
+          "q95": null,
+          "max": null,
+          "mean": null
+        },
+        "float32_sign_residual": {
+          "n": 165,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 2.384185791015625e-07,
+          "q95": 0.000814366340637207,
+          "max": 0.0017342567443847656,
+          "mean": 0.00010397289738510595
+        },
+        "float64_no_epsilon_sign_residual": {
+          "n": 165,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 1.1102230246251565e-16,
+          "q95": 2.220446049250313e-16,
+          "max": 4.440892098500626e-16,
+          "mean": 5.5174720011674444e-17
+        },
+        "epsilon_explainable_error": {
+          "n": 165,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 1.2112748427502203e-12,
+          "q75": 3.633825293947188e-12,
+          "q95": 0.0008142031587111546,
+          "max": 0.0017339828287397025,
+          "mean": 0.0001039144394836211
+        },
+        "unexplained_groups": 0,
+        "reversal_k_counts": {}
+      },
+      "R-A": {
+        "groups": 256,
+        "patients": 64,
+        "mixed_groups": 165,
+        "algebra_eligible_mixed_groups": 165,
+        "positive_mixed_groups": 165,
+        "reversed_mixed_groups": 0,
+        "mixed_tie_or_near_zero_groups": 0,
+        "zero_advantage_groups": 91,
+        "constant_input_roundoff_groups": 0,
+        "all_identical_answer_groups": 91,
+        "positive_Delta_A": {
+          "n": 165,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 5.960464477539063e-08,
+          "q95": 2.384185791015625e-07,
+          "max": 4.76837158203125e-07,
+          "mean": 5.7075962875828595e-08
+        },
+        "reversed_Delta_A": {
+          "n": 0,
+          "min": null,
+          "q25": null,
+          "median": null,
+          "q75": null,
+          "q95": null,
+          "max": null,
+          "mean": null
+        },
+        "float32_sign_residual": {
+          "n": 165,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 5.960464477539063e-08,
+          "q95": 2.384185791015625e-07,
+          "max": 4.76837158203125e-07,
+          "mean": 5.7075962875828595e-08
+        },
+        "float64_no_epsilon_sign_residual": {
+          "n": 165,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 2.220446049250313e-16,
+          "q95": 8.881784197001252e-16,
+          "max": 8.881784197001252e-16,
+          "mean": 1.3961895612710302e-16
+        },
+        "epsilon_explainable_error": {
+          "n": 165,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 4.3473374082516486e-09,
+          "q75": 6.6666668788780315e-09,
+          "q95": 1.3333334224153846e-08,
+          "max": 1.9975821167742172e-08,
+          "mean": 4.766570035282753e-09
+        },
+        "unexplained_groups": 0,
+        "reversal_k_counts": {}
+      }
+    },
+    "geometry_only_positive": {
+      "R-C": {
+        "groups": 128,
+        "patients": 32,
+        "mixed_groups": 98,
+        "algebra_eligible_mixed_groups": 98,
+        "positive_mixed_groups": 98,
+        "reversed_mixed_groups": 0,
+        "mixed_tie_or_near_zero_groups": 0,
+        "zero_advantage_groups": 30,
+        "constant_input_roundoff_groups": 0,
+        "all_identical_answer_groups": 30,
+        "positive_Delta_A": {
+          "n": 98,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 0.0,
+          "q95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "reversed_Delta_A": {
+          "n": 0,
+          "min": null,
+          "q25": null,
+          "median": null,
+          "q75": null,
+          "q95": null,
+          "max": null,
+          "mean": null
+        },
+        "float32_sign_residual": {
+          "n": 98,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 0.0,
+          "q95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "float64_no_epsilon_sign_residual": {
+          "n": 98,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 0.0,
+          "q95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "epsilon_explainable_error": {
+          "n": 98,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 0.0,
+          "q95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "unexplained_groups": 0,
+        "reversal_k_counts": {}
+      },
+      "R-H": {
+        "groups": 128,
+        "patients": 32,
+        "mixed_groups": 98,
+        "algebra_eligible_mixed_groups": 98,
+        "positive_mixed_groups": 67,
+        "reversed_mixed_groups": 31,
+        "mixed_tie_or_near_zero_groups": 0,
+        "zero_advantage_groups": 30,
+        "constant_input_roundoff_groups": 0,
+        "all_identical_answer_groups": 30,
+        "positive_Delta_A": {
+          "n": 67,
+          "min": 0.0,
+          "q25": 5.960464477539063e-08,
+          "median": 1.1920928955078125e-07,
+          "q75": 2.384185791015625e-07,
+          "q95": 2.384185791015625e-07,
+          "max": 4.76837158203125e-07,
+          "mean": 1.2899512675271104e-07
+        },
+        "reversed_Delta_A": {
+          "n": 31,
+          "min": 1.9999998807907104,
+          "q25": 2.58198881149292,
+          "median": 3.4641013145446777,
+          "q75": 3.464101552963257,
+          "q95": 5.2915027141571045,
+          "max": 5.291502952575684,
+          "mean": 3.422045423138526
+        },
+        "float32_sign_residual": {
+          "n": 98,
+          "min": 0.0,
+          "q25": 5.960464477539063e-08,
+          "median": 1.1920928955078125e-07,
+          "q75": 2.384185791015625e-07,
+          "q95": 4.76837158203125e-07,
+          "max": 1.1920928955078125e-06,
+          "mean": 1.7759751300422514e-07
+        },
+        "float64_no_epsilon_sign_residual": {
+          "n": 98,
+          "min": 0.0,
+          "q25": 6.938893903907228e-17,
+          "median": 2.220446049250313e-16,
+          "q75": 3.885780586188048e-16,
+          "q95": 8.881784197001252e-16,
+          "max": 8.881784197001252e-16,
+          "mean": 2.498001805406602e-16
+        },
+        "epsilon_explainable_error": {
+          "n": 98,
+          "min": 3.3316566616450427e-09,
+          "q25": 4.443603397754e-09,
+          "median": 1.3281265452584777e-08,
+          "q75": 1.2639813914094223e-07,
+          "q95": 3.2051898955668196e-07,
+          "max": 5.903386776570498e-07,
+          "mean": 7.053860370547537e-08
+        },
+        "unexplained_groups": 0,
+        "reversal_k_counts": {
+          "1": 7,
+          "2": 10,
+          "3": 11,
+          "4": 3
+        }
+      },
+      "R-G": {
+        "groups": 128,
+        "patients": 32,
+        "mixed_groups": 98,
+        "algebra_eligible_mixed_groups": 98,
+        "positive_mixed_groups": 98,
+        "reversed_mixed_groups": 0,
+        "mixed_tie_or_near_zero_groups": 0,
+        "zero_advantage_groups": 29,
+        "constant_input_roundoff_groups": 1,
+        "all_identical_answer_groups": 30,
+        "positive_Delta_A": {
+          "n": 98,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 1.4901161193847656e-07,
+          "q75": 3.0994415283203125e-05,
+          "q95": 0.0009830951690673762,
+          "max": 0.0017342567443847656,
+          "mean": 0.00017505640886267837
+        },
+        "reversed_Delta_A": {
+          "n": 0,
+          "min": null,
+          "q25": null,
+          "median": null,
+          "q75": null,
+          "q95": null,
+          "max": null,
+          "mean": null
+        },
+        "float32_sign_residual": {
+          "n": 98,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 1.4901161193847656e-07,
+          "q75": 3.0994415283203125e-05,
+          "q95": 0.0009830951690673762,
+          "max": 0.0017342567443847656,
+          "mean": 0.00017505640886267837
+        },
+        "float64_no_epsilon_sign_residual": {
+          "n": 98,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 2.220446049250313e-16,
+          "q95": 2.220446049250313e-16,
+          "max": 4.440892098500626e-16,
+          "mean": 9.289621226455392e-17
+        },
+        "epsilon_explainable_error": {
+          "n": 98,
+          "min": 9.082734382803718e-13,
+          "q25": 1.8168151041376438e-12,
+          "median": 3.633825293947188e-12,
+          "q75": 3.101886734569344e-05,
+          "q95": 0.0009828626534406258,
+          "max": 0.0017339828287397025,
+          "mean": 0.00017495798484487224
+        },
+        "unexplained_groups": 0,
+        "reversal_k_counts": {}
+      },
+      "R-A": {
+        "groups": 128,
+        "patients": 32,
+        "mixed_groups": 98,
+        "algebra_eligible_mixed_groups": 98,
+        "positive_mixed_groups": 98,
+        "reversed_mixed_groups": 0,
+        "mixed_tie_or_near_zero_groups": 0,
+        "zero_advantage_groups": 30,
+        "constant_input_roundoff_groups": 0,
+        "all_identical_answer_groups": 30,
+        "positive_Delta_A": {
+          "n": 98,
+          "min": 0.0,
+          "q25": 2.9802322387695312e-08,
+          "median": 5.960464477539063e-08,
+          "q75": 1.1920928955078125e-07,
+          "q95": 2.384185791015625e-07,
+          "max": 4.76837158203125e-07,
+          "mean": 9.609728443379305e-08
+        },
+        "reversed_Delta_A": {
+          "n": 0,
+          "min": null,
+          "q25": null,
+          "median": null,
+          "q75": null,
+          "q95": null,
+          "max": null,
+          "mean": null
+        },
+        "float32_sign_residual": {
+          "n": 98,
+          "min": 0.0,
+          "q25": 2.9802322387695312e-08,
+          "median": 5.960464477539063e-08,
+          "q75": 1.1920928955078125e-07,
+          "q95": 2.384185791015625e-07,
+          "max": 4.76837158203125e-07,
+          "mean": 9.609728443379305e-08
+        },
+        "float64_no_epsilon_sign_residual": {
+          "n": 98,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 1.1102230246251565e-16,
+          "q75": 4.440892098500626e-16,
+          "q95": 8.881784197001252e-16,
+          "max": 8.881784197001252e-16,
+          "mean": 2.350727322548163e-16
+        },
+        "epsilon_explainable_error": {
+          "n": 98,
+          "min": 3.2834553310807904e-10,
+          "q25": 4.4444444533423624e-09,
+          "median": 6.6666668788780315e-09,
+          "q75": 1.2627040752392435e-08,
+          "q95": 1.7341880898356366e-08,
+          "max": 1.9975821167742172e-08,
+          "mean": 8.025347508384226e-09
+        },
+        "unexplained_groups": 0,
+        "reversal_k_counts": {}
+      }
+    },
+    "ineligible_positive": {
+      "R-C": {
+        "groups": 64,
+        "patients": 16,
+        "mixed_groups": 45,
+        "algebra_eligible_mixed_groups": 45,
+        "positive_mixed_groups": 45,
+        "reversed_mixed_groups": 0,
+        "mixed_tie_or_near_zero_groups": 0,
+        "zero_advantage_groups": 19,
+        "constant_input_roundoff_groups": 0,
+        "all_identical_answer_groups": 19,
+        "positive_Delta_A": {
+          "n": 45,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 0.0,
+          "q95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "reversed_Delta_A": {
+          "n": 0,
+          "min": null,
+          "q25": null,
+          "median": null,
+          "q75": null,
+          "q95": null,
+          "max": null,
+          "mean": null
+        },
+        "float32_sign_residual": {
+          "n": 45,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 0.0,
+          "q95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "float64_no_epsilon_sign_residual": {
+          "n": 45,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 0.0,
+          "q95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "epsilon_explainable_error": {
+          "n": 45,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 0.0,
+          "q95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "unexplained_groups": 0,
+        "reversal_k_counts": {}
+      },
+      "R-H": {
+        "groups": 64,
+        "patients": 16,
+        "mixed_groups": 45,
+        "algebra_eligible_mixed_groups": 45,
+        "positive_mixed_groups": 45,
+        "reversed_mixed_groups": 0,
+        "mixed_tie_or_near_zero_groups": 0,
+        "zero_advantage_groups": 19,
+        "constant_input_roundoff_groups": 0,
+        "all_identical_answer_groups": 19,
+        "positive_Delta_A": {
+          "n": 45,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 0.0,
+          "q95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "reversed_Delta_A": {
+          "n": 0,
+          "min": null,
+          "q25": null,
+          "median": null,
+          "q75": null,
+          "q95": null,
+          "max": null,
+          "mean": null
+        },
+        "float32_sign_residual": {
+          "n": 45,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 0.0,
+          "q95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "float64_no_epsilon_sign_residual": {
+          "n": 45,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 0.0,
+          "q95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "epsilon_explainable_error": {
+          "n": 45,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 0.0,
+          "q95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "unexplained_groups": 0,
+        "reversal_k_counts": {}
+      },
+      "R-G": {
+        "groups": 64,
+        "patients": 16,
+        "mixed_groups": 45,
+        "algebra_eligible_mixed_groups": 45,
+        "positive_mixed_groups": 45,
+        "reversed_mixed_groups": 0,
+        "mixed_tie_or_near_zero_groups": 0,
+        "zero_advantage_groups": 19,
+        "constant_input_roundoff_groups": 0,
+        "all_identical_answer_groups": 19,
+        "positive_Delta_A": {
+          "n": 45,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 0.0,
+          "q95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "reversed_Delta_A": {
+          "n": 0,
+          "min": null,
+          "q25": null,
+          "median": null,
+          "q75": null,
+          "q95": null,
+          "max": null,
+          "mean": null
+        },
+        "float32_sign_residual": {
+          "n": 45,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 0.0,
+          "q95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "float64_no_epsilon_sign_residual": {
+          "n": 45,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 0.0,
+          "q95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "epsilon_explainable_error": {
+          "n": 45,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 0.0,
+          "q95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "unexplained_groups": 0,
+        "reversal_k_counts": {}
+      },
+      "R-A": {
+        "groups": 64,
+        "patients": 16,
+        "mixed_groups": 45,
+        "algebra_eligible_mixed_groups": 45,
+        "positive_mixed_groups": 45,
+        "reversed_mixed_groups": 0,
+        "mixed_tie_or_near_zero_groups": 0,
+        "zero_advantage_groups": 19,
+        "constant_input_roundoff_groups": 0,
+        "all_identical_answer_groups": 19,
+        "positive_Delta_A": {
+          "n": 45,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 0.0,
+          "q95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "reversed_Delta_A": {
+          "n": 0,
+          "min": null,
+          "q25": null,
+          "median": null,
+          "q75": null,
+          "q95": null,
+          "max": null,
+          "mean": null
+        },
+        "float32_sign_residual": {
+          "n": 45,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 0.0,
+          "q95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "float64_no_epsilon_sign_residual": {
+          "n": 45,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 0.0,
+          "q95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "epsilon_explainable_error": {
+          "n": 45,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 0.0,
+          "q95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "unexplained_groups": 0,
+        "reversal_k_counts": {}
+      }
+    },
+    "negative": {
+      "R-C": {
+        "groups": 64,
+        "patients": 16,
+        "mixed_groups": 22,
+        "algebra_eligible_mixed_groups": 22,
+        "positive_mixed_groups": 22,
+        "reversed_mixed_groups": 0,
+        "mixed_tie_or_near_zero_groups": 0,
+        "zero_advantage_groups": 42,
+        "constant_input_roundoff_groups": 0,
+        "all_identical_answer_groups": 42,
+        "positive_Delta_A": {
+          "n": 22,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 0.0,
+          "q95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "reversed_Delta_A": {
+          "n": 0,
+          "min": null,
+          "q25": null,
+          "median": null,
+          "q75": null,
+          "q95": null,
+          "max": null,
+          "mean": null
+        },
+        "float32_sign_residual": {
+          "n": 22,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 0.0,
+          "q95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "float64_no_epsilon_sign_residual": {
+          "n": 22,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 0.0,
+          "q95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "epsilon_explainable_error": {
+          "n": 22,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 0.0,
+          "q95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "unexplained_groups": 0,
+        "reversal_k_counts": {}
+      },
+      "R-H": {
+        "groups": 64,
+        "patients": 16,
+        "mixed_groups": 22,
+        "algebra_eligible_mixed_groups": 22,
+        "positive_mixed_groups": 22,
+        "reversed_mixed_groups": 0,
+        "mixed_tie_or_near_zero_groups": 0,
+        "zero_advantage_groups": 42,
+        "constant_input_roundoff_groups": 0,
+        "all_identical_answer_groups": 42,
+        "positive_Delta_A": {
+          "n": 22,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 0.0,
+          "q95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "reversed_Delta_A": {
+          "n": 0,
+          "min": null,
+          "q25": null,
+          "median": null,
+          "q75": null,
+          "q95": null,
+          "max": null,
+          "mean": null
+        },
+        "float32_sign_residual": {
+          "n": 22,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 0.0,
+          "q95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "float64_no_epsilon_sign_residual": {
+          "n": 22,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 0.0,
+          "q95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "epsilon_explainable_error": {
+          "n": 22,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 0.0,
+          "q95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "unexplained_groups": 0,
+        "reversal_k_counts": {}
+      },
+      "R-G": {
+        "groups": 64,
+        "patients": 16,
+        "mixed_groups": 22,
+        "algebra_eligible_mixed_groups": 22,
+        "positive_mixed_groups": 22,
+        "reversed_mixed_groups": 0,
+        "mixed_tie_or_near_zero_groups": 0,
+        "zero_advantage_groups": 42,
+        "constant_input_roundoff_groups": 0,
+        "all_identical_answer_groups": 42,
+        "positive_Delta_A": {
+          "n": 22,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 0.0,
+          "q95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "reversed_Delta_A": {
+          "n": 0,
+          "min": null,
+          "q25": null,
+          "median": null,
+          "q75": null,
+          "q95": null,
+          "max": null,
+          "mean": null
+        },
+        "float32_sign_residual": {
+          "n": 22,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 0.0,
+          "q95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "float64_no_epsilon_sign_residual": {
+          "n": 22,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 0.0,
+          "q95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "epsilon_explainable_error": {
+          "n": 22,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 0.0,
+          "q95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "unexplained_groups": 0,
+        "reversal_k_counts": {}
+      },
+      "R-A": {
+        "groups": 64,
+        "patients": 16,
+        "mixed_groups": 22,
+        "algebra_eligible_mixed_groups": 22,
+        "positive_mixed_groups": 22,
+        "reversed_mixed_groups": 0,
+        "mixed_tie_or_near_zero_groups": 0,
+        "zero_advantage_groups": 42,
+        "constant_input_roundoff_groups": 0,
+        "all_identical_answer_groups": 42,
+        "positive_Delta_A": {
+          "n": 22,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 0.0,
+          "q95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "reversed_Delta_A": {
+          "n": 0,
+          "min": null,
+          "q25": null,
+          "median": null,
+          "q75": null,
+          "q95": null,
+          "max": null,
+          "mean": null
+        },
+        "float32_sign_residual": {
+          "n": 22,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 0.0,
+          "q95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "float64_no_epsilon_sign_residual": {
+          "n": 22,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 0.0,
+          "q95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "epsilon_explainable_error": {
+          "n": 22,
+          "min": 0.0,
+          "q25": 0.0,
+          "median": 0.0,
+          "q75": 0.0,
+          "q95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "unexplained_groups": 0,
+        "reversal_k_counts": {}
+      }
+    }
+  },
+  "transitions": {
+    "R-G": {
+      "patients": {
+        "positive -> positive": 22,
+        "reversed -> positive": 10
+      },
+      "mixed_groups": {
+        "positive -> positive": 67,
+        "reversed -> positive": 31
+      }
+    },
+    "R-A": {
+      "patients": {
+        "positive -> positive": 22,
+        "reversed -> positive": 10
+      },
+      "mixed_groups": {
+        "positive -> positive": 67,
+        "reversed -> positive": 31
+      }
+    }
+  },
+  "patient_cluster_bootstrap": {
+    "unit": "patient cluster; all four original groups retained",
+    "clusters": 32,
+    "seed": 42,
+    "intervals": {
+      "cache_reversed_fraction": {
+        "ci95": [
+          0.15625,
+          0.46875
+        ],
+        "valid_replicates": 2000,
+        "invalid_replicates": 0,
+        "requested_replicates": 2000
+      },
+      "observed_reversal_patient_fraction": {
+        "ci95": [
+          0.125,
+          0.4375
+        ],
+        "valid_replicates": 2000,
+        "invalid_replicates": 0,
+        "requested_replicates": 2000
+      },
+      "reversed_fraction_of_mixed": {
+        "ci95": [
+          0.1529219948849105,
+          0.4900049019607843
+        ],
+        "valid_replicates": 2000,
+        "invalid_replicates": 0,
+        "requested_replicates": 2000
+      },
+      "positive_near_equivalence_fraction": {
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_replicates": 2000,
+        "invalid_replicates": 0,
+        "requested_replicates": 2000
+      }
+    }
+  },
+  "regional_semantics": "unresolved; no human review inferred from algebra or reward signs",
+  "status": "completed",
+  "runtime_seconds": 2.081312656402588,
+  "test_images_read": 0,
+  "new_GPU_seconds": 0,
+  "new_model_measurements": 0,
+  "training_run": false
+}

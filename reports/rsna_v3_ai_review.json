@@ -1,0 +1,84 @@
+{
+  "review_kind": "AI_semantic_screening",
+  "reviewer_model": "gpt-6-astra",
+  "human_expert_reviews": 0,
+  "patients": 93,
+  "rows": 930,
+  "row_status_counts": {
+    "acceptable": 129,
+    "uncertain": 103,
+    "rejected": 698
+  },
+  "by_component": {
+    "control_1:region": {
+      "rejected": 78,
+      "uncertain": 10,
+      "acceptable": 5
+    },
+    "control_1:replacement_source": {
+      "rejected": 93
+    },
+    "control_2:region": {
+      "uncertain": 15,
+      "rejected": 73,
+      "acceptable": 5
+    },
+    "control_2:replacement_source": {
+      "rejected": 92,
+      "uncertain": 1
+    },
+    "control_3:region": {
+      "rejected": 81,
+      "uncertain": 10,
+      "acceptable": 2
+    },
+    "control_3:replacement_source": {
+      "rejected": 93
+    },
+    "evidence:region": {
+      "acceptable": 64,
+      "uncertain": 28,
+      "rejected": 1
+    },
+    "evidence:replacement_source": {
+      "rejected": 93
+    },
+    "wrong:region": {
+      "acceptable": 53,
+      "uncertain": 38,
+      "rejected": 2
+    },
+    "wrong:replacement_source": {
+      "rejected": 92,
+      "uncertain": 1
+    }
+  },
+  "by_batch": {
+    "1": {
+      "patients": 32,
+      "unchanged_interface_eligible": 0,
+      "excluded": 32
+    },
+    "2": {
+      "patients": 61,
+      "unchanged_interface_eligible": 0,
+      "excluded": 61
+    }
+  },
+  "regions_changed": false,
+  "lung_coverage": "unknown",
+  "test_images_read": 0,
+  "new_GPU_seconds": 0,
+  "qualification_rule": "All eight evidence/control region and source rows acceptable; shifted-overlap probe separate",
+  "claim_limit": "AI-screened geometry; not human-validated medical evidence",
+  "completed_at": "2026-10-06T07:02:10.152183+00:00",
+  "source_review_files": [
+    "review_R001_R031.csv",
+    "review_R032_R062.csv",
+    "review_R063_R082.csv",
+    "review_R083_R088.csv",
+    "review_R089_R090.csv",
+    "review_R091_R091.csv",
+    "review_R092_R093.csv"
+  ]
+}

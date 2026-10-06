@@ -1,0 +1,57 @@
+{
+  "version": "rsna-v3-execution-amendment-1",
+  "created_at": "2026-10-06T06:07:42.072405+00:00",
+  "supersedes_authorization_only": "configs/rsna_v3.json remains the immutable CPU replay configuration",
+  "user_gpu_authorization": "gpu 我授权你使用，随便选两个即可，其他的你都可以",
+  "user_review_amendment": "真实专家可以由 gpt astra 代替",
+  "gpu_authorized": true,
+  "gpu_indices": [
+    0,
+    1
+  ],
+  "max_concurrent_gpus": 2,
+  "gpu_hours_limit": 1.0,
+  "budget_basis": "retain original prompt suggested cumulative 1 GPU hour; user increased available devices to two, not required consumption",
+  "push_authorized": true,
+  "training_enabled": false,
+  "posttraining_enabled": false,
+  "resume_P1": false,
+  "run_P2": false,
+  "run_RL": false,
+  "review": {
+    "kind": "AI_semantic_screening",
+    "model": "gpt-6-astra",
+    "human_expert": false,
+    "scope": 93,
+    "blind_to": [
+      "rewards",
+      "reward_ordering",
+      "model_correctness",
+      "intervention_scores",
+      "patient_identity"
+    ],
+    "statuses": [
+      "acceptable",
+      "uncertain",
+      "rejected"
+    ],
+    "old_regions_first": true,
+    "lung_coverage": "unknown",
+    "qualification": "AI model; no human clinical credential",
+    "case_eligibility": "evidence region, all three control regions, and all four corresponding replacement sources must each be acceptable; uncertain or rejected excludes case from unchanged-region G1; shifted-overlap probe remains a separate diagnostic",
+    "revision_policy": "finish old-region review first; any revision must be justified by semantic findings, frozen before scores, never based on reward",
+    "claim_limit": "AI-reviewed adapted G1 only; not human-validated medical evidence or original human-review protocol"
+  },
+  "G1_prerequisites": [
+    "R1 replay passes",
+    "complete AI old-region screening",
+    "freeze AI qualification/exclusions and any revised region manifest",
+    "verify historical B1 identity"
+  ],
+  "G2_prerequisites": [
+    "verified available author probe data",
+    "verified scoring recipe and model identity",
+    "explicit adapted-control label if substituting backbone"
+  ],
+  "GPU_seconds_consumed": 0
+}

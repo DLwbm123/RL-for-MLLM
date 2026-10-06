@@ -1,0 +1,33 @@
+{
+  "version": "v3-astra-semantic-region-revision-1",
+  "decision_basis": "AI image semantics only; no reward/intervention score input",
+  "scope": "all original 32 P4 geometry cases, retain exclusions",
+  "old_review_required_complete": 93,
+  "proposal_rounds_per_case": 1,
+  "evidence_rule": "preserve the original annotated evidence box and tokens; if original evidence region is not acceptable exclude rather than shrink or score-select",
+  "support_rule": "Astra may mark conservative non-evidence tissue polygons from original annotated images; absent or uncertain support excludes; these are AI proposals, not verified lung masks",
+  "control_rule": {
+    "same_pixel_area_shape_as_evidence": true,
+    "same_token_count_shape": true,
+    "vertical_center_tolerance": 0.1,
+    "max_pairwise_token_overlap_fraction": 0.75,
+    "forbidden": "original evidence union expanded 10 percent in each dimension",
+    "all_control_tokens_inside_AI_support": true,
+    "deterministic_candidate_shuffle_seed": 42
+  },
+  "source_rule": {
+    "source": "original local three-cell Chebyshev ring intersected with AI-approved support, excluding target and evidence margin",
+    "min_tokens": 4,
+    "all_source_tokens_inside_AI_support": true,
+    "no_cross_patient_sources": true
+  },
+  "review_new_proposals": {
+    "model": "gpt-6-astra",
+    "blind_to_scores": true,
+    "eight_required_components_all_acceptable": true,
+    "uncertain_or_rejected": "exclude; no second proposal pass"
+  },
+  "before_scoring": "freeze support polygons, proposal rules, every exclusion and final manifest; use same original 32 patients and candidates for common-case old/new comparison",
+  "lung_coverage": "unknown",
+  "training_enabled": false
+}

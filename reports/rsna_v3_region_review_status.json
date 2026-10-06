@@ -1,0 +1,156 @@
+{
+  "stage": "V3-R2",
+  "status": "completed_AI_screening_and_single_revision",
+  "packet_ready": true,
+  "review_version": "v3-old-regions-review-1",
+  "seed": 42,
+  "patients": 93,
+  "train": 69,
+  "development": 24,
+  "batch_1": 32,
+  "batch_2": 61,
+  "human_approved_patients": 0,
+  "human_rejected_patients": 0,
+  "images": 1116,
+  "image_access_counts": {
+    "train": 69,
+    "validation": 24
+  },
+  "test_images_read": 0,
+  "lung_coverage": "unknown",
+  "regions_changed": true,
+  "gpu_used": false,
+  "created_at": "2026-10-06T05:45:47.342393+00:00",
+  "verification": {
+    "synthetic_tests_passed": 1,
+    "synthetic_test_seconds": 0.68,
+    "png_count": 1116,
+    "csv_rows": 930,
+    "all_status_pending": true,
+    "representative_source_png_readable": true,
+    "representative_png_size": [
+      1024,
+      1058
+    ],
+    "index_and_representative_page_blind_identity_check": "passed",
+    "numeric_outcome_field_check": "passed"
+  },
+  "human_review_status": "human_review_pending",
+  "human_pending_patients": 93,
+  "human_pending_region_source_rows": 930,
+  "ai_review": {
+    "review_kind": "AI_semantic_screening",
+    "reviewer_model": "gpt-6-astra",
+    "human_expert_reviews": 0,
+    "patients": 93,
+    "rows": 930,
+    "row_status_counts": {
+      "acceptable": 129,
+      "uncertain": 103,
+      "rejected": 698
+    },
+    "by_component": {
+      "control_1:region": {
+        "rejected": 78,
+        "uncertain": 10,
+        "acceptable": 5
+      },
+      "control_1:replacement_source": {
+        "rejected": 93
+      },
+      "control_2:region": {
+        "uncertain": 15,
+        "rejected": 73,
+        "acceptable": 5
+      },
+      "control_2:replacement_source": {
+        "rejected": 92,
+        "uncertain": 1
+      },
+      "control_3:region": {
+        "rejected": 81,
+        "uncertain": 10,
+        "acceptable": 2
+      },
+      "control_3:replacement_source": {
+        "rejected": 93
+      },
+      "evidence:region": {
+        "acceptable": 64,
+        "uncertain": 28,
+        "rejected": 1
+      },
+      "evidence:replacement_source": {
+        "rejected": 93
+      },
+      "wrong:region": {
+        "acceptable": 53,
+        "uncertain": 38,
+        "rejected": 2
+      },
+      "wrong:replacement_source": {
+        "rejected": 92,
+        "uncertain": 1
+      }
+    },
+    "by_batch": {
+      "1": {
+        "patients": 32,
+        "unchanged_interface_eligible": 0,
+        "excluded": 32
+      },
+      "2": {
+        "patients": 61,
+        "unchanged_interface_eligible": 0,
+        "excluded": 61
+      }
+    },
+    "regions_changed": false,
+    "lung_coverage": "unknown",
+    "test_images_read": 0,
+    "new_GPU_seconds": 0,
+    "qualification_rule": "All eight evidence/control region and source rows acceptable; shifted-overlap probe separate",
+    "claim_limit": "AI-screened geometry; not human-validated medical evidence",
+    "completed_at": "2026-10-06T07:02:10.152183+00:00",
+    "source_review_files": [
+      "review_R001_R031.csv",
+      "review_R032_R062.csv",
+      "review_R063_R082.csv",
+      "review_R083_R088.csv",
+      "review_R089_R090.csv",
+      "review_R091_R091.csv",
+      "review_R092_R093.csv"
+    ]
+  },
+  "revision": {
+    "status": "blocked_no_eligible_regions",
+    "gpu_authorized": true,
+    "protocol_variant": "AI-screened intervention interface, not human-validated",
+    "original_P4_geometry_patients": 32,
+    "original_evidence_AI_acceptable": 22,
+    "original_evidence_AI_excluded": 10,
+    "support_nonempty": 19,
+    "support_absent_despite_acceptable_evidence": 3,
+    "single_pass_geometry_attempts": 22,
+    "patients_with_one_matching_control": 0,
+    "patients_with_three_matching_controls": 0,
+    "insufficient_evidence_source_among_attempted": 19,
+    "adequate_evidence_source_among_attempted": 3,
+    "final_selected": 0,
+    "final_excluded": 32,
+    "common_paired_analysis_patients": 0,
+    "revised_semantic_reviews": 0,
+    "new_frozen_model_measurements": 0,
+    "frozen_B1_loaded": false,
+    "new_GPU_seconds": 0,
+    "training_run": false,
+    "test_images_read": 0,
+    "old_new_score_distributions": null,
+    "old_new_reward_reversal_change": null,
+    "manifest_sha256": "b649fd66fff65e4da36d4354459c50021d846a5f46d3d62d4231de808646f74e",
+    "frozen_at": "2026-10-06T07:19:36.418203+00:00",
+    "reason": "All 22 original-evidence-acceptable cases lack even one complete evidence-shaped token block inside the proposed AI support; three matched controls cannot be formed. No second proposal or relaxed matching rule.",
+    "counts_overlap_note": "The 19 source failures are contained within the 22 control failures, not additional patients."
+  },
+  "region_change_scope": "separate new private proposals; original regions unchanged"
+}
