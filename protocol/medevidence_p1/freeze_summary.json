@@ -1,0 +1,481 @@
+{
+  "lock": {
+    "config_sha256": "22eb76a84bfb6f30e092552f6a8ea524c51a0aab674f6981c989d4ac1e752b58",
+    "hashes": {
+      "manifest.csv": "abc86f1ace32ca326eb632ce6410d613357c53c4ac74cab3be89e61b9488723b",
+      "views.json": "8412184918ed8a9a442764371494679ba9d228a467d649f2d748e28a42172e9c",
+      "schedule.json": "b53f4e04329dc9962df9105cb8303dcc845ffa5d7a59b718134a066f42e9bc24",
+      "folds.json": "c41951aa91670e798f8a75251b05d4cb5a675c58dc1d44e77c91f8bac052dc34",
+      "identity.json": "0b741216f55ccb61654a9f6633c00a386fcb45e437cdf7db4b9854d3b79230cc",
+      "token_contract.json": "870b12bb441918cfdcb4243f7db788c505312dcaf2bce19fd26ab709785ef783",
+      "AI_review.json": "c1b34cbb341eddb9abcd7e96cc808b8403df9c7a02f9301888bfeab7df9c7f25"
+    },
+    "source_hashes": {
+      "src/medevidence.py": "4394300c0012a9dacc2ca93dc8f7a3ecb1634b860b03a781583c092c65d99cd3",
+      "src/medevidence_run.py": "20804158b81b8d3692220130e905e7f8dadcd6fb16bcf76e44f0b9f049132a04",
+      "src/model.py": "3d08b38566f0a5fcce93caab929333730836bb03a6ede768818b428a1ca10e93",
+      "src/data.py": "c3f08369b5c0dc674c2c5171bdeda353589e1b289805c89d4cab1c7c086fee50",
+      "src/experiment.py": "4e8ddf9f8143a13d4a2c46cffa8d7a77e3115d959ee64f959e84e4dda98f7f44",
+      "src/v2.py": "a1346d9d0e0adb4118cb21f29aa525f9012dd16cd7bce446b08ce701e18a3c9f",
+      "src/objectives.py": "3abfe2aa1947ffa35d3eaab1926ad5518bef02f1b0e06b9c00e7cc730a820a6a",
+      "src/regions.py": "ddbb2c9feb3012d86edc3ccf05987b223d85759e03197cabbb494a15ece33df5",
+      "src/evaluation.py": "5556535c82acd42b2de52fcf72d00f864bedce538e4aed9d520f72da3b24767f",
+      "scripts/medevidence_pipeline.py": "9763c28ffd213884efa5f6d876988e884c1e36f5a35fdcad4ddca9303a928fd4",
+      "scripts/report_medevidence_p1.py": "a34d09a7a7d977110582f2c65e9b22b9a6688a513da1bc8f27512695052d0001",
+      "tests/test_medevidence.py": "21d9c262c07372530b275bdad314a8dbe1cf3dc00e2f56e9eae5965f255405eb"
+    },
+    "prompts_sha256": "5b54e4572ca76bb99b2daa331cfef214ad2528f0b047a4c3e768921de5a2ff38",
+    "seed": 17,
+    "test_pixels_read": 0,
+    "RL": false
+  },
+  "data_audit": {
+    "patients": {
+      "train": {
+        "no": 875,
+        "yes": 149
+      },
+      "validation": {
+        "no": 219,
+        "yes": 37
+      }
+    },
+    "independent_box_counts": {
+      "0": 1094,
+      "2": 81,
+      "3": 8,
+      "1": 96,
+      "4": 1
+    },
+    "raw_boxes_recovered_and_verified": true,
+    "union_box_guessing": false,
+    "patient_split_disjoint": true,
+    "duplicate_patient_ids": 0,
+    "pixel_duplicate_scan": "not performed; preserved historical patient split",
+    "geometry_exclusions": {
+      "multiple_boxes": 90,
+      "nonlocal_or_too_small": 2
+    },
+    "positive_pair_proposals": {
+      "train": 32,
+      "validation": 25
+    },
+    "negative_sham_pairs": {
+      "train": 32,
+      "validation": 32
+    },
+    "crop_patients": {
+      "train": 1021,
+      "validation": 253
+    },
+    "test_pixels_read": 0,
+    "model_bytes_mtime_match_frozen_identity": true,
+    "revision": "cc594898137f460bfe9f0759e9844b3ce807cfb5",
+    "positive_pairs_accepted": {
+      "train": 3,
+      "validation": 3
+    },
+    "AI_exclusions": {
+      "control_or_target_context_unassessable": 13,
+      "other_or_nonlocal_visible_information": 37,
+      "uncertain_target_or_control": 1
+    },
+    "clinical_expert_review": false,
+    "crop_exclusions": {
+      "narrow mediastinal crop lacks assessable lung context": 1,
+      "crop dominated by diaphragm and subdiaphragmatic signal": 1,
+      "crop dominated by cardiac silhouette; target context uncertain": 2,
+      "medial basal crop dominated by cardiac silhouette": 1,
+      "crop predominantly diaphragm and subdiaphragmatic region": 1
+    },
+    "crop_excluded_patients": 6,
+    "crop_geometry_distributions": {
+      "train_yes": {
+        "n_geometries": 232,
+        "fields": [
+          "x",
+          "y",
+          "width",
+          "height",
+          "aspect"
+        ],
+        "quantiles_0_25_50_75_100": [
+          [
+            0.0,
+            0.0,
+            0.1005859375,
+            0.1044921875,
+            0.35212765957446807
+          ],
+          [
+            0.101806640625,
+            0.10595703125,
+            0.314697265625,
+            0.342529296875,
+            0.5978888446459201
+          ],
+          [
+            0.2412109375,
+            0.2763671875,
+            0.39599609375,
+            0.46240234375,
+            0.8094047550625515
+          ],
+          [
+            0.470947265625,
+            0.4091796875,
+            0.4755859375,
+            0.688232421875,
+            1.0646175821972736
+          ],
+          [
+            0.6689453125,
+            0.7509765625,
+            0.67578125,
+            1.0,
+            2.953271028037383
+          ]
+        ]
+      },
+      "train_no": {
+        "n_geometries": 875,
+        "fields": [
+          "x",
+          "y",
+          "width",
+          "height",
+          "aspect"
+        ],
+        "quantiles_0_25_50_75_100": [
+          [
+            0.0,
+            0.0,
+            0.1005859375,
+            0.1044921875,
+            0.35212765957446807
+          ],
+          [
+            0.1025390625,
+            0.103515625,
+            0.3154296875,
+            0.3388671875,
+            0.5975634035775546
+          ],
+          [
+            0.2470703125,
+            0.2724609375,
+            0.3974609375,
+            0.4638671875,
+            0.8077858880778589
+          ],
+          [
+            0.4716796875,
+            0.4091796875,
+            0.4755859375,
+            0.6904296875,
+            1.084051724137931
+          ],
+          [
+            0.6689453125,
+            0.7509765625,
+            0.67578125,
+            1.0,
+            2.953271028037383
+          ]
+        ]
+      },
+      "validation_yes": {
+        "n_geometries": 48,
+        "fields": [
+          "x",
+          "y",
+          "width",
+          "height",
+          "aspect"
+        ],
+        "quantiles_0_25_50_75_100": [
+          [
+            0.0,
+            0.0,
+            0.24609375,
+            0.1708984375,
+            0.4303030303030303
+          ],
+          [
+            0.097412109375,
+            0.219482421875,
+            0.369873046875,
+            0.344970703125,
+            0.7263882243884935
+          ],
+          [
+            0.3388671875,
+            0.291015625,
+            0.43505859375,
+            0.474609375,
+            0.8778361344537815
+          ],
+          [
+            0.50146484375,
+            0.421630859375,
+            0.501220703125,
+            0.591796875,
+            1.0974288703732145
+          ],
+          [
+            0.61328125,
+            0.693359375,
+            0.64453125,
+            1.0,
+            2.7657142857142856
+          ]
+        ]
+      },
+      "validation_no": {
+        "n_geometries": 219,
+        "fields": [
+          "x",
+          "y",
+          "width",
+          "height",
+          "aspect"
+        ],
+        "quantiles_0_25_50_75_100": [
+          [
+            0.0,
+            0.0,
+            0.24609375,
+            0.1708984375,
+            0.4303030303030303
+          ],
+          [
+            0.0986328125,
+            0.2099609375,
+            0.3544921875,
+            0.328125,
+            0.7245155792117697
+          ],
+          [
+            0.322265625,
+            0.2900390625,
+            0.4326171875,
+            0.48046875,
+            0.875
+          ],
+          [
+            0.5029296875,
+            0.4208984375,
+            0.4990234375,
+            0.6240234375,
+            1.0698529411764706
+          ],
+          [
+            0.61328125,
+            0.693359375,
+            0.64453125,
+            1.0,
+            2.7657142857142856
+          ]
+        ]
+      }
+    },
+    "current_download_revision_receipts_verified": true
+  },
+  "planned_exposures": {
+    "M0": {
+      "full": {
+        "exposures": 2048,
+        "positive": 1024,
+        "negative": 1024,
+        "unique_patients": 1024,
+        "distinct_boxes": 0,
+        "distinct_views": 1024,
+        "skipped": 0
+      },
+      "loc": {
+        "exposures": 0,
+        "positive": 0,
+        "negative": 0,
+        "unique_patients": 0,
+        "distinct_boxes": 0,
+        "distinct_views": 0,
+        "skipped": 0
+      },
+      "crop": {
+        "exposures": 0,
+        "positive": 0,
+        "negative": 0,
+        "unique_patients": 0,
+        "distinct_boxes": 0,
+        "distinct_views": 0,
+        "skipped": 0
+      },
+      "pair": {
+        "exposures": 0,
+        "positive": 0,
+        "negative": 0,
+        "unique_patients": 0,
+        "distinct_boxes": 0,
+        "distinct_views": 0,
+        "skipped": 0
+      }
+    },
+    "W": {
+      "full": {
+        "exposures": 1024,
+        "positive": 512,
+        "negative": 512,
+        "unique_patients": 661,
+        "distinct_boxes": 0,
+        "distinct_views": 661,
+        "skipped": 0
+      },
+      "loc": {
+        "exposures": 256,
+        "positive": 128,
+        "negative": 128,
+        "unique_patients": 256,
+        "distinct_boxes": 202,
+        "distinct_views": 256,
+        "skipped": 0
+      },
+      "crop": {
+        "exposures": 256,
+        "positive": 128,
+        "negative": 128,
+        "unique_patients": 256,
+        "distinct_boxes": 128,
+        "distinct_views": 256,
+        "skipped": 0
+      },
+      "pair": {
+        "exposures": 0,
+        "positive": 0,
+        "negative": 0,
+        "unique_patients": 0,
+        "distinct_boxes": 0,
+        "distinct_views": 0,
+        "skipped": 0
+      }
+    },
+    "M1": {
+      "full": {
+        "exposures": 1024,
+        "positive": 512,
+        "negative": 512,
+        "unique_patients": 601,
+        "distinct_boxes": 0,
+        "distinct_views": 601,
+        "skipped": 0
+      },
+      "loc": {
+        "exposures": 256,
+        "positive": 128,
+        "negative": 128,
+        "unique_patients": 241,
+        "distinct_boxes": 183,
+        "distinct_views": 241,
+        "skipped": 0
+      },
+      "crop": {
+        "exposures": 256,
+        "positive": 128,
+        "negative": 128,
+        "unique_patients": 243,
+        "distinct_boxes": 124,
+        "distinct_views": 252,
+        "skipped": 0
+      },
+      "pair": {
+        "exposures": 256,
+        "positive": 128,
+        "negative": 128,
+        "unique_patients": 35,
+        "distinct_boxes": 3,
+        "distinct_views": 70,
+        "skipped": 0
+      }
+    },
+    "M2": {
+      "full": {
+        "exposures": 1024,
+        "positive": 512,
+        "negative": 512,
+        "unique_patients": 601,
+        "distinct_boxes": 0,
+        "distinct_views": 601,
+        "skipped": 0
+      },
+      "loc": {
+        "exposures": 256,
+        "positive": 128,
+        "negative": 128,
+        "unique_patients": 241,
+        "distinct_boxes": 183,
+        "distinct_views": 241,
+        "skipped": 0
+      },
+      "crop": {
+        "exposures": 256,
+        "positive": 128,
+        "negative": 128,
+        "unique_patients": 243,
+        "distinct_boxes": 124,
+        "distinct_views": 252,
+        "skipped": 0
+      },
+      "pair": {
+        "exposures": 256,
+        "positive": 128,
+        "negative": 128,
+        "unique_patients": 35,
+        "distinct_boxes": 3,
+        "distinct_views": 70,
+        "skipped": 0
+      }
+    }
+  },
+  "engineering_repairs": [
+    {
+      "stage": "smoke_preflight",
+      "optimizer_updates_before_failure": 0,
+      "reason": "Validation traversed an unnecessary zero-weight dependency BF16 graph; now compares the actual production zero-weight branch",
+      "loss_config_changed": false,
+      "views_or_schedule_changed": false,
+      "old_source_sha256": "8eeb76779c75ea5fa4795890de85f0a75ec126e96a9eb6bfe4477929318d62ad",
+      "new_source_sha256": "0f506ffe619f24d93344e08d8f67ae61b58b97de762ff2816f2b2a1efee7ccdd",
+      "charged_gpu_seconds": 21.0035080909729
+    },
+    {
+      "stage": "smoke_preflight",
+      "optimizer_updates_before_failure": 0,
+      "reason": "Identical objective repeated CUDA/BF16 backward exceeded exact absolute tolerance; now log relative L2 and maximum error, enforce <=2 BF16 eps both relative L2 and scaled max error",
+      "tolerance": 0.015625,
+      "loss_config_changed": false,
+      "views_or_schedule_changed": false,
+      "old_source_sha256": "0f506ffe619f24d93344e08d8f67ae61b58b97de762ff2816f2b2a1efee7ccdd",
+      "new_source_sha256": "30ff694bdccad2de8261c7c026d07ec2956d2c29a063ea58b0abd9f2db09710e",
+      "charged_gpu_seconds": 18.002117395401
+    },
+    {
+      "stage": "post_smoke_before_formal",
+      "reason": "Delete verified smoke weights; fail status consistency; strengthen independent-variable CPU zero-dep check; frozen evaluation quota algorithm reuses completed training slack without increasing six-hour cap",
+      "loss_config_changed": false,
+      "views_or_schedule_changed": false,
+      "source_changes": {
+        "src/medevidence_run.py": {
+          "before": "30ff694bdccad2de8261c7c026d07ec2956d2c29a063ea58b0abd9f2db09710e",
+          "after": "20804158b81b8d3692220130e905e7f8dadcd6fb16bcf76e44f0b9f049132a04"
+        },
+        "scripts/medevidence_pipeline.py": {
+          "before": "cf40909cc66b6854eccaca14dffdd1084ac7a8f042f0f16e75c6e84b5b2ad81d",
+          "after": "9763c28ffd213884efa5f6d876988e884c1e36f5a35fdcad4ddca9303a928fd4"
+        },
+        "tests/test_medevidence.py": {
+          "before": "3ed03e69131404bf7ebe4dfd94cd01b02a2731b74d6dac2e8cb79f4a93f7ff18",
+          "after": "21d9c262c07372530b275bdad314a8dbe1cf3dc00e2f56e9eae5965f255405eb"
+        }
+      }
+    }
+  ]
+}

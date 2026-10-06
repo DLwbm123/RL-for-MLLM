@@ -1,0 +1,2721 @@
+{
+  "status": "completed_evaluation",
+  "primary": "M2 minus M1 Delta_S, all frozen evaluable positive patients; joint primary raw0.5",
+  "models": {
+    "M0": {
+      "classification": {
+        "raw_0_5": {
+          "n": 256,
+          "auroc": 0.7943354313217327,
+          "ap": 0.4933692830683753,
+          "balanced_accuracy": 0.6981981981981982,
+          "macro_f1": 0.5864136253041362,
+          "sensitivity": 0.7297297297297297,
+          "specificity": 0.6666666666666666,
+          "TP": 27,
+          "FN": 10,
+          "TN": 146,
+          "FP": 73
+        },
+        "crossfit": {
+          "n": 256,
+          "auroc": 0.7943354313217327,
+          "ap": 0.4933692830683753,
+          "balanced_accuracy": 0.6998642478094532,
+          "macro_f1": 0.6998642478094532,
+          "sensitivity": 0.4864864864864865,
+          "specificity": 0.91324200913242,
+          "TP": 18,
+          "FN": 19,
+          "TN": 200,
+          "FP": 19
+        },
+        "fold_thresholds": [
+          0.8933094143867494,
+          0.880797028541565,
+          0.867035746574402,
+          0.8933094143867494,
+          0.880797028541565
+        ],
+        "auprc_definition": "sklearn average_precision_score (AP)",
+        "softmax_interpretation": "candidate-label normalized support; not calibrated disease probability",
+        "tie_policy": "p>=threshold predicts yes; historical score argmax ties predict no",
+        "score_distributions": {
+          "no": {
+            "n": 219,
+            "score_no": {
+              "mean": -0.7024891764333804,
+              "quantiles_0_25_50_75_100": [
+                -3.530019998550415,
+                -1.0539928078651428,
+                -0.3134955167770386,
+                -0.07001753523945808,
+                -0.0028219898231327534
+              ]
+            },
+            "score_yes": {
+              "mean": -1.7047722744138818,
+              "quantiles_0_25_50_75_100": [
+                -5.877821922302246,
+                -2.695026159286499,
+                -1.3134760856628418,
+                -0.42905093729496,
+                -0.029921775683760643
+              ]
+            },
+            "margin": {
+              "mean": -1.0022831033898272,
+              "quantiles_0_25_50_75_100": [
+                -5.875,
+                -2.625,
+                -1.0,
+                0.625,
+                3.5
+              ]
+            },
+            "p": {
+              "mean": 0.36609979808866366,
+              "quantiles_0_25_50_75_100": [
+                0.0028009270317852497,
+                0.06754669547080994,
+                0.2689414322376251,
+                0.6513549089431763,
+                0.970687747001648
+              ]
+            }
+          },
+          "yes": {
+            "n": 37,
+            "score_no": {
+              "mean": -2.0083188454847076,
+              "quantiles_0_25_50_75_100": [
+                -5.131078243255615,
+                -2.930114984512329,
+                -2.1273000240325928,
+                -0.6328446865081787,
+                -0.10031355917453766
+              ]
+            },
+            "score_yes": {
+              "mean": -0.5150755913173025,
+              "quantiles_0_25_50_75_100": [
+                -2.3503293991088867,
+                -0.7578446865081787,
+                -0.12730009853839874,
+                -0.055180054157972336,
+                -0.006078092381358147
+              ]
+            },
+            "margin": {
+              "mean": 1.4932432432432432,
+              "quantiles_0_25_50_75_100": [
+                -2.25,
+                -0.125,
+                1.9999998807907104,
+                2.875,
+                5.125
+              ]
+            },
+            "p": {
+              "mean": 0.712438199165705,
+              "quantiles_0_25_50_75_100": [
+                0.09534946084022522,
+                0.4687906503677368,
+                0.8807970285415649,
+                0.9465966820716858,
+                0.9940890073776245
+              ]
+            }
+          }
+        },
+        "exact_score_ties": 6
+      },
+      "localization_raw_0_5": {
+        "strict_joint_all_patients": 0.0,
+        "coverage_joint_all_patients": 0.0,
+        "single_joint": 0.0,
+        "multi_coverage_joint": 0.0,
+        "multi_strict_joint": 0.0,
+        "single_iou_mean": 0.0,
+        "single_iou_ge_05": 0.0,
+        "multi_region_recall": 0.0,
+        "multi_region_precision_known_outputs": null,
+        "multi_all_target_coverage": 0.0,
+        "positive_region_recall": 0.0,
+        "positive_region_precision_known_outputs": null,
+        "negative_nonempty_known_rate_all_negative_denominator": 0.0,
+        "invalid_output_rate": 1.0
+      },
+      "localization_crossfit": {
+        "strict_joint_all_patients": 0.0,
+        "coverage_joint_all_patients": 0.0,
+        "single_joint": 0.0,
+        "multi_coverage_joint": 0.0,
+        "multi_strict_joint": 0.0,
+        "single_iou_mean": 0.0,
+        "single_iou_ge_05": 0.0,
+        "multi_region_recall": 0.0,
+        "multi_region_precision_known_outputs": null,
+        "multi_all_target_coverage": 0.0,
+        "positive_region_recall": 0.0,
+        "positive_region_precision_known_outputs": null,
+        "negative_nonempty_known_rate_all_negative_denominator": 0.0,
+        "invalid_output_rate": 1.0
+      },
+      "single_IoU_quantiles_0_25_50_75_100": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "denominators": {
+        "all_patients": 256,
+        "positive": 37,
+        "negative": 219,
+        "single_box_patients": 25,
+        "multi_box_patients": 12,
+        "positive_GT_regions": 51,
+        "valid_predicted_boxes_positive": 0,
+        "positive_unknown_box_count_patients": 37,
+        "negative_unknown_box_count_patients": 219
+      },
+      "errors": {
+        "parse_reasons": {
+          "invalid_json": 192,
+          "invalid_list": 0,
+          "invalid_coordinates": 0,
+          "truncated": 64
+        },
+        "truncated": 64,
+        "missing_GT_regions": 51,
+        "extra_known_boxes": 0,
+        "unknown_box_counts": "Retained failures; precision over known output counts is conditional, full precision has no identifiable denominator"
+      },
+      "evidence": {
+        "gray": {
+          "n": 3,
+          "u_original": 0.7454363107681274,
+          "keep": 0.8251692255338033,
+          "hide": 0.5053121447563171,
+          "D_E": 0.2401241660118103,
+          "D_N": -0.07973291476567586,
+          "S": 0.31985708077748615,
+          "S_positive_rate": 0.6666666666666666
+        },
+        "blur": {
+          "n": 3,
+          "u_original": 0.7454363107681274,
+          "keep": 0.6934210260709127,
+          "hide": 0.7292597492535909,
+          "D_E": 0.01617656151453654,
+          "D_N": 0.05201528469721476,
+          "S": -0.03583872318267822,
+          "S_positive_rate": 0.3333333333333333
+        },
+        "blank": {
+          "n": 3,
+          "u_original": 0.7454363107681274,
+          "keep": 0.03133414685726166,
+          "hide": 0.051757595191399254,
+          "D_E": 0.6936787155767282,
+          "D_N": 0.7141021639108658,
+          "S": -0.0204234483341376,
+          "S_positive_rate": 0.0
+        }
+      },
+      "negative_sham": {
+        "gray": {
+          "n": 32,
+          "u_original": 0.3453827683115378,
+          "keep": 0.41689770529046655,
+          "hide": 0.41744339221622795,
+          "D_E": -0.07206062390469015,
+          "D_N": -0.07151493697892874,
+          "S": -0.0005456869257614017,
+          "S_positive_rate": 0.59375,
+          "view_false_positive_rate": 0.40625
+        },
+        "blur": {
+          "n": 32,
+          "u_original": 0.3453827683115378,
+          "keep": 0.49851919326465577,
+          "hide": 0.4703519169706851,
+          "D_E": -0.12496914865914732,
+          "D_N": -0.15313642495311797,
+          "S": 0.028167276293970644,
+          "S_positive_rate": 0.5625,
+          "view_false_positive_rate": 0.46875
+        },
+        "blank": {
+          "n": 32,
+          "u_original": 0.3453827683115378,
+          "keep": 0.07148690859321505,
+          "hide": 0.07139998709317297,
+          "D_E": 0.27398278121836483,
+          "D_N": 0.27389585971832275,
+          "S": 8.692150004208088e-05,
+          "S_positive_rate": 0.4375,
+          "view_false_positive_rate": 0.0
+        }
+      },
+      "crop": {
+        "positive_patients": 34,
+        "patient_mean_u_2": 0.9170710172723321,
+        "patient_mean_u_2_5": 0.9108519242966876,
+        "negative_u_2": 0.8234666716562559,
+        "negative_u_2_5": 0.7932011879657366
+      }
+    },
+    "M1": {
+      "classification": {
+        "raw_0_5": {
+          "n": 256,
+          "auroc": 0.7814389732197953,
+          "ap": 0.4810913236412521,
+          "balanced_accuracy": 0.7234974700728125,
+          "macro_f1": 0.633245664678085,
+          "sensitivity": 0.7027027027027027,
+          "specificity": 0.7442922374429224,
+          "TP": 26,
+          "FN": 11,
+          "TN": 163,
+          "FP": 56
+        },
+        "crossfit": {
+          "n": 256,
+          "auroc": 0.7814389732197953,
+          "ap": 0.4810913236412521,
+          "balanced_accuracy": 0.6817845242502777,
+          "macro_f1": 0.6797559115179252,
+          "sensitivity": 0.4594594594594595,
+          "specificity": 0.9041095890410958,
+          "TP": 17,
+          "FN": 20,
+          "TN": 198,
+          "FP": 21
+        },
+        "fold_thresholds": [
+          0.817574441432953,
+          0.7772998809814454,
+          0.7772998809814454,
+          0.817574441432953,
+          0.7772998809814454
+        ],
+        "auprc_definition": "sklearn average_precision_score (AP)",
+        "softmax_interpretation": "candidate-label normalized support; not calibrated disease probability",
+        "tie_policy": "p>=threshold predicts yes; historical score argmax ties predict no",
+        "score_distributions": {
+          "no": {
+            "n": 219,
+            "score_no": {
+              "mean": -0.5632294791253054,
+              "quantiles_0_25_50_75_100": [
+                -2.8123421669006348,
+                -0.6934094429016113,
+                -0.28133150935173035,
+                -0.10029635578393936,
+                -0.01606144569814205
+              ]
+            },
+            "score_yes": {
+              "mean": -1.537544545908905,
+              "quantiles_0_25_50_75_100": [
+                -4.141061305999756,
+                -2.350288510322571,
+                -1.4063076972961426,
+                -0.6934094429016113,
+                -0.062211062759160995
+              ]
+            },
+            "margin": {
+              "mean": -0.9743150667240631,
+              "quantiles_0_25_50_75_100": [
+                -4.125,
+                -2.25,
+                -1.125,
+                0.0,
+                2.75
+              ]
+            },
+            "p": {
+              "mean": 0.3332400973205833,
+              "quantiles_0_25_50_75_100": [
+                0.01590639166533947,
+                0.09534946084022522,
+                0.24508501589298248,
+                0.5,
+                0.9399133324623108
+              ]
+            }
+          },
+          "yes": {
+            "n": 37,
+            "score_no": {
+              "mean": -1.6345530448330414,
+              "quantiles_0_25_50_75_100": [
+                -4.264342784881592,
+                -2.464270830154419,
+                -1.5022345781326294,
+                -0.38704249262809753,
+                -0.1129119023680687
+              ]
+            },
+            "score_yes": {
+              "mean": -0.607526013904528,
+              "quantiles_0_25_50_75_100": [
+                -2.2379274368286133,
+                -1.13704252243042,
+                -0.2522346079349518,
+                -0.089255690574646,
+                -0.01434278767555952
+              ]
+            },
+            "margin": {
+              "mean": 1.027027027027027,
+              "quantiles_0_25_50_75_100": [
+                -2.125,
+                -0.75,
+                1.25,
+                2.375,
+                4.25
+              ]
+            },
+            "p": {
+              "mean": 0.6543979676994117,
+              "quantiles_0_25_50_75_100": [
+                0.10669060051441193,
+                0.3208213150501251,
+                0.7772998809814453,
+                0.9149009585380554,
+                0.9859364032745361
+              ]
+            }
+          }
+        },
+        "exact_score_ties": 2
+      },
+      "localization_raw_0_5": {
+        "strict_joint_all_patients": 0.640625,
+        "coverage_joint_all_patients": 0.640625,
+        "single_joint": 0.04,
+        "multi_coverage_joint": 0.0,
+        "multi_strict_joint": 0.0,
+        "single_iou_mean": 0.0410795484280937,
+        "single_iou_ge_05": 0.04,
+        "multi_region_recall": 0.0,
+        "multi_region_precision_known_outputs": 0.0,
+        "multi_all_target_coverage": 0.0,
+        "positive_region_recall": 0.0196078431372549,
+        "positive_region_precision_known_outputs": 0.16666666666666666,
+        "negative_nonempty_known_rate_all_negative_denominator": 0.0182648401826484,
+        "invalid_output_rate": 0.0
+      },
+      "localization_crossfit": {
+        "strict_joint_all_patients": 0.77734375,
+        "coverage_joint_all_patients": 0.77734375,
+        "single_joint": 0.04,
+        "multi_coverage_joint": 0.0,
+        "multi_strict_joint": 0.0,
+        "single_iou_mean": 0.0410795484280937,
+        "single_iou_ge_05": 0.04,
+        "multi_region_recall": 0.0,
+        "multi_region_precision_known_outputs": 0.0,
+        "multi_all_target_coverage": 0.0,
+        "positive_region_recall": 0.0196078431372549,
+        "positive_region_precision_known_outputs": 0.16666666666666666,
+        "negative_nonempty_known_rate_all_negative_denominator": 0.0182648401826484,
+        "invalid_output_rate": 0.0
+      },
+      "single_IoU_quantiles_0_25_50_75_100": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.6557501904036558
+      ],
+      "denominators": {
+        "all_patients": 256,
+        "positive": 37,
+        "negative": 219,
+        "single_box_patients": 25,
+        "multi_box_patients": 12,
+        "positive_GT_regions": 51,
+        "valid_predicted_boxes_positive": 6,
+        "positive_unknown_box_count_patients": 0,
+        "negative_unknown_box_count_patients": 0
+      },
+      "errors": {
+        "parse_reasons": {
+          "invalid_json": 0,
+          "invalid_list": 0,
+          "invalid_coordinates": 0,
+          "truncated": 0
+        },
+        "truncated": 0,
+        "missing_GT_regions": 50,
+        "extra_known_boxes": 9,
+        "unknown_box_counts": "Retained failures; precision over known output counts is conditional, full precision has no identifiable denominator"
+      },
+      "evidence": {
+        "gray": {
+          "n": 3,
+          "u_original": 0.6484714051087698,
+          "keep": 0.6613645454247793,
+          "hide": 0.3713669776916504,
+          "D_E": 0.2771044274171193,
+          "D_N": -0.012893140316009521,
+          "S": 0.28999756773312885,
+          "S_positive_rate": 0.6666666666666666
+        },
+        "blur": {
+          "n": 3,
+          "u_original": 0.6484714051087698,
+          "keep": 0.5998165210088094,
+          "hide": 0.5951629082361857,
+          "D_E": 0.05330849687258402,
+          "D_N": 0.04865488409996033,
+          "S": 0.004653612772623698,
+          "S_positive_rate": 0.3333333333333333
+        },
+        "blank": {
+          "n": 3,
+          "u_original": 0.6484714051087698,
+          "keep": 0.04069321354230245,
+          "hide": 0.06396856904029846,
+          "D_E": 0.5845028360684713,
+          "D_N": 0.6077781915664673,
+          "S": -0.023275355497996014,
+          "S_positive_rate": 0.0
+        }
+      },
+      "negative_sham": {
+        "gray": {
+          "n": 32,
+          "u_original": 0.3201197342714295,
+          "keep": 0.323099285364151,
+          "hide": 0.31018775701522827,
+          "D_E": 0.009931977256201208,
+          "D_N": -0.002979551092721522,
+          "S": 0.01291152834892273,
+          "S_positive_rate": 0.53125,
+          "view_false_positive_rate": 0.234375
+        },
+        "blur": {
+          "n": 32,
+          "u_original": 0.3201197342714295,
+          "keep": 0.43058669939637184,
+          "hide": 0.40090724756009877,
+          "D_E": -0.08078751328866929,
+          "D_N": -0.11046696512494236,
+          "S": 0.029679451836273074,
+          "S_positive_rate": 0.5,
+          "view_false_positive_rate": 0.390625
+        },
+        "blank": {
+          "n": 32,
+          "u_original": 0.3201197342714295,
+          "keep": 0.08163940801750869,
+          "hide": 0.07983664842322469,
+          "D_E": 0.2402830858482048,
+          "D_N": 0.2384803262539208,
+          "S": 0.001802759594283998,
+          "S_positive_rate": 0.46875,
+          "view_false_positive_rate": 0.0
+        }
+      },
+      "crop": {
+        "positive_patients": 34,
+        "patient_mean_u_2": 0.7118529461543349,
+        "patient_mean_u_2_5": 0.6861779357799712,
+        "negative_u_2": 0.4494034505223847,
+        "negative_u_2_5": 0.38666475296964586
+      }
+    },
+    "M2": {
+      "classification": {
+        "raw_0_5": {
+          "n": 256,
+          "auroc": 0.7782302850796001,
+          "ap": 0.48213077374892466,
+          "balanced_accuracy": 0.7257805750956436,
+          "macro_f1": 0.6365826378731825,
+          "sensitivity": 0.7027027027027027,
+          "specificity": 0.7488584474885844,
+          "TP": 26,
+          "FN": 11,
+          "TN": 164,
+          "FP": 55
+        },
+        "crossfit": {
+          "n": 256,
+          "auroc": 0.7782302850796001,
+          "ap": 0.48213077374892466,
+          "balanced_accuracy": 0.6795014192274467,
+          "macro_f1": 0.6755190729116369,
+          "sensitivity": 0.4594594594594595,
+          "specificity": 0.8995433789954338,
+          "TP": 17,
+          "FN": 20,
+          "TN": 197,
+          "FP": 22
+        },
+        "fold_thresholds": [
+          0.817574441432953,
+          0.7772998809814454,
+          0.7772998809814454,
+          0.817574441432953,
+          0.7772998809814454
+        ],
+        "auprc_definition": "sklearn average_precision_score (AP)",
+        "softmax_interpretation": "candidate-label normalized support; not calibrated disease probability",
+        "tie_policy": "p>=threshold predicts yes; historical score argmax ties predict no",
+        "score_distributions": {
+          "no": {
+            "n": 219,
+            "score_no": {
+              "mean": -0.5539647969098328,
+              "quantiles_0_25_50_75_100": [
+                -2.812268018722534,
+                -0.6631280183792114,
+                -0.3134083151817322,
+                -0.10028563067317009,
+                -0.01418977603316307
+              ]
+            },
+            "score_yes": {
+              "mean": -1.5693757567537703,
+              "quantiles_0_25_50_75_100": [
+                -4.264191150665283,
+                -2.3502856492996216,
+                -1.3134536743164062,
+                -0.7256171703338623,
+                -0.062186527997255325
+              ]
+            },
+            "margin": {
+              "mean": -1.0154109578154402,
+              "quantiles_0_25_50_75_100": [
+                -4.25,
+                -2.25,
+                -1.0,
+                -0.0625,
+                2.75
+              ]
+            },
+            "p": {
+              "mean": 0.32874399227128454,
+              "quantiles_0_25_50_75_100": [
+                0.014063626527786255,
+                0.09534946084022522,
+                0.2689414322376251,
+                0.4843953251838684,
+                0.9399133324623108
+              ]
+            }
+          },
+          "yes": {
+            "n": 37,
+            "score_no": {
+              "mean": -1.6095330656783,
+              "quantiles_0_25_50_75_100": [
+                -4.264342308044434,
+                -2.4642302989959717,
+                -1.5022386312484741,
+                -0.3870319724082947,
+                -0.10028605908155441
+              ]
+            },
+            "score_yes": {
+              "mean": -0.62642494493441,
+              "quantiles_0_25_50_75_100": [
+                -2.3502860069274902,
+                -1.1370320320129395,
+                -0.2522386610507965,
+                -0.08923039585351944,
+                -0.014342082664370537
+              ]
+            },
+            "margin": {
+              "mean": 0.9831081016643627,
+              "quantiles_0_25_50_75_100": [
+                -2.25,
+                -0.7500000596046448,
+                1.25,
+                2.375,
+                4.25
+              ]
+            },
+            "p": {
+              "mean": 0.6493485038344925,
+              "quantiles_0_25_50_75_100": [
+                0.09534946084022522,
+                0.32082128524780273,
+                0.7772998809814453,
+                0.9149009585380554,
+                0.9859364032745361
+              ]
+            }
+          }
+        },
+        "exact_score_ties": 2
+      },
+      "localization_raw_0_5": {
+        "strict_joint_all_patients": 0.64453125,
+        "coverage_joint_all_patients": 0.64453125,
+        "single_joint": 0.04,
+        "multi_coverage_joint": 0.0,
+        "multi_strict_joint": 0.0,
+        "single_iou_mean": 0.044057232524895615,
+        "single_iou_ge_05": 0.04,
+        "multi_region_recall": 0.0,
+        "multi_region_precision_known_outputs": 0.0,
+        "multi_all_target_coverage": 0.0,
+        "positive_region_recall": 0.0196078431372549,
+        "positive_region_precision_known_outputs": 0.14285714285714285,
+        "negative_nonempty_known_rate_all_negative_denominator": 0.0182648401826484,
+        "invalid_output_rate": 0.0
+      },
+      "localization_crossfit": {
+        "strict_joint_all_patients": 0.7734375,
+        "coverage_joint_all_patients": 0.7734375,
+        "single_joint": 0.04,
+        "multi_coverage_joint": 0.0,
+        "multi_strict_joint": 0.0,
+        "single_iou_mean": 0.044057232524895615,
+        "single_iou_ge_05": 0.04,
+        "multi_region_recall": 0.0,
+        "multi_region_precision_known_outputs": 0.0,
+        "multi_all_target_coverage": 0.0,
+        "positive_region_recall": 0.0196078431372549,
+        "positive_region_precision_known_outputs": 0.14285714285714285,
+        "negative_nonempty_known_rate_all_negative_denominator": 0.0182648401826484,
+        "invalid_output_rate": 0.0
+      },
+      "single_IoU_quantiles_0_25_50_75_100": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.6607003891050583
+      ],
+      "denominators": {
+        "all_patients": 256,
+        "positive": 37,
+        "negative": 219,
+        "single_box_patients": 25,
+        "multi_box_patients": 12,
+        "positive_GT_regions": 51,
+        "valid_predicted_boxes_positive": 7,
+        "positive_unknown_box_count_patients": 0,
+        "negative_unknown_box_count_patients": 0
+      },
+      "errors": {
+        "parse_reasons": {
+          "invalid_json": 0,
+          "invalid_list": 0,
+          "invalid_coordinates": 0,
+          "truncated": 0
+        },
+        "truncated": 0,
+        "missing_GT_regions": 50,
+        "extra_known_boxes": 10,
+        "unknown_box_counts": "Retained failures; precision over known output counts is conditional, full precision has no identifiable denominator"
+      },
+      "evidence": {
+        "gray": {
+          "n": 3,
+          "u_original": 0.6472135086854299,
+          "keep": 0.6512011885643005,
+          "hide": 0.36341483891010284,
+          "D_E": 0.28379866977532703,
+          "D_N": -0.0039876798788706464,
+          "S": 0.2877863496541977,
+          "S_positive_rate": 0.6666666666666666
+        },
+        "blur": {
+          "n": 3,
+          "u_original": 0.6472135086854299,
+          "keep": 0.6102196375528971,
+          "hide": 0.6035874088605245,
+          "D_E": 0.043626099824905396,
+          "D_N": 0.03699387113253275,
+          "S": 0.00663222869237264,
+          "S_positive_rate": 0.3333333333333333
+        },
+        "blank": {
+          "n": 3,
+          "u_original": 0.6472135086854299,
+          "keep": 0.03802166258295377,
+          "hide": 0.06197608262300491,
+          "D_E": 0.585237426062425,
+          "D_N": 0.6091918461024761,
+          "S": -0.023954420040051144,
+          "S_positive_rate": 0.0
+        }
+      },
+      "negative_sham": {
+        "gray": {
+          "n": 32,
+          "u_original": 0.3140702252276242,
+          "keep": 0.3159742683637887,
+          "hide": 0.3017198152374476,
+          "D_E": 0.012350409990176558,
+          "D_N": -0.001904043136164546,
+          "S": 0.014254453126341105,
+          "S_positive_rate": 0.5625,
+          "view_false_positive_rate": 0.234375
+        },
+        "blur": {
+          "n": 32,
+          "u_original": 0.3140702252276242,
+          "keep": 0.4243761801626533,
+          "hide": 0.3902618682477623,
+          "D_E": -0.07619164302013814,
+          "D_N": -0.11030595493502915,
+          "S": 0.034114311914891005,
+          "S_positive_rate": 0.53125,
+          "view_false_positive_rate": 0.390625
+        },
+        "blank": {
+          "n": 32,
+          "u_original": 0.3140702252276242,
+          "keep": 0.07824982702732086,
+          "hide": 0.07661591866053641,
+          "D_E": 0.23745430656708777,
+          "D_N": 0.23582039820030332,
+          "S": 0.0016339083667844534,
+          "S_positive_rate": 0.46875,
+          "view_false_positive_rate": 0.0
+        }
+      },
+      "crop": {
+        "positive_patients": 34,
+        "patient_mean_u_2": 0.7082142389434225,
+        "patient_mean_u_2_5": 0.6822182905367192,
+        "negative_u_2": 0.4429204259918297,
+        "negative_u_2_5": 0.38016918533137195
+      }
+    }
+  },
+  "classification_bootstrap": {
+    "method": "2000 patient-paired bootstrap; weights preserve original folds; thresholds refit in each replicate; exploratory development only",
+    "intervals": {
+      "M0 / raw_0_5 / auroc": {
+        "ci95": [
+          0.7164440970813041,
+          0.8700958015159123
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M0 / raw_0_5 / ap": {
+        "ci95": [
+          0.34148227013856874,
+          0.6402760241220466
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M0 / raw_0_5 / balanced_accuracy": {
+        "ci95": [
+          0.6192046676441838,
+          0.7776987718164188
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M0 / raw_0_5 / macro_f1": {
+        "ci95": [
+          0.5235318790892766,
+          0.6450280146211359
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M0 / raw_0_5 / sensitivity": {
+        "ci95": [
+          0.5788967611336032,
+          0.875
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M0 / raw_0_5 / specificity": {
+        "ci95": [
+          0.6071428571428571,
+          0.7268518518518519
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M0 / crossfit / auroc": {
+        "ci95": [
+          0.7164440970813041,
+          0.8700958015159123
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M0 / crossfit / ap": {
+        "ci95": [
+          0.34148227013856874,
+          0.6402760241220466
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M0 / crossfit / balanced_accuracy": {
+        "ci95": [
+          0.59299561384476,
+          0.7893429005543311
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M0 / crossfit / macro_f1": {
+        "ci95": [
+          0.5964447425792386,
+          0.7624194781089638
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M0 / crossfit / sensitivity": {
+        "ci95": [
+          0.28203125,
+          0.6668478260869555
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M0 / crossfit / specificity": {
+        "ci95": [
+          0.8873873873873874,
+          0.9209332925336597
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M0 / crossfit_minus_raw / auroc": {
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M0 / crossfit_minus_raw / ap": {
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M0 / crossfit_minus_raw / balanced_accuracy": {
+        "ci95": [
+          -0.09884462347767345,
+          0.07143578643578637
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M0 / crossfit_minus_raw / macro_f1": {
+        "ci95": [
+          0.025393942436730373,
+          0.16995633806455085
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M0 / crossfit_minus_raw / sensitivity": {
+        "ci95": [
+          -0.4411764705882352,
+          -0.08823529411764708
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M0 / crossfit_minus_raw / specificity": {
+        "ci95": [
+          0.17487890261443434,
+          0.302891685520362
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M1 / raw_0_5 / auroc": {
+        "ci95": [
+          0.6995492005128315,
+          0.8627694185782422
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M1 / raw_0_5 / ap": {
+        "ci95": [
+          0.32704362817384885,
+          0.6311349000497367
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M1 / raw_0_5 / balanced_accuracy": {
+        "ci95": [
+          0.6396401515151515,
+          0.8013892753047165
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M1 / raw_0_5 / macro_f1": {
+        "ci95": [
+          0.5646108031479707,
+          0.6960724896739552
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M1 / raw_0_5 / sensitivity": {
+        "ci95": [
+          0.5516565246788371,
+          0.8461538461538461
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M1 / raw_0_5 / specificity": {
+        "ci95": [
+          0.6869158878504673,
+          0.800021645021645
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M1 / crossfit / auroc": {
+        "ci95": [
+          0.6995492005128315,
+          0.8627694185782422
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M1 / crossfit / ap": {
+        "ci95": [
+          0.32704362817384885,
+          0.6311349000497367
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M1 / crossfit / balanced_accuracy": {
+        "ci95": [
+          0.5805451065079131,
+          0.7846774083454285
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M1 / crossfit / macro_f1": {
+        "ci95": [
+          0.5828037801149294,
+          0.757345971563981
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M1 / crossfit / sensitivity": {
+        "ci95": [
+          0.2647058823529412,
+          0.6744331395348836
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M1 / crossfit / specificity": {
+        "ci95": [
+          0.883923380398671,
+          0.9155555555555556
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M1 / crossfit_minus_raw / auroc": {
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M1 / crossfit_minus_raw / ap": {
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M1 / crossfit_minus_raw / balanced_accuracy": {
+        "ci95": [
+          -0.1358985160685204,
+          0.03958426017654245
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M1 / crossfit_minus_raw / macro_f1": {
+        "ci95": [
+          -0.03544688798646515,
+          0.11399042287453667
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M1 / crossfit_minus_raw / sensitivity": {
+        "ci95": [
+          -0.43245495495495495,
+          -0.07142857142857145
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M1 / crossfit_minus_raw / specificity": {
+        "ci95": [
+          0.10359198884983632,
+          0.21267209011264082
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M2 / raw_0_5 / auroc": {
+        "ci95": [
+          0.6938052714556943,
+          0.8612864541931637
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M2 / raw_0_5 / ap": {
+        "ci95": [
+          0.3281014377279932,
+          0.6320195477594595
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M2 / raw_0_5 / balanced_accuracy": {
+        "ci95": [
+          0.6422289624981743,
+          0.8034298655590635
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M2 / raw_0_5 / macro_f1": {
+        "ci95": [
+          0.5679694995183644,
+          0.6990598392394001
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M2 / raw_0_5 / sensitivity": {
+        "ci95": [
+          0.5516565246788371,
+          0.8461538461538461
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M2 / raw_0_5 / specificity": {
+        "ci95": [
+          0.6915887850467289,
+          0.8029059579439252
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M2 / crossfit / auroc": {
+        "ci95": [
+          0.6938052714556943,
+          0.8612864541931637
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M2 / crossfit / ap": {
+        "ci95": [
+          0.3281014377279932,
+          0.6320195477594595
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M2 / crossfit / balanced_accuracy": {
+        "ci95": [
+          0.5867330425756683,
+          0.784337309471882
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M2 / crossfit / macro_f1": {
+        "ci95": [
+          0.5895842142295854,
+          0.758068621039323
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M2 / crossfit / sensitivity": {
+        "ci95": [
+          0.2682520325203252,
+          0.6666666666666666
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M2 / crossfit / specificity": {
+        "ci95": [
+          0.8859619081951454,
+          0.9181818181818182
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M2 / crossfit_minus_raw / auroc": {
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M2 / crossfit_minus_raw / ap": {
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M2 / crossfit_minus_raw / balanced_accuracy": {
+        "ci95": [
+          -0.1337966459106165,
+          0.0379464285714286
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M2 / crossfit_minus_raw / macro_f1": {
+        "ci95": [
+          -0.032377798847762616,
+          0.1131257717617275
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M2 / crossfit_minus_raw / sensitivity": {
+        "ci95": [
+          -0.4285714285714286,
+          -0.07142857142857145
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M2 / crossfit_minus_raw / specificity": {
+        "ci95": [
+          0.09953630100688922,
+          0.21005152989373957
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M1 minus M0 / raw_0_5 / auroc": {
+        "ci95": [
+          -0.026300203568516596,
+          -0.0011153304347452
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M1 minus M0 / raw_0_5 / ap": {
+        "ci95": [
+          -0.04567572739085446,
+          0.01821491300460896
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M1 minus M0 / raw_0_5 / balanced_accuracy": {
+        "ci95": [
+          -0.012831541218637946,
+          0.05483009415741185
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M1 minus M0 / raw_0_5 / macro_f1": {
+        "ci95": [
+          0.015751974116964437,
+          0.07753269197774398
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M1 minus M0 / raw_0_5 / sensitivity": {
+        "ci95": [
+          -0.09677419354838707,
+          0.0
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M1 minus M0 / raw_0_5 / specificity": {
+        "ci95": [
+          0.041095890410958846,
+          0.11627906976744184
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M1 minus M0 / crossfit / auroc": {
+        "ci95": [
+          -0.026300203568516596,
+          -0.0011153304347452
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M1 minus M0 / crossfit / ap": {
+        "ci95": [
+          -0.04567572739085446,
+          0.01821491300460896
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M1 minus M0 / crossfit / balanced_accuracy": {
+        "ci95": [
+          -0.0647321428571428,
+          0.03723113877060813
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M1 minus M0 / crossfit / macro_f1": {
+        "ci95": [
+          -0.05999748932879438,
+          0.032174259768245624
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M1 minus M0 / crossfit / sensitivity": {
+        "ci95": [
+          -0.125,
+          0.07692307692307687
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M1 minus M0 / crossfit / specificity": {
+        "ci95": [
+          -0.024038461538461453,
+          0.014086167951102922
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M2 minus M0 / raw_0_5 / auroc": {
+        "ci95": [
+          -0.030660440062068202,
+          -0.0036390842897692094
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M2 minus M0 / raw_0_5 / ap": {
+        "ci95": [
+          -0.042961344383736846,
+          0.01819500166660036
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M2 minus M0 / raw_0_5 / balanced_accuracy": {
+        "ci95": [
+          -0.010245206272640747,
+          0.05701904590242736
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M2 minus M0 / raw_0_5 / macro_f1": {
+        "ci95": [
+          0.020689259398379893,
+          0.08027162129538121
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M2 minus M0 / raw_0_5 / sensitivity": {
+        "ci95": [
+          -0.09677419354838707,
+          0.0
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M2 minus M0 / raw_0_5 / specificity": {
+        "ci95": [
+          0.04761340555179412,
+          0.11946902654867264
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M2 minus M0 / crossfit / auroc": {
+        "ci95": [
+          -0.030660440062068202,
+          -0.0036390842897692094
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M2 minus M0 / crossfit / ap": {
+        "ci95": [
+          -0.042961344383736846,
+          0.01819500166660036
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M2 minus M0 / crossfit / balanced_accuracy": {
+        "ci95": [
+          -0.057187360925678776,
+          0.03988906088751284
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M2 minus M0 / crossfit / macro_f1": {
+        "ci95": [
+          -0.05206191335190095,
+          0.035522562845191154
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M2 minus M0 / crossfit / sensitivity": {
+        "ci95": [
+          -0.11436974789915964,
+          0.07900071123755313
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M2 minus M0 / crossfit / specificity": {
+        "ci95": [
+          -0.022522522522522515,
+          0.01851851851851849
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M2 minus M1 / raw_0_5 / auroc": {
+        "ci95": [
+          -0.008081922159246626,
+          0.0014885182752031577
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M2 minus M1 / raw_0_5 / ap": {
+        "ci95": [
+          -0.014165939377183958,
+          0.015251474949285167
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M2 minus M1 / raw_0_5 / balanced_accuracy": {
+        "ci95": [
+          0.0,
+          0.006945251937984466
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M2 minus M1 / raw_0_5 / macro_f1": {
+        "ci95": [
+          0.0,
+          0.010442527535516496
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M2 minus M1 / raw_0_5 / sensitivity": {
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M2 minus M1 / raw_0_5 / specificity": {
+        "ci95": [
+          0.0,
+          0.013890503875969042
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M2 minus M1 / crossfit / auroc": {
+        "ci95": [
+          -0.008081922159246626,
+          0.0014885182752031577
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M2 minus M1 / crossfit / ap": {
+        "ci95": [
+          -0.014165939377183958,
+          0.015251474949285167
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M2 minus M1 / crossfit / balanced_accuracy": {
+        "ci95": [
+          -0.03619381108179505,
+          0.038472201124107465
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M2 minus M1 / crossfit / macro_f1": {
+        "ci95": [
+          -0.02864287608564571,
+          0.03521980441887411
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M2 minus M1 / crossfit / sensitivity": {
+        "ci95": [
+          -0.07499999999999996,
+          0.07500000000000001
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      },
+      "M2 minus M1 / crossfit / specificity": {
+        "ci95": [
+          -0.01351504219151286,
+          0.022123893805309658
+        ],
+        "valid_replicates": 2000,
+        "requested_replicates": 2000
+      }
+    }
+  },
+  "localization_joint_bootstrap": {
+    "M0 / raw / strict_joint_all_patients": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M0 / raw / coverage_joint_all_patients": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M0 / raw / single_joint": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M0 / raw / multi_coverage_joint": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M0 / raw / multi_strict_joint": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M0 / raw / single_iou_mean": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M0 / raw / single_iou_ge_05": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M0 / raw / multi_region_recall": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M0 / raw / multi_all_target_coverage": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M0 / raw / positive_region_recall": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M0 / raw / negative_nonempty_known_rate_all_negative_denominator": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M0 / raw / invalid_output_rate": {
+      "ci95": [
+        1.0,
+        1.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M0 / crossfit / strict_joint_all_patients": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M0 / crossfit / coverage_joint_all_patients": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M0 / crossfit / single_joint": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M0 / crossfit / multi_coverage_joint": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M0 / crossfit / multi_strict_joint": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M0 / crossfit / single_iou_mean": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M0 / crossfit / single_iou_ge_05": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M0 / crossfit / multi_region_recall": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M0 / crossfit / multi_all_target_coverage": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M0 / crossfit / positive_region_recall": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M0 / crossfit / negative_nonempty_known_rate_all_negative_denominator": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M0 / crossfit / invalid_output_rate": {
+      "ci95": [
+        1.0,
+        1.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M1 / raw / strict_joint_all_patients": {
+      "ci95": [
+        0.58203125,
+        0.69921875
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M1 / raw / coverage_joint_all_patients": {
+      "ci95": [
+        0.58203125,
+        0.69921875
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M1 / raw / single_joint": {
+      "ci95": [
+        0.0,
+        0.13333333333333333
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M1 / raw / multi_coverage_joint": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M1 / raw / multi_strict_joint": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M1 / raw / single_iou_mean": {
+      "ci95": [
+        0.0,
+        0.11218938384593721
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M1 / raw / single_iou_ge_05": {
+      "ci95": [
+        0.0,
+        0.13333333333333333
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M1 / raw / multi_region_recall": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M1 / raw / multi_region_precision_known_outputs": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 1881,
+      "requested_replicates": 2000
+    },
+    "M1 / raw / multi_all_target_coverage": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M1 / raw / positive_region_recall": {
+      "ci95": [
+        0.0,
+        0.07142857142857142
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M1 / raw / positive_region_precision_known_outputs": {
+      "ci95": [
+        0.0,
+        0.6666666666666666
+      ],
+      "valid_replicates": 1986,
+      "requested_replicates": 2000
+    },
+    "M1 / raw / negative_nonempty_known_rate_all_negative_denominator": {
+      "ci95": [
+        0.004405286343612335,
+        0.03755868544600939
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M1 / raw / invalid_output_rate": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M1 / crossfit / strict_joint_all_patients": {
+      "ci95": [
+        0.73046875,
+        0.8125976562499995
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M1 / crossfit / coverage_joint_all_patients": {
+      "ci95": [
+        0.73046875,
+        0.8125976562499995
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M1 / crossfit / single_joint": {
+      "ci95": [
+        0.0,
+        0.13333333333333333
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M1 / crossfit / multi_coverage_joint": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M1 / crossfit / multi_strict_joint": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M1 / crossfit / single_iou_mean": {
+      "ci95": [
+        0.0,
+        0.11218938384593721
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M1 / crossfit / single_iou_ge_05": {
+      "ci95": [
+        0.0,
+        0.13333333333333333
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M1 / crossfit / multi_region_recall": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M1 / crossfit / multi_region_precision_known_outputs": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 1881,
+      "requested_replicates": 2000
+    },
+    "M1 / crossfit / multi_all_target_coverage": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M1 / crossfit / positive_region_recall": {
+      "ci95": [
+        0.0,
+        0.07142857142857142
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M1 / crossfit / positive_region_precision_known_outputs": {
+      "ci95": [
+        0.0,
+        0.6666666666666666
+      ],
+      "valid_replicates": 1986,
+      "requested_replicates": 2000
+    },
+    "M1 / crossfit / negative_nonempty_known_rate_all_negative_denominator": {
+      "ci95": [
+        0.004405286343612335,
+        0.03755868544600939
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M1 / crossfit / invalid_output_rate": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 / raw / strict_joint_all_patients": {
+      "ci95": [
+        0.5859375,
+        0.703125
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 / raw / coverage_joint_all_patients": {
+      "ci95": [
+        0.5859375,
+        0.703125
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 / raw / single_joint": {
+      "ci95": [
+        0.0,
+        0.13333333333333333
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 / raw / multi_coverage_joint": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 / raw / multi_strict_joint": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 / raw / single_iou_mean": {
+      "ci95": [
+        0.0,
+        0.11802511775310993
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 / raw / single_iou_ge_05": {
+      "ci95": [
+        0.0,
+        0.13333333333333333
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 / raw / multi_region_recall": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 / raw / multi_region_precision_known_outputs": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 1971,
+      "requested_replicates": 2000
+    },
+    "M2 / raw / multi_all_target_coverage": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 / raw / positive_region_recall": {
+      "ci95": [
+        0.0,
+        0.07142857142857142
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 / raw / positive_region_precision_known_outputs": {
+      "ci95": [
+        0.0,
+        0.5
+      ],
+      "valid_replicates": 1996,
+      "requested_replicates": 2000
+    },
+    "M2 / raw / negative_nonempty_known_rate_all_negative_denominator": {
+      "ci95": [
+        0.004405286343612335,
+        0.03755868544600939
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 / raw / invalid_output_rate": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 / crossfit / strict_joint_all_patients": {
+      "ci95": [
+        0.734375,
+        0.81640625
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 / crossfit / coverage_joint_all_patients": {
+      "ci95": [
+        0.734375,
+        0.81640625
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 / crossfit / single_joint": {
+      "ci95": [
+        0.0,
+        0.13333333333333333
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 / crossfit / multi_coverage_joint": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 / crossfit / multi_strict_joint": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 / crossfit / single_iou_mean": {
+      "ci95": [
+        0.0,
+        0.11802511775310993
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 / crossfit / single_iou_ge_05": {
+      "ci95": [
+        0.0,
+        0.13333333333333333
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 / crossfit / multi_region_recall": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 / crossfit / multi_region_precision_known_outputs": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 1971,
+      "requested_replicates": 2000
+    },
+    "M2 / crossfit / multi_all_target_coverage": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 / crossfit / positive_region_recall": {
+      "ci95": [
+        0.0,
+        0.07142857142857142
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 / crossfit / positive_region_precision_known_outputs": {
+      "ci95": [
+        0.0,
+        0.5
+      ],
+      "valid_replicates": 1996,
+      "requested_replicates": 2000
+    },
+    "M2 / crossfit / negative_nonempty_known_rate_all_negative_denominator": {
+      "ci95": [
+        0.004405286343612335,
+        0.03755868544600939
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 / crossfit / invalid_output_rate": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 minus M1 / raw / strict_joint_all_patients": {
+      "ci95": [
+        0.0,
+        0.01171875
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 minus M1 / raw / coverage_joint_all_patients": {
+      "ci95": [
+        0.0,
+        0.01171875
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 minus M1 / raw / single_joint": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 minus M1 / raw / multi_coverage_joint": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 minus M1 / raw / multi_strict_joint": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 minus M1 / raw / single_iou_mean": {
+      "ci95": [
+        0.0,
+        0.009585352924117935
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 minus M1 / raw / single_iou_ge_05": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 minus M1 / raw / multi_region_recall": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 minus M1 / raw / multi_region_precision_known_outputs": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 1881,
+      "requested_replicates": 2000
+    },
+    "M2 minus M1 / raw / multi_all_target_coverage": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 minus M1 / raw / positive_region_recall": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 minus M1 / raw / positive_region_precision_known_outputs": {
+      "ci95": [
+        -0.16666666666666669,
+        0.0
+      ],
+      "valid_replicates": 1986,
+      "requested_replicates": 2000
+    },
+    "M2 minus M1 / raw / negative_nonempty_known_rate_all_negative_denominator": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 minus M1 / raw / invalid_output_rate": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 minus M1 / crossfit / strict_joint_all_patients": {
+      "ci95": [
+        -0.01171875,
+        0.01953125
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 minus M1 / crossfit / coverage_joint_all_patients": {
+      "ci95": [
+        -0.01171875,
+        0.01953125
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 minus M1 / crossfit / single_joint": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 minus M1 / crossfit / multi_coverage_joint": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 minus M1 / crossfit / multi_strict_joint": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 minus M1 / crossfit / single_iou_mean": {
+      "ci95": [
+        0.0,
+        0.009585352924117935
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 minus M1 / crossfit / single_iou_ge_05": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 minus M1 / crossfit / multi_region_recall": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 minus M1 / crossfit / multi_region_precision_known_outputs": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 1881,
+      "requested_replicates": 2000
+    },
+    "M2 minus M1 / crossfit / multi_all_target_coverage": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 minus M1 / crossfit / positive_region_recall": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 minus M1 / crossfit / positive_region_precision_known_outputs": {
+      "ci95": [
+        -0.16666666666666669,
+        0.0
+      ],
+      "valid_replicates": 1986,
+      "requested_replicates": 2000
+    },
+    "M2 minus M1 / crossfit / negative_nonempty_known_rate_all_negative_denominator": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "M2 minus M1 / crossfit / invalid_output_rate": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    }
+  },
+  "evidence_paired_bootstrap": {
+    "positive / gray / S": {
+      "n_patients": 3,
+      "mean_difference": -0.002211218078931173,
+      "ci95": [
+        -0.006633654236793518,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "positive / gray / D_E": {
+      "n_patients": 3,
+      "mean_difference": 0.006694242358207703,
+      "ci95": [
+        -0.0037736892700195312,
+        0.02385641634464264
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "positive / gray / D_N": {
+      "n_patients": 3,
+      "mean_difference": 0.008905460437138876,
+      "ci95": [
+        -0.0037736892700195312,
+        0.030490070581436157
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "positive / gray / keep": {
+      "n_patients": 3,
+      "mean_difference": -0.01016335686047872,
+      "ci95": [
+        -0.030490070581436157,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "positive / gray / hide": {
+      "n_patients": 3,
+      "mean_difference": -0.007952138781547546,
+      "ci95": [
+        -0.02385641634464264,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "positive / blur / S": {
+      "n_patients": 3,
+      "mean_difference": 0.001978615919748942,
+      "ci95": [
+        -0.025273501873016357,
+        0.031209349632263184
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "positive / blur / D_E": {
+      "n_patients": 3,
+      "mean_difference": -0.009682397047678629,
+      "ci95": [
+        -0.02904719114303589,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "positive / blur / D_N": {
+      "n_patients": 3,
+      "mean_difference": -0.011661012967427572,
+      "ci95": [
+        -0.031209349632263184,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "positive / blur / keep": {
+      "n_patients": 3,
+      "mean_difference": 0.010403116544087728,
+      "ci95": [
+        0.0,
+        0.031209349632263184
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "positive / blur / hide": {
+      "n_patients": 3,
+      "mean_difference": 0.008424500624338785,
+      "ci95": [
+        0.0,
+        0.025273501873016357
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "positive / blank / S": {
+      "n_patients": 3,
+      "mean_difference": -0.00067906454205513,
+      "ci95": [
+        -0.008014652878046036,
+        0.005977459251880646
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "positive / blank / D_E": {
+      "n_patients": 3,
+      "mean_difference": 0.0007345899939537048,
+      "ci95": [
+        -0.0037736892700195312,
+        0.005977459251880646
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "positive / blank / D_N": {
+      "n_patients": 3,
+      "mean_difference": 0.0014136545360088348,
+      "ci95": [
+        0.0,
+        0.0042409636080265045
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "positive / blank / keep": {
+      "n_patients": 3,
+      "mean_difference": -0.0026715509593486786,
+      "ci95": [
+        -0.008014652878046036,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "positive / blank / hide": {
+      "n_patients": 3,
+      "mean_difference": -0.0019924864172935486,
+      "ci95": [
+        -0.005977459251880646,
+        0.0
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "negative / gray / S": {
+      "n_patients": 32,
+      "mean_difference": 0.001342924777418375,
+      "ci95": [
+        -0.005144899565493688,
+        0.007701845490373666
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "negative / gray / D_E": {
+      "n_patients": 32,
+      "mean_difference": 0.002418432733975351,
+      "ci95": [
+        -0.005292545241536573,
+        0.009769913417403575
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "negative / gray / D_N": {
+      "n_patients": 32,
+      "mean_difference": 0.0010755079565569758,
+      "ci95": [
+        -0.004518756954348646,
+        0.006503505285945721
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "negative / gray / keep": {
+      "n_patients": 32,
+      "mean_difference": -0.007125017000362277,
+      "ci95": [
+        -0.013062222948065028,
+        -0.001470681984210393
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "negative / gray / hide": {
+      "n_patients": 32,
+      "mean_difference": -0.008467941777780652,
+      "ci95": [
+        -0.015920445730444044,
+        -0.0019403421494644166
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "negative / blur / S": {
+      "n_patients": 32,
+      "mean_difference": 0.00443486007861793,
+      "ci95": [
+        -0.0025400739104952663,
+        0.011606067966204132
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "negative / blur / D_E": {
+      "n_patients": 32,
+      "mean_difference": 0.004595870268531144,
+      "ci95": [
+        -0.002320095579489134,
+        0.011105925013544031
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "negative / blur / D_N": {
+      "n_patients": 32,
+      "mean_difference": 0.00016101018991321325,
+      "ci95": [
+        -0.007257068491890095,
+        0.007446819392498582
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "negative / blur / keep": {
+      "n_patients": 32,
+      "mean_difference": -0.0062105192337185144,
+      "ci95": [
+        -0.011975943821016698,
+        -0.00010796111891977918
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "negative / blur / hide": {
+      "n_patients": 32,
+      "mean_difference": -0.010645379312336445,
+      "ci95": [
+        -0.016831952426582576,
+        -0.004035668232245374
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "negative / blank / S": {
+      "n_patients": 32,
+      "mean_difference": -0.00016885122749954462,
+      "ci95": [
+        -0.004138814719044604,
+        0.0034179862530436316
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "negative / blank / D_E": {
+      "n_patients": 32,
+      "mean_difference": -0.002828779281117022,
+      "ci95": [
+        -0.010025248251622543,
+        0.0035967783362138954
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "negative / blank / D_N": {
+      "n_patients": 32,
+      "mean_difference": -0.0026599280536174774,
+      "ci95": [
+        -0.009854111965978518,
+        0.0040610014955746
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "negative / blank / keep": {
+      "n_patients": 32,
+      "mean_difference": -0.0033895809901878238,
+      "ci95": [
+        -0.0063072822755202654,
+        -0.0008479803858790553
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    },
+    "negative / blank / hide": {
+      "n_patients": 32,
+      "mean_difference": -0.003220729762688279,
+      "ci95": [
+        -0.005708973878063262,
+        -0.0006241135764867081
+      ],
+      "valid_replicates": 2000,
+      "requested_replicates": 2000
+    }
+  },
+  "common_correct_supplement": {
+    "gray": {
+      "n": 2,
+      "Delta_S": 0.0,
+      "supplement_only": true
+    },
+    "blur": {
+      "n": 2,
+      "Delta_S": 0.002967923879623413,
+      "supplement_only": true
+    },
+    "blank": {
+      "n": 2,
+      "Delta_S": -0.004007326439023018,
+      "supplement_only": true
+    }
+  },
+  "AP_difference_M2_M1": 0.0010394501076725349,
+  "AP_drop_warning_beyond_0_02": false,
+  "limits": [
+    "Reused exploratory development set; no independent test or clinical validation",
+    "Single training seed; bootstrap excludes training randomness",
+    "AI-assisted annotation-guided views; no clinical causal ground truth",
+    "Normalized candidate support is not calibrated probability",
+    "M0 is a reference with different supervision/compute; primary matched comparison M2-M1"
+  ],
+  "next_data_requirements": "New seeds and held-out patients; PadChest-GR/MS-CXR access/annotation review only, no download authorized"
+}
