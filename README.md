@@ -44,4 +44,4 @@ python3 scripts/status.py
 
 no/yes 表示是否有提示肺炎的肺部不透明影，不是病原确诊标签。无最终裁定标签的图像不当作阴性；无框阴性仅参与分类；多框阳性用于分类和包围全部标注的定位，机制分析限单框病例。几何对照未由临床专家确认为正常肺区，亦未完成肺野分割；结果必须带上此局限及资格覆盖率。
 
-RSNA 已通过独立 16 图 GPU smoke 并启动 B0，启动快照见 [reports/rsna_launch.md](reports/rsna_launch.md)；该快照不代表实验已完成。
+RSNA pilot v1 已完成 B0、短拟合、B1 SFT 与 B1 审计，状态 completed_diagnostic；固定 120 Case 的 AUROC 0.608795 → 0.679897，但 B1 sensitivity=0，证据依赖改善未获支持。RL 未运行、测试集封存。见 [完成报告](reports/rsna_report.md) 与 [聚合结果](reports/rsna_results.json)；[启动快照](reports/rsna_launch.md) 仅保留历史启动状态。
