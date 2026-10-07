@@ -80,7 +80,8 @@ def optimizer(c,m):
 def initial_identity(c,m,opt):
     return {'adapter_digest':current_digest(m),'optimizer_digest':tensor_digest(opt.state_dict()),'RNG_digest':tensor_digest(RNG()),
             'trainable_names':[n for n,p in m.model.named_parameters() if p.requires_grad],'optimizer_state_empty':not bool(opt.state),
-            'schedule_position':0,'initialization':'P5 normalized step256','lr':c.cfg['optimizer']['lr']}
+            'schedule_position':0,'initialization':'P5 normalized step256','lr':c.cfg['optimizer']['lr'],
+            'training_mode':m.model.training,'visual_training_mode':m.visual.training}
 
 
 def supervised(c,m,k,scale):

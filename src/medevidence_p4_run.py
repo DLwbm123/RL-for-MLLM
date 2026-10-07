@@ -85,11 +85,11 @@ def initial_identity(m,opt):
 
 
 def add_reference(c,m):
-    before=current_digest(m);state=RNG();flags={n:p.requires_grad for n,p in m.model.named_parameters()}
+    before=current_digest(m);state=RNG();mode=m.model.training;flags={n:p.requires_grad for n,p in m.model.named_parameters()}
     load_frozen_adapter(m.model,c.references['COV']['checkpoint_path'],'reference')
     m.model.set_adapter('default')
     for n,p in m.model.named_parameters():p.requires_grad_(flags.get(n,False))
-    set_RNG(state)
+    m.set_training(mode);set_RNG(state)
     if current_digest(m)!=before or reference_digest(m)!=c.references['COV']['identity']['adapter_digest']:raise ValueError('Independent reference adapter identity')
 
 
