@@ -1,0 +1,30 @@
+{
+  "version": "medevidence-p5-diagnostic",
+  "seed": 17,
+  "selection_seed": 5101,
+  "sampling_seed": 5102,
+  "formats": ["normalized", "absolute"],
+  "fit_counts": {"single": 8, "multi": 8, "negative": 16},
+  "calibration_counts": {"single": 16, "multi": 16, "negative": 32},
+  "fit_steps": 256,
+  "max_new_tokens": 80,
+  "learning_rate": 0.000005,
+  "gradient_clip": 1.0,
+  "sampling": {"completions": 8, "temperature": 0.7, "top_p": 0.95, "top_k": 0},
+  "prior_GPU_seconds": 1848.6403460502625,
+  "combined_GPU_limit_seconds": 10800,
+  "diagnostic_worker_quota_seconds": 1800,
+  "allowed_gpus": [0, 1, 2],
+  "minimum_free_memory_mib": 24000,
+  "conditional_main": {
+    "steps": 64, "group_size": 4, "negative_RL_patient_weight": 2,
+    "beta": 0.01, "epsilon": 0.2,
+    "lambda": "min(1, 0.25*norm(mean4batch gSFT)/norm(mean4batch weighted_gGRPO)); zero-update calibration",
+    "initialization": "same selected diagnostic final adapter; reset optimizers and RNG",
+    "classification": "separate frozen P3 COV adapter; same image and A prompt for both branches",
+    "selection": "eligible format with greatest calibration greedy single IoU; exact tie prefers normalized",
+    "training_pool": "original P4 train405 excluding calibration64; single,multi,negative,negative",
+    "gate_failure": "stop this round with diagnostic report; no further tuning or new dataset",
+    "budget_failure": "do not launch either main branch unless both plus final evaluation fit remaining budget"
+  }
+}
