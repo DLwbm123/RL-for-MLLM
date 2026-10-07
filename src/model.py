@@ -8,11 +8,21 @@ import os
 import subprocess
 import torch
 from transformers import AutoProcessor, Qwen2_5_VLForConditionalGeneration
-from peft import LoraConfig, get_peft_model, PeftModel
+from peft import LoraConfig, get_peft_model, PeftModel, PeftConfig
 from src.data import QUESTIONS, LABELS, smart_size
 from src.objectives import token_logps
 
 REVISION='cc594898137f460bfe9f0759e9844b3ce807cfb5'
+
+
+def load_frozen_adapter(model,path,name):
+    """Create FP32 LoRA storage before copying FP32 checkpoint values into a BF16 base."""
+    if name in model.peft_config:raise ValueError('Adapter already exists')
+    config=PeftConfig.from_pretrained(path);config.inference_mode=True
+    model.add_adapter(name,config)
+    for n,p in model.named_parameters():
+        if 'lora_' in n and f'.{name}.' in n:p.data=p.data.float()
+    return model.load_adapter(path,adapter_name=name,is_trainable=False,torch_device=str(next(model.parameters()).device))
 
 
 class Model:

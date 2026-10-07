@@ -62,9 +62,10 @@ def main():
     pre=read(out/'preflight/summary.json') if (out/'preflight/summary.json').exists() else {'status':'not_completed'}
     pre.pop('effective_generation_settings',None)
     plan=read(out/'training_plan.json') if (out/'training_plan.json').exists() else None
-    validation={'same_training_initialization':len(identities)==3 and all(v==next(iter(identities.values())) for v in identities.values()),
+    validation={'same_training_initialization':all(v==next(iter(identities.values())) for v in identities.values()) if len(identities)==3 else None,
                 'native_preflight':pre,'frozen_classifier_comparison':answer,'data_access':access,'test_pixels_read':0,
                 'scientific_protocol_deviations':[],'public_push':'pending_completion_delivery_under_current_user_AGENTS' }
+    if (out/'engineering_repair.json').exists():validation['engineering_repair']=read(out/'engineering_repair.json')
     for name,value in [('training',{'branches':training,'plan':plan,'mechanism':mechanism}),
                        ('evaluation',{'status':ledger['status'],'absolute':absolute,'paired_comparisons':comparisons,'engineering_conditions':conditions,
                                       'primary_comparison':'C_NEGABS minus B_GRPO','paired_bootstrap':'2000 patient replicates, seed42; no training-seed uncertainty',

@@ -68,7 +68,10 @@ def controller():
     base=Path(os.environ['PILOT_ROOT']);out=base/'outputs';code=base/'code';cfg=read(code/'configs/medevidence_p6.json')
     assert read(out/'protocol/CPU_checks.json')['status']=='passed'
     if (out/'gpu_ledger.json').exists():raise FileExistsError('P6 already attempted; no budget reset')
-    jobs={};records=[];status={};prior=cfg['prior_GPU_seconds'];limit=cfg['combined_GPU_limit_seconds']
+    previous=out/'engineering_repair.json'
+    repair=read(previous) if previous.exists() else None
+    if repair:assert repair['formal_optimizer_updates']==0 and repair['scientific_settings_changed'] is False
+    jobs={};records=repair['prior_records'] if repair else [];status={};prior=cfg['prior_GPU_seconds'];limit=cfg['combined_GPU_limit_seconds']
     def persist(state='running'):
         now=time.time();charged=sum(r['charged_seconds'] for r in records)+sum(now-j['started'] for j in jobs.values())
         save(out/'gpu_ledger.json',{'status':state,'prior_GPU_seconds':prior,'new_charged_seconds':charged,'combined_GPU_hours':(prior+charged)/3600,
@@ -103,7 +106,7 @@ def controller():
                 j['log'].close();p=out/stage/'summary.json';summary=read(p) if p.exists() else {'status':'failed','reason':'worker exited without summary'}
                 state=summary['status']
                 if proc.returncode and state=='completed':state='failed'
-                records.append({'stage':stage,'status':state,'exit_code':proc.returncode,'charged_seconds':time.time()-j['started']})
+                records.append({'stage':stage,'attempt':'loader_repair' if repair else 'initial','status':state,'exit_code':proc.returncode,'charged_seconds':time.time()-j['started']})
                 status[stage]={'status':state,'reason':summary.get('reason'),'steps':summary.get('steps')};del jobs[stage]
             if evaluate_training:
                 occupied={j['gpu'] for j in jobs.values()}

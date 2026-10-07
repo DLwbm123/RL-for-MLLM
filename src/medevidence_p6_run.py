@@ -11,7 +11,7 @@ import torch
 from PIL import Image
 from src.data import QUESTIONS
 from src.v2 import DevelopmentData,save
-from src.model import Model
+from src.model import Model,load_frozen_adapter
 from src.experiment import seed_all
 from src.medevidence_run import tensor_digest
 from src.medevidence_p2 import enrich,distribution
@@ -250,7 +250,7 @@ def answer_digest(m):
 def evaluate(c):
     name=c.stage[5:]
     if name!='INIT':assert read(c.root/name/'summary.json')['status']=='completed'
-    m=c.model(name,False);m.model.load_adapter(c.refs['ANSWER']['checkpoint_path'],adapter_name='answer',is_trainable=False)
+    m=c.model(name,False);load_frozen_adapter(m.model,c.refs['ANSWER']['checkpoint_path'],'answer')
     assert answer_digest(m)==c.refs['ANSWER']['identity']['adapter_digest']
     m.model.set_adapter('default');m.model.requires_grad_(False);m.set_training(False)
     result={'status':'completed','classifier':'separate frozen P3 COV','test_pixels_read':0};initial_default=current_digest(m)

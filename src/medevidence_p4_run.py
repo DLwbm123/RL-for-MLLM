@@ -11,7 +11,7 @@ import numpy as np
 import pandas as pd
 import torch
 from src.data import QUESTIONS,sha
-from src.model import Model
+from src.model import Model,load_frozen_adapter
 from src.v2 import DevelopmentData,save
 from src.experiment import seed_all,optimizer_snapshot
 from src.medevidence_run import tensor_digest
@@ -86,7 +86,7 @@ def initial_identity(m,opt):
 
 def add_reference(c,m):
     before=current_digest(m);state=RNG();flags={n:p.requires_grad for n,p in m.model.named_parameters()}
-    m.model.load_adapter(c.references['COV']['checkpoint_path'],adapter_name='reference',is_trainable=False)
+    load_frozen_adapter(m.model,c.references['COV']['checkpoint_path'],'reference')
     m.model.set_adapter('default')
     for n,p in m.model.named_parameters():p.requires_grad_(flags.get(n,False))
     set_RNG(state)
