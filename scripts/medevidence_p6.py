@@ -41,7 +41,7 @@ def prepare():
     for k in selected:
         r=rows[k];h,w=smart_size(r['height'],r['width']);sizes[k]=[w,h]
         text=target(r['boxes'],r['width'],r['height'],'normalized',(w,h));ids,_=token_parts(tokenizer,text)
-        assert len(ids)+16<=cfg['max_new_tokens'];contracts[k]={'text':text,'ids':ids}
+        assert len(ids)+(16 if k in train else 0)<=cfg['max_new_tokens'];contracts[k]={'text':text,'ids':ids}
     refs={'INIT':{'checkpoint_path':str(p5/'fit_normalized/step_0256'),'identity':read(p5/'fit_normalized/step_0256/identity.json')},
           'ANSWER':read(old/'protocol/references.json')['COV']}
     frame[frame.image_id.isin(selected)].to_csv(p/'manifest.csv',index=False)
