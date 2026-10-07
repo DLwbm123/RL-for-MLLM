@@ -1,0 +1,154 @@
+{
+  "status": "completed_with_recorded_evaluator_repair",
+  "CPU": {
+    "status": "passed",
+    "patients": 405,
+    "strata": {
+      "single": 71,
+      "multi": 78,
+      "negative": 256
+    },
+    "same_P3_negatives": true,
+    "train_dev_patient_overlap": 0,
+    "development_patients": 256,
+    "train_GT_regions": 235,
+    "all_GT_retained": true,
+    "crop_dep_filter_used": false,
+    "maximum_target_tokens_including_EOS": 50,
+    "max_new_tokens": 80,
+    "historical_cap": 80,
+    "target_lengths_histogram": {
+      "34": 68,
+      "50": 6,
+      "2": 256,
+      "18": 70,
+      "33": 2,
+      "17": 1,
+      "48": 1,
+      "49": 1
+    },
+    "plan256_exposures": 1024,
+    "exposure_histograms": {
+      "single": {
+        "4": 43,
+        "3": 28
+      },
+      "multi": {
+        "4": 22,
+        "3": 56
+      },
+      "negative": {
+        "2": 256
+      }
+    },
+    "old_Ref_overlap": 20,
+    "old_Ref_not_untrained_control": true,
+    "image_identity_checks": 661,
+    "GT_roundtrip_max_pixels": 0.5120000000000005,
+    "test_access_guard_passed": true,
+    "test_pixels_read": 0,
+    "base_and_COV_adapter_identity_exact": true,
+    "historical_results_not_relabelled_as_reassessment": true,
+    "synthetic_unit_tests": "passed"
+  },
+  "SFT_native_no_update_preflight": {
+    "status": "completed",
+    "RL_status": "not_started_gate_failed",
+    "optimizer_updates": 0,
+    "SFT_gradient_norm": 1.3680464029312134,
+    "negative_GRPO_gradient_norm": null,
+    "lambda": null,
+    "actual_initial_gradient_ratio": null,
+    "lambda_cap_reached": null,
+    "mean_SFT_update_seconds": 2.579963743686676,
+    "mean_GRL_update_seconds": null,
+    "old_policy_alignment_checked": false,
+    "reference_calls_verified": 0,
+    "model_optimizer_RNG_restored_exact": true,
+    "visual_merger_gradient_absent": true,
+    "sampling_rng_initial_digest": null,
+    "calibration_rollouts": 0,
+    "runtime_seconds": 16.31194567680359,
+    "test_pixels_read": 0
+  },
+  "actual_adapter_configuration_audit": {
+    "COV": {
+      "r": 16,
+      "alpha": 32,
+      "dropout": 0.0,
+      "PEFT_target_module_suffixes": [
+        "q_proj",
+        "v_proj"
+      ],
+      "adapter_config_sha256": "c2c81c2b7eb44106cabc7a6ac3d7a8e4a1b7a7b757511fc2948b2a1a8841bcbb",
+      "status": "passed"
+    },
+    "COV-A": {
+      "r": 16,
+      "alpha": 32,
+      "dropout": 0.0,
+      "PEFT_target_module_suffixes": [
+        "v_proj",
+        "q_proj"
+      ],
+      "adapter_config_sha256": "42e80e60843d4c44163f31e0aa9cce2fa32dde4b03cb247cdc628722d1ef178b",
+      "status": "passed"
+    },
+    "actual_trainable_tensors": 112,
+    "FULL-SFT_initialization_matches_native_preflight": true,
+    "target_names_scope": "PEFT suffix selectors verified against actual full language self_attn parameter names"
+  },
+  "SFT_initial_identity_matches_preflight": true,
+  "checkpoints_saved": [
+    "step_0000",
+    "step_0064",
+    "step_0128",
+    "step_0256"
+  ],
+  "corrected_evaluation_candidate_labels": {
+    "eval_COV_corrected": [
+      "no",
+      "yes"
+    ],
+    "eval_FULL-SFT_corrected": [
+      "no",
+      "yes"
+    ]
+  },
+  "corrected_evaluation_candidate_token_ids": {
+    "eval_COV_corrected": {
+      "no": [
+        2152
+      ],
+      "yes": [
+        9693
+      ]
+    },
+    "eval_FULL-SFT_corrected": {
+      "no": [
+        2152
+      ],
+      "yes": [
+        9693
+      ]
+    }
+  },
+  "classification_regression_unit_test": "passed against environment-independent explicit no/yes binding",
+  "RL_native_preflight_reference_old_policy_and_calibration": "not_executed_gate_failed",
+  "data_access": {
+    "patient_image_calls_by_split": {
+      "train": 1779,
+      "validation": 1318,
+      "test": 0
+    },
+    "test_pixels_read": 0,
+    "blocked_CPU_sealed_path_probe": 1,
+    "all_access_logs_within_frozen_train_development_whitelist": true
+  },
+  "invalid_evaluation_attempts_preserved": true,
+  "original_training_source_commit": "4385ce3619c35f88265fe092fcee1cb7c1819e7d",
+  "non_scientific_operator_events": [
+    "Source archive transferred and synthetic tests passed; initial metadata display called getmembers after archive close. No transfer repetition or GPU failure resulted.",
+    "A metadata inspection initially assumed full PEFT target-module names; actual q_proj/v_proj suffix selectors were verified against112 full language self_attn tensors. No parameter or training change resulted."
+  ]
+}

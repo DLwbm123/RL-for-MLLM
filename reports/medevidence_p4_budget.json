@@ -1,0 +1,77 @@
+{
+  "status": "completed",
+  "gpu_hours": 0.513511207236184,
+  "GPU_limit_hours": 3,
+  "records": [
+    {
+      "stage": "D1_COV",
+      "status": "completed",
+      "exit_code": 0,
+      "charged_seconds": 82.52645993232727,
+      "result_validity": "accepted"
+    },
+    {
+      "stage": "D1_COV-A",
+      "status": "completed",
+      "exit_code": 0,
+      "charged_seconds": 88.49496817588806,
+      "result_validity": "accepted"
+    },
+    {
+      "stage": "D2",
+      "status": "completed",
+      "exit_code": 0,
+      "charged_seconds": 136.35503721237183,
+      "result_validity": "accepted"
+    },
+    {
+      "stage": "D3",
+      "status": "completed",
+      "exit_code": 0,
+      "charged_seconds": 94.19277048110962,
+      "result_validity": "accepted"
+    },
+    {
+      "stage": "eval_COV",
+      "status": "completed",
+      "exit_code": 0,
+      "charged_seconds": 196.14662146568298,
+      "result_validity": "invalidated_wrong_classification_candidates"
+    },
+    {
+      "stage": "preflight",
+      "status": "completed",
+      "exit_code": 0,
+      "charged_seconds": 22.084670543670654,
+      "result_validity": "accepted"
+    },
+    {
+      "stage": "FULL-SFT",
+      "status": "completed",
+      "exit_code": 0,
+      "charged_seconds": 634.3846559524536,
+      "result_validity": "accepted"
+    },
+    {
+      "stage": "eval_FULL-SFT",
+      "status": "failed",
+      "exit_code": -15,
+      "charged_seconds": 190.11149168014526,
+      "result_validity": "invalidated_wrong_classification_candidates"
+    },
+    {
+      "stage": "eval_COV_corrected",
+      "status": "completed",
+      "exit_code": 0,
+      "charged_seconds": 198.21341180801392,
+      "result_validity": "accepted"
+    },
+    {
+      "stage": "eval_FULL-SFT_corrected",
+      "status": "completed",
+      "exit_code": 0,
+      "charged_seconds": 206.13025879859924,
+      "result_validity": "accepted"
+    }
+  ]
+}

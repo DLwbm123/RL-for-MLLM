@@ -199,7 +199,7 @@ def report():
         'initialization_matches_preflight':all(v==read(root/'preflight/initial_identity.json') for v in initial.values()) if initial else None,'A_coefficient':0,'seed':17})
     records={};folds=read(root/'protocol/folds.json')
     for name in ('COV','FULL-SFT','FULL-GRL'):
-        dest=root/('eval_'+name)
+        dest=root/('eval_'+name+('_corrected' if (root/'evaluation_error.json').exists() else ''))
         if (dest/'summary.json').exists() and read(dest/'summary.json')['status']=='completed':records[name]=lines(dest/'predictions.jsonl')
     absolute={name:{**full_metrics(rs,folds),**extended_summary(rs)} for name,rs in records.items()};comparisons={}
     for a,b in [('FULL-SFT','FULL-GRL'),('COV','FULL-SFT'),('COV','FULL-GRL')]:
@@ -216,7 +216,10 @@ def report():
         'main_comparison_status':'completed' if 'FULL-GRL' in records and 'FULL-SFT' in records else 'not_available_RL_not_completed',
         'historical_P3_reference':{'source_commit':cfg['reference_commit'],'generation_cap':80,'results_not_new_reassessment':True},'formal_generation_cap':cfg['max_new_tokens'],
         'engineering_gate':engineering,'patient_bootstrap':'2000 repeats,seed42,original folds retained and thresholds refit each replicate; no training-seed or independent generalization uncertainty',
-        'success_false_box_curve':{'status':'not_completed','reason':'no prevalidated frozen localization confidence; optional curve not invented'}}
+        'success_false_box_curve':{'status':'not_completed','reason':'no prevalidated frozen localization confidence; optional curve not invented'},
+        'evaluation_repair':read(root/'evaluation_error.json') if (root/'evaluation_error.json').exists() else None}
+    if evaluation['evaluation_repair']:
+        evaluation['evaluation_repair']={k:v for k,v in evaluation['evaluation_repair'].items() if k not in ('signals','time')}
     save(public/'medevidence_p4_evaluation.json',evaluation)
     budget={'status':ledger['status'],'gpu_hours':ledger['gpu_hours'],'GPU_limit_hours':3,'records':[{k:v for k,v in r.items() if k in ('stage','status','charged_seconds','exit_code')} for r in ledger['records']]}
     save(public/'medevidence_p4_budget.json',budget)
@@ -229,7 +232,8 @@ def report():
     document+=f"Cumulative GPU occupancy: {ledger['gpu_hours']:.6f}/3.00 hours; includes loading, diagnostics, sampling, calibration, evaluation, failure attempts and saves.\n\n"
     if training['FULL-GRL']['status']=='not_started_gate_failed':document+='FULL-GRL was not started because a prespecified natural candidate gate failed. This run cannot answer whether geometry RL outperforms SFT; no threshold, prompt, sample count or post-SFT RL retry was changed.\n\n'
     document+='Paired differences, 95% intervals, valid bootstrap counts and new/lost/common successes are in the evaluation JSON. Historical 80-token P3 results are historical references, never relabelled as P4 reassessment. Full SFT changes both coverage and additional training; an improvement cannot be attributed solely to coverage. RL, if executed, adds geometry GRPO and fixed KL together, with greater compute. No independent validation, equal-compute superiority, evidence faithfulness or clinical utility is established.\n\n'
-    document+='Plan versus actual versus incomplete items: planned405 original patients, fixed shared schedule and COV initialization; actual exposure histograms and step freeze in training JSON. Optional intermediate curves, forced-nonempty diagnosis and localization confidence curve were not executed. No sealed test, new dataset, dep, A training or automatic next round. Protocol deviations: none unless a failed/stopped stage explicitly records its reason; aborted stages retain actual counts and are not promoted to main results.\n\n'
+    document+='Plan versus actual versus incomplete items: planned405 original patients, fixed shared schedule and COV initialization; actual exposure histograms and step freeze in training JSON. Optional intermediate curves, forced-nonempty diagnosis and localization confidence curve were not executed. No sealed test, new dataset, dep, A training or automatic next round.\n\n'
+    if evaluation['evaluation_repair']:document+='Recorded engineering deviation: the initial P4 classification evaluator inherited benign/malignant candidate labels because the dataset environment variable was missing. Those classification outputs are invalid and retained privately; the affected in-progress evaluation was stopped. Explicit frozen no/yes candidates were bound at the shared P4 model interface, then COV and FULL-SFT were uniformly re-evaluated. No training, sampling gates, cap, GT, split, hyperparameters or checkpoint selection changed. Both invalid and corrected attempts remain charged to the original cumulative ledger. Original training code is preserved in its local commit; correction source and metadata were separately frozen before corrected GPU evaluation.\n\n'
     document+='Public delivery: local commit prepared; not pushed because no P4-specific public push authorization has been received. Patient identifiers, GT, images, per-patient predictions, checkpoints and raw logs remain private.\n'
     (public/'medevidence_p4_decision.md').write_text(document)
     save(public/'medevidence_p4_status.json',{'overall':ledger['status'],'stages':status,'test_pixels_read':0,'public_push':'not_executed_pending_current_authorization'})

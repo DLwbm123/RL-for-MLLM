@@ -35,6 +35,10 @@ def main():
     assert plan==schedule(dict(reversed(list(rows.items()))),list(reversed(pools['negative'])))[1]
     assert not gate({'positive_best_of8_success':7},{'positive_distinguishable_fraction':1.},{'real_minus_shuffled_mean':1.})['passed']
     assert gate({'positive_best_of8_success':8},{'positive_distinguishable_fraction':.3},{'real_minus_shuffled_mean':.05})['passed']
+    from src.medevidence_p4_run import bind_classification_labels
+    class CandidateModel:
+        def classes(self,inputs=None,features=None,labels=['benign','malignant']):return labels
+    model=CandidateModel();bind_classification_labels(model,['no','yes']);assert model.classes()==['no','yes']
     print('PASS: detached GIoU one-to-one penalties, strict failure denominator, fp32 PPO/KL/mask, fixed405-patient stratified schedule and gate')
 
 

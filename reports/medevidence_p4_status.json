@@ -1,0 +1,62 @@
+{
+  "overall": "completed",
+  "stages": {
+    "CPU": {
+      "status": "passed"
+    },
+    "D1_COV": {
+      "status": "completed",
+      "steps": null,
+      "reason": null
+    },
+    "D1_COV-A": {
+      "status": "completed",
+      "steps": null,
+      "reason": null
+    },
+    "D2": {
+      "status": "completed",
+      "steps": null,
+      "reason": null
+    },
+    "D3": {
+      "status": "completed",
+      "steps": null,
+      "reason": null
+    },
+    "eval_COV": {
+      "status": "invalidated_classification",
+      "reason": "wrong default candidates; original receipts preserved"
+    },
+    "FULL-GRL": {
+      "status": "not_started_gate_failed",
+      "reason": "frozen natural sampling gates failed"
+    },
+    "preflight": {
+      "status": "completed",
+      "steps": null,
+      "reason": null
+    },
+    "FULL-SFT": {
+      "status": "completed",
+      "steps": 256,
+      "reason": null
+    },
+    "eval_FULL-SFT": {
+      "status": "invalidated_classification",
+      "reason": "wrong default candidates; original receipts preserved"
+    },
+    "eval_COV_corrected": {
+      "status": "completed",
+      "patients": 256,
+      "reason": null
+    },
+    "eval_FULL-SFT_corrected": {
+      "status": "completed",
+      "patients": 256,
+      "reason": null
+    }
+  },
+  "test_pixels_read": 0,
+  "public_push": "not_executed_pending_current_authorization"
+}

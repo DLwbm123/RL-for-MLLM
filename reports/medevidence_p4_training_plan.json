@@ -1,0 +1,17 @@
+{
+  "status": "frozen_before_any_formal_optimizer_update",
+  "steps": 256,
+  "RL_enabled": false,
+  "lambda": null,
+  "beta": 0.01,
+  "initialization": "verified P3 COV step256",
+  "training_quotas_seconds": {
+    "FULL-SFT": 1104.6590057373046
+  },
+  "remaining_seconds": 10180.19947218895,
+  "reserved_evaluation_seconds": 540,
+  "safety_exit_seconds": 240,
+  "throughput_safety_factor": 1.4,
+  "calibration": "first4 fixed training minibatches; zero optimizer updates",
+  "diagnostic_actual_seconds": 619.8005278110504
+}

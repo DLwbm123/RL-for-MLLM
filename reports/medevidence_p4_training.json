@@ -1,0 +1,120 @@
+{
+  "branches": {
+    "FULL-SFT": {
+      "status": "completed",
+      "reason": null,
+      "steps": 256,
+      "planned_steps": 256,
+      "SFT_exposures": 1024,
+      "exposure_histograms": {
+        "single": {
+          "4": 43,
+          "3": 28
+        },
+        "multi": {
+          "4": 22,
+          "3": 56
+        },
+        "negative": {
+          "2": 256
+        }
+      },
+      "rollouts": 0,
+      "runtime_seconds": 627.7229242324829,
+      "clip_steps": 251,
+      "peak_memory_gib": 16.453824520111084,
+      "lambda": 0,
+      "beta": 0,
+      "reference_calls_verified": 0,
+      "test_pixels_read": 0,
+      "statistics": {
+        "L_NLL": {
+          "n": 256,
+          "mean": 0.7227673441364075,
+          "quantiles_0_25_50_75_100": [
+            0.601993056741776,
+            0.6749863202312554,
+            0.7045035603223369,
+            0.7576545280098799,
+            1.0712262109154835
+          ]
+        },
+        "gradient_norm_pre_clip": {
+          "n": 256,
+          "mean": 2.912448826013133,
+          "quantiles_0_25_50_75_100": [
+            0.7948934435844421,
+            1.4110218286514282,
+            1.8310532569885254,
+            2.674358606338501,
+            20.135669708251953
+          ]
+        },
+        "update_seconds": {
+          "n": 256,
+          "mean": 2.39970369823277,
+          "quantiles_0_25_50_75_100": [
+            2.331463098526001,
+            2.3886075615882874,
+            2.393240213394165,
+            2.399482846260071,
+            3.247799873352051
+          ]
+        },
+        "J_GRPO": {
+          "n": 0,
+          "mean": null,
+          "quantiles_0_25_50_75_100": null
+        },
+        "KL": {
+          "n": 0,
+          "mean": null,
+          "quantiles_0_25_50_75_100": null
+        },
+        "mean_reward": {
+          "n": 0,
+          "mean": null,
+          "quantiles_0_25_50_75_100": null
+        },
+        "total_objective": {
+          "n": 256,
+          "mean": 0.7227673441364075,
+          "quantiles_0_25_50_75_100": [
+            0.601993056741776,
+            0.6749863202312554,
+            0.7045035603223369,
+            0.7576545280098799,
+            1.0712262109154835
+          ]
+        }
+      }
+    },
+    "FULL-GRL": {
+      "status": "not_started_gate_failed",
+      "steps": 0,
+      "SFT_exposures": 0,
+      "rollouts": 0
+    }
+  },
+  "plan": {
+    "status": "frozen_before_any_formal_optimizer_update",
+    "steps": 256,
+    "RL_enabled": false,
+    "lambda": null,
+    "beta": 0.01,
+    "initialization": "verified P3 COV step256",
+    "training_quotas_seconds": {
+      "FULL-SFT": 1104.6590057373046
+    },
+    "remaining_seconds": 10180.19947218895,
+    "reserved_evaluation_seconds": 540,
+    "safety_exit_seconds": 240,
+    "throughput_safety_factor": 1.4,
+    "calibration": "first4 fixed training minibatches; zero optimizer updates",
+    "diagnostic_actual_seconds": 619.8005278110504
+  },
+  "initialization_exact_equal": null,
+  "initialization_matches_preflight": true,
+  "A_coefficient": 0,
+  "seed": 17
+}

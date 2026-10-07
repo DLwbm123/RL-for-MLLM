@@ -1,0 +1,565 @@
+{
+  "D1_COV": {
+    "status": "completed",
+    "patients": 135,
+    "metrics": {
+      "all_patients": 135,
+      "positive": {
+        "n": 71,
+        "invalid": 0,
+        "valid_empty": 46,
+        "valid_nonempty": 25,
+        "truncated": 0
+      },
+      "negative": {
+        "n": 64,
+        "invalid": 0,
+        "valid_empty": 62,
+        "valid_nonempty": 2,
+        "truncated": 0
+      },
+      "positive_empty_rate": 0.647887323943662,
+      "positive_region_recall": 0.08450704225352113,
+      "GT_regions": 71,
+      "positive_predicted_boxes_known": 25,
+      "single_IoU_unconditional": {
+        "n": 71,
+        "mean": 0.11400088171686111,
+        "quantiles_0_25_50_75_100": [
+          0.0,
+          0.0,
+          0.0,
+          0.1410639543380339,
+          0.8521222281490513
+        ]
+      },
+      "single_IoU_ge_05_count": 6,
+      "single_strict_success_count": 6,
+      "single_IoU_nonempty_supplement": {
+        "n": 25,
+        "mean": 0.3237625040758856,
+        "quantiles_0_25_50_75_100": [
+          0.0,
+          0.13364992056849045,
+          0.30233285028272666,
+          0.46678746679872146,
+          0.8521222281490513
+        ]
+      },
+      "negative_nonempty_rate": 0.03125,
+      "negative_invalid_rate": 0.0,
+      "positive_failure_categories": {
+        "no_valid_prediction": {
+          "patients": 46,
+          "GT_regions": 46,
+          "missed_GT_regions": 46
+        },
+        "nonempty_all_IoU_below_05": {
+          "patients": 19,
+          "GT_regions": 19,
+          "missed_GT_regions": 19
+        },
+        "partial_GT_matches": {
+          "patients": 0,
+          "GT_regions": 0,
+          "missed_GT_regions": 0
+        },
+        "all_GT_with_extras": {
+          "patients": 0,
+          "GT_regions": 0,
+          "missed_GT_regions": 0
+        },
+        "all_GT_without_extras": {
+          "patients": 6,
+          "GT_regions": 6,
+          "missed_GT_regions": 0
+        }
+      },
+      "multi_patient_count": 0,
+      "multi_only_one_prediction": 0,
+      "multi_all_covered": 0,
+      "multi_strict_success": 0,
+      "class_loc_inconsistent_valid_count": null,
+      "class_loc_inconsistent_valid_rate": null,
+      "class_loc_inconsistent_all_patient_denominator": null,
+      "overall_joint_supplement": null,
+      "always_no_empty_joint_reference": 0.4740740740740741,
+      "classification_loc_cross_table": null,
+      "coordinate_diagnostics": {
+        "best_IoU": {
+          "n": 25,
+          "mean": 0.3237625040758856,
+          "quantiles_0_25_50_75_100": [
+            0.0,
+            0.13364992056849045,
+            0.30233285028272666,
+            0.46678746679872146,
+            0.8521222281490513
+          ]
+        },
+        "center_distance_image_diagonal_units": {
+          "n": 25,
+          "mean": 0.08529973585198906,
+          "quantiles_0_25_50_75_100": [
+            0.010012492197250393,
+            0.03853894134508627,
+            0.05415833269220905,
+            0.09276987657639736,
+            0.31383455036053626
+          ]
+        },
+        "width_ratio": {
+          "n": 25,
+          "mean": 1.0981882125579188,
+          "quantiles_0_25_50_75_100": [
+            0.5296442687747036,
+            0.8976897689768977,
+            1.0434782608695652,
+            1.25,
+            1.9262295081967213
+          ]
+        },
+        "height_ratio": {
+          "n": 25,
+          "mean": 0.965351151758472,
+          "quantiles_0_25_50_75_100": [
+            0.45993031358885017,
+            0.7086956521739131,
+            0.8602941176470589,
+            1.1700680272108843,
+            1.7868020304568528
+          ]
+        },
+        "area_ratio": {
+          "n": 25,
+          "mean": 1.0831120406141381,
+          "quantiles_0_25_50_75_100": [
+            0.2435994546280867,
+            0.6857860581955202,
+            0.9974269005847953,
+            1.355696902654867,
+            2.2372110647972714
+          ]
+        }
+      },
+      "template_diagnostic": {
+        "predicted_boxes": 25,
+        "distinct_exact_boxes": 25,
+        "largest_exact_template_count": 1,
+        "normalized_center_width_height_std": [
+          0.1798313365350989,
+          0.11829747926308487,
+          0.06824602552530075,
+          0.08406426113396821
+        ],
+        "interpretation": "Descriptive output spread; insufficient alone to prove a fixed template or explain empty outputs"
+      },
+      "negative_false_positive_boxes": 2,
+      "negative_false_positive_boxes_per_image": 0.03125,
+      "known_predicted_regions_all_patients": 27,
+      "matched_regions": 6,
+      "parse_errors": {},
+      "unknown_prediction_count_patients": 0,
+      "strata": {
+        "single": {
+          "patients": 71,
+          "GT_regions": 71,
+          "matched_regions": 6,
+          "strict_success": 6,
+          "empty": 46,
+          "invalid": 0
+        },
+        "multi": {
+          "patients": 0,
+          "GT_regions": 0,
+          "matched_regions": 0,
+          "strict_success": 0,
+          "empty": 0,
+          "invalid": 0
+        }
+      }
+    },
+    "optimizer_updates": 0,
+    "test_pixels_read": 0,
+    "runtime_seconds": 77.23093748092651
+  },
+  "D1_COV-A": {
+    "status": "completed",
+    "patients": 135,
+    "metrics": {
+      "all_patients": 135,
+      "positive": {
+        "n": 71,
+        "invalid": 0,
+        "valid_empty": 32,
+        "valid_nonempty": 39,
+        "truncated": 0
+      },
+      "negative": {
+        "n": 64,
+        "invalid": 0,
+        "valid_empty": 60,
+        "valid_nonempty": 4,
+        "truncated": 0
+      },
+      "positive_empty_rate": 0.4507042253521127,
+      "positive_region_recall": 0.08450704225352113,
+      "GT_regions": 71,
+      "positive_predicted_boxes_known": 39,
+      "single_IoU_unconditional": {
+        "n": 71,
+        "mean": 0.10592790922622076,
+        "quantiles_0_25_50_75_100": [
+          0.0,
+          0.0,
+          0.0,
+          0.12404668533317878,
+          0.6483183390214858
+        ]
+      },
+      "single_IoU_ge_05_count": 6,
+      "single_strict_success_count": 6,
+      "single_IoU_nonempty_supplement": {
+        "n": 39,
+        "mean": 0.19284311679645322,
+        "quantiles_0_25_50_75_100": [
+          0.0,
+          0.0,
+          0.06937494534536869,
+          0.36134563604423053,
+          0.6483183390214858
+        ]
+      },
+      "negative_nonempty_rate": 0.0625,
+      "negative_invalid_rate": 0.0,
+      "positive_failure_categories": {
+        "no_valid_prediction": {
+          "patients": 32,
+          "GT_regions": 32,
+          "missed_GT_regions": 32
+        },
+        "nonempty_all_IoU_below_05": {
+          "patients": 33,
+          "GT_regions": 33,
+          "missed_GT_regions": 33
+        },
+        "partial_GT_matches": {
+          "patients": 0,
+          "GT_regions": 0,
+          "missed_GT_regions": 0
+        },
+        "all_GT_with_extras": {
+          "patients": 0,
+          "GT_regions": 0,
+          "missed_GT_regions": 0
+        },
+        "all_GT_without_extras": {
+          "patients": 6,
+          "GT_regions": 6,
+          "missed_GT_regions": 0
+        }
+      },
+      "multi_patient_count": 0,
+      "multi_only_one_prediction": 0,
+      "multi_all_covered": 0,
+      "multi_strict_success": 0,
+      "class_loc_inconsistent_valid_count": null,
+      "class_loc_inconsistent_valid_rate": null,
+      "class_loc_inconsistent_all_patient_denominator": null,
+      "overall_joint_supplement": null,
+      "always_no_empty_joint_reference": 0.4740740740740741,
+      "classification_loc_cross_table": null,
+      "coordinate_diagnostics": {
+        "best_IoU": {
+          "n": 39,
+          "mean": 0.19284311679645322,
+          "quantiles_0_25_50_75_100": [
+            0.0,
+            0.0,
+            0.06937494534536869,
+            0.36134563604423053,
+            0.6483183390214858
+          ]
+        },
+        "center_distance_image_diagonal_units": {
+          "n": 39,
+          "mean": 0.1391324201097045,
+          "quantiles_0_25_50_75_100": [
+            0.02053350919838107,
+            0.039404420637411605,
+            0.13275258942860585,
+            0.21980579543498446,
+            0.3445085267449849
+          ]
+        },
+        "width_ratio": {
+          "n": 39,
+          "mean": 1.0140168181610922,
+          "quantiles_0_25_50_75_100": [
+            0.4,
+            0.7336026087600978,
+            0.9644268774703557,
+            1.1725636398176293,
+            1.9344262295081966
+          ]
+        },
+        "height_ratio": {
+          "n": 39,
+          "mean": 0.9236835307415169,
+          "quantiles_0_25_50_75_100": [
+            0.3185840707964602,
+            0.6322748513169074,
+            0.7955182072829131,
+            1.2504571577847439,
+            2.0306122448979593
+          ]
+        },
+        "area_ratio": {
+          "n": 39,
+          "mean": 1.0018007610441413,
+          "quantiles_0_25_50_75_100": [
+            0.12743362831858407,
+            0.41738404443784327,
+            0.7818572728024477,
+            1.3499814987753949,
+            2.792012288786482
+          ]
+        }
+      },
+      "template_diagnostic": {
+        "predicted_boxes": 39,
+        "distinct_exact_boxes": 39,
+        "largest_exact_template_count": 1,
+        "normalized_center_width_height_std": [
+          0.15345758086707637,
+          0.112687005796927,
+          0.0793252693430316,
+          0.08745276173930523
+        ],
+        "interpretation": "Descriptive output spread; insufficient alone to prove a fixed template or explain empty outputs"
+      },
+      "negative_false_positive_boxes": 4,
+      "negative_false_positive_boxes_per_image": 0.0625,
+      "known_predicted_regions_all_patients": 43,
+      "matched_regions": 6,
+      "parse_errors": {},
+      "unknown_prediction_count_patients": 0,
+      "strata": {
+        "single": {
+          "patients": 71,
+          "GT_regions": 71,
+          "matched_regions": 6,
+          "strict_success": 6,
+          "empty": 32,
+          "invalid": 0
+        },
+        "multi": {
+          "patients": 0,
+          "GT_regions": 0,
+          "matched_regions": 0,
+          "strict_success": 0,
+          "empty": 0,
+          "invalid": 0
+        }
+      }
+    },
+    "optimizer_updates": 0,
+    "test_pixels_read": 0,
+    "runtime_seconds": 82.02803421020508
+  },
+  "D2": {
+    "status": "completed",
+    "patients": 57,
+    "rollouts": 456,
+    "sampling_rng_digest": "3240a1564bdcd49bed2d6b8592d9f5ea7bf719f3094dda0667e3bfec2aee7daa",
+    "sampling_settings": {
+      "single": 25,
+      "negative": 32,
+      "completions": 8,
+      "temperature": 0.7,
+      "top_p": 0.95,
+      "top_k": 0,
+      "rng_seed": 1702
+    },
+    "all_empty_group_count": 35,
+    "invalid_output_count": 0,
+    "truncated_output_count": 0,
+    "runtime_seconds": 129.61679363250732,
+    "optimizer_updates": 0,
+    "test_pixels_read": 0,
+    "positive_patients": 25,
+    "negative_patients": 32,
+    "positive_best_of8_success": 6,
+    "positive_greedy_success": 1,
+    "best_single_IoU": {
+      "n": 25,
+      "mean": 0.22058834047716505,
+      "quantiles_0_25_50_75_100": [
+        0.0,
+        0.0,
+        0.02945969307505916,
+        0.36601110944302656,
+        0.9221814959519877
+      ]
+    },
+    "positive_all_empty_groups": 10,
+    "negative_single_nonempty": 25,
+    "negative_completion_denominator": 256,
+    "negative_any_nonempty": 7,
+    "negative_patient_denominator": 32,
+    "GT_best_of8_scope": "candidate diagnostic only; not formal inference",
+    "all_empty_group_count_rate": 0.6140350877192983,
+    "positive_all_empty_groups_rate": 0.4,
+    "negative_single_nonempty_rate": 0.09765625,
+    "negative_any_nonempty_rate": 0.21875
+  },
+  "D3": {
+    "status": "completed",
+    "patients": 64,
+    "rollouts": 256,
+    "sampling_rng_digest": "07610eb64c7cc83445e606363af4560a54b338c68d7bdbeeb231452952352a07",
+    "sampling_settings": {
+      "single": 16,
+      "multi": 16,
+      "negative": 32,
+      "completions": 4,
+      "temperature": 1.0,
+      "top_p": 1.0,
+      "top_k": 0,
+      "rng_seed": 1703
+    },
+    "all_empty_group_count": 31,
+    "invalid_output_count": 0,
+    "truncated_output_count": 0,
+    "runtime_seconds": 89.17084050178528,
+    "optimizer_updates": 0,
+    "test_pixels_read": 0,
+    "positive_distinguishable_fraction": 0.8125,
+    "strata": {
+      "single": {
+        "patients": 16,
+        "mean_reward_variance": 0.11563308693094085,
+        "distinguishable_count": 14,
+        "all_same_reward_count": 2,
+        "all_empty_count": 2,
+        "rewards": {
+          "n": 64,
+          "mean": -0.6313811655784454,
+          "quantiles_0_25_50_75_100": [
+            -1.0,
+            -1.0,
+            -1.0,
+            -0.3652492071028526,
+            0.8475832350067933
+          ]
+        },
+        "best_matched_regions_mean": 0.125,
+        "invalid_outputs": 0,
+        "truncated_outputs": 0
+      },
+      "multi": {
+        "patients": 16,
+        "mean_reward_variance": 0.035816963537303334,
+        "distinguishable_count": 12,
+        "all_same_reward_count": 4,
+        "all_empty_count": 4,
+        "rewards": {
+          "n": 64,
+          "mean": -0.7575644359573328,
+          "quantiles_0_25_50_75_100": [
+            -1.0,
+            -1.0,
+            -0.8370132539104344,
+            -0.5151219669070579,
+            -0.26709090363291454
+          ]
+        },
+        "best_matched_regions_mean": 0.0625,
+        "invalid_outputs": 0,
+        "truncated_outputs": 0
+      },
+      "negative": {
+        "patients": 32,
+        "mean_reward_variance": 0.171875,
+        "distinguishable_count": 7,
+        "all_same_reward_count": 25,
+        "all_empty_count": 25,
+        "rewards": {
+          "n": 128,
+          "mean": 0.84375,
+          "quantiles_0_25_50_75_100": [
+            -1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "best_matched_regions_mean": 0.0,
+        "invalid_outputs": 0,
+        "truncated_outputs": 0
+      }
+    },
+    "positive_mean_within_group_reward_variance": 0.07572502523412208,
+    "positive_distinguishable_count": 26,
+    "positive_groups": 32
+  },
+  "preflight": {
+    "status": "completed",
+    "RL_status": "not_started_gate_failed",
+    "optimizer_updates": 0,
+    "SFT_gradient_norm": 1.3680464029312134,
+    "negative_GRPO_gradient_norm": null,
+    "lambda": null,
+    "actual_initial_gradient_ratio": null,
+    "lambda_cap_reached": null,
+    "mean_SFT_update_seconds": 2.579963743686676,
+    "mean_GRL_update_seconds": null,
+    "old_policy_alignment_checked": false,
+    "reference_calls_verified": 0,
+    "model_optimizer_RNG_restored_exact": true,
+    "visual_merger_gradient_absent": true,
+    "sampling_rng_initial_digest": null,
+    "calibration_rollouts": 0,
+    "runtime_seconds": 16.31194567680359,
+    "test_pixels_read": 0
+  },
+  "D4": {
+    "real_mean_best_single_IoU": 0.22058834047716505,
+    "shuffled_mean": 0.08163280224032607,
+    "real_minus_shuffled_mean": 0.13895553823683898,
+    "shuffled_distribution": {
+      "n": 1000,
+      "mean": 0.08163280224032607,
+      "quantiles_0_25_50_75_100": [
+        0.017518103941444544,
+        0.06428369575346429,
+        0.08115013476939334,
+        0.09706996985457961,
+        0.17074858834067233
+      ]
+    },
+    "repeats": 1000,
+    "seed": 42,
+    "self_pairings": 0
+  },
+  "gate": {
+    "passed": false,
+    "values": {
+      "D2_best_of8_success": 6,
+      "D3_positive_distinguishable_fraction": 0.8125,
+      "D4_real_minus_shuffle_IoU": 0.13895553823683898
+    },
+    "component_passed": [
+      false,
+      true,
+      true
+    ],
+    "thresholds": [
+      8,
+      0.3,
+      0.05
+    ],
+    "scope": "R&D resource allocation only; no statistical or clinical interpretation"
+  }
+}

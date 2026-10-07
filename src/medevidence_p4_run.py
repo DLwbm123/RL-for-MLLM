@@ -1,6 +1,7 @@
 """Native P4 workers: natural diagnostics, full SFT and gated geometry GRPO."""
 from collections import Counter
 from contextlib import contextmanager
+from functools import partial
 import json
 import os
 from pathlib import Path
@@ -21,6 +22,9 @@ from src.medevidence_p2 import distribution
 
 
 def read(p):return json.loads(Path(p).read_text())
+def bind_classification_labels(model,labels):
+    if list(labels)!=['no','yes']:raise ValueError('P4 requires explicit frozen no/yes candidate order')
+    model.classes=partial(model.classes,labels=list(labels))
 def current_digest(m):return tensor_digest({n:p for n,p in m.model.named_parameters() if 'lora_' in n and '.default.' in n})
 def reference_digest(m):return tensor_digest({n.replace('.reference.','.default.'):p for n,p in m.model.named_parameters() if 'lora_' in n and '.reference.' in n})
 def parameters(m):return [p for p in m.model.parameters() if p.requires_grad]
@@ -34,7 +38,7 @@ class Context:
         self.stage=os.environ['JOB_STAGE'];self.deadline=float(os.environ['JOB_DEADLINE']);self.cfg=read(self.code/'configs/medevidence_p4.json');auth=read(self.root/'authorization.json')
         if not auth['gpu_authorized'] or auth['gpu_hours_limit']!=3 or auth['allowed_gpus']!=[0,1,2]:raise PermissionError('Current P4 resource receipt required before CUDA')
         if self.cfg['max_new_tokens']>256 or self.cfg['answer_coefficient']!=0 or self.cfg['optimizer']['lr']!=5e-6:raise PermissionError('Frozen P4 task/length/lr')
-        lock=read(self.p/'lock.json')
+        lock=read(self.p/('evaluation_fix_lock.json' if self.stage.endswith('_corrected') else 'lock.json'))
         for path,digest in lock['code_hashes'].items():
             if sha((self.code/path).read_bytes())!=digest:raise ValueError('Frozen code changed '+path)
         for path,digest in lock['protocol_hashes'].items():
@@ -67,6 +71,7 @@ class Context:
         if current_digest(m)!=identity['adapter_digest']:raise ValueError('Actual initialization/final adapter identity mismatch')
         if m.processor.tokenizer.eos_token_id!=self.identity['eos_id'] or {x:m.processor.tokenizer.encode(x,add_special_tokens=False) for x in ('no','yes')}!=self.identity['label_ids']:raise ValueError('Tokenizer identity')
         if trainable and (sum(p.numel() for p in parameters(m))!=5046272 or any('lora_' not in n or '.visual.' in n for n,p in m.model.named_parameters() if p.requires_grad)):raise ValueError('Language q/v LoRA scope changed')
+        bind_classification_labels(m,self.cfg['label_order'])
         self.current_model_identity=identity['adapter_digest'];self.tick();return m
 
 
@@ -288,14 +293,17 @@ def train(c):
 
 
 def evaluate(c):
-    name=c.stage[5:]
+    name=c.stage[5:].removesuffix('_corrected')
     if name!='COV' and read(c.root/name/'summary.json')['status']!='completed':raise PermissionError('No preregistered final checkpoint')
     m=c.model(name);records=[]
     with evaluating(m),(c.dest/'predictions.jsonl').open('x') as out:
         for k in c.sets['dev']:
             record=measure(c,m,k,'development_P4_shared_cap',True,False,False);records.append(record);out.write(json.dumps(record)+'\n');out.flush()
             print(json.dumps({'stage':c.stage,'patients':len(records),'runtime_seconds':time.time()-c.started}),flush=True)
-    save(c.dest/'summary.json',{'status':'completed','patients':len(records),'metrics':extended_summary(records),'max_new_tokens':c.cfg['max_new_tokens'],'greedy':True,'test_pixels_read':0,'runtime_seconds':time.time()-c.started})
+    save(c.dest/'summary.json',{'status':'completed','patients':len(records),'metrics':extended_summary(records),'max_new_tokens':c.cfg['max_new_tokens'],'greedy':True,'candidate_labels':c.cfg['label_order'],'candidate_token_ids':self_label_ids(m),'test_pixels_read':0,'runtime_seconds':time.time()-c.started})
+
+
+def self_label_ids(m):return {label:m.processor.tokenizer.encode(label,add_special_tokens=False) for label in ('no','yes')}
 
 
 def main():
