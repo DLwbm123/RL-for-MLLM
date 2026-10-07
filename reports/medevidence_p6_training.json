@@ -1,0 +1,27 @@
+{
+  "branches": {
+    "A_SFT": {
+      "status": "blocked",
+      "reason": "native preflight or initialization evaluation incomplete",
+      "steps": 0,
+      "SFT_exposures": 0,
+      "rollouts": 0
+    },
+    "B_GRPO": {
+      "status": "blocked",
+      "reason": "native preflight or initialization evaluation incomplete",
+      "steps": 0,
+      "SFT_exposures": 0,
+      "rollouts": 0
+    },
+    "C_NEGABS": {
+      "status": "blocked",
+      "reason": "native preflight or initialization evaluation incomplete",
+      "steps": 0,
+      "SFT_exposures": 0,
+      "rollouts": 0
+    }
+  },
+  "plan": null,
+  "mechanism": {}
+}

@@ -128,6 +128,10 @@ def rollout(c,m,k,audit=False):
                 delta=(r['old'].cpu()-torch.tensor(r['generation_logps'])).abs()
                 r['generation_replay_error_max']=float(delta.max());r['generation_replay_error_mean']=float(delta.mean())
                 if delta.max()>c.cfg['generation_replay_max_logprob_error'] or delta.mean()>c.cfg['generation_replay_mean_logprob_error']:
+                    save(c.dest/'probability_alignment_failure.json',{'max_absolute_error':float(delta.max()),
+                        'mean_absolute_error':float(delta.mean()),'completion_tokens':len(r['tokens']),
+                        'max_tolerance':c.cfg['generation_replay_max_logprob_error'],
+                        'mean_tolerance':c.cfg['generation_replay_mean_logprob_error']})
                     raise ValueError('Generation/replay log probabilities exceed frozen bf16 tolerance')
     with reference(c,m):
         for r in samples:

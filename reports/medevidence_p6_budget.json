@@ -1,0 +1,44 @@
+{
+  "status": "blocked",
+  "prior_GPU_seconds": 3194.967115879059,
+  "new_charged_seconds": 360.46551394462585,
+  "combined_GPU_hours": 0.9876201749510235,
+  "limit_seconds": 10800,
+  "records": [
+    {
+      "stage": "preflight",
+      "status": "failed",
+      "exit_code": 1,
+      "charged_seconds": 12.16762375831604,
+      "attempt": "initial"
+    },
+    {
+      "stage": "eval_INIT",
+      "status": "failed",
+      "exit_code": 1,
+      "charged_seconds": 12.008746862411499,
+      "attempt": "initial"
+    },
+    {
+      "stage": "preflight",
+      "attempt": "loader_repair",
+      "status": "failed",
+      "exit_code": 1,
+      "charged_seconds": 24.164782762527466
+    },
+    {
+      "stage": "eval_INIT",
+      "attempt": "loader_repair",
+      "status": "completed",
+      "exit_code": 0,
+      "charged_seconds": 286.1130392551422
+    },
+    {
+      "stage": "preflight",
+      "attempt": "sampling_repair",
+      "status": "failed",
+      "exit_code": 1,
+      "charged_seconds": 26.011321306228638
+    }
+  ]
+}

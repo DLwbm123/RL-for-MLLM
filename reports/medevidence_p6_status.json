@@ -1,0 +1,23 @@
+{
+  "eval_INIT": {
+    "status": "completed",
+    "reason": "retained identical greedy evaluator from prior engineering attempt"
+  },
+  "preflight": {
+    "status": "failed",
+    "reason": "Generation/replay log probabilities exceed frozen bf16 tolerance",
+    "steps": null
+  },
+  "A_SFT": {
+    "status": "blocked",
+    "reason": "native preflight or initialization evaluation incomplete"
+  },
+  "B_GRPO": {
+    "status": "blocked",
+    "reason": "native preflight or initialization evaluation incomplete"
+  },
+  "C_NEGABS": {
+    "status": "blocked",
+    "reason": "native preflight or initialization evaluation incomplete"
+  }
+}

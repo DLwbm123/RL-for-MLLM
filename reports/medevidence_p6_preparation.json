@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "train_pool": {
+    "single": 55,
+    "multi": 62,
+    "negative": 224
+  },
+  "calibration_patients": 64,
+  "development_patients": 256,
+  "new_update_calibration_overlap": 0,
+  "planned_steps": 64,
+  "SFT_exposures_per_branch": 256,
+  "RL_rollouts_per_branch": 1024,
+  "distinct_scheduled_train_patients": 245,
+  "exposure_histogram": {
+    "2": 11,
+    "1": 234
+  },
+  "max_target_length": 66,
+  "prior_GPU_seconds": 3194.967115879059,
+  "source_commit": "490cb45fce93bf4473aee35641524b4453a4614d",
+  "test_pixels_read": 0,
+  "unit_tests": "passed"
+}

@@ -1,0 +1,83 @@
+{
+  "execution_source_commit": "2f8bbb0a65ccae415d8dc9da8f573e4e61186acc",
+  "same_training_initialization": null,
+  "native_preflight": {
+    "status": "failed",
+    "reason": "Generation/replay log probabilities exceed frozen bf16 tolerance",
+    "exception_type": "ValueError",
+    "test_pixels_read": 0,
+    "runtime_seconds": 19.545780181884766
+  },
+  "frozen_classifier_comparison": {
+    "INIT": {
+      "patients": 256,
+      "max_token_score_absolute_difference_from_INIT": 0.0,
+      "exact_equal": true
+    }
+  },
+  "data_access": {
+    "eval_INIT": {
+      "validation": 256,
+      "train": 64
+    },
+    "preflight": {
+      "train": 16
+    },
+    "attempts/loader_repair/preflight": {
+      "train": 16
+    }
+  },
+  "test_pixels_read": 0,
+  "scientific_protocol_deviations": [],
+  "public_push": "pending_completion_delivery_under_current_user_AGENTS",
+  "engineering_repair": {
+    "reason": "PEFT secondary adapter rounded FP32 checkpoint through BF16; preserve FP32 before copy and restore model mode",
+    "formal_optimizer_updates": 0,
+    "scientific_settings_changed": false,
+    "source_commit": "2f8bbb0a65ccae415d8dc9da8f573e4e61186acc",
+    "prior_source_commit": "490cb45fce93bf4473aee35641524b4453a4614d",
+    "prior_records": [
+      {
+        "stage": "preflight",
+        "status": "failed",
+        "exit_code": 1,
+        "charged_seconds": 12.16762375831604,
+        "attempt": "initial"
+      },
+      {
+        "stage": "eval_INIT",
+        "status": "failed",
+        "exit_code": 1,
+        "charged_seconds": 12.008746862411499,
+        "attempt": "initial"
+      },
+      {
+        "stage": "preflight",
+        "attempt": "loader_repair",
+        "status": "failed",
+        "exit_code": 1,
+        "charged_seconds": 24.164782762527466
+      },
+      {
+        "stage": "eval_INIT",
+        "attempt": "loader_repair",
+        "status": "completed",
+        "exit_code": 0,
+        "charged_seconds": 286.1130392551422
+      }
+    ],
+    "CPU_regression": "passed",
+    "CPU_reproduction": {
+      "status": "reproduced_on_CPU",
+      "raw_secondary_adapter_max_error": 0.005609989166259766,
+      "FP32_before_copy_max_error": 0.0,
+      "test_cuda_initialized": false
+    },
+    "attempt": "sampling_repair",
+    "reuse_initial_evaluation": true,
+    "sampling_repair": "Explicit repetition_penalty=1 instead of inherited1.05; use_model_defaults=False; real CPU generate config regression passed",
+    "initial_evaluator_unchanged": "Qwen model generation config is4.37; legacy token fallback plus same greedy settings; completed INIT retained"
+  },
+  "failed_probability_error_details": null,
+  "failed_probability_error_note": "Numeric differences were not persisted by the attempted runtime; no additional GPU attempt was made to recover them."
+}

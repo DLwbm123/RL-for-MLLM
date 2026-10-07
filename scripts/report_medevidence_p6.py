@@ -55,17 +55,21 @@ def main():
         conditions={'C_vs_B':check(c,b,min(a['negative']['valid_nonempty'],b['negative']['valid_nonempty'])),
                     'B_vs_A':check(b,a,a['negative']['valid_nonempty'])}
     access={}
-    for path in out.glob('*/data_access.jsonl'):
+    for path in list(out.glob('*/data_access.jsonl'))+list(out.glob('attempts/*/*/data_access.jsonl')):
         counts={}
         for r in lines(path):counts[r['split']]=counts.get(r['split'],0)+1
-        assert set(counts)<= {'train','validation'};access[path.parent.name]=counts
+        assert set(counts)<= {'train','validation'};access[str(path.parent.relative_to(out))]=counts
     pre=read(out/'preflight/summary.json') if (out/'preflight/summary.json').exists() else {'status':'not_completed'}
     pre.pop('effective_generation_settings',None)
     plan=read(out/'training_plan.json') if (out/'training_plan.json').exists() else None
-    validation={'same_training_initialization':all(v==next(iter(identities.values())) for v in identities.values()) if len(identities)==3 else None,
+    validation={'execution_source_commit':read(out/'authorization.json')['source_commit'],'same_training_initialization':all(v==next(iter(identities.values())) for v in identities.values()) if len(identities)==3 else None,
                 'native_preflight':pre,'frozen_classifier_comparison':answer,'data_access':access,'test_pixels_read':0,
                 'scientific_protocol_deviations':[],'public_push':'pending_completion_delivery_under_current_user_AGENTS' }
     if (out/'engineering_repair.json').exists():validation['engineering_repair']=read(out/'engineering_repair.json')
+    if 'Generation/replay' in pre.get('reason',''):
+        failure=out/'preflight/probability_alignment_failure.json'
+        validation['failed_probability_error_details']=read(failure) if failure.exists() else None
+        validation['failed_probability_error_note']='Numeric differences were not persisted by the attempted runtime; no additional GPU attempt was made to recover them.' if not failure.exists() else 'Native failure receipt'
     for name,value in [('training',{'branches':training,'plan':plan,'mechanism':mechanism}),
                        ('evaluation',{'status':ledger['status'],'absolute':absolute,'paired_comparisons':comparisons,'engineering_conditions':conditions,
                                       'primary_comparison':'C_NEGABS minus B_GRPO','paired_bootstrap':'2000 patient replicates, seed42; no training-seed uncertainty',
@@ -82,7 +86,10 @@ def main():
     document+='\n| 同协议完整开发评价 | 单框严格 | 匹配GT区域 | 阴性出框 | 阴性假阳性框 | 多框严格 | 分类AP |\n|---|---:|---:|---:|---:|---:|---:|\n'
     for name,v in absolute.items():
         m=v['development'];document+=f"| {name} | {m['single_strict_success_count']}/25 | {m['matched_regions']}/51 | {m['negative']['valid_nonempty']}/219 | {m['negative_false_positive_boxes']} | {m['multi_strict_success']}/12 | {m['A_raw_ap']:.6f} |\n"
-    document+='\n主比较与辅助比较的患者配对差值、95%区间、有效重复次数及新/丢失成功计数在evaluation JSON中。\n\n'
+    document+=('\n主比较与辅助比较的患者配对差值、95%区间、有效重复次数及新/丢失成功计数在evaluation JSON中。\n\n' if comparisons else
+               '\n三组正式训练均未启动；C−B/B−A等方法差值、置信区间、训练初始身份一致性及方向性门槛均NA，不能由INIT的结果判断RL收益。\n\n')
+    if 'Generation/replay' in pre.get('reason',''):
+        document+=f"原生预检失败：{pre.get('reason','unknown')}。冻结的生成/replay最大绝对log概率误差容差{cfg['generation_replay_max_logprob_error']}、completion均值误差容差{cfg['generation_replay_mean_logprob_error']}至少一项超界。实际误差值未被该次运行持久化，记NA；未放宽容差或追加GPU诊断。后续源码增加失败时数值留存，此日志改进未经新增GPU执行。\n\n"
     if 'C_NEGABS minus B_GRPO' in comparisons:
         for metric in ('single_strict_success_rate','region_recall','negative_nonempty_rate','single_mean_IoU'):
             v=comparisons['C_NEGABS minus B_GRPO']['development'][metric]

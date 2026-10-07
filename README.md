@@ -53,3 +53,9 @@ v2已结束P0、P1、P3、P4。P1在step256首次达到32/32，但未满足连�
 见[完整科学结果](reports/rsna_v2_completion.md)、[冻结协议](reports/rsna_v2_protocol.md)、[运行聚合](reports/rsna_v2_results.json)、[奖励分布](reports/rsna_v2_reward_distribution.json)、[执行溯源与检查](reports/rsna_v2_provenance.json)。v1结果保持原样。
 
 本轮完成后不重启。对既有私有记录复算P4分布可设置`P4_GROUPS_FILE`及`P4_SUMMARY_FILE`，以中性stdin入口运行`scripts/summarize_rsna_v2_groups.py`；它只读取冻结记录、输出聚合统计，不加载模型或进行采样。
+
+## MedEvidence P4–P6
+
+P4完成完整框SFT，RL未通过启动门槛；P5完成两个坐标接口诊断，未启动主RL对照。P6实现SFT、标准GRPO和阴性绝对优势三组对照，但在生成/replay概率一致性检查处停止，三组正式更新均0步，不能报告RL收益。
+
+见[P4结果](reports/medevidence_p4_decision.md)、[P5结果](reports/medevidence_p5_decision.md)、[P6冻结方案](reports/medevidence_p6_protocol.md)、[P6实际结果与失败说明](reports/medevidence_p6_decision.md)、[P6预算](reports/medevidence_p6_budget.json)及[原生检查与工程修复](reports/medevidence_p6_validation.json)。P6执行源码为`2f8bbb0`；之后新增的失败数值日志代码未执行新的GPU诊断。测试集仍封存。
