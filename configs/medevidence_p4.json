@@ -1,0 +1,143 @@
+{
+  "dataset": "rsna",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "revision": "cc594898137f460bfe9f0759e9844b3ce807cfb5",
+  "seed": 17,
+  "min_visual_tokens": 576,
+  "max_visual_tokens": 1024,
+  "label_order": [
+    "no",
+    "yes"
+  ],
+  "lora": {
+    "r": 16,
+    "alpha": 32,
+    "dropout": 0.0,
+    "targets": "language q_proj/v_proj only"
+  },
+  "prompts": {
+    "A": "Does this chest radiograph contain lung opacity suspicious for pneumonia? Answer with exactly one label: no or yes.",
+    "L": "Locate any lung opacity suspicious for pneumonia in this chest radiograph. Return only a JSON list of bounding boxes [[x1,y1,x2,y2],...], with coordinates normalized to 0–1000. Return [] when no target finding is visible.",
+    "C": "Does the visible region contain lung opacity suspicious for pneumonia? Answer with exactly one label: no or yes."
+  },
+  "numeric_tolerance": {
+    "token_logprob_atol": 0.001,
+    "token_logprob_rtol": 0.001,
+    "RNG_and_adapter_identity": "exact",
+    "gradient_relative_L2": 0.015625,
+    "gradient_scaled_max_absolute": 0.015625,
+    "reason": "two bf16 epsilon; historical actual repeated-backward discrepancy .006211, fixed before native pilot3 check"
+  },
+  "classification_threshold": 0.5,
+  "max_parsed_boxes": 64,
+  "version": "medevidence-p4",
+  "reference_commit": "1aef482396f2ac068e982eeb2d4e2bb95a2d6887",
+  "initialization": "verified frozen P3 COV step256",
+  "optimizer": {
+    "lr": 5e-06,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eps": 1e-08,
+    "weight_decay": 0.01
+  },
+  "gradient_clip": 1.0,
+  "answer_coefficient": 0.0,
+  "gpu_hours_limit": 3.0,
+  "allowed_gpus": [
+    0,
+    1,
+    2
+  ],
+  "max_concurrent_gpus": 3,
+  "single_gpu_per_job": true,
+  "minimum_free_memory_mib": 24000,
+  "max_new_tokens": 80,
+  "steps": "frozen_before_training_256_or128",
+  "checkpoints": [
+    0,
+    64,
+    128,
+    256
+  ],
+  "patients": {
+    "single": 71,
+    "multi": 78,
+    "negative": 256
+  },
+  "schedule": "Independent seed17 cycling permutations for each stratum; single,multi,negative,negative; original full-image inputs",
+  "D1": {
+    "single": 71,
+    "negative": 64,
+    "seed": 17
+  },
+  "D2": {
+    "single": 25,
+    "negative": 32,
+    "completions": 8,
+    "temperature": 0.7,
+    "top_p": 0.95,
+    "top_k": 0,
+    "rng_seed": 1702
+  },
+  "D3": {
+    "single": 16,
+    "multi": 16,
+    "negative": 32,
+    "completions": 4,
+    "temperature": 1.0,
+    "top_p": 1.0,
+    "top_k": 0,
+    "rng_seed": 1703
+  },
+  "RL": {
+    "completions": 4,
+    "temperature": 1.0,
+    "top_p": 1.0,
+    "top_k": 0,
+    "epsilon": 0.2,
+    "beta": 0.01,
+    "group_std_ddof": 0,
+    "zero_advantage_std": 1e-06,
+    "sampling_rng_seed": 1704,
+    "lambda_rule": "min(1,0.25*norm(mean4batch gSFT)/norm(mean4batch gNegativeGRPO)); one train-only no-update calibration",
+    "KL": "d=log_pi_ref-log_pi_current; exp(d)-d-1; token mean, completion mean, patient mean",
+    "reference": "fixed initial COV independent PEFT reference adapter",
+    "old_policy": "sampling-time current policy detached raw token logprobs; never reference logprobs"
+  },
+  "gates": {
+    "best_of8_success_min": 8,
+    "positive_reward_distinguishable_min": 0.3,
+    "real_minus_shuffle_IoU_min": 0.05
+  },
+  "D4": {
+    "repeats": 1000,
+    "seed": 42,
+    "self_pairings": false
+  },
+  "bootstrap": {
+    "repeats": 2000,
+    "seed": 42,
+    "unit": "patient; refit frozen5fold specificity thresholds each weighted replicate"
+  },
+  "budget": {
+    "diagnostics_seconds": 1620,
+    "SFT_seconds": 1620,
+    "GRL_seconds": 5040,
+    "evaluation_seconds": 1620,
+    "buffer_seconds": 900,
+    "limit_seconds": 10800,
+    "freeze_reallocation_before_training": true,
+    "throughput_safety_factor": 1.4
+  },
+  "optional_diagnostics": {
+    "intermediate_learning_curve": "not planned; preserve main budget",
+    "forced_nonempty": "not planned; natural gates only",
+    "success_false_box_curve": "not planned; no prevalidated scalar localization confidence available"
+  },
+  "publication": "requires current explicit authorization; otherwise local commit only",
+  "test_access": "sealed; narrowed whitelist selected405train+same256development",
+  "main_inference": "greedy; shared audited cap; original L prompt; strict historical parser and matching",
+  "longest_training_target_including_EOS": 50
+}

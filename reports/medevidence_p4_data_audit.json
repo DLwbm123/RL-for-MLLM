@@ -1,0 +1,51 @@
+{
+  "status": "passed",
+  "patients": 405,
+  "strata": {
+    "single": 71,
+    "multi": 78,
+    "negative": 256
+  },
+  "same_P3_negatives": true,
+  "train_dev_patient_overlap": 0,
+  "development_patients": 256,
+  "train_GT_regions": 235,
+  "all_GT_retained": true,
+  "crop_dep_filter_used": false,
+  "maximum_target_tokens_including_EOS": 50,
+  "max_new_tokens": 80,
+  "historical_cap": 80,
+  "target_lengths_histogram": {
+    "34": 68,
+    "50": 6,
+    "2": 256,
+    "18": 70,
+    "33": 2,
+    "17": 1,
+    "48": 1,
+    "49": 1
+  },
+  "plan256_exposures": 1024,
+  "exposure_histograms": {
+    "single": {
+      "4": 43,
+      "3": 28
+    },
+    "multi": {
+      "4": 22,
+      "3": 56
+    },
+    "negative": {
+      "2": 256
+    }
+  },
+  "old_Ref_overlap": 20,
+  "old_Ref_not_untrained_control": true,
+  "image_identity_checks": 661,
+  "GT_roundtrip_max_pixels": 0.5120000000000005,
+  "test_access_guard_passed": true,
+  "test_pixels_read": 0,
+  "base_and_COV_adapter_identity_exact": true,
+  "historical_results_not_relabelled_as_reassessment": true,
+  "synthetic_unit_tests": "passed"
+}
