@@ -111,7 +111,7 @@ def rollout(c,m,k,audit=False):
     try:
         for _ in range(4):
             c.tick();text,tokens=m.generate(inp,feat,max_tokens=c.cfg['max_new_tokens'],sample=True,diagnostic=audit,
-                sampling_config={x:settings[x] for x in ('temperature','top_p','top_k')}|{'max_new_tokens':c.cfg['max_new_tokens']})
+                sampling_config={x:settings[x] for x in ('temperature','top_p','top_k')}|{'max_new_tokens':c.cfg['max_new_tokens'],'repetition_penalty':1.})
             check_generation(m.last_generation_settings,c.cfg)
             if not tokens:raise ValueError('Empty completion token sequence')
             truncated=len(tokens)>=c.cfg['max_new_tokens'] and tokens[-1]!=m.processor.tokenizer.eos_token_id

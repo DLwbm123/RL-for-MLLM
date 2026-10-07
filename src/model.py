@@ -134,12 +134,13 @@ class Model:
                 if sample:
                     cfg=sampling_config or {'temperature':1.,'top_p':.95,'top_k':0,'max_new_tokens':max_tokens}
                     kwargs.update({k:cfg[k] for k in ['temperature','top_p','top_k','max_new_tokens']})
+                    if 'repetition_penalty' in cfg:kwargs['repetition_penalty']=cfg['repetition_penalty']
                 if diagnostic:kwargs.update(return_dict_in_generate=True,output_scores=True)
                 effective=deepcopy(self.model.generation_config)
                 unused=effective.update(**kwargs)
                 if unused:raise ValueError('Unrecognized generation settings: '+str(unused))
                 self.last_generation_settings=effective.to_dict()
-                output=self.model.generate(**inputs,generation_config=effective)
+                output=self.model.generate(**inputs,generation_config=effective,use_model_defaults=False)
         finally:
             self.generating=False
             self.set_training(before)

@@ -72,6 +72,9 @@ def controller():
     repair=read(previous) if previous.exists() else None
     if repair:assert repair['formal_optimizer_updates']==0 and repair['scientific_settings_changed'] is False
     jobs={};records=repair['prior_records'] if repair else [];status={};prior=cfg['prior_GPU_seconds'];limit=cfg['combined_GPU_limit_seconds']
+    if repair and repair.get('reuse_initial_evaluation'):
+        assert read(out/'eval_INIT/summary.json')['status']=='completed'
+        status['eval_INIT']={'status':'completed','reason':'retained identical greedy evaluator from prior engineering attempt'}
     def persist(state='running'):
         now=time.time();charged=sum(r['charged_seconds'] for r in records)+sum(now-j['started'] for j in jobs.values())
         save(out/'gpu_ledger.json',{'status':state,'prior_GPU_seconds':prior,'new_charged_seconds':charged,'combined_GPU_hours':(prior+charged)/3600,
@@ -106,7 +109,7 @@ def controller():
                 j['log'].close();p=out/stage/'summary.json';summary=read(p) if p.exists() else {'status':'failed','reason':'worker exited without summary'}
                 state=summary['status']
                 if proc.returncode and state=='completed':state='failed'
-                records.append({'stage':stage,'attempt':'loader_repair' if repair else 'initial','status':state,'exit_code':proc.returncode,'charged_seconds':time.time()-j['started']})
+                records.append({'stage':stage,'attempt':repair.get('attempt','loader_repair') if repair else 'initial','status':state,'exit_code':proc.returncode,'charged_seconds':time.time()-j['started']})
                 status[stage]={'status':state,'reason':summary.get('reason'),'steps':summary.get('steps')};del jobs[stage]
             if evaluate_training:
                 occupied={j['gpu'] for j in jobs.values()}
@@ -123,7 +126,8 @@ def controller():
         from scripts.report_medevidence_p6 import main
         main()
     persist();launch('preflight',0,cfg['preflight_quota_seconds'],reserve=3*cfg['evaluation_quota_seconds']+cfg['exit_reserve_seconds'])
-    launch('eval_INIT',1,cfg['evaluation_quota_seconds'],reserve=3*cfg['evaluation_quota_seconds']+cfg['exit_reserve_seconds']);collect()
+    if 'eval_INIT' not in status:launch('eval_INIT',1,cfg['evaluation_quota_seconds'],reserve=3*cfg['evaluation_quota_seconds']+cfg['exit_reserve_seconds'])
+    collect()
     if any(status.get(s,{}).get('status')!='completed' for s in ('preflight','eval_INIT')):
         for name in cfg['branches']:status[name]={'status':'blocked','reason':'native preflight or initialization evaluation incomplete'}
         finish('blocked');return

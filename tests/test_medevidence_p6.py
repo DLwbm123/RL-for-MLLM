@@ -34,6 +34,19 @@ def main():
     with tempfile.TemporaryDirectory() as path:
         model.save_pretrained(path);load_frozen_adapter(model,path,'reference')
         assert all(torch.equal(p,expected[n.replace('.reference.','.default.')]) for n,p in model.named_parameters() if '.reference.' in n)
+    from types import SimpleNamespace
+    from src.model import Model
+    wrapper=Model.__new__(Model);wrapper.model=model;wrapper.visual=torch.nn.Identity()
+    wrapper.processor=SimpleNamespace(tokenizer=SimpleNamespace(decode=lambda ids,**kw:str(ids)))
+    wrapper.generation_calls=wrapper.generated_tokens=0;model.generation_config.repetition_penalty=1.05
+    resolved=[];base=model.get_base_model();prepare=base._prepare_generation_config
+    def capture(*args,**kwargs):
+        result=prepare(*args,**kwargs);resolved.append(result[0].to_dict());return result
+    base._prepare_generation_config=capture
+    wrapper.generate({'input_ids':torch.tensor([[1,3]]),'attention_mask':torch.ones(1,2,dtype=torch.long)},None,max_tokens=2,sampling_config={
+        'temperature':1.,'top_p':1.,'top_k':0,'max_new_tokens':2,'repetition_penalty':1.})
+    assert wrapper.last_generation_settings['repetition_penalty']==resolved[-1]['repetition_penalty']==1.
+    base._prepare_generation_config=prepare
     assert not torch.cuda.is_initialized()
     print('P6 synthetic objective checks passed')
 
