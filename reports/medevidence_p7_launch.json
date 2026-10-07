@@ -1,0 +1,15 @@
+{
+  "status": "running",
+  "detector_updates_observed": 300,
+  "last_update": {
+    "step": 300,
+    "loss": 0.15045087039470673,
+    "gradient_norm": 3.088548421859741
+  },
+  "elapsed_seconds": 77.12828063964844,
+  "neutral_ps_verified": true,
+  "source_commit": "5e828f3606daf3425528f456ac5c180e57e4d711",
+  "observation_scope": "startup snapshot only; no continuous monitoring; policy stages conditional on candidate gate",
+  "planned_detector_steps": 800,
+  "prior_GPU_hours": 0.9876201749510235
+}

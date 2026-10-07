@@ -59,3 +59,7 @@ v2已结束P0、P1、P3、P4。P1在step256首次达到32/32，但未满足连�
 P4完成完整框SFT，RL未通过启动门槛；P5完成两个坐标接口诊断，未启动主RL对照。P6实现SFT、标准GRPO和阴性绝对优势三组对照，但在生成/replay概率一致性检查处停止，三组正式更新均0步，不能报告RL收益。
 
 见[P4结果](reports/medevidence_p4_decision.md)、[P5结果](reports/medevidence_p5_decision.md)、[P6冻结方案](reports/medevidence_p6_protocol.md)、[P6实际结果与失败说明](reports/medevidence_p6_decision.md)、[P6预算](reports/medevidence_p6_budget.json)及[原生检查与工程修复](reports/medevidence_p6_validation.json)。P6执行源码为`2f8bbb0`；之后新增的失败数值日志代码未执行新的GPU诊断。测试集仍封存。
+
+## MedEvidence P7（新路线，运行中）
+
+P7先训练并冻结独立检测器，校准候选覆盖通过后，再在冻结Qwen视觉特征上比较SFT选择器与有限动作bandit策略。动作是选择一个候选、回答目标标签阴性或拒答；不生成坐标，不更新语言模型。当前只有准备检查与启动状态，不能称定位器可靠或RL有效。见[冻结方案](reports/medevidence_p7_protocol.md)；所有后续阶段由候选准入及原累计3 GPU小时预算约束。
