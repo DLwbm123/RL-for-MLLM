@@ -1,0 +1,79 @@
+{
+  "D3": {
+    "positive": {
+      "groups": 32,
+      "completions": 128,
+      "empty_completions": 65,
+      "distinguishable_groups": 26,
+      "all_empty_groups": 6,
+      "mixed_empty_nonempty_groups": 21,
+      "any_matched_region_groups": 3,
+      "distinguishable_without_any_match": 23,
+      "nonempty_geometry_distinguishable_groups": 20,
+      "positive_advantage_without_match_completions": 47,
+      "nonempty_completions": 63,
+      "sum_group_reward_variance": 2.4232008074919067,
+      "between_output_state_variance": 1.713353826318424,
+      "within_output_state_variance": 0.7098469811734829,
+      "between_state_share": 0.7070622546101749
+    },
+    "negative": {
+      "groups": 32,
+      "completions": 128,
+      "nonempty_completions": 10,
+      "empty_completions": 118,
+      "distinguishable_groups": 7,
+      "all_empty_groups": 25,
+      "mixed_empty_nonempty_groups": 7,
+      "any_matched_region_groups": 0,
+      "distinguishable_without_any_match": 7,
+      "nonempty_geometry_distinguishable_groups": 0,
+      "positive_advantage_without_match_completions": 0,
+      "sum_group_reward_variance": 5.5,
+      "between_output_state_variance": 5.5,
+      "within_output_state_variance": 0.0,
+      "between_state_share": 1.0
+    },
+    "negative_penalty_rescaling_advantage_invariance_checked": true,
+    "interpretation": "Equal-count nonempty reward variation is geometric, not proof of correct boxes; no causal attribution."
+  },
+  "D2": {
+    "positive": {
+      "groups": 25,
+      "completions": 200,
+      "nonempty_completions": 57,
+      "empty_completions": 143,
+      "distinguishable_groups": 15,
+      "all_empty_groups": 10,
+      "mixed_empty_nonempty_groups": 13,
+      "any_matched_region_groups": 6,
+      "distinguishable_without_any_match": 9,
+      "nonempty_geometry_distinguishable_groups": 13,
+      "positive_advantage_without_match_completions": 33,
+      "sum_group_reward_variance": 2.684854807885188,
+      "between_output_state_variance": 2.3341535716275352,
+      "within_output_state_variance": 0.3507012362576526,
+      "between_state_share": 0.8693779510058892
+    },
+    "negative": {
+      "groups": 32,
+      "completions": 256,
+      "empty_completions": 231,
+      "distinguishable_groups": 6,
+      "all_empty_groups": 25,
+      "mixed_empty_nonempty_groups": 6,
+      "any_matched_region_groups": 0,
+      "distinguishable_without_any_match": 6,
+      "nonempty_geometry_distinguishable_groups": 0,
+      "positive_advantage_without_match_completions": 0,
+      "nonempty_completions": 25,
+      "sum_group_reward_variance": 3.4375,
+      "between_output_state_variance": 3.4375,
+      "within_output_state_variance": 0.0,
+      "between_state_share": 1.0
+    },
+    "negative_penalty_rescaling_advantage_invariance_checked": true,
+    "interpretation": "Equal-count nonempty reward variation is geometric, not proof of correct boxes; no causal attribution."
+  },
+  "selection_scope": "D3 training mechanism audit primary; D2 old development descriptive only; neither selects coordinate format"
+}

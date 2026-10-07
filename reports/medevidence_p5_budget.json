@@ -1,0 +1,21 @@
+{
+  "status": "diagnostics_completed",
+  "prior_GPU_seconds": 1848.6403460502625,
+  "new_charged_seconds": 1346.3267698287964,
+  "combined_GPU_hours": 0.8874908655219608,
+  "limit_seconds": 10800,
+  "records": [
+    {
+      "stage": "fit_absolute",
+      "status": "completed",
+      "exit_code": 0,
+      "charged_seconds": 666.1607275009155
+    },
+    {
+      "stage": "fit_normalized",
+      "status": "completed",
+      "exit_code": 0,
+      "charged_seconds": 680.1660423278809
+    }
+  ]
+}

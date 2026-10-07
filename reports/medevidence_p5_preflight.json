@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "fit_patients": 32,
+  "calibration_patients": 64,
+  "overlap": 0,
+  "new_image_reads": 0,
+  "test_pixels_read": 0,
+  "historically_unseen_calibration": false,
+  "max_target_lengths": {
+    "normalized": 50,
+    "absolute": 50
+  },
+  "max_coordinate_rounding_difference_0_1000": 0.9642857142856656,
+  "fit_steps": 256,
+  "exposures_per_branch": 1024,
+  "exposures_per_fit_patient": 32,
+  "unit_tests": "passed",
+  "prior_GPU_seconds": 1848.6403460502625,
+  "source_commit": "e0a5b44c9a7d93bd36935e917173c6a7d42402cb"
+}
