@@ -1,0 +1,63 @@
+{
+  "CPU": {
+    "status": "passed"
+  },
+  "training": {
+    "status": "completed_diagnostic",
+    "matched_comparison_available": true
+  },
+  "local_views": {
+    "status": "completed",
+    "pairs": 34,
+    "independent_patients": 68,
+    "crops_per_model": 192
+  },
+  "preflight": {
+    "status": "completed",
+    "steps": null,
+    "patients": null,
+    "reason": null
+  },
+  "COV": {
+    "status": "completed_diagnostic",
+    "steps": 256,
+    "patients": null,
+    "reason": null
+  },
+  "COV-A": {
+    "status": "completed_diagnostic",
+    "steps": 256,
+    "patients": null,
+    "reason": null
+  },
+  "local_M1": {
+    "status": "completed",
+    "steps": null,
+    "patients": null,
+    "reason": null
+  },
+  "eval_COV": {
+    "status": "completed",
+    "steps": null,
+    "patients": 256,
+    "reason": null
+  },
+  "local_COV": {
+    "status": "completed",
+    "steps": null,
+    "patients": null,
+    "reason": null
+  },
+  "eval_COV-A": {
+    "status": "completed",
+    "steps": null,
+    "patients": 256,
+    "reason": null
+  },
+  "local_COV-A": {
+    "status": "completed",
+    "steps": null,
+    "patients": null,
+    "reason": null
+  }
+}

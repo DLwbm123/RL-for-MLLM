@@ -1,0 +1,56 @@
+{
+  "status": "completed_diagnostic",
+  "gpu_hours": 0.6589707677894169,
+  "gpu_limit_hours": 3,
+  "max_concurrent_gpus": 3,
+  "records": [
+    {
+      "stage": "preflight",
+      "charged_seconds": 24.019684553146362,
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "stage": "local_M1",
+      "charged_seconds": 72.04157710075378,
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "stage": "COV",
+      "charged_seconds": 764.7095894813538,
+      "exit_code": 0,
+      "status": "completed_diagnostic"
+    },
+    {
+      "stage": "local_COV",
+      "charged_seconds": 72.04358959197998,
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "stage": "COV-A",
+      "charged_seconds": 964.9346106052399,
+      "exit_code": 0,
+      "status": "completed_diagnostic"
+    },
+    {
+      "stage": "eval_COV",
+      "charged_seconds": 200.23827147483826,
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "stage": "local_COV-A",
+      "charged_seconds": 72.04757499694824,
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "stage": "eval_COV-A",
+      "charged_seconds": 202.25986623764038,
+      "exit_code": 0,
+      "status": "completed"
+    }
+  ]
+}

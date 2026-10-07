@@ -1,0 +1,39 @@
+# MedEvidence pilot-3 患者与共享排程
+
+```json
+{
+  "status": "prepared",
+  "positive_patients": 71,
+  "negative_patients": 256,
+  "shared_steps": 256,
+  "L_exposures_per_branch": 1024,
+  "positive_L_exposures": 512,
+  "negative_L_exposures": 512,
+  "positive_repetition_histogram": {
+    "7": 56,
+    "8": 15
+  },
+  "negative_repetition_histogram": {
+    "2": 256
+  },
+  "old_Fit_overlap": 32,
+  "old_Ref_overlap": {
+    "yes": 16,
+    "no": 4
+  },
+  "old_Ref_not_unupdated_reference": true,
+  "new_multibox_training_patients": 0,
+  "selection_uses_model_scores": false,
+  "local_view_pairs": 34,
+  "local_independent_patients": 68,
+  "local_crops_all_scales": 192,
+  "local_positive_single_patients": 22,
+  "local_positive_multi_patients": 12,
+  "local_crop_qualification_excluded": 3,
+  "local_geometry_exclusions": 0,
+  "local_negative_donors_reused": 0,
+  "max_crop_geometry_normalized_error": 0.0
+}
+```
+
+选择不使用模型分数，旧Fit全部32名重叠；旧Ref重叠者进入训练，不再作本轮不更新参照。原78名多框训练阳性未加入。局部34患者资格来自旧crop规则，保留3名旧排除病例，无新审核、补选或训练。

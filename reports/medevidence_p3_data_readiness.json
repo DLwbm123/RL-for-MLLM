@@ -1,0 +1,38 @@
+{
+  "status": "pending_user_submission",
+  "checked_local_date": "2026-10-07",
+  "access_authorization_verified": false,
+  "actual_dataset_metadata_records_read": 0,
+  "model_scoring_new_data": false,
+  "applications_submitted": 0,
+  "datasets_downloaded": 0,
+  "search_scope": [
+    "current project private file-name inventory: no PadChest access receipt/material",
+    "authorized remote project data directory top-level inventory: no PadChest entry",
+    "historical pilot1 documentation: future access only"
+  ],
+  "official_sources": {
+    "dataset": "https://bimcv.cipf.es/bimcv-projects/padchest-gr/",
+    "terms": "https://bimcv.cipf.es/bimcv-projects/padchest/padchest-dataset-research-use-agreement/",
+    "application": "https://docs.google.com/forms/d/e/1FAIpQLScTnT0aUCQERfiHet7QZ7mQeED-V-veKlmEWRMEpiU26ePQag/viewform",
+    "paper": "https://arxiv.org/abs/2411.05085v2"
+  },
+  "official_form_fields": [
+    "Email",
+    "Name",
+    "Affiliation",
+    "Objective (Academic Research or Other)"
+  ],
+  "missing_user_fields": [
+    "applicant email",
+    "applicant full name",
+    "official affiliation",
+    "user confirmation of intended use and terms"
+  ],
+  "prepared": [
+    "local application draft without sending",
+    "normalized schema contract with source-field mappings pending actual authorized metadata",
+    "patient-grouped split and deduplication plan"
+  ],
+  "next_step": "User reviews and submits official request; authorized metadata/schema/version verification precedes any future scoring or training"
+}
