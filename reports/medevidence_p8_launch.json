@@ -1,0 +1,24 @@
+{
+  "status": "running_at_startup_check",
+  "checked_epoch": 1791446735.6199749,
+  "run_id": "medevidence_p8",
+  "source_commit": "8b95819b2c2c953abf716832830a534aa50dd3e1",
+  "controller_pid": 4043351,
+  "worker_pid": 4043369,
+  "gpu": 0,
+  "neutral_ps_and_GPU_process_verified": true,
+  "progress": {
+    "stage": "training_candidates",
+    "elapsed_seconds": 4.906246900558472,
+    "argv_verified": true,
+    "reused_detector_steps": 800,
+    "new_detector_steps": 0
+  },
+  "phase_GPU_limit_seconds": 1800,
+  "combined_GPU_limit_seconds": 10800,
+  "prior_GPU_seconds": 3715.4577264785767,
+  "new_charged_seconds_at_check": 40.006401777267456,
+  "no_immediate_error": true,
+  "final_metrics_available": false,
+  "monitoring": "one startup check only; no continuous monitor"
+}

@@ -63,3 +63,7 @@ P4完成完整框SFT，RL未通过启动门槛；P5完成两个坐标接口诊�
 ## MedEvidence P7（候选门槛未通过，已结束）
 
 P7检测器完成800步；校准集最多8个候选覆盖18/32阳性、匹配22/49区域，未达到冻结的75%/60%门槛，后续选择器SFT及bandit均未启动。真实覆盖高于患者错配对照，但不能称定位器已可靠或RL有效。见[最终结果](reports/medevidence_p7_decision.md)、[回执核对](reports/medevidence_p7_validation.json)和[冻结方案](reports/medevidence_p7_protocol.md)。累计1.032072/3 GPU小时，开发和test未新增读取；历史启动快照不是当前状态。
+
+## MedEvidence P8（已后台启动，尚无最终结果）
+
+P8固定P7第800步检测器，单次比较分数阈值、SFT和有限动作奖励优化；主要比较75%回答覆盖率下的错误风险，并约束阳性有证据成功率与阴性误报。新增上限0.5 GPU小时，累计3 GPU小时上限不变；P7候选门槛失败结论保留，不自动重试。见[冻结方案](reports/medevidence_p8_protocol.md)、[CPU准备检查](reports/medevidence_p8_preparation.json)和[启动时快照](reports/medevidence_p8_launch.json)。启动快照只证明该时刻运行，不能代替最终回执或效能结论。
