@@ -130,19 +130,21 @@ class Run:
         for name,p in m.backbone.body.named_parameters():p.requires_grad_(name.startswith(('layer2.','layer3.','layer4.')))
         return m
 
-    def detector(self):
+    def detector(self,output_dir=None,evaluate_calibration=True):
         from torchvision.transforms.functional import to_tensor
+        out=Path(output_dir) if output_dir is not None else self.out
+        previous_steps=self.detector_steps
         m=self.build_detector().cuda();m.train()
         for module in m.modules():
             if isinstance(module,nn.BatchNorm2d):module.eval()
         opt=torch.optim.SGD([p for p in m.parameters() if p.requires_grad],lr=self.cfg['detector_lr'],momentum=.9,weight_decay=.0005)
-        plan=self.schedule(self.cfg['detector_steps'],2,17);save(self.out/'detector_schedule.json',plan)
+        plan=self.schedule(self.cfg['detector_steps'],2,17);save(out/'detector_schedule.json',plan)
         self.update('detector_training',planned_steps=len(plan),steps=0)
         gpu=subprocess.check_output(['nvidia-smi','--query-compute-apps=pid,process_name,used_memory','--format=csv,noheader'],text=True)
         own=[s for s in gpu.splitlines() if s.split(',')[0].strip()==str(os.getpid())]
         assert own and not any(t in ' '.join(own).lower() for t in ('wangbomin','medevidence','mllm','qwen','sft','grpo'))
-        save(self.out/'gpu_process_receipt.json',{'neutral_process':True,'GPU_process':own})
-        with (self.out/'detector_training.jsonl').open('x') as log:
+        save(out/'gpu_process_receipt.json',{'neutral_process':True,'GPU_process':own})
+        with (out/'detector_training.jsonl').open('x') as log:
             for step,ids in enumerate(plan):
                 self.tick()
                 if time.time()-self.start>self.cfg['detector_phase_limit_seconds']-180:raise TimeoutError('Detector phase reserve')
@@ -155,11 +157,12 @@ class Run:
                 if not torch.isfinite(loss):raise FloatingPointError('Detector loss nonfinite')
                 loss.backward();norm=torch.nn.utils.clip_grad_norm_(m.parameters(),10.)
                 if not torch.isfinite(norm):raise FloatingPointError('Detector gradient nonfinite')
-                opt.step();self.detector_steps=step+1
+                opt.step();self.detector_steps=previous_steps+step+1
                 r={'step':step+1,'loss':float(loss.detach()),'gradient_norm':float(norm),'patients':ids};log.write(json.dumps(r)+'\n');log.flush()
                 if (step+1)%40==0:self.update('detector_training',steps=step+1,loss=r['loss'])
-        torch.save(m.state_dict(),self.out/'detector_final.pt');del opt
+        torch.save(m.state_dict(),out/'detector_final.pt');del opt
         m.eval().requires_grad_(False);self.detector_model=m
+        if not evaluate_calibration:return True
         self.predict(self.sets['calibration'])
         gate=self.candidate_audit(self.sets['calibration']);save(self.out/'candidate_gate.json',gate)
         self.update('candidate_gate',candidate_gate_passed=gate['passed'])
