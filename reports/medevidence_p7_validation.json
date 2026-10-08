@@ -1,0 +1,19 @@
+{
+  "detector_steps_verified": 800,
+  "detector_patient_exposures": 3200,
+  "distinct_detector_training_patients": 960,
+  "calibration_patients": 64,
+  "actual_image_reads_by_original_split": {
+    "train": 1024
+  },
+  "development_image_reads": 0,
+  "test_pixels_read": 0,
+  "policy_warmup_steps": 0,
+  "SFT_continuation_steps": 0,
+  "bandit_steps": 0,
+  "language_model_updates": 0,
+  "source_commit": "5e828f3606daf3425528f456ac5c180e57e4d711",
+  "all_stages_terminal": true,
+  "GPU_budget_verified": true,
+  "interpretation": "Top8 proposal oracle coverage, not single-action success; calibration only; no clinical or RL-effect claim"
+}

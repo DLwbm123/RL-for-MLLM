@@ -60,6 +60,6 @@ P4完成完整框SFT，RL未通过启动门槛；P5完成两个坐标接口诊�
 
 见[P4结果](reports/medevidence_p4_decision.md)、[P5结果](reports/medevidence_p5_decision.md)、[P6冻结方案](reports/medevidence_p6_protocol.md)、[P6实际结果与失败说明](reports/medevidence_p6_decision.md)、[P6预算](reports/medevidence_p6_budget.json)及[原生检查与工程修复](reports/medevidence_p6_validation.json)。P6执行源码为`2f8bbb0`；之后新增的失败数值日志代码未执行新的GPU诊断。测试集仍封存。
 
-## MedEvidence P7（新路线，运行中）
+## MedEvidence P7（候选门槛未通过，已结束）
 
-P7先训练并冻结独立检测器，校准候选覆盖通过后，再在冻结Qwen视觉特征上比较SFT选择器与有限动作bandit策略。动作是选择一个候选、回答目标标签阴性或拒答；不生成坐标，不更新语言模型。当前只有准备检查与启动状态，不能称定位器可靠或RL有效。见[冻结方案](reports/medevidence_p7_protocol.md)；所有后续阶段由候选准入及原累计3 GPU小时预算约束。
+P7检测器完成800步；校准集最多8个候选覆盖18/32阳性、匹配22/49区域，未达到冻结的75%/60%门槛，后续选择器SFT及bandit均未启动。真实覆盖高于患者错配对照，但不能称定位器已可靠或RL有效。见[最终结果](reports/medevidence_p7_decision.md)、[回执核对](reports/medevidence_p7_validation.json)和[冻结方案](reports/medevidence_p7_protocol.md)。累计1.032072/3 GPU小时，开发和test未新增读取；历史启动快照不是当前状态。

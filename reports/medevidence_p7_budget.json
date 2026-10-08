@@ -1,0 +1,9 @@
+{
+  "status": "stopped_candidate_gate",
+  "prior_GPU_seconds": 3555.4326298236847,
+  "new_charged_seconds": 160.02509665489197,
+  "combined_GPU_hours": 1.0320715906884934,
+  "limit_seconds": 10800,
+  "active": [],
+  "exit_code": 0
+}

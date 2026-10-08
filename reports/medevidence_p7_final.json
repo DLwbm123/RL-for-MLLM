@@ -1,0 +1,13 @@
+{
+  "status": "stopped_candidate_gate",
+  "reason": null,
+  "stage": "candidate_gate",
+  "detector_steps": 800,
+  "test_pixels_read": 0,
+  "data_access": {
+    "train": 1024
+  },
+  "runtime_seconds": 151.51052689552307,
+  "language_model_updates": 0,
+  "scope": "Detector proposals plus frozen Qwen visual features and a categorical evidence-selection actor; not autoregressive language-model RL or clinically validated abstention"
+}
