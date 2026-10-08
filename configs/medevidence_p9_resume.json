@@ -1,0 +1,55 @@
+{
+  "version": "medevidence-p9-resume",
+  "seed": 17,
+  "prior_GPU_seconds": 5855.87869143486,
+  "combined_GPU_limit_seconds": 10800,
+  "exit_reserve_seconds": 30,
+  "allowed_gpus": [
+    0,
+    1,
+    2
+  ],
+  "minimum_free_memory_mib": 40000,
+  "detector_steps": 800,
+  "detector_batch_size": 4,
+  "detector_lr": 0.005,
+  "detector_min_size": 512,
+  "detector_max_size": 768,
+  "detector_phase_limit_seconds": 5400,
+  "candidate_limit": 8,
+  "candidate_score_threshold": 0.001,
+  "candidate_nms_iou": 0.3,
+  "candidate_gate": {
+    "positive_any_hit": 0.75,
+    "region_recall": 0.6,
+    "real_minus_shuffled_any_hit": 0.1
+  },
+  "matching_iou": 0.5,
+  "reward": {
+    "correct_supported": 1.0,
+    "wrong": -1.0,
+    "abstain": -0.2
+  },
+  "bootstrap_repeats": 2000,
+  "bootstrap_seed": 42,
+  "detector_weights_url": "https://download.pytorch.org/models/fasterrcnn_resnet50_fpn_v2_coco-dd69338a.pth",
+  "weights_filename": "fasterrcnn_resnet50_fpn_v2_coco-dd69338a.pth",
+  "test_access": false,
+  "language_model_updates": false,
+  "scope": "Three-fold out-of-fold detector proposals; two supervised correctness heads; frozen final P7 detector and Qwen features; no RL or language-model updates. Retrospective development pilot, not clinical safety.",
+  "phase_GPU_limit_seconds": 2700,
+  "matched_coverages": [
+    0.25,
+    0.5,
+    0.75,
+    0.9,
+    1.0
+  ],
+  "primary_coverage": 0.75,
+  "oof_folds": 3,
+  "head_C": 0.01,
+  "head_max_iter": 1000,
+  "feature_std_floor": 0.1,
+  "calibration_bias_l2": 0.01,
+  "feature_cache_chunk_size": 32
+}

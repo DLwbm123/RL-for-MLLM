@@ -206,30 +206,38 @@ class Run:
         actual['conditions']={k:actual[k]>=v for k,v in self.cfg['candidate_gate'].items()};actual['passed']=all(actual['conditions'].values())
         actual['scope']='Candidate support only; not diagnostic reliability';return actual
 
-    def features(self,ids):
+    def features(self,ids,cache=None):
         from src.model import Model
         from src.regions import region_tokens
         from src.data import QUESTIONS
-        self.update('frozen_visual_features',feature_patients=len(ids))
+        records=cache.records.copy() if cache is not None else {}
+        missing=[k for k in ids if k not in records]
+        self.update('frozen_visual_features',feature_patients=len(ids),features_done=len(records),persisted_features=len(records))
+        if not missing:return records
         model=Model(Path(os.environ['MODEL_ROOT'])/'Qwen2.5-VL-7B-Instruct',None,False,576,1024)
         QUESTIONS['A']='Does this chest radiograph contain lung opacity suspicious for pneumonia?'
-        records={}
-        with torch.no_grad():
-            for i,k in enumerate(ids):
-                self.tick();im=self.image(k);inp,(gh,gw)=model.prompt(im,'A');visual=model.encode(inp).float();d=visual.shape[1]
-                global_feature=nn.functional.layer_norm(visual.mean(0),(d,)).cpu();x=torch.zeros(10,d*2+8)
-                for j,(box,score) in enumerate(zip(self.candidates[k]['boxes'],self.candidates[k]['scores'])):
-                    selected=region_tokens(box,im.width,im.height,gh,gw)
-                    if not selected:raise ValueError('Candidate lacks visual tokens')
-                    local=nn.functional.layer_norm(visual[selected].mean(0),(d,)).cpu()
-                    geometry=torch.tensor([box[0]/im.width,box[1]/im.height,box[2]/im.width,box[3]/im.height,score,1,0,0])
-                    x[j]=torch.cat([global_feature,local,geometry])
-                x[8]=torch.cat([global_feature,torch.zeros(d),torch.tensor([0.,0,0,0,0,0,1,0])])
-                x[9]=torch.cat([global_feature,torch.zeros(d),torch.tensor([0.,0,0,0,0,0,0,1])])
-                valid,rewards,good=action_targets(self.candidates[k]['boxes'],self.rows[k]['boxes'])
-                assert torch.isfinite(x).all();records[k]={'x':x.half(),'valid':valid,'rewards':rewards,'good':good}
-                if (i+1)%128==0:self.update('frozen_visual_features',features_done=i+1,feature_patients=len(ids))
-        assert not any(p.requires_grad for p in model.model.parameters());del model;torch.cuda.empty_cache()
+        try:
+            with torch.no_grad():
+                for k in missing:
+                    self.tick();im=self.image(k);inp,(gh,gw)=model.prompt(im,'A');visual=model.encode(inp).float();d=visual.shape[1]
+                    global_feature=nn.functional.layer_norm(visual.mean(0),(d,)).cpu();x=torch.zeros(10,d*2+8)
+                    for j,(box,score) in enumerate(zip(self.candidates[k]['boxes'],self.candidates[k]['scores'])):
+                        selected=region_tokens(box,im.width,im.height,gh,gw)
+                        if not selected:raise ValueError('Candidate lacks visual tokens')
+                        local=nn.functional.layer_norm(visual[selected].mean(0),(d,)).cpu()
+                        geometry=torch.tensor([box[0]/im.width,box[1]/im.height,box[2]/im.width,box[3]/im.height,score,1,0,0])
+                        x[j]=torch.cat([global_feature,local,geometry])
+                    x[8]=torch.cat([global_feature,torch.zeros(d),torch.tensor([0.,0,0,0,0,0,1,0])])
+                    x[9]=torch.cat([global_feature,torch.zeros(d),torch.tensor([0.,0,0,0,0,0,0,1])])
+                    valid,rewards,good=action_targets(self.candidates[k]['boxes'],self.rows[k]['boxes'])
+                    assert torch.isfinite(x).all();records[k]={'x':x.half(),'valid':valid,'rewards':rewards,'good':good}
+                    if cache is not None:cache.add(k,records[k])
+                    if len(records)%(32 if cache is not None else 128)==0:
+                        self.update('frozen_visual_features',features_done=len(records),feature_patients=len(ids),persisted_features=cache.persisted if cache is not None else 0)
+            assert not any(p.requires_grad for p in model.model.parameters())
+        finally:
+            if cache is not None:cache.flush()
+            del model;torch.cuda.empty_cache()
         return records
 
     def fit_policy(self,records):

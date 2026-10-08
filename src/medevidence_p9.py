@@ -76,7 +76,7 @@ def weighted_cutoff(confidence,weights,coverage):
 
 
 class Run(PreviousRun):
-    def __init__(self):super().__init__('medevidence_p9.json')
+    def __init__(self,config_name='medevidence_p9.json'):super().__init__(config_name)
 
     def execute(self):
         from src.experiment import seed_all
@@ -104,6 +104,11 @@ class Run(PreviousRun):
         if not audit['top1_supported_positive'] or not audit['positive_without_supported_candidate']:
             return 'stopped_oof_target_support'
         features=self.features(original+self.sets['calibration']);torch.save(features,self.out/'training_calibration_features.pt')
+        return self.finish(features)
+
+    def finish(self,features):
+        previous=self.base.parent/'medevidence_p8/outputs';original=self.sets['train']
+        positives=[k for k in original if self.rows[k]['boxes']]
         self.update('correctness_training');x,y,has=input_features(features,original)
         model,checks=fit_heads(x,y,self.cfg);save(self.out/'head_training.json',{'heads':['supported_top1_yes','correct_no'],'patients':len(x),
             'positive_prior':len(positives)/len(x),'weighting':'natural patient distribution; no class-balanced resampling','checks':checks})
@@ -159,14 +164,15 @@ class Run(PreviousRun):
 def worker():previous_worker(Run)
 
 
-def report():
+def report(prefix='medevidence_p9'):
     import re
     base=Path(os.environ['PILOT_ROOT']);out=base/'outputs';public=base/'code/reports';public.mkdir(exist_ok=True)
     names={'final':'FINAL.json','budget':'gpu_ledger.json','training':'head_training.json','calibration':'calibration.json','oof':'oof_audit.json',
-        'evaluation':'evaluation.json','preparation':'protocol/CPU_checks.json'}
+        'evaluation':'evaluation.json','preparation':'protocol/CPU_checks.json','resume':'resume_receipt.json','diagnostics':'diagnostics.json','cache':'cache_state.json'}
     values={n:read(out/p) for n,p in names.items() if (out/p).exists()}
-    for n,v in values.items():save(public/('medevidence_p9_'+n+'.json'),json.loads(re.sub(r'/(?:data|Users|remote-home)/[^\s"\\]+','[private-path]',json.dumps(v))))
-    f=values['final'];text='# MedEvidence P9 实际结果\n\n'+f"状态：{f['status']}；折外检测器总更新{f['detector_steps']}步；RL及语言模型更新0。\n\n"
+    for n,v in values.items():save(public/(prefix+'_'+n+'.json'),json.loads(re.sub(r'/(?:data|Users|remote-home)/[^\s"\\]+','[private-path]',json.dumps(v))))
+    f=values['final'];text='# MedEvidence P9 实际结果\n\n'+f"状态：{f['status']}；本次新增检测器更新{f['detector_steps']}步；RL及语言模型更新0。\n\n"
+    if 'resume' in values:text+='本次为原P9工程续跑，复用已完成三折检测器和候选；原始预算停止记录保留。科学配置与原方案相同。\n\n'
     if 'evaluation' in values:
         e=values['evaluation'];text+=f"冻结决策：`{e['decision']}`。\n\n"
         text+='| 方法 | 实际回答覆盖率 | 已回答错误风险 | 阳性有证据成功率 | 阴性误报率 |\n|---|---:|---:|---:|---:|\n'
@@ -174,6 +180,7 @@ def report():
         for n,m in e['metrics'].items():text+='| '+n+' | '+' | '.join(fmt(m[k]) for k in ['coverage','answered_risk','positive_supported_success_rate','negative_wrong_yes_rate'])+' |\n'
         text+='\n主要75%相同覆盖率比较及配对区间见evaluation JSON；表中为校准规则实际覆盖率，二者不可混同。\n'
     else:text+='尚无完整评价，不支持有效性结论。\n'
-    text+=f"\n本轮GPU小时：{values['budget']['new_charged_seconds']/3600:.6f}/0.5；累计：{values['budget']['combined_GPU_hours']:.6f}/3。\n\n"
+    limit=.75 if prefix=='medevidence_p9_resume' else .5
+    text+=f"\n本次GPU小时：{values['budget']['new_charged_seconds']/3600:.6f}/{limit}；累计：{values['budget']['combined_GPU_hours']:.6f}/3。\n\n"
     text+='三折训练候选与全960人最终检测器仍可能存在分布差异；64例校准仅作有限研发校准。开发集已多次使用，本轮不能证明独立泛化、临床安全或MLLM的RL收益。原图、患者级记录、特征和权重保持私有；不自动重试或扩展。\n'
-    (public/'medevidence_p9_decision.md').write_text(text)
+    (public/(prefix+'_decision.md')).write_text(text)
