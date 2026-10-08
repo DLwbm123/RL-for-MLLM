@@ -1,0 +1,9 @@
+{
+  "status": "completed",
+  "prior_GPU_seconds": 5855.87869143486,
+  "new_charged_seconds": 325.0404100418091,
+  "combined_GPU_hours": 1.716921972632408,
+  "limit_seconds": 10800,
+  "active": [],
+  "exit_code": 0
+}

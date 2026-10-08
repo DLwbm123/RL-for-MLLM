@@ -1,0 +1,25 @@
+{
+  "heads": [
+    "supported_top1_yes",
+    "correct_no"
+  ],
+  "patients": 960,
+  "positive_prior": 0.121875,
+  "weighting": "natural patient distribution; no class-balanced resampling",
+  "checks": [
+    {
+      "iterations": 180,
+      "positive_targets": 51,
+      "initial_full_loss": 0.20761578667410185,
+      "final_full_loss": 0.0244454610900928,
+      "regularized_objective": 0.04613394772715953
+    },
+    {
+      "iterations": 180,
+      "positive_targets": 843,
+      "initial_full_loss": 0.37064422616302595,
+      "final_full_loss": 0.0664053123110029,
+      "regularized_objective": 0.11185949233600746
+    }
+  ]
+}

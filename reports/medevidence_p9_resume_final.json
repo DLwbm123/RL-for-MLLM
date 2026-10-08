@@ -1,0 +1,13 @@
+{
+  "status": "completed",
+  "reason": null,
+  "stage": "final_cached_development_evaluation",
+  "detector_steps": 0,
+  "test_pixels_read": 0,
+  "data_access": {
+    "train": 1024
+  },
+  "runtime_seconds": 318.9701268672943,
+  "language_model_updates": 0,
+  "scope": "Three-fold out-of-fold detector proposals; two supervised correctness heads; frozen final P7 detector and Qwen features; no RL or language-model updates. Retrospective development pilot, not clinical safety."
+}

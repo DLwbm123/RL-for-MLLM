@@ -1,0 +1,935 @@
+{
+  "scope": "Explanatory diagnostics only; frozen main decision and predictions are unchanged",
+  "splits": {
+    "train": {
+      "raw": {
+        "patients": 960,
+        "groups": {
+          "negative": {
+            "patients": 843,
+            "rules": {
+              "utility": {
+                "yes": 0,
+                "no": 843,
+                "abstain": 0,
+                "correct": 843
+              }
+            }
+          },
+          "top1_supported_positive": {
+            "patients": 51,
+            "rules": {
+              "utility": {
+                "yes": 50,
+                "no": 1,
+                "abstain": 0,
+                "correct": 50
+              }
+            }
+          },
+          "other_candidate_supported_positive": {
+            "patients": 13,
+            "rules": {
+              "utility": {
+                "yes": 0,
+                "no": 0,
+                "abstain": 13,
+                "correct": 0
+              }
+            }
+          },
+          "no_supported_candidate_positive": {
+            "patients": 53,
+            "rules": {
+              "utility": {
+                "yes": 0,
+                "no": 15,
+                "abstain": 38,
+                "correct": 0
+              }
+            }
+          }
+        },
+        "probability_conflict": {
+          "tolerance": 1e-06,
+          "count": 81,
+          "fraction": 0.084375,
+          "mean_excess": 0.0019436400077109154,
+          "max_excess": 0.13558461404010824
+        },
+        "heads": {
+          "supported_yes": {
+            "brier": 0.003757681961787777,
+            "auroc": 1.0,
+            "average_precision": 1.0000000000000002,
+            "reliability_bins": [
+              {
+                "lower": 0.0,
+                "upper": 0.2,
+                "patients": 907,
+                "mean_probability": 0.011180693239471112,
+                "observed_correct_fraction": 0.0
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.4,
+                "patients": 2,
+                "mean_probability": 0.22631357001110508,
+                "observed_correct_fraction": 0.0
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.6000000000000001,
+                "patients": 4,
+                "mean_probability": 0.5645064850563672,
+                "observed_correct_fraction": 1.0
+              },
+              {
+                "lower": 0.6000000000000001,
+                "upper": 0.8,
+                "patients": 23,
+                "mean_probability": 0.7362188923101465,
+                "observed_correct_fraction": 1.0
+              },
+              {
+                "lower": 0.8,
+                "upper": 1.0,
+                "patients": 24,
+                "mean_probability": 0.8827686866709129,
+                "observed_correct_fraction": 1.0
+              }
+            ]
+          },
+          "correct_no": {
+            "brier": 0.013148851167661594,
+            "auroc": 0.999371394389188,
+            "average_precision": 0.99991165915616,
+            "reliability_bins": [
+              {
+                "lower": 0.0,
+                "upper": 0.2,
+                "patients": 64,
+                "mean_probability": 0.11227236416804272,
+                "observed_correct_fraction": 0.0
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.4,
+                "patients": 37,
+                "mean_probability": 0.26093275996399257,
+                "observed_correct_fraction": 0.0
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.6000000000000001,
+                "patients": 8,
+                "mean_probability": 0.5190266479182392,
+                "observed_correct_fraction": 0.0
+              },
+              {
+                "lower": 0.6000000000000001,
+                "upper": 0.8,
+                "patients": 17,
+                "mean_probability": 0.7240691627694748,
+                "observed_correct_fraction": 0.5882352941176471
+              },
+              {
+                "lower": 0.8,
+                "upper": 1.0,
+                "patients": 834,
+                "mean_probability": 0.9708627789842487,
+                "observed_correct_fraction": 0.9988009592326139
+              }
+            ]
+          }
+        }
+      },
+      "calibrated": {
+        "patients": 960,
+        "groups": {
+          "negative": {
+            "patients": 843,
+            "rules": {
+              "utility": {
+                "yes": 0,
+                "no": 843,
+                "abstain": 0,
+                "correct": 843
+              },
+              "calibrated_threshold": {
+                "yes": 0,
+                "no": 769,
+                "abstain": 74,
+                "correct": 769
+              }
+            }
+          },
+          "top1_supported_positive": {
+            "patients": 51,
+            "rules": {
+              "utility": {
+                "yes": 51,
+                "no": 0,
+                "abstain": 0,
+                "correct": 51
+              },
+              "calibrated_threshold": {
+                "yes": 15,
+                "no": 0,
+                "abstain": 36,
+                "correct": 15
+              }
+            }
+          },
+          "other_candidate_supported_positive": {
+            "patients": 13,
+            "rules": {
+              "utility": {
+                "yes": 0,
+                "no": 0,
+                "abstain": 13,
+                "correct": 0
+              },
+              "calibrated_threshold": {
+                "yes": 0,
+                "no": 0,
+                "abstain": 13,
+                "correct": 0
+              }
+            }
+          },
+          "no_supported_candidate_positive": {
+            "patients": 53,
+            "rules": {
+              "utility": {
+                "yes": 0,
+                "no": 14,
+                "abstain": 39,
+                "correct": 0
+              },
+              "calibrated_threshold": {
+                "yes": 0,
+                "no": 0,
+                "abstain": 53,
+                "correct": 0
+              }
+            }
+          }
+        },
+        "probability_conflict": {
+          "tolerance": 1e-06,
+          "count": 81,
+          "fraction": 0.084375,
+          "mean_excess": 0.0020740327467553654,
+          "max_excess": 0.1194699845072178
+        },
+        "heads": {
+          "supported_yes": {
+            "brier": 0.0034010948020210385,
+            "auroc": 1.0,
+            "average_precision": 1.0000000000000002,
+            "reliability_bins": [
+              {
+                "lower": 0.0,
+                "upper": 0.2,
+                "patients": 906,
+                "mean_probability": 0.013220104040557715,
+                "observed_correct_fraction": 0.0
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.4,
+                "patients": 3,
+                "mean_probability": 0.2512944527331749,
+                "observed_correct_fraction": 0.0
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.6000000000000001,
+                "patients": 1,
+                "mean_probability": 0.5731073255405198,
+                "observed_correct_fraction": 1.0
+              },
+              {
+                "lower": 0.6000000000000001,
+                "upper": 0.8,
+                "patients": 22,
+                "mean_probability": 0.7441760160069921,
+                "observed_correct_fraction": 1.0
+              },
+              {
+                "lower": 0.8,
+                "upper": 1.0,
+                "patients": 28,
+                "mean_probability": 0.8903851492822882,
+                "observed_correct_fraction": 1.0
+              }
+            ]
+          },
+          "correct_no": {
+            "brier": 0.012370940226307695,
+            "auroc": 0.999371394389188,
+            "average_precision": 0.99991165915616,
+            "reliability_bins": [
+              {
+                "lower": 0.0,
+                "upper": 0.2,
+                "patients": 75,
+                "mean_probability": 0.10759287496815181,
+                "observed_correct_fraction": 0.0
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.4,
+                "patients": 27,
+                "mean_probability": 0.2494280205854935,
+                "observed_correct_fraction": 0.0
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.6000000000000001,
+                "patients": 11,
+                "mean_probability": 0.5205905093226735,
+                "observed_correct_fraction": 0.09090909090909091
+              },
+              {
+                "lower": 0.6000000000000001,
+                "upper": 0.8,
+                "patients": 24,
+                "mean_probability": 0.7453142118210422,
+                "observed_correct_fraction": 0.8333333333333334
+              },
+              {
+                "lower": 0.8,
+                "upper": 1.0,
+                "patients": 823,
+                "mean_probability": 0.9677017108293768,
+                "observed_correct_fraction": 0.9987849331713244
+              }
+            ]
+          }
+        }
+      }
+    },
+    "calibration": {
+      "raw": {
+        "patients": 64,
+        "groups": {
+          "negative": {
+            "patients": 32,
+            "rules": {
+              "utility": {
+                "yes": 0,
+                "no": 31,
+                "abstain": 1,
+                "correct": 31
+              }
+            }
+          },
+          "top1_supported_positive": {
+            "patients": 12,
+            "rules": {
+              "utility": {
+                "yes": 1,
+                "no": 8,
+                "abstain": 3,
+                "correct": 1
+              }
+            }
+          },
+          "other_candidate_supported_positive": {
+            "patients": 6,
+            "rules": {
+              "utility": {
+                "yes": 1,
+                "no": 4,
+                "abstain": 1,
+                "correct": 0
+              }
+            }
+          },
+          "no_supported_candidate_positive": {
+            "patients": 14,
+            "rules": {
+              "utility": {
+                "yes": 0,
+                "no": 10,
+                "abstain": 4,
+                "correct": 0
+              }
+            }
+          }
+        },
+        "probability_conflict": {
+          "tolerance": 1e-06,
+          "count": 8,
+          "fraction": 0.125,
+          "mean_excess": 0.011233551458711473,
+          "max_excess": 0.23353475453578687
+        },
+        "heads": {
+          "supported_yes": {
+            "brier": 0.044225066794382956,
+            "auroc": 0.7854925637876927,
+            "average_precision": 0.19056373670052956,
+            "reliability_bins": [
+              {
+                "lower": 0.0,
+                "upper": 0.2,
+                "patients": 54,
+                "mean_probability": 0.015317103338628568,
+                "observed_correct_fraction": 0.045803971812940415
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.4,
+                "patients": 8,
+                "mean_probability": 0.25851867645500337,
+                "observed_correct_fraction": 0.0
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.6000000000000001,
+                "patients": 1,
+                "mean_probability": 0.4130975953635228,
+                "observed_correct_fraction": 0.0
+              },
+              {
+                "lower": 0.6000000000000001,
+                "upper": 0.8,
+                "patients": 1,
+                "mean_probability": 0.6970578582116899,
+                "observed_correct_fraction": 1.0
+              },
+              {
+                "lower": 0.8,
+                "upper": 1.0,
+                "patients": 0,
+                "mean_probability": null,
+                "observed_correct_fraction": null
+              }
+            ]
+          },
+          "correct_no": {
+            "brier": 0.09821960889779685,
+            "auroc": 0.7978515625000001,
+            "average_precision": 0.9619754651819674,
+            "reliability_bins": [
+              {
+                "lower": 0.0,
+                "upper": 0.2,
+                "patients": 7,
+                "mean_probability": 0.03353374411345793,
+                "observed_correct_fraction": 0.5456310679611651
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.4,
+                "patients": 4,
+                "mean_probability": 0.2891630685093171,
+                "observed_correct_fraction": 0.0
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.6000000000000001,
+                "patients": 2,
+                "mean_probability": 0.45975547438839826,
+                "observed_correct_fraction": 0.0
+              },
+              {
+                "lower": 0.6000000000000001,
+                "upper": 0.8,
+                "patients": 4,
+                "mean_probability": 0.6303962902524314,
+                "observed_correct_fraction": 0.706030150753769
+              },
+              {
+                "lower": 0.8,
+                "upper": 1.0,
+                "patients": 47,
+                "mean_probability": 0.9631079191937373,
+                "observed_correct_fraction": 0.9270867700428901
+              }
+            ]
+          }
+        }
+      },
+      "calibrated": {
+        "patients": 64,
+        "groups": {
+          "negative": {
+            "patients": 32,
+            "rules": {
+              "utility": {
+                "yes": 0,
+                "no": 31,
+                "abstain": 1,
+                "correct": 31
+              },
+              "calibrated_threshold": {
+                "yes": 0,
+                "no": 26,
+                "abstain": 6,
+                "correct": 26
+              }
+            }
+          },
+          "top1_supported_positive": {
+            "patients": 12,
+            "rules": {
+              "utility": {
+                "yes": 1,
+                "no": 7,
+                "abstain": 4,
+                "correct": 1
+              },
+              "calibrated_threshold": {
+                "yes": 0,
+                "no": 5,
+                "abstain": 7,
+                "correct": 0
+              }
+            }
+          },
+          "other_candidate_supported_positive": {
+            "patients": 6,
+            "rules": {
+              "utility": {
+                "yes": 1,
+                "no": 4,
+                "abstain": 1,
+                "correct": 0
+              },
+              "calibrated_threshold": {
+                "yes": 0,
+                "no": 2,
+                "abstain": 4,
+                "correct": 0
+              }
+            }
+          },
+          "no_supported_candidate_positive": {
+            "patients": 14,
+            "rules": {
+              "utility": {
+                "yes": 0,
+                "no": 10,
+                "abstain": 4,
+                "correct": 0
+              },
+              "calibrated_threshold": {
+                "yes": 0,
+                "no": 7,
+                "abstain": 7,
+                "correct": 0
+              }
+            }
+          }
+        },
+        "probability_conflict": {
+          "tolerance": 1e-06,
+          "count": 8,
+          "fraction": 0.125,
+          "mean_excess": 0.01291394809891288,
+          "max_excess": 0.27102030019875434
+        },
+        "heads": {
+          "supported_yes": {
+            "brier": 0.045530838533301726,
+            "auroc": 0.7854925637876927,
+            "average_precision": 0.19056373670052956,
+            "reliability_bins": [
+              {
+                "lower": 0.0,
+                "upper": 0.2,
+                "patients": 53,
+                "mean_probability": 0.017641620635141957,
+                "observed_correct_fraction": 0.04599549694435509
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.4,
+                "patients": 9,
+                "mean_probability": 0.29448149143958574,
+                "observed_correct_fraction": 0.0
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.6000000000000001,
+                "patients": 1,
+                "mean_probability": 0.46255541317996424,
+                "observed_correct_fraction": 0.0
+              },
+              {
+                "lower": 0.6000000000000001,
+                "upper": 0.8,
+                "patients": 1,
+                "mean_probability": 0.7377761546489022,
+                "observed_correct_fraction": 1.0
+              },
+              {
+                "lower": 0.8,
+                "upper": 1.0,
+                "patients": 0,
+                "mean_probability": null,
+                "observed_correct_fraction": null
+              }
+            ]
+          },
+          "correct_no": {
+            "brier": 0.09776299768431505,
+            "auroc": 0.7978515625000001,
+            "average_precision": 0.9619754651819674,
+            "reliability_bins": [
+              {
+                "lower": 0.0,
+                "upper": 0.2,
+                "patients": 8,
+                "mean_probability": 0.03996376659689481,
+                "observed_correct_fraction": 0.5072202166064982
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.4,
+                "patients": 4,
+                "mean_probability": 0.29299979790028624,
+                "observed_correct_fraction": 0.0
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.6000000000000001,
+                "patients": 3,
+                "mean_probability": 0.5591058847318551,
+                "observed_correct_fraction": 0.7827298050139276
+              },
+              {
+                "lower": 0.6000000000000001,
+                "upper": 0.8,
+                "patients": 3,
+                "mean_probability": 0.7630888370191471,
+                "observed_correct_fraction": 0.7827298050139276
+              },
+              {
+                "lower": 0.8,
+                "upper": 1.0,
+                "patients": 46,
+                "mean_probability": 0.9611109622928767,
+                "observed_correct_fraction": 0.9247616886064458
+              }
+            ]
+          }
+        }
+      }
+    },
+    "dev": {
+      "raw": {
+        "patients": 256,
+        "groups": {
+          "negative": {
+            "patients": 219,
+            "rules": {
+              "utility": {
+                "yes": 0,
+                "no": 209,
+                "abstain": 10,
+                "correct": 209
+              }
+            }
+          },
+          "top1_supported_positive": {
+            "patients": 17,
+            "rules": {
+              "utility": {
+                "yes": 1,
+                "no": 14,
+                "abstain": 2,
+                "correct": 1
+              }
+            }
+          },
+          "other_candidate_supported_positive": {
+            "patients": 8,
+            "rules": {
+              "utility": {
+                "yes": 0,
+                "no": 5,
+                "abstain": 3,
+                "correct": 0
+              }
+            }
+          },
+          "no_supported_candidate_positive": {
+            "patients": 12,
+            "rules": {
+              "utility": {
+                "yes": 2,
+                "no": 9,
+                "abstain": 1,
+                "correct": 0
+              }
+            }
+          }
+        },
+        "probability_conflict": {
+          "tolerance": 1e-06,
+          "count": 46,
+          "fraction": 0.1796875,
+          "mean_excess": 0.012053588166419079,
+          "max_excess": 0.5105151116652604
+        },
+        "heads": {
+          "supported_yes": {
+            "brier": 0.0644288922283427,
+            "auroc": 0.799409303470342,
+            "average_precision": 0.18950606827188154,
+            "reliability_bins": [
+              {
+                "lower": 0.0,
+                "upper": 0.2,
+                "patients": 242,
+                "mean_probability": 0.0218348777465981,
+                "observed_correct_fraction": 0.05785123966942149
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.4,
+                "patients": 6,
+                "mean_probability": 0.31554495708711006,
+                "observed_correct_fraction": 0.16666666666666666
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.6000000000000001,
+                "patients": 6,
+                "mean_probability": 0.48196144761691,
+                "observed_correct_fraction": 0.3333333333333333
+              },
+              {
+                "lower": 0.6000000000000001,
+                "upper": 0.8,
+                "patients": 2,
+                "mean_probability": 0.7577711815479488,
+                "observed_correct_fraction": 0.0
+              },
+              {
+                "lower": 0.8,
+                "upper": 1.0,
+                "patients": 0,
+                "mean_probability": null,
+                "observed_correct_fraction": null
+              }
+            ]
+          },
+          "correct_no": {
+            "brier": 0.10176631593088536,
+            "auroc": 0.8198198198198198,
+            "average_precision": 0.9572125722373188,
+            "reliability_bins": [
+              {
+                "lower": 0.0,
+                "upper": 0.2,
+                "patients": 8,
+                "mean_probability": 0.11426997650496175,
+                "observed_correct_fraction": 0.125
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.4,
+                "patients": 11,
+                "mean_probability": 0.32438136688609187,
+                "observed_correct_fraction": 0.8181818181818182
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.6000000000000001,
+                "patients": 11,
+                "mean_probability": 0.5100302721980365,
+                "observed_correct_fraction": 0.45454545454545453
+              },
+              {
+                "lower": 0.6000000000000001,
+                "upper": 0.8,
+                "patients": 14,
+                "mean_probability": 0.7136370799401127,
+                "observed_correct_fraction": 0.5
+              },
+              {
+                "lower": 0.8,
+                "upper": 1.0,
+                "patients": 212,
+                "mean_probability": 0.9655677593990672,
+                "observed_correct_fraction": 0.9292452830188679
+              }
+            ]
+          }
+        }
+      },
+      "calibrated": {
+        "patients": 256,
+        "groups": {
+          "negative": {
+            "patients": 219,
+            "rules": {
+              "utility": {
+                "yes": 0,
+                "no": 205,
+                "abstain": 14,
+                "correct": 205
+              },
+              "calibrated_threshold": {
+                "yes": 0,
+                "no": 177,
+                "abstain": 42,
+                "correct": 177
+              }
+            }
+          },
+          "top1_supported_positive": {
+            "patients": 17,
+            "rules": {
+              "utility": {
+                "yes": 1,
+                "no": 14,
+                "abstain": 2,
+                "correct": 1
+              },
+              "calibrated_threshold": {
+                "yes": 0,
+                "no": 5,
+                "abstain": 12,
+                "correct": 0
+              }
+            }
+          },
+          "other_candidate_supported_positive": {
+            "patients": 8,
+            "rules": {
+              "utility": {
+                "yes": 0,
+                "no": 5,
+                "abstain": 3,
+                "correct": 0
+              },
+              "calibrated_threshold": {
+                "yes": 0,
+                "no": 1,
+                "abstain": 7,
+                "correct": 0
+              }
+            }
+          },
+          "no_supported_candidate_positive": {
+            "patients": 12,
+            "rules": {
+              "utility": {
+                "yes": 2,
+                "no": 9,
+                "abstain": 1,
+                "correct": 0
+              },
+              "calibrated_threshold": {
+                "yes": 0,
+                "no": 4,
+                "abstain": 8,
+                "correct": 0
+              }
+            }
+          }
+        },
+        "probability_conflict": {
+          "tolerance": 1e-06,
+          "count": 46,
+          "fraction": 0.1796875,
+          "mean_excess": 0.013478051692139349,
+          "max_excess": 0.5461839644732458
+        },
+        "heads": {
+          "supported_yes": {
+            "brier": 0.0653035679642697,
+            "auroc": 0.799409303470342,
+            "average_precision": 0.18950606827188154,
+            "reliability_bins": [
+              {
+                "lower": 0.0,
+                "upper": 0.2,
+                "patients": 235,
+                "mean_probability": 0.020375913309536902,
+                "observed_correct_fraction": 0.05106382978723404
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.4,
+                "patients": 11,
+                "mean_probability": 0.25884551561457664,
+                "observed_correct_fraction": 0.2727272727272727
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.6000000000000001,
+                "patients": 6,
+                "mean_probability": 0.4671416953555134,
+                "observed_correct_fraction": 0.16666666666666666
+              },
+              {
+                "lower": 0.6000000000000001,
+                "upper": 0.8,
+                "patients": 3,
+                "mean_probability": 0.6668511724543812,
+                "observed_correct_fraction": 0.3333333333333333
+              },
+              {
+                "lower": 0.8,
+                "upper": 1.0,
+                "patients": 1,
+                "mean_probability": 0.8082139993547873,
+                "observed_correct_fraction": 0.0
+              }
+            ]
+          },
+          "correct_no": {
+            "brier": 0.10212958099239389,
+            "auroc": 0.8198198198198198,
+            "average_precision": 0.9572125722373188,
+            "reliability_bins": [
+              {
+                "lower": 0.0,
+                "upper": 0.2,
+                "patients": 8,
+                "mean_probability": 0.09663282059616479,
+                "observed_correct_fraction": 0.125
+              },
+              {
+                "lower": 0.2,
+                "upper": 0.4,
+                "patients": 15,
+                "mean_probability": 0.30986390599831815,
+                "observed_correct_fraction": 0.8666666666666667
+              },
+              {
+                "lower": 0.4,
+                "upper": 0.6000000000000001,
+                "patients": 8,
+                "mean_probability": 0.5177530109703281,
+                "observed_correct_fraction": 0.125
+              },
+              {
+                "lower": 0.6000000000000001,
+                "upper": 0.8,
+                "patients": 21,
+                "mean_probability": 0.7196386217953852,
+                "observed_correct_fraction": 0.6666666666666666
+              },
+              {
+                "lower": 0.8,
+                "upper": 1.0,
+                "patients": 204,
+                "mean_probability": 0.9659374825553076,
+                "observed_correct_fraction": 0.9313725490196079
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

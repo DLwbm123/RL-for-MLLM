@@ -1,0 +1,8 @@
+{
+  "schema": "p9-features-v1",
+  "patients_planned": 1024,
+  "patients_persisted": 1024,
+  "chunk_size": 32,
+  "complete": true,
+  "atomic_chunk_writes": true
+}

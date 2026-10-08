@@ -1,0 +1,16 @@
+{
+  "target_positive_prior": 0.121875,
+  "calibration_positive_fraction": 0.5,
+  "bias_shift": [
+    0.20111537296528798,
+    -0.1936093750055037
+  ],
+  "utility_minimum_correctness": 0.4,
+  "correctness_reject_threshold": 0.8883615769825279,
+  "weighted_calibration_coverage": 0.766796875,
+  "detector_threshold": 0.3312948644161225,
+  "detector_reject_threshold": 0.3285163925029338,
+  "weighted_brier_before": 0.07122233784608992,
+  "weighted_brier_after": 0.07164691810880838,
+  "scope": "Two regularized intercept corrections on 64 calibration patients; not a clinical calibration guarantee; no development-based threshold choice"
+}

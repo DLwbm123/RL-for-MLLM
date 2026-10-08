@@ -1,0 +1,32 @@
+{
+  "patients": 960,
+  "positive": 117,
+  "top1_supported_positive": 51,
+  "positive_without_supported_candidate": 53,
+  "new_detector_steps": 2400,
+  "folds": 3,
+  "patient_leakage": 0,
+  "fold_receipts": [
+    {
+      "fold": 1,
+      "fit_patients": 640,
+      "heldout_patients": 320,
+      "overlap": 0,
+      "steps": 800
+    },
+    {
+      "fold": 2,
+      "fit_patients": 640,
+      "heldout_patients": 320,
+      "overlap": 0,
+      "steps": 800
+    },
+    {
+      "fold": 3,
+      "fit_patients": 640,
+      "heldout_patients": 320,
+      "overlap": 0,
+      "steps": 800
+    }
+  ]
+}

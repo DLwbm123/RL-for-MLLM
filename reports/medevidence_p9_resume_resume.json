@@ -1,0 +1,17 @@
+{
+  "status": "prepared",
+  "resume_from": "P9 frozen visual features",
+  "original_execution_source_commit": "5672cd293a7e4eaba97b0673f814b1328e3c321e",
+  "engineering_source_commit": "c28aca50e6c7f784e3bb2cd446fa7ec3fe12b4f3",
+  "historical_P9_GPU_seconds": 1715.3540925979614,
+  "prior_combined_GPU_seconds": 5855.87869143486,
+  "continuation_limit_seconds": 2700,
+  "reused_detector_steps": 2400,
+  "new_detector_steps_planned": 0,
+  "reused_training_candidate_patients": 960,
+  "reused_calibration_candidate_patients": 64,
+  "reused_development_cached_patients": 256,
+  "chunk_size": 32,
+  "scientific_configuration_unchanged": true,
+  "checks": "provenance metadata, patient membership and cache readability; no file hashes"
+}

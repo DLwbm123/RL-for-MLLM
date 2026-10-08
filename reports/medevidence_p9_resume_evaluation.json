@@ -1,0 +1,397 @@
+{
+  "metrics": {
+    "detector_threshold": {
+      "patients": 256,
+      "positive_supported_success_rate": 0.24324324324324326,
+      "negative_wrong_yes_rate": 0.0730593607305936,
+      "coverage": 1.0,
+      "answered_risk": 0.171875,
+      "mean_utility": 0.65625,
+      "positive_supported_success": 9,
+      "negative_wrong_yes": 16,
+      "wrong_no": 13,
+      "abstentions": 0
+    },
+    "detector_calibrated75": {
+      "patients": 256,
+      "positive_supported_success_rate": 0.24324324324324326,
+      "negative_wrong_yes_rate": 0.0365296803652968,
+      "coverage": 0.67578125,
+      "answered_risk": 0.14450867052023122,
+      "mean_utility": 0.41562499903375283,
+      "positive_supported_success": 9,
+      "negative_wrong_yes": 8,
+      "wrong_no": 5,
+      "abstentions": 83
+    },
+    "correctness_utility": {
+      "patients": 256,
+      "positive_supported_success_rate": 0.02702702702702703,
+      "negative_wrong_yes_rate": 0.0,
+      "coverage": 0.921875,
+      "answered_risk": 0.1271186440677966,
+      "mean_utility": 0.6718749997671694,
+      "positive_supported_success": 1,
+      "negative_wrong_yes": 0,
+      "wrong_no": 28,
+      "abstentions": 20
+    },
+    "correctness_calibrated75": {
+      "patients": 256,
+      "positive_supported_success_rate": 0.0,
+      "negative_wrong_yes_rate": 0.0,
+      "coverage": 0.73046875,
+      "answered_risk": 0.053475935828877004,
+      "mean_utility": 0.5984374991967343,
+      "positive_supported_success": 0,
+      "negative_wrong_yes": 0,
+      "wrong_no": 10,
+      "abstentions": 69
+    },
+    "always_no": {
+      "patients": 256,
+      "positive_supported_success_rate": 0.0,
+      "negative_wrong_yes_rate": 0.0,
+      "coverage": 1.0,
+      "answered_risk": 0.14453125,
+      "mean_utility": 0.7109375,
+      "positive_supported_success": 0,
+      "negative_wrong_yes": 0,
+      "wrong_no": 37,
+      "abstentions": 0
+    },
+    "always_abstain": {
+      "patients": 256,
+      "positive_supported_success_rate": 0.0,
+      "negative_wrong_yes_rate": 0.0,
+      "coverage": 0.0,
+      "answered_risk": null,
+      "mean_utility": -0.20000000298023224,
+      "positive_supported_success": 0,
+      "negative_wrong_yes": 0,
+      "wrong_no": 0,
+      "abstentions": 256
+    }
+  },
+  "matched_coverage": {
+    "detector_threshold": [
+      {
+        "available": true,
+        "coverage": 0.25,
+        "maximum_coverage": 1.0,
+        "answered_risk": 0.3215392561983471,
+        "positive_supported_success_rate": 0.24324324324324326,
+        "negative_wrong_yes_rate": 0.0365296803652968,
+        "positive_supported_success": 9.0,
+        "negative_wrong_yes": 8.0,
+        "mean_utility": -0.06076962809917358
+      },
+      {
+        "available": true,
+        "coverage": 0.5,
+        "maximum_coverage": 1.0,
+        "answered_risk": 0.1690340909090909,
+        "positive_supported_success_rate": 0.24324324324324326,
+        "negative_wrong_yes_rate": 0.0365296803652968,
+        "positive_supported_success": 9.0,
+        "negative_wrong_yes": 8.0,
+        "mean_utility": 0.2309659090909091
+      },
+      {
+        "available": true,
+        "coverage": 0.75,
+        "maximum_coverage": 1.0,
+        "answered_risk": 0.13541666666666666,
+        "positive_supported_success_rate": 0.24324324324324326,
+        "negative_wrong_yes_rate": 0.0365296803652968,
+        "positive_supported_success": 9.0,
+        "negative_wrong_yes": 8.0,
+        "mean_utility": 0.496875
+      },
+      {
+        "available": true,
+        "coverage": 0.9,
+        "maximum_coverage": 1.0,
+        "answered_risk": 0.1519097222222222,
+        "positive_supported_success_rate": 0.24324324324324326,
+        "negative_wrong_yes_rate": 0.0410958904109589,
+        "positive_supported_success": 9.0,
+        "negative_wrong_yes": 9.0,
+        "mean_utility": 0.6065625
+      },
+      {
+        "available": true,
+        "coverage": 1.0,
+        "maximum_coverage": 1.0,
+        "answered_risk": 0.171875,
+        "positive_supported_success_rate": 0.24324324324324326,
+        "negative_wrong_yes_rate": 0.0730593607305936,
+        "positive_supported_success": 9.0,
+        "negative_wrong_yes": 16.0,
+        "mean_utility": 0.65625
+      }
+    ],
+    "detector_calibrated75": [
+      {
+        "available": true,
+        "coverage": 0.25,
+        "maximum_coverage": 0.67578125,
+        "answered_risk": 0.3215392561983471,
+        "positive_supported_success_rate": 0.24324324324324326,
+        "negative_wrong_yes_rate": 0.0365296803652968,
+        "positive_supported_success": 9.0,
+        "negative_wrong_yes": 8.0,
+        "mean_utility": -0.06076962809917358
+      },
+      {
+        "available": true,
+        "coverage": 0.5,
+        "maximum_coverage": 0.67578125,
+        "answered_risk": 0.1690340909090909,
+        "positive_supported_success_rate": 0.24324324324324326,
+        "negative_wrong_yes_rate": 0.0365296803652968,
+        "positive_supported_success": 9.0,
+        "negative_wrong_yes": 8.0,
+        "mean_utility": 0.2309659090909091
+      },
+      {
+        "available": false,
+        "maximum_coverage": 0.67578125,
+        "requested_coverage": 0.75
+      },
+      {
+        "available": false,
+        "maximum_coverage": 0.67578125,
+        "requested_coverage": 0.9
+      },
+      {
+        "available": false,
+        "maximum_coverage": 0.67578125,
+        "requested_coverage": 1.0
+      }
+    ],
+    "correctness_utility": [
+      {
+        "available": true,
+        "coverage": 0.25,
+        "maximum_coverage": 0.921875,
+        "answered_risk": 0.03125,
+        "positive_supported_success_rate": 0.0,
+        "negative_wrong_yes_rate": 0.0,
+        "positive_supported_success": 0.0,
+        "negative_wrong_yes": 0.0,
+        "mean_utility": 0.08437499999999998
+      },
+      {
+        "available": true,
+        "coverage": 0.5,
+        "maximum_coverage": 0.921875,
+        "answered_risk": 0.046875,
+        "positive_supported_success_rate": 0.0,
+        "negative_wrong_yes_rate": 0.0,
+        "positive_supported_success": 0.0,
+        "negative_wrong_yes": 0.0,
+        "mean_utility": 0.353125
+      },
+      {
+        "available": true,
+        "coverage": 0.75,
+        "maximum_coverage": 0.921875,
+        "answered_risk": 0.057291666666666664,
+        "positive_supported_success_rate": 0.0,
+        "negative_wrong_yes_rate": 0.0,
+        "positive_supported_success": 0.0,
+        "negative_wrong_yes": 0.0,
+        "mean_utility": 0.6140625
+      },
+      {
+        "available": true,
+        "coverage": 0.9,
+        "maximum_coverage": 0.921875,
+        "answered_risk": 0.10850694444444445,
+        "positive_supported_success_rate": 0.02702702702702703,
+        "negative_wrong_yes_rate": 0.0,
+        "positive_supported_success": 1.0,
+        "negative_wrong_yes": 0.0,
+        "mean_utility": 0.6846875
+      },
+      {
+        "available": false,
+        "maximum_coverage": 0.921875,
+        "requested_coverage": 1.0
+      }
+    ],
+    "correctness_calibrated75": [
+      {
+        "available": true,
+        "coverage": 0.25,
+        "maximum_coverage": 0.73046875,
+        "answered_risk": 0.03125,
+        "positive_supported_success_rate": 0.0,
+        "negative_wrong_yes_rate": 0.0,
+        "positive_supported_success": 0.0,
+        "negative_wrong_yes": 0.0,
+        "mean_utility": 0.08437499999999998
+      },
+      {
+        "available": true,
+        "coverage": 0.5,
+        "maximum_coverage": 0.73046875,
+        "answered_risk": 0.046875,
+        "positive_supported_success_rate": 0.0,
+        "negative_wrong_yes_rate": 0.0,
+        "positive_supported_success": 0.0,
+        "negative_wrong_yes": 0.0,
+        "mean_utility": 0.353125
+      },
+      {
+        "available": false,
+        "maximum_coverage": 0.73046875,
+        "requested_coverage": 0.75
+      },
+      {
+        "available": false,
+        "maximum_coverage": 0.73046875,
+        "requested_coverage": 0.9
+      },
+      {
+        "available": false,
+        "maximum_coverage": 0.73046875,
+        "requested_coverage": 1.0
+      }
+    ],
+    "always_no": [
+      {
+        "available": true,
+        "coverage": 0.25,
+        "maximum_coverage": 1.0,
+        "answered_risk": 0.14453125,
+        "positive_supported_success_rate": 0.0,
+        "negative_wrong_yes_rate": 0.0,
+        "positive_supported_success": 0.0,
+        "negative_wrong_yes": 0.0,
+        "mean_utility": 0.027734374999999978
+      },
+      {
+        "available": true,
+        "coverage": 0.5,
+        "maximum_coverage": 1.0,
+        "answered_risk": 0.14453125,
+        "positive_supported_success_rate": 0.0,
+        "negative_wrong_yes_rate": 0.0,
+        "positive_supported_success": 0.0,
+        "negative_wrong_yes": 0.0,
+        "mean_utility": 0.25546875
+      },
+      {
+        "available": true,
+        "coverage": 0.75,
+        "maximum_coverage": 1.0,
+        "answered_risk": 0.14453125,
+        "positive_supported_success_rate": 0.0,
+        "negative_wrong_yes_rate": 0.0,
+        "positive_supported_success": 0.0,
+        "negative_wrong_yes": 0.0,
+        "mean_utility": 0.483203125
+      },
+      {
+        "available": true,
+        "coverage": 0.9000000000000002,
+        "maximum_coverage": 1.0,
+        "answered_risk": 0.14453124999999994,
+        "positive_supported_success_rate": 0.0,
+        "negative_wrong_yes_rate": 0.0,
+        "positive_supported_success": 0.0,
+        "negative_wrong_yes": 0.0,
+        "mean_utility": 0.6198437499999999
+      },
+      {
+        "available": true,
+        "coverage": 1.0,
+        "maximum_coverage": 1.0,
+        "answered_risk": 0.14453125,
+        "positive_supported_success_rate": 0.0,
+        "negative_wrong_yes_rate": 0.0,
+        "positive_supported_success": 0.0,
+        "negative_wrong_yes": 0.0,
+        "mean_utility": 0.7109375
+      }
+    ],
+    "always_abstain": [
+      {
+        "available": false,
+        "maximum_coverage": 0.0,
+        "requested_coverage": 0.25
+      },
+      {
+        "available": false,
+        "maximum_coverage": 0.0,
+        "requested_coverage": 0.5
+      },
+      {
+        "available": false,
+        "maximum_coverage": 0.0,
+        "requested_coverage": 0.75
+      },
+      {
+        "available": false,
+        "maximum_coverage": 0.0,
+        "requested_coverage": 0.9
+      },
+      {
+        "available": false,
+        "maximum_coverage": 0.0,
+        "requested_coverage": 1.0
+      }
+    ]
+  },
+  "correctness_minus_detector": {
+    "available": true,
+    "coverage": 0.75,
+    "comparison_minus_baseline": {
+      "answered_risk": {
+        "difference": -0.078125,
+        "ci95": [
+          -0.125,
+          -0.041666666666666664
+        ],
+        "valid_replicates": 2000
+      },
+      "positive_supported_success_rate": {
+        "difference": -0.24324324324324326,
+        "ci95": [
+          -0.3870967741935484,
+          -0.10810810810810811
+        ],
+        "valid_replicates": 2000
+      },
+      "negative_wrong_yes_rate": {
+        "difference": -0.0365296803652968,
+        "ci95": [
+          -0.0630701968937263,
+          -0.013759896946085218
+        ],
+        "valid_replicates": 2000
+      },
+      "mean_utility": {
+        "difference": 0.11718749999999994,
+        "ci95": [
+          0.0625,
+          0.18749999999999994
+        ],
+        "valid_replicates": 2000
+      }
+    }
+  },
+  "decision": "STOP_CURRENT_CORRECTNESS_BASELINE",
+  "primary_coverage": 0.75,
+  "primary_scope": "Retrospective matched coverage; deployment-style calibration thresholds reported separately at their actual coverage",
+  "development_brier": [
+    0.06530356796426967,
+    0.1021295809923939
+  ],
+  "development_cached_patients": 256,
+  "new_development_pixel_reads": 0,
+  "RL_updates": 0,
+  "test_pixels_read": 0
+}
