@@ -1,0 +1,13 @@
+{
+  "status": "stopped_budget",
+  "reason": "TimeoutError: Cumulative GPU budget reserve",
+  "stage": "frozen_visual_features",
+  "detector_steps": 2400,
+  "test_pixels_read": 0,
+  "data_access": {
+    "train": 960
+  },
+  "runtime_seconds": 1706.2938714027405,
+  "language_model_updates": 0,
+  "scope": "Three-fold out-of-fold detector proposals; two supervised correctness heads; frozen final P7 detector and Qwen features; no RL or language-model updates. Retrospective development pilot, not clinical safety."
+}

@@ -1,0 +1,62 @@
+{
+  "status": "verified_budget_stop",
+  "run_status": "stopped_budget",
+  "worker_exit_code": 0,
+  "active_GPU_jobs": 0,
+  "detector_updates": 2400,
+  "fold_receipts": [
+    {
+      "fold": 1,
+      "updates": 800,
+      "patient_exposures": 3200,
+      "distinct_fit_patients": 640,
+      "heldout_patients": 320,
+      "fit_heldout_overlap": 0,
+      "checkpoint_present": true
+    },
+    {
+      "fold": 2,
+      "updates": 800,
+      "patient_exposures": 3200,
+      "distinct_fit_patients": 640,
+      "heldout_patients": 320,
+      "fit_heldout_overlap": 0,
+      "checkpoint_present": true
+    },
+    {
+      "fold": 3,
+      "updates": 800,
+      "patient_exposures": 3200,
+      "distinct_fit_patients": 640,
+      "heldout_patients": 320,
+      "fit_heldout_overlap": 0,
+      "checkpoint_present": true
+    }
+  ],
+  "oof_train_candidates": 960,
+  "reused_calibration_candidates": 64,
+  "development_candidates_generated": 0,
+  "positive_top1_supported": 51,
+  "positive_any_candidate_supported": 64,
+  "positive_without_supported_candidate": 53,
+  "last_logged_features_done": 256,
+  "planned_feature_patients": 1024,
+  "feature_count_scope": "Last logged multiple of 128 only; exact partial count unavailable; no completed feature artifact saved",
+  "correctness_head_training_started": false,
+  "calibration_started": false,
+  "development_evaluation_started": false,
+  "artifact_presence": {
+    "training_calibration_features.pt": false,
+    "head_training.json": false,
+    "correctness_heads.pt": false,
+    "calibration.json": false,
+    "evaluation.json": false,
+    "predictions.json": false
+  },
+  "new_development_pixel_reads": 0,
+  "test_pixels_read": 0,
+  "phase_GPU_seconds": 1715.3540925979614,
+  "combined_GPU_hours": 1.6266329698430166,
+  "auto_retry": false,
+  "execution_source_commit": "5672cd293a7e4eaba97b0673f814b1328e3c321e"
+}

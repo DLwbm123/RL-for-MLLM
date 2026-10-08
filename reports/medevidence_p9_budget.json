@@ -1,0 +1,9 @@
+{
+  "status": "stopped_budget",
+  "prior_GPU_seconds": 4140.524598836899,
+  "new_charged_seconds": 1715.3540925979614,
+  "combined_GPU_hours": 1.6266329698430166,
+  "limit_seconds": 10800,
+  "active": [],
+  "exit_code": 0
+}

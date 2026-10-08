@@ -70,6 +70,8 @@ P8固定P7检测器，完成共同warmup、SFT与有限动作奖励优化对照�
 
 见[实际结果与解释](reports/medevidence_p8_decision.md)、[完整指标](reports/medevidence_p8_evaluation.json)、[回执核对及报告导出修复](reports/medevidence_p8_validation.json)和[冻结方案](reports/medevidence_p8_protocol.md)。[启动快照](reports/medevidence_p8_launch.json)仅保留历史状态。
 
-## MedEvidence P9（已后台启动，尚无最终结果）
+## MedEvidence P9（预算停止，全流程未完成）
 
-P9采用三折折外检测候选训练两个独立正确性预测头，保留检测器top1排序，并在64例校准集上固定拒答规则；本轮无RL或语言模型更新。训练候选先检查有真实漏检阳性，再继续后续阶段。新增上限0.5 GPU小时，累计3小时不变。见[冻结方案](reports/medevidence_p9_protocol.md)、[CPU准备检查](reports/medevidence_p9_preparation.json)和[启动时快照](reports/medevidence_p9_launch.json)。启动检查只确认第一折正常更新，不代表全部流程完成或有效。
+P9完成三折检测器共2400步和960人折外候选；117个阳性中64个有正确候选、53个候选全部不支持，补齐了P8缺失的失败样本类型。随后在视觉特征提取阶段触发本轮预算，正确性预测头、校准和开发评价均未启动，没有完整特征缓存，不能报告方案有效性。
+
+本轮计费0.476487 GPU小时，累计1.626633/3；无新增开发/test像素读取，无自动续跑。三折权重与候选已私有保留。见[停止报告](reports/medevidence_p9_decision.md)、[回执核对](reports/medevidence_p9_validation.json)、[折外统计](reports/medevidence_p9_oof.json)和[冻结方案](reports/medevidence_p9_protocol.md)。[启动快照](reports/medevidence_p9_launch.json)仅保留历史状态。
