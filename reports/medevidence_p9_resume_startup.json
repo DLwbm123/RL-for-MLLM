@@ -1,0 +1,50 @@
+{
+  "status_at_startup_check": "running",
+  "checked_at_utc": "2026-10-08T14:25:45.455409+00:00",
+  "source_commit": "c28aca50e6c7f784e3bb2cd446fa7ec3fe12b4f3",
+  "run_id": "medevidence_p9_resume",
+  "phase_GPU_limit_seconds": 2700,
+  "combined_GPU_limit_seconds": 10800,
+  "prior_GPU_seconds": 5855.87869143486,
+  "new_charged_seconds_at_check": 30.004942178726196,
+  "progress": {
+    "stage": "frozen_visual_features",
+    "elapsed_seconds": 26.16502070426941,
+    "argv_verified": true,
+    "reused_detector_steps": 2400,
+    "new_detector_steps": 0,
+    "reused_candidate_patients": 960,
+    "persisted_features": 64,
+    "feature_patients": 1024,
+    "features_done": 64
+  },
+  "cache_state": {
+    "schema": "p9-features-v1",
+    "patients_planned": 1024,
+    "patients_persisted": 64,
+    "chunk_size": 32,
+    "complete": false,
+    "atomic_chunk_writes": true
+  },
+  "resume": {
+    "status": "prepared",
+    "resume_from": "P9 frozen visual features",
+    "original_execution_source_commit": "5672cd293a7e4eaba97b0673f814b1328e3c321e",
+    "engineering_source_commit": "c28aca50e6c7f784e3bb2cd446fa7ec3fe12b4f3",
+    "historical_P9_GPU_seconds": 1715.3540925979614,
+    "prior_combined_GPU_seconds": 5855.87869143486,
+    "continuation_limit_seconds": 2700,
+    "reused_detector_steps": 2400,
+    "new_detector_steps_planned": 0,
+    "reused_training_candidate_patients": 960,
+    "reused_calibration_candidate_patients": 64,
+    "reused_development_cached_patients": 256,
+    "chunk_size": 32,
+    "scientific_configuration_unchanged": true,
+    "checks": "provenance metadata, patient membership and cache readability; no file hashes"
+  },
+  "neutral_process_commands_verified": true,
+  "gpu_forward_confirmed": true,
+  "final_receipt_present": false,
+  "monitoring": "One startup check; no continuing monitor scheduled"
+}
