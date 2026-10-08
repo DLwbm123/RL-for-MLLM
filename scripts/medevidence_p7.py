@@ -39,18 +39,20 @@ def prepare():
     save(p/'CPU_checks.json',receipt);save(base/'code/reports/medevidence_p7_preparation.json',receipt);print(json.dumps(receipt),flush=True)
 
 
-def controller():
-    base=Path(os.environ['PILOT_ROOT']);out=base/'outputs';cfg=read(base/'code/configs/medevidence_p7.json')
+def controller(config_name="medevidence_p7.json",worker_module="src.medevidence_p7"):
+    base=Path(os.environ['PILOT_ROOT']);out=base/'outputs';cfg=read(base/'code/configs'/config_name)
     assert read(out/'protocol/CPU_checks.json')['status']=='passed'
-    if (out/'gpu_ledger.json').exists():raise FileExistsError('P7 already attempted; no automatic retry')
+    if (out/'gpu_ledger.json').exists():raise FileExistsError('Run already attempted; no automatic retry')
     memory={int(s.split(',')[0]):int(s.split(',')[1]) for s in subprocess.check_output(['nvidia-smi','--query-gpu=index,memory.free','--format=csv,noheader,nounits'],text=True).splitlines()}
     gpu=next((g for g in cfg['allowed_gpus'] if memory[g]>=cfg['minimum_free_memory_mib']),None)
     if gpu is None:raise RuntimeError('Insufficient authorized GPU memory; no launch')
-    quota=cfg['combined_GPU_limit_seconds']-cfg['prior_GPU_seconds']-cfg['exit_reserve_seconds'];started=time.time();deadline=started+quota
+    quota=min(cfg['combined_GPU_limit_seconds']-cfg['prior_GPU_seconds'],cfg.get('phase_GPU_limit_seconds',float('inf')))-cfg['exit_reserve_seconds']
+    assert quota>60
+    started=time.time();deadline=started+quota
     env=os.environ.copy();env.update(CUDA_VISIBLE_DEVICES=str(gpu),JOB_DEADLINE=str(deadline),DATASET_NAME='rsna')
     with (base/'logs/worker.log').open('x') as log:
         proc=subprocess.Popen([sys.executable,'-u','-'],stdin=subprocess.PIPE,stdout=log,stderr=subprocess.STDOUT,cwd=base/'code',env=env,start_new_session=True)
-        proc.stdin.write(b'from src.medevidence_p7 import worker;worker()\n');proc.stdin.close();signaled=False
+        proc.stdin.write(('from '+worker_module+' import worker;worker()\n').encode());proc.stdin.close();signaled=False
         def ledger(status):
             charged=time.time()-started
             save(out/'gpu_ledger.json',{'status':status,'prior_GPU_seconds':cfg['prior_GPU_seconds'],'new_charged_seconds':charged,
@@ -71,8 +73,9 @@ def controller():
             'detector_steps':progress.get('steps',0),'test_pixels_read':None,'language_model_updates':0,'scope':cfg['scope']})
     result=read(out/'FINAL.json')
     if proc.returncode and result['status']=='completed':result['status']='failed';result['reason']='nonzero worker exit';save(out/'FINAL.json',result)
-    ledger(result['status']);from src.medevidence_p7 import report
-    report()
+    ledger(result['status'])
+    from importlib import import_module
+    import_module(worker_module).report()
 
 
 if __name__=='__main__':{'prepare':prepare,'controller':controller}[os.environ['P7_ACTION']]()

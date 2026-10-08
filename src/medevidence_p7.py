@@ -76,10 +76,10 @@ def paired(a,b,repeats=2000):
 
 
 class Run:
-    def __init__(self):
+    def __init__(self,config_name="medevidence_p7.json"):
         import pandas as pd
         from src.experiment import seed_all
-        self.start=time.time();self.base=Path(os.environ['PILOT_ROOT']);self.out=self.base/'outputs';self.cfg=read(self.base/'code/configs/medevidence_p7.json')
+        self.start=time.time();self.base=Path(os.environ['PILOT_ROOT']);self.out=self.base/'outputs';self.cfg=read(self.base/'code/configs'/config_name)
         self.deadline=float(os.environ['JOB_DEADLINE']);self.stop=False
         signal.signal(signal.SIGUSR1,lambda *_:setattr(self,'stop',True))
         auth=read(self.out/'authorization.json');assert auth['gpu_authorized'] and auth['source_commit']
@@ -298,10 +298,10 @@ class Run:
         return 'completed'
 
 
-def worker():
+def worker(run_class=Run):
     run=None
     try:
-        run=Run();status=run.execute();reason=None
+        run=run_class();status=run.execute();reason=None
     except Exception as exc:
         status='stopped_budget' if isinstance(exc,TimeoutError) else 'failed';reason=type(exc).__name__+': '+str(exc)
         if run:save(run.out/'failure.json',{'reason':reason,'stage':run.stage,'detector_steps':run.detector_steps})
