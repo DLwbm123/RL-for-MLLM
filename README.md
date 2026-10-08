@@ -69,3 +69,7 @@ P7检测器完成800步；校准集最多8个候选覆盖18/32阳性、匹配22/
 P8固定P7检测器，完成共同warmup、SFT与有限动作奖励优化对照。在相同75%回答覆盖率下，检测器/SFT/bandit错误风险为13.54%/6.77%/45.73%，阳性有证据成功为9/37、0/37、12/37；bandit阴性误报73/219。SFT牺牲了阳性证据成功，bandit明显增加风险，均不满足冻结继续条件，决策为`STOP_CURRENT_SELECTOR_BRANCH`。本轮0.118074 GPU小时，累计1.150146/3；test读取0，无自动续跑。
 
 见[实际结果与解释](reports/medevidence_p8_decision.md)、[完整指标](reports/medevidence_p8_evaluation.json)、[回执核对及报告导出修复](reports/medevidence_p8_validation.json)和[冻结方案](reports/medevidence_p8_protocol.md)。[启动快照](reports/medevidence_p8_launch.json)仅保留历史状态。
+
+## MedEvidence P9（已后台启动，尚无最终结果）
+
+P9采用三折折外检测候选训练两个独立正确性预测头，保留检测器top1排序，并在64例校准集上固定拒答规则；本轮无RL或语言模型更新。训练候选先检查有真实漏检阳性，再继续后续阶段。新增上限0.5 GPU小时，累计3小时不变。见[冻结方案](reports/medevidence_p9_protocol.md)、[CPU准备检查](reports/medevidence_p9_preparation.json)和[启动时快照](reports/medevidence_p9_launch.json)。启动检查只确认第一折正常更新，不代表全部流程完成或有效。

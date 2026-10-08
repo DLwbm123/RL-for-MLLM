@@ -1,0 +1,34 @@
+{
+  "status": "passed",
+  "patients": {
+    "train": {
+      "patients": 960,
+      "positive": 117,
+      "negative": 843
+    },
+    "calibration": {
+      "patients": 64,
+      "positive": 32,
+      "negative": 32
+    },
+    "dev": {
+      "patients": 256,
+      "positive": 37,
+      "negative": 219
+    }
+  },
+  "train_cal_dev_overlap": 0,
+  "test_pixels_read": 0,
+  "detector_weight_load": "passed_CPU",
+  "synthetic_actor_tests": "passed",
+  "prior_GPU_seconds": 4140.524598836899,
+  "source_commit": "5672cd293a7e4eaba97b0673f814b1328e3c321e",
+  "matched_coverage_checks": "passed",
+  "phase_GPU_limit_seconds": 1800,
+  "folds": 3,
+  "heldout_patients_per_fold": 320,
+  "heldout_positive_per_fold": 39,
+  "detector_patients_per_fold": 640,
+  "fold_patient_overlap": 0,
+  "correctness_cpu_checks": "passed"
+}
