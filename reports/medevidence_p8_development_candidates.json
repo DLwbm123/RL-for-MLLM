@@ -1,0 +1,18 @@
+{
+  "positive_patients": 37,
+  "covered_positive_patients": 25,
+  "positive_any_hit": 0.6756756756756757,
+  "GT_regions": 51,
+  "matched_regions": 29,
+  "region_recall": 0.5686274509803921,
+  "shuffled_any_hit_mean": 0.046756756756756765,
+  "real_minus_shuffled_any_hit": 0.6289189189189189,
+  "permutation_repeats": 100,
+  "conditions": {
+    "positive_any_hit": false,
+    "region_recall": false,
+    "real_minus_shuffled_any_hit": true
+  },
+  "passed": false,
+  "scope": "Candidate support only; not diagnostic reliability"
+}

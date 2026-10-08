@@ -64,6 +64,8 @@ P4完成完整框SFT，RL未通过启动门槛；P5完成两个坐标接口诊�
 
 P7检测器完成800步；校准集最多8个候选覆盖18/32阳性、匹配22/49区域，未达到冻结的75%/60%门槛，后续选择器SFT及bandit均未启动。真实覆盖高于患者错配对照，但不能称定位器已可靠或RL有效。见[最终结果](reports/medevidence_p7_decision.md)、[回执核对](reports/medevidence_p7_validation.json)和[冻结方案](reports/medevidence_p7_protocol.md)。累计1.032072/3 GPU小时，开发和test未新增读取；历史启动快照不是当前状态。
 
-## MedEvidence P8（已后台启动，尚无最终结果）
+## MedEvidence P8（已完成，停止当前选择器分支）
 
-P8固定P7第800步检测器，单次比较分数阈值、SFT和有限动作奖励优化；主要比较75%回答覆盖率下的错误风险，并约束阳性有证据成功率与阴性误报。新增上限0.5 GPU小时，累计3 GPU小时上限不变；P7候选门槛失败结论保留，不自动重试。见[冻结方案](reports/medevidence_p8_protocol.md)、[CPU准备检查](reports/medevidence_p8_preparation.json)和[启动时快照](reports/medevidence_p8_launch.json)。启动快照只证明该时刻运行，不能代替最终回执或效能结论。
+P8固定P7检测器，完成共同warmup、SFT与有限动作奖励优化对照。在相同75%回答覆盖率下，检测器/SFT/bandit错误风险为13.54%/6.77%/45.73%，阳性有证据成功为9/37、0/37、12/37；bandit阴性误报73/219。SFT牺牲了阳性证据成功，bandit明显增加风险，均不满足冻结继续条件，决策为`STOP_CURRENT_SELECTOR_BRANCH`。本轮0.118074 GPU小时，累计1.150146/3；test读取0，无自动续跑。
+
+见[实际结果与解释](reports/medevidence_p8_decision.md)、[完整指标](reports/medevidence_p8_evaluation.json)、[回执核对及报告导出修复](reports/medevidence_p8_validation.json)和[冻结方案](reports/medevidence_p8_protocol.md)。[启动快照](reports/medevidence_p8_launch.json)仅保留历史状态。

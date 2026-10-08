@@ -1,4 +1,5 @@
 """One frozen-detector selection experiment; matched coverage is descriptive evaluation."""
+import json
 import os
 from pathlib import Path
 import numpy as np

@@ -1,0 +1,14 @@
+{
+  "status": "completed",
+  "reason": null,
+  "stage": "evaluation",
+  "detector_steps": 0,
+  "test_pixels_read": 0,
+  "data_access": {
+    "train": 960,
+    "validation": 256
+  },
+  "runtime_seconds": 414.50592279434204,
+  "language_model_updates": 0,
+  "scope": "Frozen P7 detector with incomplete candidates; frozen Qwen visual features; SFT versus exact finite-action expected reward. No detector or language-model updates, no clinical safety or independent generalization claim."
+}

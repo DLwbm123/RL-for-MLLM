@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "worker_completed": true,
+  "worker_exit_code": 0,
+  "active_GPU_jobs": 0,
+  "prediction_methods": 6,
+  "development_patients_per_method": 256,
+  "prediction_aggregate_recheck": "passed",
+  "warmup_steps": 128,
+  "SFT_continuation_steps": 128,
+  "bandit_continuation_steps": 128,
+  "training_schedules_exclude_calibration_and_development": true,
+  "train_cal_dev_overlap": 0,
+  "new_detector_steps": 0,
+  "language_model_updates": 0,
+  "test_pixels_read": 0,
+  "data_access": {
+    "train": 960,
+    "validation": 256
+  },
+  "phase_GPU_seconds": 425.06687235832214,
+  "combined_GPU_hours": 1.1501457218991387,
+  "report_export_repair": "Added missing json import; regenerated aggregates on CPU from completed receipts; no experimental rerun",
+  "execution_source_commit": "8b95819b2c2c953abf716832830a534aa50dd3e1"
+}

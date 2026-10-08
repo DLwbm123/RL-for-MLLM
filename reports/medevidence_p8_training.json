@@ -1,0 +1,20 @@
+{
+  "warmup": {
+    "steps": 128,
+    "first_loss": 1.1632224321365356,
+    "last_loss": 0.7030103206634521,
+    "patient_exposures": 2048
+  },
+  "SFT": {
+    "steps": 128,
+    "first_loss": 0.6723371148109436,
+    "last_loss": 0.4430848956108093,
+    "patient_exposures": 2048
+  },
+  "bandit": {
+    "steps": 128,
+    "first_loss": -0.3146187365055084,
+    "last_loss": -0.2308882176876068,
+    "patient_exposures": 2048
+  }
+}

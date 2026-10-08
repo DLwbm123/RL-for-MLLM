@@ -1,0 +1,516 @@
+{
+  "metrics": {
+    "detector_threshold": {
+      "patients": 256,
+      "positive_supported_success_rate": 0.24324324324324326,
+      "negative_wrong_yes_rate": 0.0730593607305936,
+      "coverage": 1.0,
+      "answered_risk": 0.171875,
+      "mean_utility": 0.65625,
+      "positive_supported_success": 9,
+      "negative_wrong_yes": 16,
+      "wrong_no": 13,
+      "abstentions": 0
+    },
+    "always_no": {
+      "patients": 256,
+      "positive_supported_success_rate": 0.0,
+      "negative_wrong_yes_rate": 0.0,
+      "coverage": 1.0,
+      "answered_risk": 0.14453125,
+      "mean_utility": 0.7109375,
+      "positive_supported_success": 0,
+      "negative_wrong_yes": 0,
+      "wrong_no": 37,
+      "abstentions": 0
+    },
+    "always_abstain": {
+      "patients": 256,
+      "positive_supported_success_rate": 0.0,
+      "negative_wrong_yes_rate": 0.0,
+      "coverage": 0.0,
+      "answered_risk": null,
+      "mean_utility": -0.20000000298023224,
+      "positive_supported_success": 0,
+      "negative_wrong_yes": 0,
+      "wrong_no": 0,
+      "abstentions": 256
+    },
+    "warmup": {
+      "patients": 256,
+      "positive_supported_success_rate": 0.32432432432432434,
+      "negative_wrong_yes_rate": 0.3059360730593607,
+      "coverage": 1.0,
+      "answered_risk": 0.359375,
+      "mean_utility": 0.28125,
+      "positive_supported_success": 12,
+      "negative_wrong_yes": 67,
+      "wrong_no": 4,
+      "abstentions": 0
+    },
+    "SFT": {
+      "patients": 256,
+      "positive_supported_success_rate": 0.0,
+      "negative_wrong_yes_rate": 0.0045662100456621,
+      "coverage": 1.0,
+      "answered_risk": 0.1484375,
+      "mean_utility": 0.703125,
+      "positive_supported_success": 0,
+      "negative_wrong_yes": 1,
+      "wrong_no": 32,
+      "abstentions": 0
+    },
+    "bandit": {
+      "patients": 256,
+      "positive_supported_success_rate": 0.4594594594594595,
+      "negative_wrong_yes_rate": 0.4474885844748858,
+      "coverage": 1.0,
+      "answered_risk": 0.4609375,
+      "mean_utility": 0.078125,
+      "positive_supported_success": 17,
+      "negative_wrong_yes": 98,
+      "wrong_no": 2,
+      "abstentions": 0
+    }
+  },
+  "matched_coverage": {
+    "detector_threshold": [
+      {
+        "available": true,
+        "coverage": 0.25,
+        "maximum_coverage": 1.0,
+        "answered_risk": 0.3215392561983471,
+        "positive_supported_success_rate": 0.24324324324324326,
+        "negative_wrong_yes_rate": 0.0365296803652968,
+        "positive_supported_success": 9.0,
+        "negative_wrong_yes": 8.0,
+        "mean_utility": -0.06076962809917358
+      },
+      {
+        "available": true,
+        "coverage": 0.5,
+        "maximum_coverage": 1.0,
+        "answered_risk": 0.1690340909090909,
+        "positive_supported_success_rate": 0.24324324324324326,
+        "negative_wrong_yes_rate": 0.0365296803652968,
+        "positive_supported_success": 9.0,
+        "negative_wrong_yes": 8.0,
+        "mean_utility": 0.2309659090909091
+      },
+      {
+        "available": true,
+        "coverage": 0.75,
+        "maximum_coverage": 1.0,
+        "answered_risk": 0.13541666666666666,
+        "positive_supported_success_rate": 0.24324324324324326,
+        "negative_wrong_yes_rate": 0.0365296803652968,
+        "positive_supported_success": 9.0,
+        "negative_wrong_yes": 8.0,
+        "mean_utility": 0.496875
+      },
+      {
+        "available": true,
+        "coverage": 0.9,
+        "maximum_coverage": 1.0,
+        "answered_risk": 0.1519097222222222,
+        "positive_supported_success_rate": 0.24324324324324326,
+        "negative_wrong_yes_rate": 0.0410958904109589,
+        "positive_supported_success": 9.0,
+        "negative_wrong_yes": 9.0,
+        "mean_utility": 0.6065625
+      },
+      {
+        "available": true,
+        "coverage": 1.0,
+        "maximum_coverage": 1.0,
+        "answered_risk": 0.171875,
+        "positive_supported_success_rate": 0.24324324324324326,
+        "negative_wrong_yes_rate": 0.0730593607305936,
+        "positive_supported_success": 9.0,
+        "negative_wrong_yes": 16.0,
+        "mean_utility": 0.65625
+      }
+    ],
+    "always_no": [
+      {
+        "available": true,
+        "coverage": 0.25,
+        "maximum_coverage": 1.0,
+        "answered_risk": 0.14453125,
+        "positive_supported_success_rate": 0.0,
+        "negative_wrong_yes_rate": 0.0,
+        "positive_supported_success": 0.0,
+        "negative_wrong_yes": 0.0,
+        "mean_utility": 0.027734374999999978
+      },
+      {
+        "available": true,
+        "coverage": 0.5,
+        "maximum_coverage": 1.0,
+        "answered_risk": 0.14453125,
+        "positive_supported_success_rate": 0.0,
+        "negative_wrong_yes_rate": 0.0,
+        "positive_supported_success": 0.0,
+        "negative_wrong_yes": 0.0,
+        "mean_utility": 0.25546875
+      },
+      {
+        "available": true,
+        "coverage": 0.75,
+        "maximum_coverage": 1.0,
+        "answered_risk": 0.14453125,
+        "positive_supported_success_rate": 0.0,
+        "negative_wrong_yes_rate": 0.0,
+        "positive_supported_success": 0.0,
+        "negative_wrong_yes": 0.0,
+        "mean_utility": 0.483203125
+      },
+      {
+        "available": true,
+        "coverage": 0.9000000000000002,
+        "maximum_coverage": 1.0,
+        "answered_risk": 0.14453124999999994,
+        "positive_supported_success_rate": 0.0,
+        "negative_wrong_yes_rate": 0.0,
+        "positive_supported_success": 0.0,
+        "negative_wrong_yes": 0.0,
+        "mean_utility": 0.6198437499999999
+      },
+      {
+        "available": true,
+        "coverage": 1.0,
+        "maximum_coverage": 1.0,
+        "answered_risk": 0.14453125,
+        "positive_supported_success_rate": 0.0,
+        "negative_wrong_yes_rate": 0.0,
+        "positive_supported_success": 0.0,
+        "negative_wrong_yes": 0.0,
+        "mean_utility": 0.7109375
+      }
+    ],
+    "always_abstain": [
+      {
+        "available": false,
+        "maximum_coverage": 0.0,
+        "requested_coverage": 0.25
+      },
+      {
+        "available": false,
+        "maximum_coverage": 0.0,
+        "requested_coverage": 0.5
+      },
+      {
+        "available": false,
+        "maximum_coverage": 0.0,
+        "requested_coverage": 0.75
+      },
+      {
+        "available": false,
+        "maximum_coverage": 0.0,
+        "requested_coverage": 0.9
+      },
+      {
+        "available": false,
+        "maximum_coverage": 0.0,
+        "requested_coverage": 1.0
+      }
+    ],
+    "warmup": [
+      {
+        "available": true,
+        "coverage": 0.25,
+        "maximum_coverage": 1.0,
+        "answered_risk": 0.609375,
+        "positive_supported_success_rate": 0.16216216216216217,
+        "negative_wrong_yes_rate": 0.1415525114155251,
+        "positive_supported_success": 6.0,
+        "negative_wrong_yes": 31.0,
+        "mean_utility": -0.20468750000000002
+      },
+      {
+        "available": true,
+        "coverage": 0.5,
+        "maximum_coverage": 1.0,
+        "answered_risk": 0.31883445945945943,
+        "positive_supported_success_rate": 0.16216216216216217,
+        "negative_wrong_yes_rate": 0.1415525114155251,
+        "positive_supported_success": 6.0,
+        "negative_wrong_yes": 31.0,
+        "mean_utility": 0.08116554054054054
+      },
+      {
+        "available": true,
+        "coverage": 0.75,
+        "maximum_coverage": 1.0,
+        "answered_risk": 0.28125,
+        "positive_supported_success_rate": 0.21621621621621623,
+        "negative_wrong_yes_rate": 0.1872146118721461,
+        "positive_supported_success": 8.0,
+        "negative_wrong_yes": 41.0,
+        "mean_utility": 0.278125
+      },
+      {
+        "available": true,
+        "coverage": 0.9,
+        "maximum_coverage": 1.0,
+        "answered_risk": 0.3402777777777778,
+        "positive_supported_success_rate": 0.2702702702702703,
+        "negative_wrong_yes_rate": 0.2666666666666667,
+        "positive_supported_success": 10.0,
+        "negative_wrong_yes": 58.400000000000006,
+        "mean_utility": 0.26749999999999996
+      },
+      {
+        "available": true,
+        "coverage": 1.0,
+        "maximum_coverage": 1.0,
+        "answered_risk": 0.359375,
+        "positive_supported_success_rate": 0.32432432432432434,
+        "negative_wrong_yes_rate": 0.3059360730593607,
+        "positive_supported_success": 12.0,
+        "negative_wrong_yes": 67.0,
+        "mean_utility": 0.28125
+      }
+    ],
+    "SFT": [
+      {
+        "available": true,
+        "coverage": 0.25,
+        "maximum_coverage": 1.0,
+        "answered_risk": 0.03317307692307692,
+        "positive_supported_success_rate": 0.0,
+        "negative_wrong_yes_rate": 0.0,
+        "positive_supported_success": 0.0,
+        "negative_wrong_yes": 0.0,
+        "mean_utility": 0.08341346153846146
+      },
+      {
+        "available": true,
+        "coverage": 0.5,
+        "maximum_coverage": 1.0,
+        "answered_risk": 0.0234375,
+        "positive_supported_success_rate": 0.0,
+        "negative_wrong_yes_rate": 0.0,
+        "positive_supported_success": 0.0,
+        "negative_wrong_yes": 0.0,
+        "mean_utility": 0.3765625
+      },
+      {
+        "available": true,
+        "coverage": 0.75,
+        "maximum_coverage": 1.0,
+        "answered_risk": 0.06770833333333333,
+        "positive_supported_success_rate": 0.0,
+        "negative_wrong_yes_rate": 0.0045662100456621,
+        "positive_supported_success": 0.0,
+        "negative_wrong_yes": 1.0,
+        "mean_utility": 0.5984375
+      },
+      {
+        "available": true,
+        "coverage": 0.9,
+        "maximum_coverage": 1.0,
+        "answered_risk": 0.0954861111111111,
+        "positive_supported_success_rate": 0.0,
+        "negative_wrong_yes_rate": 0.0045662100456621,
+        "positive_supported_success": 0.0,
+        "negative_wrong_yes": 1.0,
+        "mean_utility": 0.708125
+      },
+      {
+        "available": true,
+        "coverage": 1.0,
+        "maximum_coverage": 1.0,
+        "answered_risk": 0.1484375,
+        "positive_supported_success_rate": 0.0,
+        "negative_wrong_yes_rate": 0.0045662100456621,
+        "positive_supported_success": 0.0,
+        "negative_wrong_yes": 1.0,
+        "mean_utility": 0.703125
+      }
+    ],
+    "bandit": [
+      {
+        "available": true,
+        "coverage": 0.25,
+        "maximum_coverage": 1.0,
+        "answered_risk": 0.84375,
+        "positive_supported_success_rate": 0.2702702702702703,
+        "negative_wrong_yes_rate": 0.2374429223744292,
+        "positive_supported_success": 10.0,
+        "negative_wrong_yes": 52.0,
+        "mean_utility": -0.321875
+      },
+      {
+        "available": true,
+        "coverage": 0.5,
+        "maximum_coverage": 1.0,
+        "answered_risk": 0.671875,
+        "positive_supported_success_rate": 0.32432432432432434,
+        "negative_wrong_yes_rate": 0.3333333333333333,
+        "positive_supported_success": 12.0,
+        "negative_wrong_yes": 73.0,
+        "mean_utility": -0.271875
+      },
+      {
+        "available": true,
+        "coverage": 0.75,
+        "maximum_coverage": 1.0,
+        "answered_risk": 0.4572704081632653,
+        "positive_supported_success_rate": 0.32432432432432434,
+        "negative_wrong_yes_rate": 0.3333333333333333,
+        "positive_supported_success": 12.0,
+        "negative_wrong_yes": 73.0,
+        "mean_utility": 0.01409438775510205
+      },
+      {
+        "available": true,
+        "coverage": 0.9,
+        "maximum_coverage": 1.0,
+        "answered_risk": 0.4227430555555556,
+        "positive_supported_success_rate": 0.35135135135135137,
+        "negative_wrong_yes_rate": 0.3698630136986301,
+        "positive_supported_success": 13.0,
+        "negative_wrong_yes": 81.0,
+        "mean_utility": 0.11906249999999999
+      },
+      {
+        "available": true,
+        "coverage": 1.0,
+        "maximum_coverage": 1.0,
+        "answered_risk": 0.4609375,
+        "positive_supported_success_rate": 0.4594594594594595,
+        "negative_wrong_yes_rate": 0.4474885844748858,
+        "positive_supported_success": 17.0,
+        "negative_wrong_yes": 98.0,
+        "mean_utility": 0.078125
+      }
+    ]
+  },
+  "primary_coverage": 0.75,
+  "comparisons": {
+    "SFT_minus_detector": {
+      "available": true,
+      "coverage": 0.75,
+      "comparison_minus_baseline": {
+        "answered_risk": {
+          "difference": -0.06770833333333333,
+          "ci95": [
+            -0.11979166666666666,
+            -0.03125
+          ],
+          "valid_replicates": 2000
+        },
+        "positive_supported_success_rate": {
+          "difference": -0.24324324324324326,
+          "ci95": [
+            -0.3870967741935484,
+            -0.10810810810810811
+          ],
+          "valid_replicates": 2000
+        },
+        "negative_wrong_yes_rate": {
+          "difference": -0.0319634703196347,
+          "ci95": [
+            -0.06018518518518518,
+            -0.009215532913372517
+          ],
+          "valid_replicates": 2000
+        },
+        "mean_utility": {
+          "difference": 0.10156249999999994,
+          "ci95": [
+            0.046875,
+            0.17968749999999994
+          ],
+          "valid_replicates": 2000
+        }
+      }
+    },
+    "bandit_minus_detector": {
+      "available": true,
+      "coverage": 0.75,
+      "comparison_minus_baseline": {
+        "answered_risk": {
+          "difference": 0.3218537414965986,
+          "ci95": [
+            0.23958333333333334,
+            0.39912993669690094
+          ],
+          "valid_replicates": 2000
+        },
+        "positive_supported_success_rate": {
+          "difference": 0.08108108108108109,
+          "ci95": [
+            -0.12822580645161288,
+            0.2857142857142857
+          ],
+          "valid_replicates": 2000
+        },
+        "negative_wrong_yes_rate": {
+          "difference": 0.2968036529680365,
+          "ci95": [
+            0.23421949987370547,
+            0.3592380455494056
+          ],
+          "valid_replicates": 2000
+        },
+        "mean_utility": {
+          "difference": -0.482780612244898,
+          "ci95": [
+            -0.5986949050453515,
+            -0.359375
+          ],
+          "valid_replicates": 2000
+        }
+      }
+    },
+    "bandit_minus_SFT": {
+      "available": true,
+      "coverage": 0.75,
+      "comparison_minus_baseline": {
+        "answered_risk": {
+          "difference": 0.389562074829932,
+          "ci95": [
+            0.3125,
+            0.4739583333333333
+          ],
+          "valid_replicates": 2000
+        },
+        "positive_supported_success_rate": {
+          "difference": 0.32432432432432434,
+          "ci95": [
+            0.17073170731707318,
+            0.4762175324675323
+          ],
+          "valid_replicates": 2000
+        },
+        "negative_wrong_yes_rate": {
+          "difference": 0.3287671232876712,
+          "ci95": [
+            0.270261301124133,
+            0.3893937241211333
+          ],
+          "valid_replicates": 2000
+        },
+        "mean_utility": {
+          "difference": -0.5843431122448979,
+          "ci95": [
+            -0.7109375,
+            -0.46874999999999994
+          ],
+          "valid_replicates": 2000
+        }
+      }
+    }
+  },
+  "engineering_evidence": {
+    "SFT_minus_detector": false,
+    "bandit_minus_detector": false,
+    "bandit_minus_SFT": false
+  },
+  "decision": "STOP_CURRENT_SELECTOR_BRANCH",
+  "detector_threshold": 0.3312948644161225,
+  "tie_rule": "expected uniform retention within tied confidence; no label-based tie breaking",
+  "scope": "Retrospective confidence-ranked risk at fixed coverage, not deployed calibrated abstention; single seed and reused development set; unadjusted exploratory bootstrap intervals."
+}
