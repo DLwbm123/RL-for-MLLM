@@ -1,0 +1,29 @@
+{
+  "status": "passed",
+  "pytest_exit_code": 0,
+  "cuda_initialized": false,
+  "runtime_seconds": 4.9222636222839355,
+  "tests": [
+    "test_rl_methods.py",
+    "test_core.py"
+  ],
+  "p6_self_check": true,
+  "model": "randomly initialized tiny native Qwen2.5-VL + PEFT",
+  "private_patient_data_read": false,
+  "scientific_training_launched": false,
+  "gpu_used": false,
+  "p6_self_check_separate_process": true,
+  "p6_runtime_seconds": 3.9180057048797607,
+  "p6_cuda_initialized": false,
+  "pytest_passed": 31,
+  "new_method_tests": 20,
+  "existing_core_tests": 11,
+  "versions": {
+    "torch": "2.7.1+cu128",
+    "transformers": "4.51.3",
+    "peft": "0.15.2"
+  },
+  "date": "2026-10-09",
+  "scope": "implementation-only CPU engineering checks",
+  "formal_7b_bf16_gpu_probability_gate_verified": false
+}

@@ -75,3 +75,9 @@ P8固定P7检测器，完成共同warmup、SFT与有限动作奖励优化对照�
 P9完成三折检测器共2400步和960人折外候选；117个阳性中64个有正确候选、53个候选全部不支持，补齐了P8缺失的失败样本类型。随后在视觉特征提取阶段触发本轮预算，正确性预测头、校准和开发评价均未启动，没有完整特征缓存，不能报告方案有效性。
 
 本轮计费0.476487 GPU小时，累计1.626633/3；无新增开发/test像素读取，无自动续跑。三折权重与候选已私有保留。见[停止报告](reports/medevidence_p9_decision.md)、[回执核对](reports/medevidence_p9_validation.json)、[折外统计](reports/medevidence_p9_oof.json)和[冻结方案](reports/medevidence_p9_protocol.md)。[启动快照](reports/medevidence_p9_launch.json)仅保留历史状态。
+
+## 通用 RL 方法实现（2026-10-09）
+
+按优先级实现 ViSurf → RL-ZVP → PAPO → CFPO → ACTIVE-o3 → AXPO → DeFacto，并接入现有 Qwen2.5-VL completion scorer、冻结参考适配器和训练梯度。医学专用方法仅作文献对比。当前仅完成工程实现与 CPU 检查，未启动正式实验；历史 P4–P9 冻结协议和停止决定保持不变。
+
+见[实现范围、适配差异及使用方式](reports/rl_methods_implementation.md)、[工程检查回执](reports/rl_methods_validation.json)。核心接口为 `src.rl_methods_run.UpdateGroup.groups()` / `.backward()`；注册运行入口为 `scripts.run_rl_methods.main()`，缺少新的私有协议与预算时拒绝启动。

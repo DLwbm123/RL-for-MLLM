@@ -1,0 +1,28 @@
+{
+  "version": "general-rl-2026-implementation-1",
+  "execution_mode": "implementation_only",
+  "priority": ["visurf", "rl_zvp", "papo", "cfpo", "active_o3", "axpo", "defacto"],
+  "medical_methods": "literature comparison only; not implemented",
+  "reference": "frozen initial adapter; fixed observer uses the same frozen adapter",
+  "sampling": {"completions": 4, "temperature": 1.0, "top_p": 1.0, "top_k": 0, "max_new_tokens": 128, "repetition_penalty": 1.0},
+  "epsilon": 0.2,
+  "beta": 0.01,
+  "gradient_clip": 1.0,
+  "generation_replay_max_logprob_error": 0.0625,
+  "generation_replay_mean_logprob_error": 0.015625,
+  "old_current_logprob_atol": 0.015625,
+  "old_current_logprob_rtol": 0.015625,
+  "zvp_alpha": 0.1,
+  "papo": {"gamma": 0.01, "entropy_factual": 0.03, "entropy_corrupted": 0.03, "mask_ratio": 0.6},
+  "cfpo": {"gamma": 0.01, "entropy_factual": 0.03, "entropy_corrupted": 0.0, "sigma": 2.0},
+  "observation": {"max_regions": 2, "min_area": 0.01, "max_area": 0.5},
+  "axpo": {"continuations": 4, "max_extra_rollouts": 4},
+  "requirements_for_scientific_run": [
+    "new registered protocol and explicit resource budget",
+    "training-only patient whitelist and fixed schedule",
+    "native probability alignment before optimizer updates",
+    "fixed positive-evidence success and negative false-positive criteria",
+    "registered complete evidence support for DeFacto counterfactual labels"
+  ],
+  "interpretation": "Engineering defaults for project adaptations; not frozen experimental settings or author benchmark reproduction. Historical P4-P9 protocols and gates are unchanged."
+}

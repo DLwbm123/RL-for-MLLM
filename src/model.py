@@ -80,8 +80,8 @@ class Model:
         try:yield
         finally:self.visual.forward=original
 
-    def prompt(self,image,task='A'):
-        messages=[{'role':'user','content':[{'type':'image'},{'type':'text','text':QUESTIONS[task]}]}]
+    def prompt(self,image,task='A',question=None):
+        messages=[{'role':'user','content':[{'type':'image'},{'type':'text','text':QUESTIONS[task] if question is None else question}]}]
         text=self.processor.apply_chat_template(messages,tokenize=False,add_generation_prompt=True)
         inputs=self.processor(text=[text],images=[image.convert('RGB')],return_tensors='pt').to('cuda')
         grid=inputs['image_grid_thw'][0].tolist()
@@ -99,12 +99,12 @@ class Model:
         self.vision_count+=1
         return out.detach()
 
-    def score(self,inputs,features,answer=None,ids=None,include_eos=False):
+    def score(self,inputs,features,answer=None,ids=None,include_eos=False,include_entropy=False):
         if ids is None:
             ids=self.processor.tokenizer.encode(answer,add_special_tokens=False)
             if include_eos:ids=ids+[self.processor.tokenizer.eos_token_id]
         if not len(ids):raise ValueError('Empty answer')
-        ids=torch.as_tensor(ids,device='cuda',dtype=torch.long).reshape(1,-1)
+        ids=torch.as_tensor(ids,device=inputs['input_ids'].device,dtype=torch.long).reshape(1,-1)
         n=inputs['input_ids'].shape[1]
         batch={k:v for k,v in inputs.items()}
         batch['input_ids']=torch.cat([inputs['input_ids'],ids],dim=1)
@@ -116,9 +116,12 @@ class Model:
         self.forward_count+=1
         # Slice first: FP32 log-softmax over answer positions only avoids full-vocabulary prompt activations.
         logits=output.logits[:,n-1:n+ids.shape[1]-1,:]
-        values=torch.log_softmax(logits.float(),dim=-1).gather(-1,ids.unsqueeze(-1)).squeeze(-1)[0]
-        return {'mean':values.mean(),'sum':values.sum(),'length':len(values),'tokens':values,'ids':ids[0],
+        logps=torch.log_softmax(logits.float(),dim=-1)
+        values=logps.gather(-1,ids.unsqueeze(-1)).squeeze(-1)[0]
+        result={'mean':values.mean(),'sum':values.sum(),'length':len(values),'tokens':values,'ids':ids[0],
                 'prompt_length':n,'eos_included':include_eos}
+        if include_entropy:result['entropy']=-(logps.exp()*logps).sum(-1)[0]
+        return result
 
     def classes(self,inputs,features,labels=LABELS):
         scores=[self.score(inputs,features,answer=x) for x in labels]
