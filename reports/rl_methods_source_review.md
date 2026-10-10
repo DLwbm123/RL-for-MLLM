@@ -1,3 +1,5 @@
+后续更正：本初审遗漏 RL-ZVP 附录 A 的无 KL／upper clip=.28／token 归约，以及 ACTIVE-o3 附录 B 的确定参数；当前实现与结论以[修复后复核](rl_methods_source_recheck.md)为准。以下保留初次审阅快照。
+
 # 七个 RL 方法的原文与作者代码核对
 
 本文件保留修复前提交的审阅证据；其中五项问题及后续作者对齐已在[2026-10-10 修复说明](rl_methods_source_fixes.md)中处理，当前实现以该说明和新验证回执为准。

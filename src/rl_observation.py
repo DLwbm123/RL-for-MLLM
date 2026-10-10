@@ -27,7 +27,7 @@ def parse_observation(text,max_regions,truncated=False):
 def tool_prefix(tokens,tokenizer):
     """Fork only at an exact token boundary following the opening tool tag."""
     for n in range(1,len(tokens)+1):
-        if re.fullmatch(r'\s*<think>.*?</think>\s*<tool_call>',tokenizer.decode(tokens[:n],skip_special_tokens=False),re.S):return n
+        if re.fullmatch(r'\s*<think>.*?</think>\s*<tool_call>\s*',tokenizer.decode(tokens[:n],skip_special_tokens=False),re.S):return n
     return None
 
 
@@ -61,19 +61,19 @@ def pixel_box(box,size):
 
 
 def active_reward(action,gt,observed_answer,min_area,max_area):
-    """ACTIVE-o3-inspired heuristics plus verified joint answer/region outcome."""
+    """ACTIVE-o3 Appendix B heuristics plus medical joint answer/region outcome."""
     if not 0<min_area<max_area<=1:raise ValueError('Invalid crop area bounds')
-    if not action['valid']:return {'reward':-1.,'correct':0.,'answer_correct':False,'evidence_success':False}
+    if not action['valid']:return {'reward':0.,'correct':0.,'answer_correct':False,'evidence_success':False}
     boxes=action['boxes'];matched=matching(gt,boxes)
     answer_correct=observed_answer==('yes' if gt else 'no')
     evidence_success=matched['strict'] if gt else not boxes
     correct=float(answer_correct and evidence_success)
     areas=[(b[2]-b[0])*(b[3]-b[1])/1e6 for b in boxes]
     area_ok=all(min_area<=a<=max_area for a in areas)
-    nonoverlap=all(iou(a,b)<=.1 for i,a in enumerate(boxes) for b in boxes[i+1:])
-    coverage=matched['matches']/len(gt) if gt else float(not boxes)
-    heuristic=(1.+float(area_ok)+float(nonoverlap)+coverage)/4
-    return {'reward':correct+.25*heuristic,'correct':correct,'answer_correct':answer_correct,
+    nonoverlap=all(iou(a,b)<=.3 for i,a in enumerate(boxes) for b in boxes[i+1:])
+    coverage=sum(any(iou(g,b)>=.5 for b in boxes) for g in gt)/len(gt) if gt else float(not boxes)
+    heuristic=1.+float(area_ok)+float(nonoverlap)+coverage
+    return {'reward':correct+heuristic,'correct':correct,'answer_correct':answer_correct,
             'evidence_success':evidence_success,'coverage':coverage,'regions':len(boxes)}
 
 
@@ -101,9 +101,15 @@ def defacto_views(image,gt,controls,complete_evidence):
         raise ValueError('Area-matched masks require nonoverlapping rectangles within each view')
     area=lambda boxes:sum((b[2]-b[0])*(b[3]-b[1]) for b in boxes)
     if not np.isclose(area(gt),area(controls),rtol=0,atol=1e-6):raise ValueError('Control mask area must match evidence mask area')
+    pixels=[[pixel_box(b,image.size) for b in boxes] for boxes in (gt,controls)]
+    # Rounding must not let the control erase target pixels or change the masking budget.
+    if any(overlaps(a,b) for a in pixels[0] for b in pixels[1]) or any(
+            overlaps(a,b) for boxes in pixels for i,a in enumerate(boxes) for b in boxes[i+1:]):
+        raise ValueError('Evidence/control masks overlap after pixel rounding')
+    if area(pixels[0])!=area(pixels[1]):raise ValueError('Control mask pixel area must match evidence mask pixel area')
     evidence=image.copy();control=image.copy()
-    for b in gt:evidence.paste((0,0,0),pixel_box(b,image.size))
-    for b in controls:control.paste((0,0,0),pixel_box(b,image.size))
+    for b in pixels[0]:evidence.paste((0,0,0),b)
+    for b in pixels[1]:control.paste((0,0,0),b)
     return [('pos',image.copy(),'yes'),('cf',evidence,'unknown'),('rand',control,'yes')]
 
 

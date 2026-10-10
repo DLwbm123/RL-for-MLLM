@@ -56,6 +56,42 @@ def test_visurf_sequence_gradient_has_no_reference_kl():
     assert loss.item()==-2. and x.grad.tolist()==[-1.,-1.] and stats['reference_kl']==0
 
 
+def test_zvp_appendix_clip_and_no_kl():
+    x=torch.tensor([-1.],requires_grad=True);old=torch.tensor([-1.-np.log(1.5)],requires_grad=True)
+    ref=torch.tensor([-101.],requires_grad=True)
+    loss,stats=completion_loss(x,old,ref,1.,[True],.2,.01,'rl_zvp')
+    assert loss.item()==pytest.approx(-1.28) and stats['reference_kl']==0
+    loss.backward()
+    assert x.grad.item()==0 and old.grad is None and ref.grad is None
+
+
+@pytest.mark.parametrize('method',['rl_zvp','papo','cfpo'])
+def test_batch_token_reduction_and_detached_entropy(method):
+    parameter=torch.tensor(0.,requires_grad=True)
+    m=SimpleNamespace(score=lambda inputs,features,ids: {'tokens':parameter.expand(len(ids))-1.})
+    engine=UpdateGroup(m,method,CFG,nullcontext,lambda:None,np.random.default_rng(1))
+    h=[torch.ones(1,requires_grad=True),torch.full((3,),2.,requires_grad=True)]
+    a=zvp_advantages([1.,1.],h,.1)
+    samples=[{'tokens':[3]*n,'old':torch.full((n,),-1.),'reference':torch.full((n,),-101.),
+              'corrupted_old':torch.full((n,),-1.,requires_grad=True),
+              'mask':torch.ones(n,dtype=torch.bool),'alignment':{'max_error':0.}} for n in (1,3)]
+    g={'inputs':{},'features':None,'samples':samples,'advantages':a,'view':'pos'}
+    stats=engine.backward([g])
+    assert [t['weight'] for t in stats['terms']]==[.25,.75]
+    assert parameter.grad.item()==pytest.approx(-.225 if method=='papo' else -.175)
+    assert all(v.grad is None for v in h) and all(s['corrupted_old'].grad is None for s in samples)
+
+
+def test_old_policy_gate_checks_whole_batch_before_gradient():
+    parameter=torch.tensor(0.,requires_grad=True)
+    m=SimpleNamespace(score=lambda inputs,features,ids: {'tokens':parameter.expand(len(ids))-1.})
+    engine=UpdateGroup(m,'visurf',CFG,nullcontext,lambda:None,np.random.default_rng(1))
+    samples=[{'tokens':[3],'old':torch.tensor([v]),'mask':torch.ones(1,dtype=torch.bool)} for v in (-1.,-2.)]
+    with pytest.raises(RuntimeError,match='Old/current'):
+        engine.backward([{'inputs':{},'features':None,'samples':samples}])
+    assert parameter.grad is None
+
+
 @pytest.mark.parametrize('method',['papo','cfpo'])
 def test_author_dual_clipping_and_reference_stabilization(method):
     x=torch.tensor([-1.],requires_grad=True);old=torch.tensor([-1.-np.log(4.)])
@@ -175,6 +211,14 @@ def test_axpo_complete_call_span_excludes_thinking_and_eos():
     assert tool_span(tokenizer.encode('<think>abc</think><answer>no</answer>'),tokenizer) is None
 
 
+def test_axpo_opening_tag_token_can_include_whitespace_but_not_action():
+    pieces={10:'<think>x</think>',11:'<tool_call>\n',12:'[[100,100,300,300]]',13:'</tool_call>',14:'<tool_call>['}
+    tokenizer=SimpleNamespace(decode=lambda ids,**kwargs: ''.join(pieces.get(int(i),'') for i in ids))
+    assert tool_prefix([10,11,12,13,2],tokenizer)==2
+    assert tool_span([10,11,12,13,2],tokenizer)==(1,4)
+    assert tool_prefix([10,14,13,2],tokenizer) is None
+
+
 def test_observation_bounds_and_positive_joint_success():
     action=parse_observation('<think>x</think><tool_call>[[100,100,300,300]]</tool_call>',2)
     assert action['valid'] and active_reward(action,GT,'yes',.01,.5)['correct']==1
@@ -183,6 +227,16 @@ def test_observation_bounds_and_positive_joint_success():
     assert not parse_observation('<think>x</think><tool_call>python:exec("bad")</tool_call>',2)['valid']
     assert not parse_observation('<think>x</think><tool_call>[[100,100,300,300]]</tool_call>',2,True)['valid']
     assert not parse_observation('<think>x</think><tool_call>[]</tool_call>',2)['valid']
+
+
+def test_active_appendix_heuristic_weights_overlap_and_coverage():
+    boxes=GT+[[250,100,450,300]]  # IoU=1/7: permitted by the paper's .3 threshold.
+    action={'valid':True,'tool':True,'boxes':boxes,'answer':None}
+    assert active_reward(action,boxes,'yes',.01,.5)['reward']==5.
+    action['boxes']=GT
+    result=active_reward(action,GT+[[120,100,320,300]],'yes',.01,.5)
+    assert result['coverage']==1. and result['correct']==0 and result['reward']==4.
+    assert active_reward({'valid':False},GT,None,.01,.5)['reward']==0.
 
 
 @pytest.mark.parametrize('method',['active_o3','axpo'])
@@ -211,6 +265,19 @@ def test_defacto_evidence_label_guard_and_controls():
     assert defacto_reward('{"answer":"yes","boxes":[[100,100,300,300]]}',GT,CONTROL,'pos')['correct']==1
     assert not parse_evidence('{"answer":"no","answer":"yes","boxes":[]}')['valid']
     assert not parse_evidence('{"answer":[],"boxes":[]}')['valid']
+
+
+def test_defacto_pixel_masks_preserve_disjoint_equal_area_controls():
+    image=Image.new('RGB',(10,10),'white')
+    # Normalized disjoint equal-area boxes become overlapping pixels at a fractional edge.
+    gt=[[100,100,250,300]];controls=[[250,100,400,300]]
+    with pytest.raises(ValueError,match='pixel'):defacto_views(image,gt,controls,True)
+    # Equal normalized areas can rasterize to 4 versus 9 pixels at different phases.
+    with pytest.raises(ValueError,match='pixel'):
+        defacto_views(image,[[100,100,300,300]],[[650,650,850,850]],True)
+    views=defacto_views(image,GT,CONTROL,True)
+    masks=[np.any(np.asarray(v[1])!=np.asarray(image),axis=-1) for v in views[1:]]
+    assert masks[0].sum()==masks[1].sum()==4 and not (masks[0]&masks[1]).any()
 
 
 def test_papo_raw_pixel_bernoulli_mask_can_keep_all_or_mask_all():
@@ -257,8 +324,8 @@ class Tokenizer:
     def convert_tokens_to_ids(self,value):return 255 if value=='<|im_end|>' else None
 
 
-@pytest.fixture
-def native(tmp_path):
+@pytest.fixture(params=['eager','sdpa'])
+def native(tmp_path,request):
     from transformers import Qwen2_5_VLConfig,Qwen2_5_VLForConditionalGeneration
     from peft import LoraConfig,get_peft_model
     from src.model import Model
@@ -269,7 +336,8 @@ def native(tmp_path):
         image_token_id=254,video_token_id=251,vision_start_token_id=252,vision_end_token_id=253,bos_token_id=1,eos_token_id=2,pad_token_id=0,
         vision_config={'depth':1,'hidden_size':32,'intermediate_size':64,'num_heads':4,'out_hidden_size':32,
                        'patch_size':14,'temporal_patch_size':2,'spatial_merge_size':2,'fullatt_block_indexes':[0]})
-    base=Qwen2_5_VLForConditionalGeneration(cfg);cfg._attn_implementation='eager'
+    cfg._attn_implementation=request.param
+    base=Qwen2_5_VLForConditionalGeneration(cfg)
     assert next(base.parameters()).device.type=='cpu'
     m=Model.__new__(Model);m.visual=base.visual
     m.model=get_peft_model(base,LoraConfig(r=2,lora_alpha=4,lora_dropout=0.,target_modules=['q_proj','v_proj'],task_type='CAUSAL_LM'))
@@ -381,7 +449,7 @@ def test_all_method_group_integration_with_native_scores(native,method):
         cached_count=m.score_count
     stats=engine.backward(groups)
     if method in ('papo','cfpo'):assert m.score_count-cached_count==2*len(groups[0]['samples'])
-    if method in ('visurf','defacto'):assert all(t['reference_kl']==0 for t in stats['terms'])
+    if method in ('visurf','rl_zvp','defacto'):assert all(t['reference_kl']==0 for t in stats['terms'])
     if method=='axpo':
         assert sum(t['weight']==.25 for t in stats['terms'])==5  # One prefix + four branches, Eq.5 added once.
         assert sum(t['weight']==.0625 for t in stats['terms'])==15  # Unselected ordinary GRPO.

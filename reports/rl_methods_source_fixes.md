@@ -1,5 +1,7 @@
 # 七方法源码对齐与五项问题修复
 
+后续复核补齐 RL-ZVP／ACTIVE-o3 附录规则、DeFacto 像素条件及 AXPO 空白 token 边界，详见[72 项复核报告](rl_methods_source_recheck.md)。本文件与 54 项回执保留为上一轮记录。
+
 2026-10-10。已修复[审阅报告](rl_methods_source_review.md)的五项问题，并按用户要求对齐：取得训练代码的 PAPO、CFPO、DeFacto 以固定作者 revision 为准；ViSurf、RL-ZVP、ACTIVE-o3、AXPO 依据已取得原文。没有启动实验，历史停止决定、数据、checkpoint、样本和预算保持原样。
 
 ## 五项问题的处理

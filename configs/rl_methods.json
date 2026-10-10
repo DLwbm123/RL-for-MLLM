@@ -1,5 +1,5 @@
 {
-  "version": "general-rl-2026-source-aligned-2",
+  "version": "general-rl-2026-source-aligned-3",
   "execution_mode": "implementation_only",
   "priority": ["visurf", "rl_zvp", "papo", "cfpo", "active_o3", "axpo", "defacto"],
   "medical_methods": "literature comparison only; not implemented",
@@ -13,6 +13,7 @@
   "old_current_logprob_atol": 0.015625,
   "old_current_logprob_rtol": 0.015625,
   "zvp_alpha": 0.1,
+  "rl_zvp": {"beta": 0.0},
   "visurf": {"beta": 0.0},
   "papo": {"gamma": 0.02, "entropy_factual": 0.05, "entropy_corrupted": 0.05, "mask_ratio": 0.6, "patch_size": 14},
   "cfpo": {"gamma": 0.02, "entropy_factual": 0.0, "entropy_corrupted": 0.0, "sigma": 2.0},

@@ -1,0 +1,56 @@
+{
+  "pytest_exit_code": 0,
+  "pytest_passed": 72,
+  "method_tests": 61,
+  "core_tests": 11,
+  "failed_tests": [],
+  "runtime_seconds": 1.8481428623199463,
+  "versions": {
+    "torch": "2.6.0",
+    "transformers": "4.51.3",
+    "peft": "0.19.1"
+  },
+  "cuda_initialized": false,
+  "date": "2026-10-10",
+  "status": "passed",
+  "base_review_commit": "fc36bf1849d90980819a59369adbf46810795458",
+  "config_version": "general-rl-2026-source-aligned-3",
+  "previous_validation": "rl_methods_source_fix_validation.json",
+  "fixed_omissions": [
+    "RL-ZVP appendix KL, clipping and token reduction",
+    "ACTIVE-o3 appendix heuristic weights, overlap threshold and per-GT coverage",
+    "DeFacto actual pixel mask support and area",
+    "AXPO opening-tag whitespace token boundary"
+  ],
+  "native_attention_backends": [
+    "eager",
+    "sdpa"
+  ],
+  "author_policy_loss_and_gradient_comparisons": {
+    "papo": {
+      "loss_max_error": 0.0,
+      "gradient_max_error": 0.0,
+      "cases": "mixed advantages; unequal mask; upper/lower/dual clips; zero advantage; extreme finite ratios and reference KL"
+    },
+    "cfpo": {
+      "loss_max_error": 0.0,
+      "gradient_max_error": 0.0,
+      "cases": "mixed advantages; unequal mask; upper/lower/dual clips; zero advantage; extreme finite ratios and reference KL"
+    },
+    "cuda_initialized": false
+  },
+  "author_revisions": {
+    "papo": "fb63bf4533b78da5a2bb17bc812375dcb620887d",
+    "cfpo": "98ca5a4123be2e85e94855fead46c9a385611136",
+    "defacto": "471a747bc416a59e8ddad22de2e9b038c0c0aeba"
+  },
+  "gpu_used": false,
+  "patient_data_read": false,
+  "scientific_experiments_run": false,
+  "formal_7b_bf16_gpu_probability_gate_verified": false,
+  "remote_pinned_runtime_validated": false,
+  "dependencies_installed": false,
+  "historical_protocols_modified": false,
+  "platform": "local macOS arm64 CPU",
+  "tests_use_random_tiny_model_and_synthetic_optimizer_fixture": true
+}

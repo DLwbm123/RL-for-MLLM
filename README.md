@@ -82,4 +82,6 @@ P9完成三折检测器共2400步和960人折外候选；117个阳性中64个有
 
 见[实现范围、适配差异及使用方式](reports/rl_methods_implementation.md)、[工程检查回执](reports/rl_methods_validation.json)。核心接口为 `src.rl_methods_run.UpdateGroup.groups()` / `.backward()`；注册运行入口为 `scripts.run_rl_methods.main()`，缺少新的私有协议与预算时拒绝启动。
 
-2026-10-10 已修复原文／作者代码审阅发现的五项问题，并对齐可取得作者实现的默认路径。详见[修复与医学任务适配说明](reports/rl_methods_source_fixes.md)及[当前 CPU 验证回执](reports/rl_methods_source_fix_validation.json)。整批接口为 `UpdateGroup.batch_groups()`；未启动实验。
+2026-10-10 已修复原文／作者代码审阅发现的五项问题，并对齐可取得作者实现的默认路径。详见[修复与医学任务适配说明](reports/rl_methods_source_fixes.md)及[上一轮 CPU 验证回执](reports/rl_methods_source_fix_validation.json)。整批接口为 `UpdateGroup.batch_groups()`；未启动实验。
+
+2026-10-10 对修复后七方法再次复核，修正 RL-ZVP／ACTIVE-o3 附录对齐、DeFacto 像素 control 条件和 AXPO token 边界；[复核结论与医学适配](reports/rl_methods_source_recheck.md)、[当前 72 项 CPU 回执](reports/rl_methods_source_recheck_validation.json)。未启动实验。

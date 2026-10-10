@@ -202,7 +202,7 @@ class UpdateGroup:
             for index,(s,a) in enumerate(zip(g['samples'],g['advantages'])):
                 self.tick();paired=self.method in ('papo','cfpo');trained=int(s['mask'].sum())
                 weight=scale/len(groups)/len(g['samples'])
-                if paired:weight=scale*trained/token_count
+                if paired or self.method=='rl_zvp':weight=scale*trained/token_count
                 if self.method=='axpo':
                     weight=scale/len(groups)*(1. if index in g['selected_prefixes'] or index>=g['original_count'] else 1/g['original_count'])
                 factual=m.score(g['inputs'],g['features'],ids=s['tokens'])['tokens']

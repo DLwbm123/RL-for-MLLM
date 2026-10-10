@@ -65,11 +65,11 @@ def completion_loss(current,old,reference,advantage,mask,epsilon,beta,method=Non
         raise FloatingPointError('Empty/nonfinite completion logprobs')
     d=current-old
     if method in ('papo','cfpo'):d=d.clamp(-20.,20.)
-    high=.3 if method in ('papo','cfpo') else .4 if method=='axpo' else epsilon
+    high=.3 if method in ('papo','cfpo') else .4 if method=='axpo' else .28 if method=='rl_zvp' else epsilon
     ratio=d.exp();surrogate=torch.minimum(ratio*a,ratio.clamp(1-epsilon,1+high)*a)
     if method in ('papo','cfpo'):surrogate=torch.where(a<0,torch.maximum(surrogate,3.*a),surrogate)
     objective=surrogate.sum() if method=='visurf' else surrogate.mean()
-    if method in ('visurf','defacto') or beta==0:kl=current.new_zeros(())
+    if method in ('visurf','rl_zvp','defacto') or beta==0:kl=current.new_zeros(())
     else:
         delta=reference-current
         if method in ('papo','cfpo'):delta=delta.clamp(-20.,20.)
@@ -143,7 +143,7 @@ def crossmodal_values(attention,values,image_mask,query_mask,sigma):
 
 @contextmanager
 def cfpo_attention(model,image_mask,query_mask,intervene=True,sigma=2.):
-    """Qwen2.5-VL 4.51 attention path; keep this context open through backward."""
+    """Qwen2.5-VL 4.51 teacher scoring; keep open through backward if gradients are enabled."""
     # shortcut: full-sequence Qwen2.5-VL only, add a backbone-specific path before changing models.
     from transformers.models.qwen2_5_vl.modeling_qwen2_5_vl import Qwen2_5_VLAttention,apply_multimodal_rotary_pos_emb,repeat_kv
     masks=[torch.as_tensor(v,dtype=torch.bool) for v in (image_mask,query_mask)]

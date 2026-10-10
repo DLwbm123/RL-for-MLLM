@@ -1,6 +1,6 @@
 # 通用 RL 方法实现
 
-2026-10-10 更新。按用户指定范围实现通用 RL 方法；医学方法只用于文献对比。本次依据[源码核对](rl_methods_source_review.md)修复问题：PAPO、CFPO、DeFacto 以固定作者 revision 为准，其余依据原文。没有正式训练、患者图像读取、GPU 使用或历史阶段续跑。实现是本项目的任务适配，不是论文原始任务与完整训练系统的复现，也不是科学效果验证。修复和必要适配详见[修复说明](rl_methods_source_fixes.md)。
+2026-10-10 更新。按用户指定范围实现通用 RL 方法；医学方法只用于文献对比。本次依据[源码核对](rl_methods_source_review.md)修复问题：PAPO、CFPO、DeFacto 以固定作者 revision 为准，其余依据原文。没有正式训练、患者图像读取、GPU 使用或历史阶段续跑。实现是本项目的任务适配，不是论文原始任务与完整训练系统的复现，也不是科学效果验证。当前复核和必要适配详见[72 项复核报告](rl_methods_source_recheck.md)，上一轮见[修复说明](rl_methods_source_fixes.md)。
 
 ## 实现范围与优先级
 
@@ -12,7 +12,9 @@
 | 4 | [CFPO](https://arxiv.org/abs/2606.23206) | 各样本所有 post-image query／head 的有效 attention 共同计算均值和样本标准差；高于 mean+2std 的边替换为每 head 标量视觉均值 prior，包括 completion query | [固定作者代码](https://github.com/Raven-July/CFPO/tree/98ca5a4123be2e85e94855fead46c9a385611136)：缓存无梯度干预概率；与 PAPO 相同的有界 `corrupt-factual` k3；按 CFPO-G 脚本 gamma=.02，两个 entropy 开关均关闭。选择作者实现而非冲突的正文解释。限定 Transformers 4.51.3 的 Qwen2.5-VL、单图、无 cache 完整序列；生成仍走原生路径 |
 | 5 | [ACTIVE-o3](https://arxiv.org/abs/2505.21457) | 可训练策略生成有限个裁剪框；冻结初始适配器识别每个新裁剪；合并回答、区域成功、面积和覆盖奖励 | 单步并行裁剪任务适配；不运行任意 Python、网页或外部工具，不另加 Grounding DINO。观察者不接收真实框。阳性正确必须同时有正确回答和严格匹配证据，单独说 yes 不算成功 |
 | 6 | [AXPO](https://arxiv.org/abs/2605.28774) | 非空工具子组全错触发；按完整工具调用 token 的平均概率排序；整批 r=.25、K=4，广度优先分配；未选中轨迹保留原优势；每个被选来源单独做 Eq.4 奖励替换 | 原来源只训练前缀，分支只训练续写，重复前缀不进入 policy/KL。普通未选中 loss 保留 1/G，Eq.5 的 prefix+continuation 和逐前缀加入，再按问题批平均；不再按 G+K 稀释。按附录采用上裁剪 .4、KL=.001。闭合、可解析的有限裁剪接口代替原多轮工具系统；小批预算不足 K 时不向上取整加预算 |
-| 7 | [DeFacto](https://arxiv.org/abs/2509.20912) | pos/cf/rand 视图；答案、格式、selection 三项独立计分；恢复作者默认 .2/1/.6/.9 系数、正负 IoU 权重 1、空框 -.5、总组合 1/.2/.2、参考 KL=0 | 使用注册真实框与 control 框，不复刻 DINO-X 与作者大规模数据流水线。只有显式登记完整证据支持的阳性才生成 Unknown；无关遮挡保留 yes，阴性只使用原图 no。严格 JSON 代替标签与语义 API，不把格式失败伪装成答案判定。每视图独立样本标准差加 1e-4 归一化。两组遮挡框均要求不重叠、归一化面积相等；像素取整可能造成小面积差异 |
+| 7 | [DeFacto](https://arxiv.org/abs/2509.20912) | pos/cf/rand 视图；答案、格式、selection 三项独立计分；恢复作者默认 .2/1/.6/.9 系数、正负 IoU 权重 1、空框 -.5、总组合 1/.2/.2、参考 KL=0 | 使用注册真实框与 control 框，不复刻 DINO-X 与作者大规模数据流水线。只有显式登记完整证据支持的阳性才生成 Unknown；无关遮挡保留 yes，阴性只使用原图 no。严格 JSON 代替标签与语义 API，不把格式失败伪装成答案判定。每视图独立样本标准差加 1e-4 归一化。两组遮挡框在归一化与实际像素层面都要求不重叠、面积相等；取整破坏条件时拒绝 |
+
+RL-ZVP 已按附录 A／Table 5 采用无参考 KL、上裁剪 .28 和整批 token 平均。ACTIVE-o3 的四项启发式权重均为 1、overlap 阈值 .3、coverage 按每个 GT 有任一匹配计算；医学任务成功仍为严格证据与回答联合成功。AXPO 的纯 prefix token 边界允许开标签后空白，不包含动作。
 
 ## 接口与更新路径
 
@@ -36,7 +38,7 @@ PAPO／CFPO 在采样阶段一次性缓存无梯度扰动概率，更新只通�
 
 ## 工程检查
 
-2026-10-09 的 31 项检查和 P6 自检属于修复前记录，保留在[历史回执](rl_methods_validation.json)，不能作为本次对齐证据。本次定向测试、核心回归和独立作者函数对照见[修复检查回执](rl_methods_source_fix_validation.json)。未安装新依赖。
+2026-10-09 的 31 项检查和 P6 自检属于修复前记录，保留在[历史回执](rl_methods_validation.json)，不能作为本次对齐证据。上一轮定向测试、核心回归和独立作者函数对照见[54 项修复检查回执](rl_methods_source_fix_validation.json)。后续补齐附录及医学边界的当前结果见[72 项复核报告](rl_methods_source_recheck.md)和[复核回执](rl_methods_source_recheck_validation.json)。未安装新依赖。
 
 检查覆盖独立原文预期、作者函数的数值结果、极端概率限幅、AXPO 排序／预算／优势／mask、输入支持、完整证据门槛、原生随机初始化小型 Qwen2.5-VL 的生成与 replay、冻结参考适配器、缓存教师与 checkpoint 事实梯度、七个方法的梯度及一次人工夹具 optimizer 更新。七方法集成检查使用人工指定动作和原生概率评分；真正的原生随机采样由单独检查覆盖，不能把人工轨迹称为真实 on-policy 数据。
 
