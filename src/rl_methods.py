@@ -4,7 +4,6 @@ import math
 import types
 import torch
 from src.objectives import advantages
-from src.medevidence_p4 import policy_terms
 
 
 PRIORITY=('visurf','rl_zvp','papo','cfpo','active_o3','axpo','defacto')
@@ -43,7 +42,14 @@ def zvp_advantages(rewards,entropies,alpha):
     return out
 
 
-def completion_loss(current,old,reference,advantage,mask,epsilon,beta):
+def author_advantages(rewards,method):
+    """Pinned PAPO/CFPO and DeFacto trainers use sample standard deviation."""
+    r=reward_vector(rewards)
+    if method not in ('papo','cfpo','defacto'):raise ValueError('Unknown author normalization')
+    return (r-r.mean())/(r.std()+ (1e-4 if method=='defacto' else 1e-6))
+
+
+def completion_loss(current,old,reference,advantage,mask,epsilon,beta,method=None):
     if not 0<epsilon<1 or not math.isfinite(beta) or beta<0:
         raise ValueError('Invalid PPO/KL coefficients')
     mask=torch.as_tensor(mask,device=current.device,dtype=torch.bool)
@@ -54,22 +60,36 @@ def completion_loss(current,old,reference,advantage,mask,epsilon,beta):
         if a.shape!=current.shape:raise ValueError('Token advantage span mismatch')
         a=a[mask]
     if not torch.isfinite(a).all():raise ValueError('Nonfinite advantage')
-    objective,kl=policy_terms(current,old,reference,a,mask,epsilon)
+    current=current[mask].float();old=old[mask].detach().float();reference=reference[mask].detach().float()
+    if not len(current) or not all(torch.isfinite(x).all() for x in (current,old,reference)):
+        raise FloatingPointError('Empty/nonfinite completion logprobs')
+    d=current-old
+    if method in ('papo','cfpo'):d=d.clamp(-20.,20.)
+    high=.3 if method in ('papo','cfpo') else .4 if method=='axpo' else epsilon
+    ratio=d.exp();surrogate=torch.minimum(ratio*a,ratio.clamp(1-epsilon,1+high)*a)
+    if method in ('papo','cfpo'):surrogate=torch.where(a<0,torch.maximum(surrogate,3.*a),surrogate)
+    objective=surrogate.sum() if method=='visurf' else surrogate.mean()
+    if method in ('visurf','defacto') or beta==0:kl=current.new_zeros(())
+    else:
+        delta=reference-current
+        if method in ('papo','cfpo'):delta=delta.clamp(-20.,20.)
+        k3=delta.exp()-delta-1
+        if method in ('papo','cfpo'):k3=k3.clamp(-10.,10.)
+        kl=k3.mean()
+    if not all(torch.isfinite(x).all() for x in (ratio,objective,kl)):raise FloatingPointError('Nonfinite ratio/KL/objective')
     return -objective+beta*kl,{'policy_objective':float(objective.detach()),'reference_kl':float(kl.detach())}
 
 
 def perception_loss(factual,corrupted,method,gamma,entropy_factual,entropy_corrupted):
-    """PAPO author low_var_kl; CFPO Eq. 15 uses the opposite log-ratio."""
+    """Pinned author low_var_kl and cached, no-grad corrupted teacher."""
     if method not in ('papo','cfpo'):raise ValueError('Unknown perception objective')
     if factual.ndim!=1 or factual.shape!=corrupted.shape or not len(factual):raise ValueError('Paired response span mismatch')
     if not all(math.isfinite(v) and v>=0 for v in (gamma,entropy_factual,entropy_corrupted)):
         raise ValueError('Invalid perception coefficients')
     if not torch.isfinite(factual).all() or not torch.isfinite(corrupted).all():raise FloatingPointError('Nonfinite paired logprobs')
-    d=corrupted.float()-factual.float() if method=='papo' else factual.float()-corrupted.float()
-    if method=='papo':
-        d=d.clamp(-20.,20.)
-        k3=(d.exp()-d-1).clamp(-10.,10.)
-    else:k3=d.exp()-d-1
+    corrupted=corrupted.detach().float()
+    d=(corrupted-factual.float()).clamp(-20.,20.)
+    k3=(d.exp()-d-1).clamp(-10.,10.)
     # The released PAPO code uses negative sampled log-probability as its entropy surrogate.
     loss=-gamma*k3.mean()-entropy_factual*factual.mean()-entropy_corrupted*corrupted.mean()
     if not torch.isfinite(loss):raise FloatingPointError('Nonfinite perception objective')
@@ -85,18 +105,19 @@ def axpo_advantages(rewards,prefix_lengths,continuation_rewards):
     tool={i for i,n in enumerate(prefix_lengths) if n is not None}
     if selected and (not selected<=tool or any(r[i]!=0 for i in tool)):
         raise ValueError('Resampling requires an entirely wrong, nonempty tool subgroup')
-    recovered=r.clone();branches={}
+    base=advantages(r);branches={}
     for i,values in continuation_rewards.items():
         if not isinstance(i,int) or not 0<=i<len(r) or not isinstance(prefix_lengths[i],int) or prefix_lengths[i]<=0:
             raise ValueError('Invalid source prefix')
         values=reward_vector(values)
         if not torch.all((values==0)|(values==1)):raise ValueError('Binary continuation rewards required')
-        recovered[i]=float((values==1).any());branches[i]=advantages(values)
-    return advantages(recovered),branches
+        recovered=r.clone();recovered[i]=float((values==1).any())
+        base[i]=advantages(recovered)[i];branches[i]=advantages(values)
+    return base,branches
 
 
 def crossmodal_values(attention,values,image_mask,query_mask,sigma):
-    """CFPO Eqs. 10–13, per head; non-query outputs are unchanged."""
+    """Pinned author image-mean prior and pooled valid-weight GMM statistics."""
     if attention.ndim!=4 or values.ndim!=4 or attention.shape[:2]!=values.shape[:2] or attention.shape[-1]!=values.shape[-2]:
         raise ValueError('Attention/value shape mismatch')
     length=attention.shape[-1]
@@ -108,9 +129,13 @@ def crossmodal_values(attention,values,image_mask,query_mask,sigma):
         raise ValueError('Disjoint nonempty image/query spans required')
     qi=query_mask.nonzero().flatten();ii=image_mask.nonzero().flatten()
     cross=attention.index_select(-2,qi).index_select(-1,ii)
-    threshold=cross.detach().mean((-2,-1),keepdim=True)+sigma*cross.detach().std((-2,-1),unbiased=False,keepdim=True)
-    salient=(cross.detach()>threshold).to(cross.dtype)
-    visual=values.index_select(-2,ii);delta=visual.mean(-2,keepdim=True)-visual
+    salient=torch.zeros_like(cross)
+    for b in range(len(cross)):
+        valid=cross[b].detach()>1e-8;data=cross[b].detach()[valid]
+        # Author singleton sample std is NaN and selects no edges; avoid its warning.
+        if len(data)>1:salient[b]=((cross[b].detach()>data.mean()+sigma*data.std())&valid).to(cross.dtype)
+    visual=values.index_select(-2,ii)
+    delta=visual.sum((-2,-1),keepdim=True)/(visual.shape[-2]*visual.shape[-1])-visual
     correction=(cross*salient)@delta
     out=attention@values
     return out.index_add(-2,qi,correction),int(salient.sum())
@@ -142,7 +167,8 @@ def cfpo_attention(model,image_mask,query_mask,intervene=True,sigma=2.):
         else:scores=scores.masked_fill(torch.ones(n,n,device=q.device,dtype=torch.bool).triu(1),float('-inf'))
         weights=torch.softmax(scores,dim=-1,dtype=torch.float32).to(q.dtype)
         if intervene:
-            image,query=[torch.cat([m.to(q.device),torch.zeros(n-len(m),device=q.device,dtype=torch.bool)]) for m in masks]
+            image=torch.cat([masks[0].to(q.device),torch.zeros(n-len(masks[0]),device=q.device,dtype=torch.bool)])
+            query=torch.cat([masks[1].to(q.device),torch.ones(n-len(masks[1]),device=q.device,dtype=torch.bool)])
             out,count=crossmodal_values(weights,v,image,query,sigma);stats['salient_edges']+=count
         else:out=weights@v
         stats['forwards']+=1

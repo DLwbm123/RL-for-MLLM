@@ -1,0 +1,272 @@
+{
+  "review_date": "2026-10-10",
+  "timezone": "Asia/Shanghai",
+  "audited_commit": "8d98fba74ed76eefecf8206671b810d97e1567f9",
+  "verdict": "changes_required",
+  "scope": "Paper and available author-source review; deterministic CPU counterexamples only",
+  "sources": [
+    {
+      "method": "visurf",
+      "paper": "https://arxiv.org/abs/2510.10606",
+      "author_source": "https://huggingface.co/Ricky06662/Visurf-7B-Best-on-gRefCOCO",
+      "repository": "https://github.com/dvlab-research/ViSurf",
+      "availability": "Public repository API returned 404; author implementation not obtained"
+    },
+    {
+      "method": "rl_zvp",
+      "paper": "https://arxiv.org/abs/2509.21880",
+      "author_source": "https://bltnynk.github.io/publications/rl-zvp/",
+      "availability": "Project-page source marks code as to be released; training implementation not obtained"
+    },
+    {
+      "method": "papo",
+      "paper": "https://arxiv.org/abs/2507.06448",
+      "repository": "https://github.com/mikewangwzhl/PAPO",
+      "revision": "fb63bf4533b78da5a2bb17bc812375dcb620887d",
+      "availability": "Scoped training and intervention source obtained",
+      "checked": [
+        "core_algos",
+        "dp_actor",
+        "papo_utils",
+        "ray_trainer",
+        "dataset",
+        "configs"
+      ]
+    },
+    {
+      "method": "cfpo",
+      "paper": "https://arxiv.org/abs/2606.23206",
+      "repository": "https://github.com/Raven-July/CFPO",
+      "revision": "98ca5a4123be2e85e94855fead46c9a385611136",
+      "availability": "Scoped training and intervention source obtained",
+      "checked": [
+        "core_algos",
+        "dp_actor",
+        "fsdp_workers",
+        "ray_trainer",
+        "qwen2_vl_cmve",
+        "monkey_patch",
+        "configs"
+      ]
+    },
+    {
+      "method": "active_o3",
+      "paper": "https://arxiv.org/abs/2505.21457",
+      "repository": "https://github.com/aim-uofa/Active-o3",
+      "revision": "a862f0e0951e082d8af4adb3ca4c79e2809077ae",
+      "availability": "Public tree has seven files and no training implementation"
+    },
+    {
+      "method": "axpo",
+      "paper": "https://arxiv.org/abs/2605.28774",
+      "author_source": "https://byungkwanlee.github.io/AXPO-page/",
+      "availability": "Project page marks code as internal-use-only and public release as coming soon; internal repository not accessed"
+    },
+    {
+      "method": "defacto",
+      "paper": "https://arxiv.org/abs/2509.20912",
+      "repository": "https://github.com/tinnel123666888/defacto",
+      "revision": "471a747bc416a59e8ddad22de2e9b038c0c0aeba",
+      "availability": "Scoped reward plugin and trainer source obtained",
+      "checked": [
+        "viscot_reward_plugin_parallel",
+        "grpo_trainer",
+        "training_script"
+      ],
+      "not_checked": [
+        "complete data-generation pipeline"
+      ]
+    }
+  ],
+  "method_verdicts": {
+    "visurf": {
+      "core": "Label augmentation and smoothing match paper equations 6-7",
+      "differences": [
+        "Reference KL retained despite paper removing it",
+        "Compact JSON preference alignment not established",
+        "Sequence versus token reduction not confirmed without author code"
+      ]
+    },
+    "rl_zvp": {
+      "core": "Three advantage branches and response-relative entropy match equation 5 under the current single-update schedule",
+      "limits": [
+        "Author code unavailable",
+        "Frozen entropy semantics require rechecking before multiple policy updates"
+      ]
+    },
+    "papo": {
+      "core": "Released low_var_kl sign, clamps and sampled-surprisal signs match",
+      "differences": [
+        "Both sides recomputed with gradients, corresponding to an optional author mode rather than its default",
+        "Fixed-count merged-grid masking instead of independent Bernoulli masking on original 14-pixel patches"
+      ]
+    },
+    "cfpo": {
+      "core": "Paper-inspired intervention variant; not equivalent to released author baseline",
+      "findings": [
+        3
+      ],
+      "differences": [
+        "Paper and author log-ratio directions conflict",
+        "Vector prior versus author scalar broadcast prior",
+        "Per-head population statistics versus pooled valid-weight sample statistics",
+        "Prompt-only versus all post-image query positions",
+        "Joint current gradients versus cached no-grad corrupted teacher",
+        "Different entropy coefficients and gamma"
+      ]
+    },
+    "active_o3": {
+      "core": "Trainable observer and frozen task module preserve the main structure",
+      "findings": [
+        4
+      ],
+      "differences": [
+        "Crop proposals themselves evaluated as evidence boxes rather than task-model localized boxes",
+        "Binary answer and project-specific heuristics",
+        "Training code unavailable"
+      ]
+    },
+    "axpo": {
+      "core": "Trigger, fork boundary and masks match the paper; candidate ranking and unselected advantages do not",
+      "findings": [
+        1,
+        2,
+        4,
+        5
+      ],
+      "differences": [
+        "Per-patient extra-rollout cap instead of global breadth-first budget",
+        "Equal averaging of valid original and continuation losses",
+        "Single crop step and fixed binary reader",
+        "Training code unavailable"
+      ]
+    },
+    "defacto": {
+      "core": "Three views, counterfactual abstention/guess penalty and selection-reward branches preserve the main mechanisms",
+      "differences": [
+        "Complete positive GT replaces automated evidence proposals",
+        "JSON and strict binary/unknown answer replace reasoning and semantic judge",
+        "No sequential region exploration",
+        "Different abstention, guessing, format and selection coefficients"
+      ]
+    }
+  },
+  "findings": [
+    {
+      "id": 1,
+      "priority": "P1",
+      "file": "src/rl_methods_run.py",
+      "line": 127,
+      "title": "AXPO ranks thinking-prefix confidence instead of tool-call confidence",
+      "minimal_fix": "Record the complete tool-call span and rank its token probabilities"
+    },
+    {
+      "id": 2,
+      "priority": "P1",
+      "file": "src/rl_methods.py",
+      "line": 95,
+      "related_location": "src/rl_methods_run.py:134",
+      "title": "AXPO replaces unselected original GRPO advantages after recovery",
+      "minimal_fix": "Retain original advantages and replace only selected source-prefix advantages"
+    },
+    {
+      "id": 3,
+      "priority": "P1",
+      "file": "src/rl_methods.py",
+      "line": 72,
+      "title": "CFPO exponential overflows for finite paired logprobs",
+      "minimal_fix": "Choose the intended baseline objective and add its numerical stabilization without removing finite checks"
+    },
+    {
+      "id": 4,
+      "priority": "P2",
+      "file": "src/rl_observation.py",
+      "line": 49,
+      "related_locations": [
+        "configs/rl_methods.json",
+        "scripts/run_rl_methods.py:71"
+      ],
+      "title": "Two-region action cap cannot satisfy strict three-GT evidence success",
+      "minimal_fix": "Validate supported input cardinality; register a changed action budget or task-model localization if multi-lesion support is required"
+    },
+    {
+      "id": 5,
+      "priority": "P2",
+      "file": "tests/test_rl_methods.py",
+      "line": 76,
+      "title": "Tests encode a local AXPO error and do not independently establish author alignment",
+      "minimal_fix": "Add paper-derived ranking and unselected-advantage cases plus independent source-function numerical comparisons"
+    }
+  ],
+  "counterexamples": {
+    "axpo_unselected_advantages": {
+      "actual": [
+        1.732050895690918,
+        -0.5773502588272095,
+        -0.5773502588272095,
+        -0.5773502588272095
+      ],
+      "paper_original_unselected": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "selected": 0
+    },
+    "axpo_ranking": {
+      "actual_selected": 1,
+      "paper_selected": 0
+    },
+    "cfpo_ratio_direction": {
+      "paper_eq15_and_local_k3": 4.389056205749512,
+      "released_author_k3": 1.1353352069854736
+    },
+    "cfpo_unclamped_finite_input": "Raises for finite logprobs -1 and -101",
+    "cfpo_mean_prior": {
+      "local_vector_prior": [
+        3.0,
+        5.0
+      ],
+      "author_scalar_prior": 4.0,
+      "local_query2": [
+        3.1999998092651367,
+        5.199999809265137
+      ],
+      "author_query2": [
+        4.099999904632568,
+        4.299999713897705
+      ]
+    },
+    "observation_gt_exceeds_cap": {
+      "gt_boxes": 3,
+      "max_regions": 2,
+      "best_exact_two_boxes_correct": 0.0,
+      "coverage": 0.6666666666666666
+    },
+    "papo_mask_distribution": {
+      "author_can_mask_zero": true,
+      "ours_forced_mask_count": 3,
+      "grid_cells": 4
+    }
+  },
+  "checks": {
+    "validation": "Deterministic CPU counterexamples from extracted reviewed functions",
+    "cuda_initialized": false,
+    "model_loaded": false,
+    "optimizer_run": false,
+    "patient_data_read": false,
+    "scientific_experiments_run": false,
+    "algorithm_modified": false,
+    "previous_test_suite_rerun": false,
+    "github_access": "Proxy only",
+    "not_validated": [
+      "7B BF16 GPU numerics",
+      "GPU memory",
+      "Throughput",
+      "Medical effectiveness"
+    ]
+  },
+  "review_scope": "Pre-fix snapshot of audited_commit; current resolution is recorded separately",
+  "resolution_report": "rl_methods_source_fixes.md",
+  "resolution_validation": "rl_methods_source_fix_validation.json"
+}

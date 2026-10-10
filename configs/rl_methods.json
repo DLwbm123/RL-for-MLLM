@@ -1,5 +1,5 @@
 {
-  "version": "general-rl-2026-implementation-1",
+  "version": "general-rl-2026-source-aligned-2",
   "execution_mode": "implementation_only",
   "priority": ["visurf", "rl_zvp", "papo", "cfpo", "active_o3", "axpo", "defacto"],
   "medical_methods": "literature comparison only; not implemented",
@@ -13,10 +13,12 @@
   "old_current_logprob_atol": 0.015625,
   "old_current_logprob_rtol": 0.015625,
   "zvp_alpha": 0.1,
-  "papo": {"gamma": 0.01, "entropy_factual": 0.03, "entropy_corrupted": 0.03, "mask_ratio": 0.6},
-  "cfpo": {"gamma": 0.01, "entropy_factual": 0.03, "entropy_corrupted": 0.0, "sigma": 2.0},
+  "visurf": {"beta": 0.0},
+  "papo": {"gamma": 0.02, "entropy_factual": 0.05, "entropy_corrupted": 0.05, "mask_ratio": 0.6, "patch_size": 14},
+  "cfpo": {"gamma": 0.02, "entropy_factual": 0.0, "entropy_corrupted": 0.0, "sigma": 2.0},
   "observation": {"max_regions": 2, "min_area": 0.01, "max_area": 0.5},
-  "axpo": {"continuations": 4, "max_extra_rollouts": 4},
+  "axpo": {"continuations": 4, "extra_rollout_ratio": 0.25, "beta": 0.001},
+  "defacto": {"beta": 0.0},
   "requirements_for_scientific_run": [
     "new registered protocol and explicit resource budget",
     "training-only patient whitelist and fixed schedule",

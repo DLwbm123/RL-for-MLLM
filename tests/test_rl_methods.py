@@ -9,10 +9,10 @@ import pytest
 import torch
 from src.objectives import advantages
 from src.rl_methods import (PRIORITY,visurf_advantages,zvp_advantages,completion_loss,
-                            perception_loss,axpo_advantages,crossmodal_values,cfpo_attention)
-from src.rl_observation import (parse_observation,tool_prefix,active_reward,random_patch_mask,
+                            perception_loss,axpo_advantages,author_advantages,crossmodal_values,cfpo_attention)
+from src.rl_observation import (parse_observation,tool_prefix,tool_span,validate_observation_support,active_reward,random_patch_mask,
                                defacto_views,parse_evidence,defacto_reward)
-from src.rl_methods_run import UpdateGroup,probability_audit,native_sampling
+from src.rl_methods_run import UpdateGroup,probability_audit,native_sampling,query_masks
 from scripts.run_rl_methods import validate_spec
 
 
@@ -49,18 +49,48 @@ def test_completion_mask_detaches_advantage_and_gradient_direction():
     with pytest.raises(FloatingPointError):completion_loss(x*float('nan'),x.detach(),x.detach(),0.,[True]*3,.2,0.)
 
 
+def test_visurf_sequence_gradient_has_no_reference_kl():
+    x=torch.tensor([-1.,-2.],requires_grad=True)
+    loss,stats=completion_loss(x,x.detach(),torch.tensor([-100.,-101.]),1.,[True,True],.2,.01,'visurf')
+    loss.backward()
+    assert loss.item()==-2. and x.grad.tolist()==[-1.,-1.] and stats['reference_kl']==0
+
+
 @pytest.mark.parametrize('method',['papo','cfpo'])
-def test_perception_formula_and_joint_partial_gradient(method):
-    f=torch.tensor([-.4,-1.2],requires_grad=True);c=torch.tensor([-.9,-.8],requires_grad=True)
+def test_author_dual_clipping_and_reference_stabilization(method):
+    x=torch.tensor([-1.],requires_grad=True);old=torch.tensor([-1.-np.log(4.)])
+    loss,_=completion_loss(x,old,x.detach(),-1.,[True],.2,0.,method)
+    assert loss.item()==pytest.approx(3.)  # Author negative-advantage dual cap.
+    loss,_=completion_loss(x,old,torch.tensor([-101.]),1.,[True],.2,.01,method)
+    assert loss.item()==pytest.approx(-1.2,abs=1e-6)  # 1.3 upper clip and .01 * clamped k3=10.
+
+
+@pytest.mark.parametrize('method',['papo','cfpo'])
+def test_perception_author_golden_value_and_cached_gradient(method):
+    # Pinned author compute_kl(-1, -3, low_var_kl) = exp(-2)+2-1.
+    f=torch.tensor([-1.],requires_grad=True);c=torch.tensor([-3.],requires_grad=True)
     value,_=perception_loss(f,c,method,.1,.03,.02)
-    d=c-f if method=='papo' else f-c
-    assert torch.allclose(value,-.1*(d.exp()-d-1).mean()-.03*f.mean()-.02*c.mean())
-    expected=torch.autograd.grad(value,(f,c))
-    lf,_=perception_loss(f,c.detach(),method,.1,.03,.02)
-    lc,_=perception_loss(f.detach(),c,method,.1,.03,.02)
-    actual=(torch.autograd.grad(lf,f)[0],torch.autograd.grad(lc,c)[0])
-    assert all(torch.allclose(a,b) for a,b in zip(expected,actual))
-    if method=='papo':assert torch.isfinite(perception_loss(torch.tensor([-100.]),torch.tensor([0.]),method,.1,0.,0.)[0])
+    assert value.item()==pytest.approx(-.0235335283237,abs=1e-7)
+    value.backward()
+    assert f.grad.item()==pytest.approx(-.116466471676,abs=1e-7) and c.grad is None
+
+
+@pytest.mark.parametrize('method',['papo','cfpo'])
+@pytest.mark.parametrize('pair',[(-1.,-101.),(-101.,-1.)])
+def test_author_perception_extreme_finite_inputs(method,pair):
+    f=torch.tensor([pair[0]],requires_grad=True);c=torch.tensor([pair[1]],requires_grad=True)
+    loss,stats=perception_loss(f,c,method,.02,0.,0.)
+    assert loss.item()==pytest.approx(-.2) and stats['perception_k3']==10.
+    loss.backward();assert torch.isfinite(f.grad).all() and c.grad is None
+
+
+@pytest.mark.parametrize('method,eps',[('papo',1e-6),('cfpo',1e-6),('defacto',1e-4)])
+def test_author_sample_standard_deviation(method,eps):
+    # Four Bernoulli outcomes have sample std sqrt(1/3), rather than population std .5.
+    actual=author_advantages([0,1,0,1],method)
+    expected=.5/(3**-.5+eps)
+    assert actual.tolist()==pytest.approx([-expected,expected,-expected,expected])
+    assert torch.equal(author_advantages([1,1,1,1],method),torch.zeros(4))
 
 
 def test_cfpo_per_head_value_only_intervention():
@@ -73,11 +103,76 @@ def test_cfpo_per_head_value_only_intervention():
     out.sum().backward();assert torch.isfinite(values.grad).all()
 
 
+def test_cfpo_author_scalar_prior_and_pooled_valid_statistics():
+    attention=torch.zeros(1,2,4,4)
+    attention[0,0,2:,:2]=torch.tensor([.6,.3]);attention[0,1,2:,:2]=.05
+    values=torch.tensor([[[[1.,3.],[5.,7.],[0.,0.],[0.,0.]],[[10.,20.],[30.,40.],[0.,0.],[0.,0.]]]])
+    # Author medium GMM: pooled mean .25, sample std sqrt(.41/7); only the two .6 edges exceed it.
+    out,count=crossmodal_values(attention,values,[True,True,False,False],[False,False,True,True],1.)
+    assert count==2
+    assert torch.allclose(out[0,0,2:],torch.tensor([[3.9,4.5],[3.9,4.5]]))
+    assert torch.allclose(out[0,1,2:],torch.tensor([[2.,3.],[2.,3.]]))
+    tiny=attention.clone();tiny[:]=1e-9
+    assert crossmodal_values(tiny,values,[True,True,False,False],[False,False,True,True],2.)[1]==0
+
+
 def test_axpo_recovered_prefix_and_trigger():
     a,b=axpo_advantages([0,0,0,0],[2,2,None,None],{0:[0,1,0,0]})
-    assert a[0]>0 and (a[1:]<0).all() and b[0][1]>0
+    assert a.tolist()==pytest.approx([3**.5,0.,0.,0.]) and b[0].tolist()==pytest.approx([-3**-.5,3**.5,-3**-.5,-3**-.5])
+    # A successful no-tool original keeps its original advantage; each selected prefix uses its own Eq.4 replacement.
+    a,_=axpo_advantages([0,0,1,0],[2,2,None,None],{0:[0,1]})
+    assert a.tolist()==pytest.approx([1.,-3**-.5,3**.5,-3**-.5])
+    a,_=axpo_advantages([0,0,0,0],[2,2,None,None],{0:[0,1],1:[1,0]})
+    assert a.tolist()==pytest.approx([3**.5,3**.5,0.,0.])
     with pytest.raises(ValueError):axpo_advantages([0,1],[2,2],{0:[0,1]})
     with pytest.raises(ValueError):axpo_advantages([0,0],[None,None],{0:[0,1]})
+
+
+def axpo_fixture(confidences,cfg):
+    engine=UpdateGroup(SimpleNamespace(),'axpo',cfg,nullcontext,lambda:None,np.random.default_rng(2));groups=[];calls=[]
+    for confidence in confidences:
+        samples=[]
+        for pair in confidence:
+            samples.append({'tokens':[1,2,3,4],'generated':[-1.]*4,'mask':torch.ones(4,dtype=torch.bool),
+                'prefix':1 if pair else None,'tool_span':(1,3) if pair else None,'correct':0.,
+                'old':torch.tensor([np.log(pair[0]),np.log(pair[1]),np.log(pair[1]),-3.]) if pair else torch.full((4,),-1.)})
+        groups.append({'samples':samples,'original_count':len(samples),'advantages':[0.]*len(samples),'selected_prefixes':[],
+                       'case':(None,[],(),''),'inputs':{},'features':None,'view':'pos'})
+    def collect(*args):
+        calls.append(args[-1]);return {'tokens':[1,2,3,4],'generated':[-1.]*4,'mask':torch.ones(4,dtype=torch.bool),
+                                      'correct':float(len(calls)%2)}
+    engine.collect=collect
+    return engine,groups,calls
+
+
+def test_axpo_ranking_uses_tool_tokens_instead_of_thinking():
+    cfg=json.loads(json.dumps(CFG))
+    engine,groups,calls=axpo_fixture([[ (.9,.1),(.2,.8),None,None]]+[[None]*4]*3,cfg)
+    engine.resample(groups)
+    assert groups[0]['selected_prefixes']==[0] and len(calls)==4
+    assert groups[0]['advantages'][:4]==pytest.approx([3**.5,0.,0.,0.])
+
+
+def test_axpo_global_budget_is_breadth_first_and_never_rounded_up():
+    cfg=json.loads(json.dumps(CFG));cfg['axpo'].update(continuations=2,extra_rollout_ratio=.75)
+    engine,groups,calls=axpo_fixture([[(.9,.1),(.8,.2),(.7,.3),(.6,.4)]]*2,cfg)
+    engine.resample(groups)
+    assert [g['selected_prefixes'] for g in groups]==[[0,1],[0]] and len(calls)==6
+    assert len(calls)<=.75*8
+    engine,groups,calls=axpo_fixture([[(.9,.1)]*4],CFG)
+    engine.resample(groups)
+    assert not calls and not groups[0]['selected_prefixes'] and groups[0]['advantages']==[0.]*4
+
+
+def test_axpo_complete_call_span_excludes_thinking_and_eos():
+    tokenizer=Tokenizer();prefix='<think>abc</think><tool_call>';body='[[100,100,300,300]]</tool_call>'
+    tokens=tokenizer.encode(prefix+body)+[2]
+    assert tool_span(tokens,tokenizer)==(len('<think>abc</think>'),len(prefix+body))
+    assert tool_prefix(tokens,tokenizer)==len(prefix)
+    thinking='<think>literal <tool_call> text</think><tool_call>'
+    assert tool_prefix(tokenizer.encode(thinking+body),tokenizer)==len(thinking)
+    assert tool_span(tokenizer.encode(prefix+'[['),tokenizer) is None
+    assert tool_span(tokenizer.encode('<think>abc</think><answer>no</answer>'),tokenizer) is None
 
 
 def test_observation_bounds_and_positive_joint_success():
@@ -88,6 +183,17 @@ def test_observation_bounds_and_positive_joint_success():
     assert not parse_observation('<think>x</think><tool_call>python:exec("bad")</tool_call>',2)['valid']
     assert not parse_observation('<think>x</think><tool_call>[[100,100,300,300]]</tool_call>',2,True)['valid']
     assert not parse_observation('<think>x</think><tool_call>[]</tool_call>',2)['valid']
+
+
+@pytest.mark.parametrize('method',['active_o3','axpo'])
+def test_crop_cap_rejected_before_any_sampling(method):
+    calls=[];engine=UpdateGroup(SimpleNamespace(),method,CFG,nullcontext,lambda:calls.append(1),np.random.default_rng(2))
+    gt=GT+CONTROL+[[400,400,500,500]]
+    with pytest.raises(ValueError,match='strict success is impossible'):engine.groups(None,gt,'q')
+    with pytest.raises(ValueError,match='strict success is impossible'):engine.batch_groups([(None,GT,'q'),(None,gt,'q')])
+    assert calls==[]
+    validate_observation_support([],2);validate_observation_support(GT+CONTROL,2)
+    validate_observation_support([[1100,1100,1400,1400]],2)  # Manifest geometry is in pixels before normalization.
 
 
 def test_defacto_evidence_label_guard_and_controls():
@@ -105,8 +211,35 @@ def test_defacto_evidence_label_guard_and_controls():
     assert defacto_reward('{"answer":"yes","boxes":[[100,100,300,300]]}',GT,CONTROL,'pos')['correct']==1
     assert not parse_evidence('{"answer":"no","answer":"yes","boxes":[]}')['valid']
     assert not parse_evidence('{"answer":[],"boxes":[]}')['valid']
-    out,ids=random_patch_mask(image,(2,2),np.random.default_rng(2),.6)
-    assert len(ids)==3 and np.any(np.asarray(out)==255) and image.getpixel((20,20))==(255,255,255)
+
+
+def test_papo_raw_pixel_bernoulli_mask_can_keep_all_or_mask_all():
+    image=Image.new('RGB',(29,15),'white')
+    rng=SimpleNamespace(random=lambda:1.)
+    out,ids=random_patch_mask(image,14,rng,.6)
+    assert ids==[] and np.asarray(out).min()==255
+    out,ids=random_patch_mask(image,14,SimpleNamespace(random=lambda:0.),.6)
+    assert ids==list(range(6)) and np.asarray(out).max()==0 and np.asarray(image).min()==255
+    draws=iter([.1,.9,.9,.9,.9,.1])
+    out,ids=random_patch_mask(image,14,SimpleNamespace(random=lambda:next(draws)),.6)
+    assert ids==[0,5] and out.getpixel((13,13))==(0,0,0) and out.getpixel((14,13))==(255,255,255)
+    assert out.getpixel((28,14))==(0,0,0)
+
+
+@pytest.mark.parametrize('answer,view,expected',[
+    ('yes','pos',1.4),('unknown','pos',-.1),('unknown','cf',1.2),('no','cf',-.4),('yes','cf',-1.3)])
+def test_defacto_author_reward_coefficients(answer,view,expected):
+    text=json.dumps({'answer':answer,'boxes':GT if answer=='yes' else []})
+    assert defacto_reward(text,GT,CONTROL,view)['reward']==pytest.approx(expected)
+    wrong=defacto_reward(json.dumps({'answer':'yes','boxes':CONTROL}),GT,CONTROL,'pos')
+    assert wrong['coherence']==-1 and wrong['reward']==pytest.approx(1.) and wrong['correct']==0
+
+
+def test_defacto_rewards_are_independent_of_format_success():
+    value=defacto_reward('{"answer":"yes","boxes":[]}',GT,CONTROL,'pos')
+    assert value['answer_reward']==1 and value['format_reward']==0 and value['reward']==pytest.approx(.9) and value['correct']==0
+    assert defacto_reward('not json',GT,CONTROL,'cf')['reward']==pytest.approx(-.6)
+    assert defacto_reward('{"answer":"no","boxes":[]}',[],[],'pos')['correct']==1
 
 
 def test_probability_and_authorization_fail_closed():
@@ -137,6 +270,7 @@ def native(tmp_path):
         vision_config={'depth':1,'hidden_size':32,'intermediate_size':64,'num_heads':4,'out_hidden_size':32,
                        'patch_size':14,'temporal_patch_size':2,'spatial_merge_size':2,'fullatt_block_indexes':[0]})
     base=Qwen2_5_VLForConditionalGeneration(cfg);cfg._attn_implementation='eager'
+    assert next(base.parameters()).device.type=='cpu'
     m=Model.__new__(Model);m.visual=base.visual
     m.model=get_peft_model(base,LoraConfig(r=2,lora_alpha=4,lora_dropout=0.,target_modules=['q_proj','v_proj'],task_type='CAUSAL_LM'))
     for n,p in m.model.named_parameters():
@@ -185,23 +319,21 @@ def test_native_cfpo_attention_restore_and_checkpoint_gradient(native):
     assert any(p.grad is not None and p.grad.abs().sum()>0 for p in m.model.parameters() if p.requires_grad)
 
 
-def test_native_cfpo_paired_checkpoint_gradient_matches_joint(native):
+def test_native_cfpo_cached_teacher_checkpoint_gradient_matches_direct(native):
     m,_,_=native;inp,_=m.prompt(Image.new('RGB',(28,28),'white'));feat=m.encode(inp)
-    image=inp['input_ids'][0]==254;query=torch.zeros(11,dtype=torch.bool);query[7:9]=True
+    image,query=query_masks(m,inp)
+    assert query.tolist()==[False]*6+[True]*5
     def context(enabled):return cfpo_attention(m.model,image,query,enabled,sigma=0.)
     trainable=[p for p in m.model.parameters() if p.requires_grad]
     def grads():return torch.cat([p.grad.flatten() if p.grad is not None else torch.zeros_like(p).flatten() for p in trainable])
     m.model.gradient_checkpointing_disable()
-    with context(False):f=m.score(inp,feat,ids=[30,31,2])['tokens']
-    with context(True):c=m.score(inp,feat,ids=[30,31,2])['tokens']
-    perception_loss(f,c,'cfpo',.1,.03,0.)[0].backward();expected=grads().clone()
+    with torch.no_grad(),context(True):c=m.score(inp,feat,ids=[30,31,2])['tokens']
+    c=c.detach().requires_grad_(True);f=m.score(inp,feat,ids=[30,31,2])['tokens']
+    perception_loss(f,c,'cfpo',.1,0.,0.)[0].backward();expected=grads().clone()
+    assert c.grad is None
     m.model.zero_grad(set_to_none=True)
     m.model.gradient_checkpointing_enable(gradient_checkpointing_kwargs={'use_reentrant':False})
-    with torch.no_grad(),context(True):c=m.score(inp,feat,ids=[30,31,2])['tokens']
-    with context(False):
-        f=m.score(inp,feat,ids=[30,31,2])['tokens'];perception_loss(f,c,'cfpo',.1,.03,0.)[0].backward()
-    with context(True):
-        c=m.score(inp,feat,ids=[30,31,2])['tokens'];perception_loss(f.detach(),c,'cfpo',.1,.03,0.)[0].backward()
+    f=m.score(inp,feat,ids=[30,31,2])['tokens'];perception_loss(f,c,'cfpo',.1,0.,0.)[0].backward()
     assert expected.abs().sum()>0 and torch.allclose(grads(),expected,atol=1e-7,rtol=1e-4)
 
 
@@ -212,7 +344,7 @@ def test_all_method_group_integration_with_native_scores(native,method):
     cfg['cfpo']['sigma']=0.;index=0
     texts=['[]','[[100,100,300,300]]','[]','[[100,100,300,300]]']
     if method in ('active_o3','axpo'):
-        texts=['<think>x</think><tool_call>[[500,500,700,700]]</tool_call>']*4
+        texts=['<think>x</think><tool_call>[[500,500,700,700]]</tool_call>']*(16 if method=='axpo' else 4)
         texts+=['<think>x</think><tool_call>[[100,100,300,300]]</tool_call>',
                 '<think>x</think><tool_call>[[500,500,700,700]]</tool_call>']*2
         if method=='active_o3':texts=texts[4:8]
@@ -234,14 +366,25 @@ def test_all_method_group_integration_with_native_scores(native,method):
     if method in ('active_o3','axpo'):
         actual=engine.frozen_answer(image,'Is the target visible?');assert actual in ('yes','no')
         engine.frozen_answer=lambda image,question:'yes'
-    groups=engine.groups(image,GT,'Is the target visible?',CONTROL,True)
+    case=(image,GT,'Is the target visible?',CONTROL,True)
+    groups=engine.batch_groups([case]*4) if method=='axpo' else engine.groups(*case)
     if method=='axpo':
-        assert engine.extra_rollouts==4 and len(groups[0]['samples'])==8
-        source=groups[0]['selected_prefixes'][0];n=groups[0]['samples'][source]['prefix']
-        assert not groups[0]['samples'][source]['mask'][n:].any()
-        assert all(not s['mask'][:n].any() for s in groups[0]['samples'][4:])
-        assert tool_prefix(groups[0]['samples'][source]['tokens'],m.processor.tokenizer)==n
+        assert engine.extra_rollouts==4 and sum(len(g['samples']) for g in groups)==20
+        selected=next(g for g in groups if g['selected_prefixes'])
+        source=selected['selected_prefixes'][0];n=selected['samples'][source]['prefix']
+        assert not selected['samples'][source]['mask'][n:].any()
+        assert all(not s['mask'][:n].any() for s in selected['samples'][4:])
+        assert tool_prefix(selected['samples'][source]['tokens'],m.processor.tokenizer)==n
+        assert all(a==0 for i,a in enumerate(selected['advantages'][:4]) if i!=source)
+    if method in ('papo','cfpo'):
+        assert all(not s['corrupted_old'].requires_grad for g in groups for s in g['samples'])
+        cached_count=m.score_count
     stats=engine.backward(groups)
+    if method in ('papo','cfpo'):assert m.score_count-cached_count==2*len(groups[0]['samples'])
+    if method in ('visurf','defacto'):assert all(t['reference_kl']==0 for t in stats['terms'])
+    if method=='axpo':
+        assert sum(t['weight']==.25 for t in stats['terms'])==5  # One prefix + four branches, Eq.5 added once.
+        assert sum(t['weight']==.0625 for t in stats['terms'])==15  # Unselected ordinary GRPO.
     assert np.isfinite(stats['mean_loss']) and stats['completions']>=4
     trained=[p for p in m.model.parameters() if p.requires_grad]
     assert any(p.grad is not None and p.grad.abs().sum()>0 for p in trained)

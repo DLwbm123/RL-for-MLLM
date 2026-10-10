@@ -4,9 +4,9 @@ import json
 import torch
 from src.medevidence import parse_boxes,matching
 from src.objectives import advantages
-from src.rl_methods import (PRIORITY,visurf_advantages,zvp_advantages,axpo_advantages,
+from src.rl_methods import (PRIORITY,visurf_advantages,zvp_advantages,axpo_advantages,author_advantages,
                             completion_loss,perception_loss,cfpo_attention)
-from src.rl_observation import (observation_prompt,parse_observation,tool_prefix,pixel_box,
+from src.rl_observation import (observation_prompt,parse_observation,tool_prefix,tool_span,pixel_box,validate_observation_support,
                                active_reward,random_patch_mask,defacto_views,evidence_prompt,defacto_reward)
 
 
@@ -37,12 +37,11 @@ def query_masks(m,inputs):
     ids=inputs['input_ids'][0];image=ids==m.model.config.image_token_id
     end=m.model.config.vision_end_token_id
     locations=(ids==end).nonzero().flatten()
-    stop=m.processor.tokenizer.convert_tokens_to_ids('<|im_end|>')
-    if len(locations)!=1 or stop is None:raise ValueError('Single image and explicit question boundary required')
-    after=int(locations[0])+1
-    ends=(ids[after:]==stop).nonzero().flatten()
-    if not len(ends):raise ValueError('Missing user-question terminator')
-    query=torch.zeros_like(image);query[after:after+int(ends[0])]=True
+    if len(locations)!=1:raise ValueError('Single image and explicit image boundary required')
+    after=int(locations[0]);start=(ids==m.model.config.vision_start_token_id).nonzero().flatten()
+    if len(start)!=1 or not image[int(start[0])+1:after].all() or int(start[0])+1>=after:
+        raise ValueError('Contiguous single-image span required')
+    query=torch.zeros_like(image);query[after:]=True
     if not image.any() or not query.any():raise ValueError('Missing CFPO image/question span')
     return image,query
 
@@ -53,6 +52,10 @@ class UpdateGroup:
         if method not in PRIORITY:raise ValueError('Unknown RL adaptation')
         if cfg['sampling']['completions']<2:raise ValueError('At least two rollouts required')
         native_sampling(cfg['sampling']|{'do_sample':True})
+        if method=='axpo':
+            a=cfg['axpo']
+            if type(a['continuations']) is not int or a['continuations']<2 or not 0<a['extra_rollout_ratio']<1:
+                raise ValueError('AXPO requires K>=2 and a global extra-rollout ratio in (0,1)')
         self.m=m;self.method=method;self.cfg=cfg;self.reference=reference;self.tick=tick;self.rng=rng
         self.observer_calls=0;self.extra_rollouts=0
 
@@ -101,14 +104,16 @@ class UpdateGroup:
             alignment=probability_audit(generated,old['tokens'],cfg)
             with self.reference():ref=m.score(inputs,features,ids=tokens)['tokens'].detach()
         finally:m.set_training(before)
+        span=tool_span(tokens,m.processor.tokenizer) if self.method=='axpo' else None
         result={'tokens':tokens,'old':old['tokens'].detach(),'reference':ref,'generated':generated,'alignment':alignment,
                 'entropy':old.get('entropy'),'mask':torch.ones(len(tokens),dtype=torch.bool),
-                'prefix':tool_prefix(tokens,m.processor.tokenizer) if self.method=='axpo' else None}
+                'prefix':tool_prefix(tokens,m.processor.tokenizer) if span else None,'tool_span':span}
         result.update(self.outcome(text,truncated,image,gt,controls,variant,question))
         return result
 
-    def groups(self,image,gt,question,controls=(),complete_evidence=False):
+    def groups(self,image,gt,question,controls=(),complete_evidence=False,resample=True):
         m=self.m;cfg=self.cfg
+        if self.method in ('active_o3','axpo'):validate_observation_support(gt,cfg['observation']['max_regions'])
         if self.method=='defacto':views=defacto_views(image,gt,controls,complete_evidence);prompt=evidence_prompt(question)
         else:
             views=[('pos',image,'yes' if gt else 'no')]
@@ -116,24 +121,11 @@ class UpdateGroup:
                     question+' Return only [[x1,y1,x2,y2],...] with coordinates normalized to 0–1000, or [] when no target is visible.')
         out=[]
         for variant,view,_ in views:
-            self.tick();inputs,grid=m.prompt(view,question=prompt);features=m.encode(inputs)
+            self.tick();inputs,_=m.prompt(view,question=prompt);features=m.encode(inputs)
             samples=[self.collect(inputs,features,view,gt,controls,variant,question) for _ in range(cfg['sampling']['completions'])]
             rewards=[s['correct'] if self.method in ('rl_zvp','axpo') else s['reward'] for s in samples]
-            branches={};selected=[]
             if self.method=='axpo':
-                a=cfg['axpo'];tool=[i for i,s in enumerate(samples) if s['prefix'] is not None]
-                if a['continuations']<2 or a['max_extra_rollouts']<0:raise ValueError('Invalid AXPO rollout cap')
-                if tool and all(samples[i]['correct']==0 for i in tool):
-                    tool.sort(key=lambda i:float(samples[i]['old'][:samples[i]['prefix']].exp().mean()))
-                    selected=tool[:a['max_extra_rollouts']//a['continuations']]
-                    for i in selected:
-                        s=samples[i];n=s['prefix'];p={'tokens':s['tokens'][:n],'generated':s['generated'][:n]}
-                        branches[i]=[self.collect(inputs,features,view,gt,controls,variant,question,p) for _ in range(a['continuations'])]
-                        self.extra_rollouts+=len(branches[i]);s['mask'][n:]=False
-                        for branch in branches[i]:branch['mask'][:n]=False
-                base,extra=axpo_advantages(rewards,[s['prefix'] for s in samples],{i:[s['correct'] for s in ss] for i,ss in branches.items()})
-                adv=base.tolist()
-                for i,ss in branches.items():samples.extend(ss);adv.extend(extra[i].tolist())
+                adv=advantages(torch.tensor(rewards,dtype=torch.float32)).tolist()
             elif self.method=='visurf':
                 target=json.dumps(gt,separators=(',',':'))
                 ids=m.processor.tokenizer.encode(target,add_special_tokens=False)+[m.processor.tokenizer.eos_token_id]
@@ -142,18 +134,63 @@ class UpdateGroup:
                 samples.append({'tokens':ids,'old':old,'reference':ref,'mask':torch.ones(len(ids),dtype=torch.bool),'reward':1.,'correct':1.})
                 adv=visurf_advantages(rewards,1.).tolist()
             elif self.method=='rl_zvp':adv=zvp_advantages(rewards,[s['entropy'] for s in samples],cfg['zvp_alpha'])
+            elif self.method in ('papo','cfpo','defacto'):adv=author_advantages(rewards,self.method).tolist()
             else:adv=advantages(torch.tensor(rewards,dtype=torch.float32)).tolist()
-            group={'inputs':inputs,'features':features,'samples':samples,'advantages':adv,'view':variant,'selected_prefixes':selected}
+            group={'inputs':inputs,'features':features,'samples':samples,'advantages':adv,'view':variant,'selected_prefixes':[],
+                   'original_count':len(samples)}
+            if self.method=='axpo':group['case']=(view,gt,controls,question)
             if self.method=='papo':
-                masked,indices=random_patch_mask(view,grid,self.rng,cfg['papo']['mask_ratio'])
+                masked,indices=random_patch_mask(view,cfg['papo']['patch_size'],self.rng,cfg['papo']['mask_ratio'])
                 altered,_=m.prompt(masked,question=prompt);group['corrupted']=(altered,m.encode(altered));group['masked_patches']=indices
             if self.method=='cfpo':group['spans']=query_masks(m,inputs)
+            if self.method in ('papo','cfpo'):
+                ci,cf=group.get('corrupted',(inputs,features))
+                context=cfpo_attention(m.model,*group['spans'],sigma=cfg['cfpo']['sigma']) if self.method=='cfpo' else nullcontext()
+                with torch.no_grad(),context:
+                    for sample in samples:sample['corrupted_old']=m.score(ci,cf,ids=sample['tokens'])['tokens'].detach()
             out.append(group)
+        if self.method=='axpo' and resample:self.resample(out)
         return out
+
+    def batch_groups(self,cases):
+        """Collect all original groups before allocating AXPO's step-wide budget."""
+        if not cases:raise ValueError('Nonempty update batch required')
+        if self.method in ('active_o3','axpo'):
+            for case in cases:validate_observation_support(case[1],self.cfg['observation']['max_regions'])
+        groups=[g for case in cases for g in self.groups(*case,resample=False)]
+        if self.method=='axpo':self.resample(groups)
+        return groups
+
+    def resample(self,groups):
+        a=self.cfg['axpo'];k=a['continuations'];slots=int(a['extra_rollout_ratio']*sum(g['original_count'] for g in groups))//k
+        candidates=[]
+        for g in groups:
+            tool=[i for i,s in enumerate(g['samples']) if s['prefix'] is not None]
+            if tool and all(g['samples'][i]['correct']==0 for i in tool):
+                tool.sort(key=lambda i:float(g['samples'][i]['old'][slice(*g['samples'][i]['tool_span'])].exp().mean()))
+            else:tool=[]
+            candidates.append(tool)
+        # Breadth first: each admitted question gets its first prefix before any gets a second.
+        for rank in range(max(map(len,candidates),default=0)):
+            for g,tool in zip(groups,candidates):
+                if slots and rank<len(tool):g['selected_prefixes'].append(tool[rank]);slots-=1
+        for g in groups:
+            original=g['samples'][:g['original_count']];branches={}
+            image,gt,controls,question=g['case']
+            for i in g['selected_prefixes']:
+                s=original[i];n=s['prefix'];prefix={'tokens':s['tokens'][:n],'generated':s['generated'][:n]}
+                branches[i]=[self.collect(g['inputs'],g['features'],image,gt,controls,g['view'],question,prefix) for _ in range(k)]
+                self.extra_rollouts+=k;s['mask'][n:]=False
+                for branch in branches[i]:branch['mask'][:n]=False
+            base,extra=axpo_advantages([s['correct'] for s in original],[s['prefix'] for s in original],
+                                       {i:[s['correct'] for s in ss] for i,ss in branches.items()})
+            g['advantages']=base.tolist()
+            for i,ss in branches.items():g['samples'].extend(ss);g['advantages'].extend(extra[i].tolist())
 
     def backward(self,groups,scale=1.):
         if not groups or not 0<scale<=1:raise ValueError('Nonempty groups and positive averaging scale required')
-        m=self.m;cfg=self.cfg;logs=[]
+        m=self.m;cfg=self.cfg;logs=[];weighted_loss=0.
+        token_count=sum(int(s['mask'].sum()) for g in groups for s in g['samples'])
         # Check every old/current pair before accumulating any gradient.
         for g in groups:
             for s in g['samples']:
@@ -162,29 +199,21 @@ class UpdateGroup:
                 if not torch.allclose(current,s['old'],atol=cfg['old_current_logprob_atol'],rtol=cfg['old_current_logprob_rtol']):
                     raise RuntimeError('Old/current on-policy probability gate failed')
         for g in groups:
-            weight=scale/len(groups)/len(g['samples'])
-            for s,a in zip(g['samples'],g['advantages']):
-                self.tick();paired=self.method in ('papo','cfpo')
+            for index,(s,a) in enumerate(zip(g['samples'],g['advantages'])):
+                self.tick();paired=self.method in ('papo','cfpo');trained=int(s['mask'].sum())
+                weight=scale/len(groups)/len(g['samples'])
+                if paired:weight=scale*trained/token_count
+                if self.method=='axpo':
+                    weight=scale/len(groups)*(1. if index in g['selected_prefixes'] or index>=g['original_count'] else 1/g['original_count'])
+                factual=m.score(g['inputs'],g['features'],ids=s['tokens'])['tokens']
+                beta=cfg[self.method].get('beta',cfg['beta']) if self.method in cfg else cfg['beta']
+                loss,stats=completion_loss(factual,s['old'],s['reference'],a,s['mask'],cfg['epsilon'],beta,self.method)
                 if paired:
                     p=cfg[self.method]
-                    ci,cf=g.get('corrupted',(g['inputs'],g['features']))
-                    context=(lambda enabled:cfpo_attention(m.model,*g['spans'],intervene=enabled,sigma=p['sigma'])) if self.method=='cfpo' else (lambda enabled:nullcontext())
-                    # Two partial backwards give the joint paired gradient and keep checkpoint recomputation in its own attention context.
-                    with torch.no_grad(),context(True):corrupted=m.score(ci,cf,ids=s['tokens'])['tokens'].detach()
-                else:context=lambda enabled:nullcontext()
-                with context(False):
-                    factual=m.score(g['inputs'],g['features'],ids=s['tokens'])['tokens']
-                    loss,stats=completion_loss(factual,s['old'],s['reference'],a,s['mask'],cfg['epsilon'],cfg['beta'])
-                    if paired:
-                        extra,perception=perception_loss(factual,corrupted,self.method,p['gamma'],p['entropy_factual'],p['entropy_corrupted'])
-                        loss=loss+extra;stats.update(perception)
-                    value=float(loss.detach());(weight*loss).backward()
-                if paired:
-                    with context(True):
-                        corrupted=m.score(ci,cf,ids=s['tokens'])['tokens']
-                        extra,_=perception_loss(factual.detach(),corrupted,self.method,p['gamma'],p['entropy_factual'],p['entropy_corrupted'])
-                        (weight*extra).backward()
-                logs.append(stats|{'loss':value,'view':g['view'],'trained_tokens':int(s['mask'].sum())})
-        return {'method':self.method,'mean_loss':sum(x['loss'] for x in logs)/len(logs),'completions':len(logs),
+                    extra,perception=perception_loss(factual,s['corrupted_old'],self.method,p['gamma'],p['entropy_factual'],p['entropy_corrupted'])
+                    loss=loss+extra;stats.update(perception)
+                value=float(loss.detach());(weight*loss).backward();weighted_loss+=weight*value
+                logs.append(stats|{'loss':value,'weight':weight,'view':g['view'],'trained_tokens':trained})
+        return {'method':self.method,'mean_loss':weighted_loss/scale,'completions':len(logs),
                 'extra_rollouts':self.extra_rollouts,'observer_calls':self.observer_calls,'terms':logs,
                 'generation_replay_max_error':max(s['alignment']['max_error'] for g in groups for s in g['samples'] if 'alignment' in s)}

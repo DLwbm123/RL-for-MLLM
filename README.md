@@ -81,3 +81,5 @@ P9完成三折检测器共2400步和960人折外候选；117个阳性中64个有
 按优先级实现 ViSurf → RL-ZVP → PAPO → CFPO → ACTIVE-o3 → AXPO → DeFacto，并接入现有 Qwen2.5-VL completion scorer、冻结参考适配器和训练梯度。医学专用方法仅作文献对比。当前仅完成工程实现与 CPU 检查，未启动正式实验；历史 P4–P9 冻结协议和停止决定保持不变。
 
 见[实现范围、适配差异及使用方式](reports/rl_methods_implementation.md)、[工程检查回执](reports/rl_methods_validation.json)。核心接口为 `src.rl_methods_run.UpdateGroup.groups()` / `.backward()`；注册运行入口为 `scripts.run_rl_methods.main()`，缺少新的私有协议与预算时拒绝启动。
+
+2026-10-10 已修复原文／作者代码审阅发现的五项问题，并对齐可取得作者实现的默认路径。详见[修复与医学任务适配说明](reports/rl_methods_source_fixes.md)及[当前 CPU 验证回执](reports/rl_methods_source_fix_validation.json)。整批接口为 `UpdateGroup.batch_groups()`；未启动实验。

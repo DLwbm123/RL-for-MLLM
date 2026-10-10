@@ -15,6 +15,7 @@ from src.medevidence import normalized
 from src.medevidence_p4_run import add_reference,reference,current_digest
 from src.rl_methods import PRIORITY
 from src.rl_methods_run import UpdateGroup,native_sampling
+from src.rl_observation import validate_observation_support
 
 
 def validate_spec(spec,cfg):
@@ -54,6 +55,8 @@ def main():
         frame=pd.read_csv(spec['manifest'],keep_default_na=False,dtype={'case_id':str,'image_id':str})
         frame=frame[frame.image_id.isin(spec['train_ids'])].copy()
         if set(frame.image_id)!=set(spec['train_ids']) or set(frame.split)!={'train'}:raise PermissionError('Train-only identities required')
+        if spec['method'] in ('active_o3','axpo'):
+            for value in frame['boxes']:validate_observation_support(json.loads(value),cfg['observation']['max_regions'])
         data=DevelopmentData(spec['data_root'],frame,dest/'data_access.jsonl');data.install_guard()
         rows=frame.set_index('image_id').to_dict('index');seed_all(spec['seed']);tick()
         model=Model(spec['model_root'],spec['initial_adapter'],True)
@@ -66,13 +69,13 @@ def main():
         plan=spec['schedule'] if spec['execution_mode']=='train' else spec['schedule'][:1]
         with (dest/'updates.jsonl').open('x') as out:
             for ids in plan:
-                tick();opt.zero_grad(set_to_none=True);records=[]
+                tick();opt.zero_grad(set_to_none=True);cases=[]
                 for key in ids:
                     row=rows[key];image=data.image(key);gt=normalized(json.loads(row['boxes']),image.width,image.height)
                     controls=json.loads(row.get('control_boxes','[]'))
-                    engine=UpdateGroup(model,spec['method'],cfg,lambda:reference(ctx,model),tick,np.random.default_rng(spec['seed']+completed*len(ids)+len(records)))
-                    groups=engine.groups(image,gt,spec['question'],controls,row.get('complete_evidence') in (True,'true','True'))
-                    records.append(engine.backward(groups,scale=1/len(ids)))
+                    cases.append((image,gt,spec['question'],controls,row.get('complete_evidence') in (True,'true','True')))
+                engine=UpdateGroup(model,spec['method'],cfg,lambda:reference(ctx,model),tick,np.random.default_rng(spec['seed']+completed))
+                records=[engine.backward(engine.batch_groups(cases))]
                 if any(p.grad is not None for n,p in model.model.named_parameters() if '.visual.' in n or '.reference.' in n):
                     raise RuntimeError('Frozen visual/reference gradient')
                 norm=torch.nn.utils.clip_grad_norm_(trainable,cfg['gradient_clip'])

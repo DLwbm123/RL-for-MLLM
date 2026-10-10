@@ -27,8 +27,28 @@ def parse_observation(text,max_regions,truncated=False):
 def tool_prefix(tokens,tokenizer):
     """Fork only at an exact token boundary following the opening tool tag."""
     for n in range(1,len(tokens)+1):
-        if tokenizer.decode(tokens[:n],skip_special_tokens=False).endswith('<tool_call>'):return n
+        if re.fullmatch(r'\s*<think>.*?</think>\s*<tool_call>',tokenizer.decode(tokens[:n],skip_special_tokens=False),re.S):return n
     return None
+
+
+def tool_span(tokens,tokenizer):
+    """Complete serialized tool call, including its tags, excluding thinking and EOS."""
+    fork=tool_prefix(tokens,tokenizer)
+    if fork is None:return None
+    offset=tokenizer.decode(tokens[:fork],skip_special_tokens=False).rfind('<tool_call>')
+    start=next(n-1 for n in range(1,fork+1) if len(tokenizer.decode(tokens[:n],skip_special_tokens=False))>offset)
+    for end in range(fork+1,len(tokens)+1):
+        if '</tool_call>' in tokenizer.decode(tokens[fork:end],skip_special_tokens=False):return start,end
+    return None
+
+
+def validate_observation_support(gt,max_regions):
+    if type(max_regions) is not int or max_regions<1:raise ValueError('Positive crop limit required')
+    if not isinstance(gt,(list,tuple)) or any(not isinstance(b,(list,tuple)) or len(b)!=4 or
+            any(type(x) not in (int,float) or not math.isfinite(x) or x<0 for x in b) or
+            b[0]>=b[2] or b[1]>=b[3] for b in gt):raise ValueError('Illegal target geometry')
+    if len(gt)>max_regions:
+        raise ValueError(f'{len(gt)} target regions exceed registered crop limit {max_regions}; strict success is impossible')
 
 
 def pixel_box(box,size):
@@ -57,15 +77,16 @@ def active_reward(action,gt,observed_answer,min_area,max_area):
             'evidence_success':evidence_success,'coverage':coverage,'regions':len(boxes)}
 
 
-def random_patch_mask(image,grid,rng,ratio):
-    gh,gw=grid
-    if type(gh) is not int or type(gw) is not int or gh*gw<2 or not 0<ratio<1:
+def random_patch_mask(image,patch_size,rng,ratio):
+    """Author PAPO: independent Bernoulli draws on raw-image pixel patches."""
+    if type(patch_size) is not int or patch_size<1 or not 0<=ratio<=1:
         raise ValueError('Invalid random patch masking geometry')
-    count=min(gh*gw-1,max(1,math.ceil(gh*gw*ratio)))
-    selected=rng.choice(gh*gw,size=count,replace=False).tolist();out=image.copy();w,h=image.size
-    for index in selected:
-        y,x=divmod(index,gw)
-        out.paste((0,0,0),(math.floor(x*w/gw),math.floor(y*h/gh),math.ceil((x+1)*w/gw),math.ceil((y+1)*h/gh)))
+    selected=[];out=image.copy();w,h=image.size;index=0
+    for y in range(0,h,patch_size):
+        for x in range(0,w,patch_size):
+            if rng.random()<ratio:
+                selected.append(index);out.paste(0,(x,y,min(x+patch_size,w),min(y+patch_size,h)))
+            index+=1
     return out,selected
 
 
@@ -105,24 +126,25 @@ def parse_evidence(text,truncated=False):
         if truncated or not isinstance(value,dict) or set(value)!={'answer','boxes'} or value['answer'] not in ('yes','no','unknown'):
             raise ValueError('Invalid evidence schema')
         boxes,error=parse_boxes(json.dumps(value['boxes']))
-        if error or bool(boxes)!=(value['answer']=='yes'):raise ValueError('Answer/evidence disagreement')
-        return {'valid':True,'answer':value['answer'],'boxes':boxes}
+        valid=not error and bool(boxes)==(value['answer']=='yes')
+        return {'valid':valid,'answer':value['answer'],'boxes':boxes if not error else None}
     except (ValueError,TypeError):return {'valid':False,'answer':None,'boxes':None}
 
 
 def defacto_reward(text,gt,controls,variant,truncated=False):
     if variant not in ('pos','cf','rand'):raise ValueError('Unknown evidence view')
     value=parse_evidence(text,truncated)
-    if not value['valid']:return {'reward':-1.,'correct':0.,'answer_correct':False,'evidence_success':False}
-    answer=value['answer'];boxes=value['boxes'];target='yes' if gt else 'no'
+    answer=value['answer'];boxes=value['boxes'] or [];target='yes' if gt else 'no'
     if variant=='cf':
         if not gt:raise ValueError('No counterfactual label for target-free image')
-        correct=float(answer=='unknown');answer_reward=1. if correct else -1.-float(answer==target)
-        coherence=0.;evidence_success=bool(correct)
+        answer_reward=float(answer=='unknown')-.6*float(answer!='unknown')-.9*float(answer==target)
+        correct=float(value['valid'] and answer=='unknown');coherence=0.;evidence_success=bool(correct)
     else:
-        answer_reward=float(answer==target)-float(answer=='unknown')
-        evidence_success=matching(gt,boxes)['strict'];correct=float(answer==target and evidence_success)
-        coherence=(sum(max(iou(b,g) for g in gt)-.5*max((iou(b,c) for c in controls),default=0.) for b in boxes)/len(boxes)
-                   if boxes and gt else -.5 if gt else float(not boxes))
-    return {'reward':answer_reward+.1+.25*coherence,'correct':correct,'answer_correct':answer==('unknown' if variant=='cf' else target),
-            'evidence_success':evidence_success,'view':variant,'coherence':coherence}
+        answer_reward=float(answer==target)-.2*float(answer=='unknown')
+        evidence_success=value['valid'] and matching(gt,boxes)['strict'];correct=float(answer==target and evidence_success)
+        coherence=(sum(max((iou(b,g) for g in gt),default=0.)-max((iou(b,c) for c in controls),default=0.) for b in boxes)/len(boxes)
+                   if boxes else -.5)
+    format_reward=float(value['valid'])
+    return {'reward':answer_reward+.2*format_reward+.2*coherence,'correct':correct,'answer_correct':answer==('unknown' if variant=='cf' else target),
+            'evidence_success':evidence_success,'view':variant,'coherence':coherence,
+            'answer_reward':answer_reward,'format_reward':format_reward}

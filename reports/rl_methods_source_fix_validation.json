@@ -1,0 +1,87 @@
+{
+  "date": "2026-10-10",
+  "status": "passed",
+  "pytest_exit_code": 0,
+  "pytest_passed": 54,
+  "method_tests": 43,
+  "core_tests": 11,
+  "failed_tests": [],
+  "runtime_seconds": 1.3065409660339355,
+  "versions": {
+    "torch": "2.6.0",
+    "transformers": "4.51.3",
+    "peft": "0.19.1"
+  },
+  "platform": "local macOS arm64 CPU; remote SSH unavailable",
+  "base_review_commit": "8d98fba74ed76eefecf8206671b810d97e1567f9",
+  "config_version": "general-rl-2026-source-aligned-2",
+  "resolved_findings": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "author_function_comparisons": {
+    "cfpo_torch.float32_low": {
+      "matching_edges": 26,
+      "max_error": 5.960464477539063e-08,
+      "roundoff_bound": 2.5160426275760983e-07
+    },
+    "cfpo_torch.float32_medium": {
+      "matching_edges": 10,
+      "max_error": 5.960464477539063e-08,
+      "roundoff_bound": 2.5160426275760983e-07
+    },
+    "cfpo_torch.float32_high": {
+      "matching_edges": 5,
+      "max_error": 5.960464477539063e-08,
+      "roundoff_bound": 2.5160426275760983e-07
+    },
+    "cfpo_torch.float32_extra": {
+      "matching_edges": 1,
+      "max_error": 0.0,
+      "roundoff_bound": 2.5160426275760983e-07
+    },
+    "cfpo_torch.bfloat16_low": {
+      "matching_edges": 26,
+      "max_error": 0.0,
+      "roundoff_bound": 0.0164794921875
+    },
+    "cfpo_torch.bfloat16_medium": {
+      "matching_edges": 10,
+      "max_error": 0.0,
+      "roundoff_bound": 0.0164794921875
+    },
+    "cfpo_torch.bfloat16_high": {
+      "matching_edges": 5,
+      "max_error": 0.0,
+      "roundoff_bound": 0.0164794921875
+    },
+    "cfpo_torch.bfloat16_extra": {
+      "matching_edges": 1,
+      "max_error": 0.0,
+      "roundoff_bound": 0.0164794921875
+    },
+    "papo_released_kl": 7.045111179351807,
+    "cfpo_released_kl": 7.045111179351807,
+    "author_group_normalization": "exact",
+    "papo_raw_pixel_mask": "exact for identical draws",
+    "defacto_author_selection": "exact across all three views and empty/positive/control boxes",
+    "cuda_initialized": false
+  },
+  "author_revisions": {
+    "papo": "fb63bf4533b78da5a2bb17bc812375dcb620887d",
+    "cfpo": "98ca5a4123be2e85e94855fead46c9a385611136",
+    "defacto": "471a747bc416a59e8ddad22de2e9b038c0c0aeba"
+  },
+  "cuda_initialized": false,
+  "gpu_used": false,
+  "patient_data_read": false,
+  "scientific_experiments_run": false,
+  "tests_use_random_tiny_model_and_synthetic_optimizer_fixture": true,
+  "formal_7b_bf16_gpu_probability_gate_verified": false,
+  "remote_pinned_runtime_validated": false,
+  "dependencies_installed": false,
+  "historical_protocols_modified": false
+}
